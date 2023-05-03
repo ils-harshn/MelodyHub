@@ -18,6 +18,9 @@ class Song(models.Model):
     url = models.URLField()
     original_name = models.CharField(max_length=500)
 
+    class Meta:
+        ordering = ["title"]
+
     def __str__(self) -> str:
         return self.original_name
 
