@@ -6,3 +6,11 @@ class SongFilterSet(FilterSet):
     album__title = CharFilter(field_name="album__title", lookup_expr="icontains", label="Album Title")
     artist__name = CharFilter(field_name="artist__name", lookup_expr="icontains", label="Aritist Name")
     year = NumberFilter(field_name="album__year")
+
+class ArtistFilterSet(FilterSet):
+    name = CharFilter(field_name="name", lookup_expr="icontains", label="Artist Name")
+
+class AlbumFilterSet(FilterSet):
+    title = CharFilter(field_name="title", lookup_expr="icontains", label="Name")
+    code = CharFilter(field_name="code", lookup_expr="icontains", label="Code")
+    year = CharFilter(field_name="year", lookup_expr="icontains", label="Year")
