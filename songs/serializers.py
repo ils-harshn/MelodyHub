@@ -36,4 +36,3 @@ class PlaylistNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlist
         fields = ("id", "title")
-

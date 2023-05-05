@@ -12,5 +12,9 @@ urlpatterns = [
     path('albums/get/<int:id>/', view=views.AlbumView.as_view(), name="artist-detail"),
     path('albums/get/<int:id>/songs/', view=views.AlbumWithSongsView.as_view(), name="artist-detail-with-songs"),
     path('songs/playlists/', view=views.UserPlaylists.as_view(), name="user-playlists-with-filter"),
+    path('songs/playlists/create/', view=views.CreatePlaylist.as_view(), name="create-playlist"),
+    path('songs/playlists/delete/<int:id>/', view=views.DeletePlaylist.as_view(), name="delete-playlist"),
     path('songs/playlists/get/<int:id>/songs/', view=views.PlaylistSongsView.as_view(), name="user-playlists-with-songs"),
+    path('songs/playlists/get/<int:playlist_id>/song/add/<int:song_id>/', view=views.AddSongToPlayList.as_view(), name="add-song-in-playlist"),
+    path('songs/playlists/get/<int:playlist_id>/song/delete/<int:song_id>/', view=views.DeleteSongFromPlayList.as_view(), name="delete-song-in-playlist"),
 ]

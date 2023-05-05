@@ -1,11 +1,15 @@
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, DestroyAPIView
 from songs.models import Song, Album, Artist
 from songs.serializers import SongSerializer, ArtistSerializer, SongDetailWithoutAritistSerializer, AlbumSerializer, PlaylistNameSerializer
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from songs.filters import SongFilterSet, ArtistFilterSet, AlbumFilterSet, PlaylistFilterSet
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 class SongsListView(ListAPIView):
     permission_classes = [IsAuthenticated]
@@ -141,3 +145,47 @@ class PlaylistSongsView(RetrieveAPIView):
         response_data = serializer.data
         response_data['songs'] = serialized_related_objects
         return paginator.get_paginated_response(response_data)
+    
+class CreatePlaylist(CreateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PlaylistNameSerializer
+
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+class DeletePlaylist(DestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PlaylistNameSerializer
+    lookup_field = "id"
+
+    def get_queryset(self):
+        return self.request.user.playlist_set.all()
+
+class AddSongToPlayList(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, playlist_id, song_id, format=None):
+        try:
+            playlist = request.user.playlist_set.get(id=playlist_id)
+            try:
+                playlist.songs.get(id=song_id)
+                return Response(data={"error": "song already exists"}, status=status.HTTP_400_BAD_REQUEST)
+            except ObjectDoesNotExist:
+                song = Song.objects.get(id=song_id)
+                playlist.songs.add(song)
+        except ObjectDoesNotExist:
+            raise Http404()
+        return Response(status=status.HTTP_200_OK)
+    
+class DeleteSongFromPlayList(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, playlist_id, song_id, format=None):
+        try:
+            playlist = request.user.playlist_set.get(id=playlist_id)
+            song = playlist.songs.get(id=song_id)
+            playlist.songs.remove(song)
+        except ObjectDoesNotExist:
+            raise Http404()
+        return Response(status=status.HTTP_200_OK)
