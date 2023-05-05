@@ -41,3 +41,19 @@ class Playlist(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.author.email} - {self.id})"
+
+class SongReaction(models.Model):
+    LIKE = 'like'
+    DISLIKE = 'dislike'
+    
+    REACTION_CHOICES = (
+        (LIKE, "like"),
+        (DISLIKE, "dislike"),
+    )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    reaction = models.CharField(max_length=20, choices=REACTION_CHOICES)
+
+    def __str__(self):
+        return f"{self.song.original_name} {self.reaction} by {self.user.email}"
