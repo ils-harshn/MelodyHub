@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from songs.models import Song, Artist, Album, Playlist
+from songs.models import Song, Artist, Album, Playlist, SongReaction
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -46,3 +46,11 @@ class PlaylistNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlist
         fields = ("id", "title")
+
+class SongReactionSerializer(serializers.ModelSerializer):
+    song_id = serializers.ReadOnlyField(source='song.id')
+    user_id = serializers.ReadOnlyField(source='user.id')
+    
+    class Meta:
+        model = SongReaction
+        fields = ("reaction", "song_id", "user_id")

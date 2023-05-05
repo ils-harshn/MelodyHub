@@ -45,7 +45,7 @@ class Playlist(models.Model):
 class SongReaction(models.Model):
     LIKE = 'like'
     DISLIKE = 'dislike'
-    
+
     REACTION_CHOICES = (
         (LIKE, "like"),
         (DISLIKE, "dislike"),

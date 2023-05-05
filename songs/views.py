@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 
 class SongsListView(ListAPIView):
     permission_classes = [IsAuthenticated]
@@ -188,4 +189,19 @@ class DeleteSongFromPlayList(APIView):
             playlist.songs.remove(song)
         except ObjectDoesNotExist:
             raise Http404()
+        return Response(status=status.HTTP_200_OK)
+    
+from songs.serializers import SongReactionSerializer
+
+class SongReactionManageView(APIView):
+    def post(self, request, song_id, format=None):
+        serializer = SongReactionSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        song = get_object_or_404(Song, id=song_id)
+        try:
+            reaction = request.user.songreaction_set.get(song=song.id)
+            reaction.reaction = serializer.validated_data.get("reaction")
+            reaction.save()
+        except ObjectDoesNotExist:
+            serializer.save(song=song, user=request.user)
         return Response(status=status.HTTP_200_OK)
