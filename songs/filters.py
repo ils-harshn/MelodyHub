@@ -14,3 +14,6 @@ class AlbumFilterSet(FilterSet):
     title = CharFilter(field_name="title", lookup_expr="icontains", label="Name")
     code = CharFilter(field_name="code", lookup_expr="icontains", label="Code")
     year = CharFilter(field_name="year", lookup_expr="icontains", label="Year")
+
+class PlaylistFilterSet(FilterSet):
+    title = CharFilter(field_name="title", lookup_expr="icontains", label="Playlist Title")

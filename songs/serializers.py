@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from songs.models import Song, Artist, Album
-from django.urls import reverse
+from songs.models import Song, Artist, Album, Playlist
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -32,3 +31,9 @@ class SongDetailWithoutAritistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
         fields = "__all__"
+
+class PlaylistNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Playlist
+        fields = ("id", "title")
+
