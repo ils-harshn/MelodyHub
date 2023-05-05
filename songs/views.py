@@ -110,6 +110,7 @@ class UserPlaylists(ListAPIView):
     serializer_class = PlaylistNameSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = PlaylistFilterSet
+    pagination_class = PageNumberPagination
 
     def get_queryset(self):
         user = self.request.user
