@@ -72,3 +72,10 @@ class SongReactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = SongReaction
         fields = ("reaction", "song_id", "user_id")
+
+class SongReactionWithSongsSerializer(serializers.ModelSerializer):
+    song = SongSerializer(required=True)
+    
+    class Meta:
+        model = SongReaction
+        fields = ("song", "reaction")

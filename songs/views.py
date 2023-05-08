@@ -11,7 +11,7 @@ from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from songs.serializers import SongReactionSerializer
+from songs.serializers import SongReactionSerializer, SongReactionWithSongsSerializer
 
 class SongsListView(ListAPIView):
     permission_classes = [IsAuthenticated]
@@ -251,3 +251,20 @@ class GenreSongsView(RetrieveAPIView):
         response_data = serializer.data
         response_data['songs'] = serialized_related_objects
         return paginator.get_paginated_response(response_data)
+    
+
+class LikedSongsListView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = SongReactionWithSongsSerializer
+    pagination_class = PageNumberPagination
+
+    def get_queryset(self):
+        return self.request.user.songreaction_set.filter(reaction="like")
+
+class DislikedSongsListView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = SongReactionWithSongsSerializer
+    pagination_class = PageNumberPagination
+
+    def get_queryset(self):
+        return self.request.user.songreaction_set.filter(reaction="dislike")
