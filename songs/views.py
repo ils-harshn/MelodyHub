@@ -3,7 +3,7 @@ from songs.models import Song, Album, Artist, Genre
 from songs.serializers import SongSerializer, ArtistSerializer, SongDetailWithoutAritistSerializer, AlbumSerializer, PlaylistNameSerializer, GenreSerializer
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
-from songs.filters import SongFilterSet, ArtistFilterSet, AlbumFilterSet, PlaylistFilterSet
+from songs.filters import SongFilterSet, ArtistFilterSet, AlbumFilterSet, PlaylistFilterSet, GenreFilterSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -225,6 +225,8 @@ class GenreListView(ListAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
     pagination_class = PageNumberPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = GenreFilterSet
 
 
 class GenreSongsView(RetrieveAPIView):
