@@ -28,6 +28,12 @@ class SongView(RetrieveAPIView):
     serializer_class = SongSerializer
     lookup_field = "id"
 
+    def get_object(self):
+        obj = super().get_object()
+        obj.views += 1
+        obj.save()
+        return obj
+
 
 class ArtistsListView(ListAPIView):
     permission_classes = [IsAuthenticated]

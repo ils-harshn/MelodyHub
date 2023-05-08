@@ -18,6 +18,7 @@ class Song(models.Model):
     title = models.CharField(max_length=500)
     url = models.URLField()
     original_name = models.CharField(max_length=500)
+    views = models.IntegerField(default=0)
 
     class Meta:
         ordering = ["title"]
