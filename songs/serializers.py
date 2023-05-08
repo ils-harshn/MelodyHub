@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from songs.models import Song, Artist, Album, Playlist, SongReaction
+from songs.models import Song, Artist, Album, Playlist, SongReaction, Genre
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -18,10 +18,16 @@ class ArtistNameSerializer(serializers.ModelSerializer):
         model = Artist
         fields = ("id", "name", "artists_thumbnail", "artists_thumbnail300x300")
 
+class GenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = ("id", "name")
+
 class SongSerializer(serializers.ModelSerializer):
     album = AlbumSerializer(required=True)
     artist_set = ArtistNameSerializer(required=True, many=True)
     reaction = serializers.SerializerMethodField()
+    genre = GenreSerializer(required=True)
     
     class Meta:
         model = Song

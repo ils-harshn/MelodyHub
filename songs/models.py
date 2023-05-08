@@ -13,12 +13,19 @@ class Album(models.Model):
     def __str__(self) -> str:
         return self.title
 
+class Genre(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self) -> str:
+        return self.name
+
 class Song(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     title = models.CharField(max_length=500)
     url = models.URLField()
     original_name = models.CharField(max_length=500)
     views = models.IntegerField(default=0)
+    genre = models.OneToOneField(Genre, on_delete=models.DO_NOTHING, null=True)
 
     class Meta:
         ordering = ["title"]
