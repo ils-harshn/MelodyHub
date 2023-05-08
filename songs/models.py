@@ -25,7 +25,7 @@ class Song(models.Model):
     url = models.URLField()
     original_name = models.CharField(max_length=500)
     views = models.IntegerField(default=0)
-    genre = models.OneToOneField(Genre, on_delete=models.DO_NOTHING, null=True)
+    genre = models.ForeignKey(Genre, on_delete=models.SET_DEFAULT, null=True, default=None)
 
     class Meta:
         ordering = ["title"]
