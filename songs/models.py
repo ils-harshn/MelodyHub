@@ -63,5 +63,8 @@ class SongReaction(models.Model):
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
     reaction = models.CharField(max_length=20, choices=REACTION_CHOICES)
 
+    class Meta:
+        ordering = ["song__original_name"]
+
     def __str__(self):
         return f"{self.song.original_name} {self.reaction} by {self.user.email}"
