@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('songs/', view=views.SongsListView.as_view(), name="songs-list-with-filter"),
+    path('songs/mostviewed/', view=views.MostViewedSongsView.as_view(), name="songs-list-with-most-viewed"),
     path('songs/reaction/<int:song_id>/', view=views.SongReactionManageView.as_view(), name="song-like-and-dislike"),
     path('songs/get/<int:id>/', view=views.SongView.as_view(), name="song-detail"),
     path('artists/', view=views.ArtistsListView.as_view(), name="artists-list-with-filter"),

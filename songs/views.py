@@ -210,3 +210,9 @@ class SongReactionManageView(APIView):
         except ObjectDoesNotExist:
             serializer.save(song=song, user=request.user)
         return Response(status=status.HTTP_200_OK)
+
+
+class MostViewedSongsView(ListAPIView):
+    queryset = Song.objects.all().order_by('-views')[:25]
+    serializer_class = SongSerializer
+    pagination_class = None
