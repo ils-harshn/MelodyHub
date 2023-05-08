@@ -88,4 +88,4 @@ class SongReactionWithSongsSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = SongReaction
-        fields = ("song")
+        fields = ("song",)
