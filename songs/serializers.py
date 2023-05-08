@@ -73,9 +73,19 @@ class SongReactionSerializer(serializers.ModelSerializer):
         model = SongReaction
         fields = ("reaction", "song_id", "user_id")
 
+class SongSerializerWithoutReaction(serializers.ModelSerializer):
+    album = AlbumSerializer(required=True)
+    artist_set = ArtistNameSerializer(required=True, many=True)
+    genre = GenreSerializer(required=True)
+    
+    class Meta:
+        model = Song
+        fields = "__all__"
+        read_only_fields = ["views"]
+
 class SongReactionWithSongsSerializer(serializers.ModelSerializer):
-    song = SongSerializer(required=True)
+    song = SongSerializerWithoutReaction(required=True)
     
     class Meta:
         model = SongReaction
-        fields = ("song", "reaction")
+        fields = ("song")
