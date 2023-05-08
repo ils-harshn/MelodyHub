@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, DestroyAPIView
-from songs.models import Song, Album, Artist
-from songs.serializers import SongSerializer, ArtistSerializer, SongDetailWithoutAritistSerializer, AlbumSerializer, PlaylistNameSerializer
+from songs.models import Song, Album, Artist, Genre
+from songs.serializers import SongSerializer, ArtistSerializer, SongDetailWithoutAritistSerializer, AlbumSerializer, PlaylistNameSerializer, GenreSerializer
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from songs.filters import SongFilterSet, ArtistFilterSet, AlbumFilterSet, PlaylistFilterSet
@@ -60,7 +60,7 @@ class ArtistWithSongsView(RetrieveAPIView):
             related_objects, request)
 
         serialized_related_objects = SongDetailWithoutAritistSerializer(
-            paginated_objects, many=True).data
+            paginated_objects, many=True, context={'request': request}).data
 
         serializer = self.get_serializer(instance)
         response_data = serializer.data
@@ -108,7 +108,7 @@ class AlbumWithSongsView(RetrieveAPIView):
             related_objects, request)
 
         serialized_related_objects = SongSerializer(
-            paginated_objects, many=True).data
+            paginated_objects, many=True, context={'request': request}).data
 
         serializer = self.get_serializer(instance)
         response_data = serializer.data
@@ -147,7 +147,7 @@ class PlaylistSongsView(RetrieveAPIView):
             related_objects, request)
 
         serialized_related_objects = SongSerializer(
-            paginated_objects, many=True).data
+            paginated_objects, many=True, context={'request': request}).data
 
         serializer = self.get_serializer(instance)
         response_data = serializer.data
@@ -199,6 +199,8 @@ class DeleteSongFromPlayList(APIView):
         return Response(status=status.HTTP_200_OK)
 
 class SongReactionManageView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request, song_id, format=None):
         serializer = SongReactionSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -213,6 +215,37 @@ class SongReactionManageView(APIView):
 
 
 class MostViewedSongsView(ListAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Song.objects.all().order_by('-views')[:25]
     serializer_class = SongSerializer
     pagination_class = None
+
+class GenreListView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+    pagination_class = PageNumberPagination
+
+
+class GenreSongsView(RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = GenreSerializer
+    pagination_class = PageNumberPagination
+    queryset = Genre.objects.all()
+    lookup_field = "id"
+
+    def get(self, request, *args, **kwargs):
+        instance = self.get_object()
+        related_objects = instance.song_set.all()
+
+        paginator = self.pagination_class()
+        paginated_objects = paginator.paginate_queryset(
+            related_objects, request)
+
+        serialized_related_objects = SongSerializer(
+            paginated_objects, many=True, context={'request': request}).data
+
+        serializer = self.get_serializer(instance)
+        response_data = serializer.data
+        response_data['songs'] = serialized_related_objects
+        return paginator.get_paginated_response(response_data)

@@ -19,4 +19,6 @@ urlpatterns = [
     path('songs/playlists/get/<int:id>/songs/', view=views.PlaylistSongsView.as_view(), name="user-playlists-with-songs"),
     path('songs/playlists/get/<int:playlist_id>/song/add/<int:song_id>/', view=views.AddSongToPlayList.as_view(), name="add-song-in-playlist"),
     path('songs/playlists/get/<int:playlist_id>/song/delete/<int:song_id>/', view=views.DeleteSongFromPlayList.as_view(), name="delete-song-in-playlist"),
+    path('genres/', view=views.GenreListView.as_view(), name="genre-list"),
+    path('genres/get/<int:id>/songs/', view=views.GenreSongsView.as_view(), name="genre-song-list"),
 ]
