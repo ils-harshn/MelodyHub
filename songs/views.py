@@ -268,3 +268,12 @@ class DislikedSongsListView(ListAPIView):
 
     def get_queryset(self):
         return self.request.user.songreaction_set.filter(reaction="dislike")
+    
+class GetRandomSong(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, format=None):
+        return Response(
+            data=SongSerializer(Song.objects.order_by("?")[0]).data,
+            status=status.HTTP_200_OK
+        )

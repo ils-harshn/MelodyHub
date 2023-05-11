@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('songs/', view=views.SongsListView.as_view(), name="songs-list-with-filter"),
+    path('random/song/', view=views.SongsListView.as_view(), name="get-random-song"),
     path('songs/mostviewed/', view=views.MostViewedSongsView.as_view(), name="songs-list-with-most-viewed"),
     path('songs/liked/', view=views.LikedSongsListView.as_view(), name="liked-songs-list"),
     path('songs/disliked/', view=views.DislikedSongsListView.as_view(), name="disliked-songs-list"),
