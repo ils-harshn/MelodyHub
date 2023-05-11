@@ -274,6 +274,6 @@ class GetRandomSong(APIView):
 
     def get(self, request, format=None):
         return Response(
-            data=SongSerializer(Song.objects.order_by("?")[0]).data,
+            data=SongSerializer(Song.objects.order_by("?")[0], context={'request': request}).data,
             status=status.HTTP_200_OK
         )
