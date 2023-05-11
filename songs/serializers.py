@@ -42,24 +42,6 @@ class SongSerializer(serializers.ModelSerializer):
             reaction = "neutral"
         return reaction
 
-class SongDetailWithoutAritistSerializer(serializers.ModelSerializer):
-    album = AlbumSerializer(required=True)
-    reaction = serializers.SerializerMethodField()
-    genre = GenreSerializer(required=True)
-
-    class Meta:
-        model = Song
-        fields = "__all__"
-        read_only_fields = ["views"]
-    
-    def get_reaction(self, obj):
-        user = self.context['request'].user
-        try:
-            reaction = user.songreaction_set.get(song_id=obj.id).reaction
-        except ObjectDoesNotExist:
-            reaction = "neutral"
-        return reaction
-
 class PlaylistNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlist

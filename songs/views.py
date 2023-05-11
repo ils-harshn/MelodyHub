@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, DestroyAPIView
 from songs.models import Song, Album, Artist, Genre
-from songs.serializers import SongSerializer, ArtistSerializer, SongDetailWithoutAritistSerializer, AlbumSerializer, PlaylistNameSerializer, GenreSerializer
+from songs.serializers import SongSerializer, ArtistSerializer, AlbumSerializer, PlaylistNameSerializer, GenreSerializer
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from songs.filters import SongFilterSet, ArtistFilterSet, AlbumFilterSet, PlaylistFilterSet, GenreFilterSet
@@ -59,7 +59,7 @@ class ArtistWithSongsView(RetrieveAPIView):
         paginated_objects = paginator.paginate_queryset(
             related_objects, request)
 
-        serialized_related_objects = SongDetailWithoutAritistSerializer(
+        serialized_related_objects = SongSerializer(
             paginated_objects, many=True, context={'request': request}).data
 
         serializer = self.get_serializer(instance)
