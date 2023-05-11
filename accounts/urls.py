@@ -10,4 +10,5 @@ urlpatterns = [
     path('token', view=obtain_auth_token),
     path('forgetpasswordrequest', view=views.RequestForgetPassword.as_view()),
     path('forgetverify', view=views.ForgetPasswordVerify.as_view()),
+    path('verifytoken', view=views.AuthUser.as_view()),
 ]

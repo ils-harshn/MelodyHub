@@ -11,6 +11,8 @@ from django.core.exceptions import ValidationError
 from django.core.cache import cache
 from django.core.validators import validate_email
 from accounts.utils import send_verification_code, verify_verification_code, send_forget_verification_code
+from rest_framework.permissions import IsAuthenticated
+from accounts.serializers import UserSerializer
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -76,3 +78,14 @@ class ForgetPasswordVerify(APIView):
         user.set_password(password)
         user.save()
         return Response(status=status.HTTP_200_OK)
+    
+
+class AuthUser(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, format=None):
+        serializer = UserSerializer(request.user)
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK,
+        )
