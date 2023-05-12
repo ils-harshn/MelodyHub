@@ -285,7 +285,7 @@ class DislikedSongsListView(APIView):
     def post(self, request, format=None):
         try:
             id = int(request.data.get("id"))
-            self.request.user.songreaction_set.get(song=id)
+            self.request.user.songreaction_set.get(song=id).delete()
             return Response(status=status.HTTP_200_OK)
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
