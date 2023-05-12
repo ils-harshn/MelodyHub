@@ -277,3 +277,15 @@ class GetRandomSong(APIView):
             data=SongSerializer(Song.objects.order_by("?")[0], context={'request': request}).data,
             status=status.HTTP_200_OK
         )
+    
+class DislikedSongsListView(APIView):
+    permission_classes = [IsAuthenticated]
+    pagination_class = None
+
+    def post(self, request, format=None):
+        try:
+            id = int(request.data.get("id"))
+            self.request.user.songreaction_set.get(song=id)
+            return Response(status=status.HTTP_200_OK)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
