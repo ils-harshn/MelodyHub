@@ -14,6 +14,14 @@
         margin-right: 20px;
     }
 
+    input[type=number] {
+        outline: none;
+        border: none;
+        padding: 10px 10px 10px 20px;
+        border-radius: 25px;
+        margin-right: 20px;
+    }
+
     .drop-down-container {
         position: relative;
         cursor: pointer;
@@ -53,5 +61,42 @@
 
     .drop-down-container:hover .current {
         border: none;
+    }
+
+
+    .search-song-pagination {
+        margin-left: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        div:first-child {
+            button {
+                border: none;
+                outline: none;
+                width: 40px;
+                height: 40px;
+                border-radius: 20px;
+                padding: 6px;
+                margin-right: 10px;
+                color: #FFFFFF;
+                background-color: #090909;
+
+                span {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            button:disabled {
+                background-color: #303030b6;
+                color: rgba(255, 255, 255, 0.149);
+            }
+        }
+
+        div:last-child {
+            color: rgb(199, 199, 199);
+        }
     }
 }

@@ -56,7 +56,7 @@ export const getMostViewedSongsApi = (token) => {
 export const searchSongsApi = (token, original_name = "", album__code = "", album__title = "", artist__name = "", year = "", genre = "", page = 1) => {
   let config = {
     method: 'get',
-    url: `${BASE_URL}/api/songs/?page=1&original_name=${original_name}&album__code=${album__code}&album__title=${album__title}&artist__name=${artist__name}&year=${year}&genre=${genre}`,
+    url: `${BASE_URL}/api/songs/?page=${page}&original_name=${original_name}&album__code=${album__code}&album__title=${album__title}&artist__name=${artist__name}&year=${year}&genre=${genre}`,
     headers: {
       'Authorization': `Token ${token}`
     }
