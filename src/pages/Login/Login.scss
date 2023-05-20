@@ -1,0 +1,132 @@
+@import "../../styles/consts.scss";
+
+.login-page {
+    .form-container {
+        height: calc(100vh - $NAV_BAR_HEIGHT);
+        display: flex;
+        justify-content: center;
+        margin-top: $NAV_BAR_HEIGHT;
+
+        form {
+            width: 450px;
+            padding: 20px;
+            height: fit-content;
+
+            .input-group {
+                margin-bottom: 6px;
+
+                label {
+                    display: block;
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 13px;
+                    line-height: 16px;
+                    margin-bottom: 5px;
+                }
+
+                input {
+                    outline: none;
+                    border: none;
+                    width: calc(100% - 28px);
+                    padding: 14px;
+                    background: #FFFFFF;
+                    border: 1px solid #878787;
+                    border-radius: 4px;
+                }
+
+                .error {
+                    font-size: 12px;
+                    color: red;
+                }
+            }
+
+            .form-error {
+                font-size: 12px;
+                text-align: center;
+                color: red;
+                margin-bottom: 4px;
+            }
+
+            .forget-password {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+                text-decoration: underline;
+                margin-bottom: 10px;
+            }
+
+            .login-button-with-remember-me {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                margin-bottom: 20px;
+
+                .left {
+                    display: flex;
+                    align-items: center;
+
+                    input[type=checkbox] {
+                        margin: 0;
+                    }
+
+                    label {
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 13px;
+                        line-height: 16px;
+                        margin-left: 10px;
+                    }
+                }
+
+                .right {
+                    button {
+                        width: 120px;
+                        height: 48px;
+                        outline: none;
+                        border: none;
+                        background: #1ED760;
+                        border-radius: 25px;
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 14px;
+                        line-height: 17px;
+                    }
+                }
+            }
+
+            .form-footer-seperator {
+                border: 1px solid #D9DADC;
+                margin-bottom: 20px;
+            }
+
+            .form-footer {
+                div {
+                    font-style: normal;
+                    text-align: center;
+                    font-weight: 700;
+                    font-size: 17px;
+                    line-height: 21px;
+                    color: #000000;
+                    margin: 10px;
+                }
+
+                button {
+                    width: 100%;
+                    padding: 16px 141.578px 16px 140.422px;
+                    border: 1px solid #878787;
+                    border-radius: 500px;
+
+                    font-weight: 700;
+                    font-size: 13px;
+                    line-height: 16px;
+                    /* identical to box height */
+                    text-align: center;
+                    letter-spacing: 1.498px;
+                    text-transform: uppercase;
+                    color: #6A6A6A;
+                }
+            }
+        }
+    }
+}

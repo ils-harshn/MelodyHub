@@ -1,0 +1,20 @@
+@import "../../styles/resetBody.scss";
+@import "../../styles/consts.scss";
+.auth-layout {
+    nav {
+        border-bottom: 1px solid #D9DADC;
+        height: $NAV_BAR_HEIGHT;
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: inherit;
+            
+            img {
+                height: 50px;
+            }
+        }
+
+    }
+}

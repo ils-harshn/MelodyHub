@@ -1,0 +1,57 @@
+.song-card-component {
+    width: 185px;
+    height: 274px;
+    padding: 15px;
+
+    background: #181818;
+    border-radius: 6px;
+    color: white;
+
+    margin: 12px;
+
+    .song-img {
+
+        // width: 100%;
+        img {
+            // margin: 15px;
+            width: 185px;
+            height: 185px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .skeleton-loader-img-card {
+            width: 185px;
+            height: 180px;
+            margin-bottom: 3px;
+        }
+    }
+
+    .song-title {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: 10px;
+        color: #FFFFFF;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .album,
+    .artists {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #A7A7A7;
+    }
+
+    .views {
+        margin-top: 10px;
+        font-size: 12px;
+        text-align: right;
+    }
+}
