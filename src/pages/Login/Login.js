@@ -1,30 +1,70 @@
+import { useEffect, useState } from "react";
 import "./Login.scss";
+import { get_token, set_and_validate_field } from "../../utils";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import * as actionTypes from "../../store/actions/loginActions"
 
 const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [emailError, setEmailError] = useState(true);
+    const [passwordError, setPasswordError] = useState(true);
+    const [rememberMe, setRememberMe] = useState(false);
+
+    const navigate = useNavigate()
+    
+    const data = useSelector((reducers) => reducers.loginReducer);
+    const dispatch = useDispatch();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch({ type: actionTypes.INITIATE_LOGIN, payload: {
+            email,
+            password,
+            rememberMe,
+        }})
+    }
+
+    const check_if_user_logged_in = () => {
+        let token = get_token();
+        if (data.is_logged_in == false && token) dispatch({ type: actionTypes.INITIATE_LOGIN_WITH_TOKEN, payload: { token } });
+        else if (data.loading == false && data.is_logged_in == false) navigate("/accounts/login/")
+    }
+
+    useEffect(() => {
+        check_if_user_logged_in();
+    }, [])
+
+    useEffect(() => {
+        if (data.is_logged_in) navigate("/");
+    }, [data])
+
     return <div className="login-page">
         <div className="form-container">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="input-group">
                     <label>Email address or username</label>
-                    <input placeholder="Email address or username" type="text" />
-                    <div className="error">*Required</div>
+                    <input placeholder="Email address or username" value={email} onChange={(e) => set_and_validate_field(e.target.value, setEmail, setEmailError, "email")} />
+                    <div className="error">{emailError && emailError}</div>
                 </div>
                 <div className="input-group">
-                    <label>Password</label>
-                    <input placeholder="Password" type="password" />
-                    <div className="error">*Required</div>
+                    <label>Enter Password</label>
+                    <input placeholder="Password" value={password} type="password" onChange={(e) => set_and_validate_field(e.target.value, setPassword, setPasswordError, "*")} />
+                    <div className="error">{passwordError && passwordError}</div>
                 </div>
-                <div className="form-error">*Invalid Username or Password</div>
+                <div className="form-error">{data.error}</div>
                 <div className="forget-password">
                     Forgot your password?
                 </div>
                 <div className="login-button-with-remember-me">
                     <div className="left">
-                        <input type="checkbox" />
+                        <input type="checkbox" value={rememberMe} onChange={(e) => setRememberMe(e.target.checked)}/>
                         <label>Remember Me</label>
                     </div>
                     <div className="right">
-                        <button type="submit">LOG IN</button>
+                        <button type="submit" disabled={emailError || passwordError || data.loading}>LOG IN</button>
                     </div>
                 </div>
                 <div className="form-footer-seperator"></div>

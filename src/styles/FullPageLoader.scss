@@ -1,0 +1,25 @@
+.full-page-loader {
+    height: 100vh;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, #121212 100%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .loader {
+        img {
+            width: 80px;
+            animation: heartBeatLoaderImg 800ms;
+        }
+
+        @keyframes heartBeatLoaderImg {
+            0% {
+                width: 80px;
+            } 50% {
+                width: 160px;
+            } 100% {
+                width: 80px;
+            }
+        }
+    }
+}
