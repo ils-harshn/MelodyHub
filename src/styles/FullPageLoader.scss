@@ -9,7 +9,7 @@
     .loader {
         img {
             width: 80px;
-            animation: heartBeatLoaderImg 800ms;
+            animation: heartBeatLoaderImg 800ms infinite;
         }
 
         @keyframes heartBeatLoaderImg {

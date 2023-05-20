@@ -2,17 +2,30 @@ import SongCardComponent from "./SongCardComponent";
 import "../styles/LikedSongs.scss"
 
 
-const CardSongsCollections = ({ title }) => {
+const LikedSongsComponent = ({ title, data }) => {
     return (
         <div className="liked-songs">
             <div className="title">{title}</div>
             <div className="list">
-                {[1, 2, 3, 4, 5, 6, 7, 8].map(() => (
-                    <SongCardComponent />
+                {data.results.map((item, index) => (
+                    <SongCardComponent item={item.song} key={index}/>
                 ))}
             </div>
         </div>
     )
 }
 
-export default CardSongsCollections;
+export const MostViewedSongsComponent = ({ title, data }) => {
+    return (
+        <div className="liked-songs">
+            <div className="title">{title}</div>
+            <div className="list">
+                {data.map((item, index) => (
+                    <SongCardComponent item={item} key={index}/>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export default LikedSongsComponent;

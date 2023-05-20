@@ -1,19 +1,19 @@
 import "../styles/SongCardComponent.scss";
 import ImageWithSkeleton from "./ImageLoader";
 
-const SongCardComponent = () => {
+const SongCardComponent = ({ item }) => {
     return (
-        <div className="song-card-component">
+        <div className="song-card-component" key={item.id}>
             <div className="song-img">
-                <ImageWithSkeleton src="https://drive.google.com/uc?id=1LNXKjq6kU3r460fJLh2wjAGIq2Et4lrB&export=download" />
+                <ImageWithSkeleton src={item.album.thumbnail300x300} />
             </div>
             <div className="song-title">
-                12 Saal
+                {item.original_name}
             </div>
-            <div className="album">Honey (2000) sd sd sd kjsdkj hsdkj hskdj hskjdh</div>
-            <div className="artists">J Star, Extra</div>
+            <div className="album">{item.album.title} ({item.album.year})</div>
+            <div className="artists">{item.artist_set.map(item => item.name)}</div>
             <div className="views">
-                12 views
+                {item.views} views
             </div>
         </div>
     )

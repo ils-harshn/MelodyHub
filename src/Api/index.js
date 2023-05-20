@@ -27,3 +27,28 @@ export const verifyTokenApi = (token) => {
 
   return axios.request(config)
 }
+
+export const getLikedSongsApi = (token, page = 1) => {
+  let config = {
+    method: 'get',
+    url: `${BASE_URL}/api/songs/liked/?page=${page}`,
+    headers: {
+      'Authorization': `Token ${token}`,
+    },
+  };
+
+  return axios.request(config)
+}
+
+export const getMostViewedSongsApi = (token) => {
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: `${BASE_URL}/api/songs/mostviewed/`,
+    headers: {
+      'Authorization': `Token ${token}`
+    }
+  };
+
+  return axios.request(config)
+}

@@ -1,24 +1,35 @@
-import { useState } from "react";
-import CardSongsCollections from "../../components/CardSongsCollections";
+import { useEffect, useState } from "react";
 import EmptyHeader from "../../components/EmptyHeader";
 import "./Home.scss";
 import MainLoader from "../../components/MainLoader";
+import { useDispatch, useSelector } from "react-redux";
+import * as likedSongsActions from "../../store/actions/likedSongsActions"
+import LikedSongsComponent, { MostViewedSongsComponent } from "../../components/CardSongsCollections";
+import * as mostViewedSongsActions from "../../store/actions/mostViewedSongsActions";
+
 
 const Home = () => {
-    const [loading, setLoading] = useState(true);
+    // const loading = true;
+    const dispatch = useDispatch();
+    const likedSongs = useSelector((reducers) => reducers.likedSongsReducers)
+    const mostViewedSongs = useSelector((reducers) => reducers.mostViewedSongsReducer)
+    const data = useSelector((reducers) => reducers.loginReducer);
 
-    setTimeout(() => setLoading(false), 1000);
+    useEffect(() => {
+        dispatch({ type: likedSongsActions.INITIATE_LIKED_SONGS, payload: { page: 1, token: data.user.token } });
+        dispatch({ type: mostViewedSongsActions.INITIATE_GET_MOST_VIEWED_SONGS, payload: { token: data.user.token } });
+    }, [])
 
     return (<>
         {
-            loading ? <MainLoader /> :
+            likedSongs.loading || mostViewedSongs.loading ? <MainLoader /> :
                 <div className="home-page">
                     <EmptyHeader />
                     <div className="container">
-                        <CardSongsCollections title={"Liked Songs"} />
+                        <LikedSongsComponent title={"Liked Songs"} data={likedSongs.data} />
                     </div>
                     <div className="container" >
-                        <CardSongsCollections title={"Most Viewed Songs"} />
+                        <MostViewedSongsComponent title={"Most Viewed Songs"} data={mostViewedSongs.data} />
                     </div>
                 </div>
         }
