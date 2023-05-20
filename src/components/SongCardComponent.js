@@ -13,7 +13,7 @@ const SongCardComponent = ({ item }) => {
             <div className="album">{item.album.title} ({item.album.year})</div>
             <div className="artists">{item.artist_set.map(item => item.name).join(", ")}</div>
             <div className="views">
-                {item.views} views
+                {item.views} listened
             </div>
         </div>
     )

@@ -1,0 +1,57 @@
+.SearchHeader {
+    background-color: #181818;
+    display: flex;
+    align-items: center;
+    color: white;
+    height: 80px;
+    padding-left: 20px;
+
+    input[type=text] {
+        outline: none;
+        border: none;
+        padding: 10px 10px 10px 20px;
+        border-radius: 25px;
+        margin-right: 20px;
+    }
+
+    .drop-down-container {
+        position: relative;
+        cursor: pointer;
+        .current {
+            padding: 12px;
+            border-radius: 25px;
+            border: 1px solid #848484;
+            transition: 300ms all;
+        }
+
+        .drop-down-for-filter {
+            position: absolute;
+            display: none;
+            width: 140px;
+            left: 10px;
+            background-color: #4b4b4b;
+            border-radius: 6px;
+            transition: 300ms all;
+            z-index: 200;
+
+            div {
+                padding: 12px;
+                border-radius: 6px;
+                transition: 300ms all;
+            }
+
+            div:hover {
+                background-color: white;
+                color: black;
+            }
+        }
+    }
+
+    .drop-down-container:hover .drop-down-for-filter {
+        display: block;
+    }
+
+    .drop-down-container:hover .current {
+        border: none;
+    }
+}

@@ -15,7 +15,8 @@ const LikedSongsComponent = ({ title, data }) => {
     )
 }
 
-export const MostViewedSongsComponent = ({ title, data }) => {
+export const CommonSongsComponent = ({ title, data }) => {
+    if (data.length == 0) { title = "Found Nothing"}
     return (
         <div className="liked-songs">
             <div className="title">{title}</div>

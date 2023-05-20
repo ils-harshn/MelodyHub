@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import EmptyHeader from "../../components/EmptyHeader";
 import "./Home.scss";
 import MainLoader from "../../components/MainLoader";
 import { useDispatch, useSelector } from "react-redux";
 import * as likedSongsActions from "../../store/actions/likedSongsActions"
-import LikedSongsComponent, { MostViewedSongsComponent } from "../../components/CardSongsCollections";
+import LikedSongsComponent, { CommonSongsComponent } from "../../components/CardSongsCollections";
 import * as mostViewedSongsActions from "../../store/actions/mostViewedSongsActions";
 
 
@@ -29,7 +29,7 @@ const Home = () => {
                         <LikedSongsComponent title={"Liked Songs"} data={likedSongs.data} />
                     </div>
                     <div className="container" >
-                        <MostViewedSongsComponent title={"Most Viewed Songs"} data={mostViewedSongs.data} />
+                        <CommonSongsComponent title={"Most Viewed Songs"} data={mostViewedSongs.data} />
                     </div>
                 </div>
         }

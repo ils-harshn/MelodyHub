@@ -1,0 +1,11 @@
+.search-page {
+    .searched-songs {
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+
+        .search-song-skeleton-loader {
+            margin: 12px;
+        }
+    }
+}
