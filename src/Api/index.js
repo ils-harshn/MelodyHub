@@ -64,3 +64,46 @@ export const searchSongsApi = (token, original_name = "", album__code = "", albu
 
   return axios.request(config)
 }
+
+export const getSongByIdApi = (token, id) => {
+  let config = {
+    method: 'get',
+    url: `${BASE_URL}/api/songs/get/${id}/`,
+    headers: {
+      'Authorization': `Token ${token}`
+    }
+  };
+
+  return axios.request(config);
+}
+
+export const likeSongApi = (token, id) => {
+  let data = new FormData();
+  data.append('reaction', 'like');
+  let config = {
+    method: 'post',
+    url: `${BASE_URL}/api/songs/reaction/${id}/`,
+    headers: {
+      'Authorization': `Token ${token}`,
+    },
+    data: data
+  };
+
+  return axios.request(config)
+}
+
+export const neutralizeReactionApi = (token, id) => {
+  let data = new FormData();
+  data.append('id', `${id}`);
+
+  let config = {
+    method: 'post',
+    url: `${BASE_URL}/api/songs/neutral/`,
+    headers: {
+      'Authorization': `Token ${token}`,
+    },
+    data: data
+  };
+
+  return axios.request(config)
+}

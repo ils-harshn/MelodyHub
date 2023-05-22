@@ -25,9 +25,11 @@ const Home = () => {
             likedSongs.loading || mostViewedSongs.loading ? <MainLoader /> :
                 <div className="home-page">
                     <EmptyHeader />
+                    {likedSongs.data.results.length > 0 && 
                     <div className="container">
                         <LikedSongsComponent title={"Liked Songs"} data={likedSongs.data} />
                     </div>
+                    }
                     <div className="container" >
                         <CommonSongsComponent title={"Most Viewed Songs"} data={mostViewedSongs.data} />
                     </div>

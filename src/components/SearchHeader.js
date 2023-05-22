@@ -34,7 +34,7 @@ const SearchHeader = () => {
             album__code: (index == 5 ? searchText : ""),
         }
         dispatch({ type: INITIATE_SEARCH_SONGS, payload });
-    }, [searchText, page])
+    }, [searchText, page, index])
 
     return (
         <div className="SearchHeader">
@@ -53,13 +53,17 @@ const SearchHeader = () => {
                 <div className="current">Filter: {options[index][0]}</div>
                 <div className="drop-down-for-filter">
                     {options.map((item, index) => (
-                        <div className="drop-down-filter-option" key={index} onClick={() => setIndex(index)}>
+                        <div className="drop-down-filter-option" key={index} onClick={() => {
+                            setIndex(index)
+                            setPage(1);
+                            // console.log(page, "Changed")
+                        }}>
                             {item[0]}
                         </div>))}
                 </div>
             </div>
             {
-                !songsdata.loading &&
+                (!songsdata.loading && !songsdata.error) &&
                 <>
                     <div className="search-song-pagination">
                         <div>

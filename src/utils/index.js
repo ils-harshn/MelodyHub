@@ -40,17 +40,14 @@ const remove_token = () => {
     sessionStorage.removeItem("token");
 }
 
-const parseDateAndTime = (dateString) => {
-    const date = new Date(dateString);
-
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1; // Add 1 since months are zero-based (0 - 11)
-    const day = date.getDate();
-
-    const hour = date.getHours();
-    const minute = date.getMinutes();
-
-    return `${day}/${month}/${year} - ${hour}:${minute}`;
+const set_volume = (volume) => {
+    localStorage.setItem("vol", volume);
 }
 
-export { validator, set_and_validate_field, set_token, get_token, remove_token, parseDateAndTime }
+const get_volume = () => {
+    let volume = parseInt(localStorage.getItem("vol"));
+    
+    return volume || 100;
+}
+
+export { validator, set_and_validate_field, set_token, get_token, remove_token, set_volume, get_volume }
