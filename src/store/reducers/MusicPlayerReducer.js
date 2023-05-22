@@ -1,11 +1,13 @@
+import { get_last_played_song, set_last_played_song } from "../../utils"
 import * as actionTypes from "../actions/MusicPlayerActions"
 
 const initailState = {
-    current: 400,
+    current: get_last_played_song(),
 }
 const MusicPlayerReducer = (state = initailState, action) => {
     switch (action.type) {
         case actionTypes.SET_SONG_ID:
+            set_last_played_song(action.payload.id)
             return {
                 ...state,
                 current: action.payload.id,

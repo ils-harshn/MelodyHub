@@ -65,10 +65,10 @@ const MusicPlayer = () => {
             {fetching == false && <audio ref={audio} src={songData.url} onTimeUpdate={() => {
                 let value = (audio.current.currentTime * 100) / audio.current.duration;
                 setTimeRangeValue(value)
-                audio.current.volume = volume / 100;
                 timeSlider.current.style.background = `linear-gradient(to right, #82CFD0 0%, #82CFD0 ${value}%, #fff ${value}%, white 100%)`
             }} onCanPlay={() => {
                 setCanPlaySong(true)
+                audio.current.volume = volume / 100;
                 if (playing) {
                     setPlaying(true)
                     audio.current.play();

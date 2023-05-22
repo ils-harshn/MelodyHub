@@ -50,4 +50,12 @@ const get_volume = () => {
     return volume || 100;
 }
 
-export { validator, set_and_validate_field, set_token, get_token, remove_token, set_volume, get_volume }
+const set_last_played_song = (id) => {
+    localStorage.setItem("last_played", id);
+}
+
+const get_last_played_song = () => {
+    return localStorage.getItem("last_played") || 120; 
+}
+
+export { validator, set_and_validate_field, set_token, get_token, remove_token, set_volume, get_volume, get_last_played_song, set_last_played_song }
