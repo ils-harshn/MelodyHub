@@ -7,15 +7,15 @@ import Search from "./pages/Search/Search";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route path="/" element={<Layout/>}>
-          <Route index element={<Home/>}/>
-          <Route path="/search/" element={<Search/>}/>
-        </Route>
-        <Route path="accounts" element={<AuthLayout/>}>
-          <Route path="login" element={<Login/>} />
-        </Route>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/search/" element={<Search />} />
+          </Route>
+          <Route path="accounts" element={<AuthLayout />}>
+            <Route path="login" element={<Login />} />
+          </Route>
       </Routes>
     </BrowserRouter>
   );
