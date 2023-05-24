@@ -5,6 +5,7 @@ import Layout from "./pages/Layouts/Layout";
 import Home from "./pages/Home/Home";
 import Search from "./pages/Search/Search";
 import Register from "./pages/Register/Register";
+import VerifyOTP from "./pages/VerifyOTP/VerifyOTP";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="accounts" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="verifyOTP" element={<VerifyOTP />} />
           </Route>
       </Routes>
     </BrowserRouter>

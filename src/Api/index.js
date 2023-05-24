@@ -107,3 +107,35 @@ export const neutralizeReactionApi = (token, id) => {
 
   return axios.request(config)
 }
+
+
+export const registerApi = (email, password, password2, first_name, last_name) => {
+  let data = new FormData();
+  data.append('email', email)
+  data.append('password', password)
+  data.append('password2', password2)
+  data.append('first_name', first_name)
+  data.append('last_name', last_name)
+
+  let config = {
+    method: 'post',
+    url: `${BASE_URL}/api/accounts/register`,
+    data: data
+  };
+
+  return axios.request(config);
+}
+
+export const verifyOTPApi = (email, code) => {
+  let data = new FormData();
+  data.append('email', email);
+  data.append('code', code);
+
+  let config = {
+    method: 'post',
+    url: `${BASE_URL}/api/accounts/verify`,
+    data: data
+  };
+
+  return axios.request(config)
+}

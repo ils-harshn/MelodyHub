@@ -4,6 +4,8 @@ import likedSongsReducers from "./likedSongsReducers";
 import mostViewedSongsReducer from "./mostViewedSongsReducers";
 import searchSongsReducer from "./searchSongReducer";
 import MusicPlayerReducer from "./MusicPlayerReducer";
+import registerReducer from "./registerReducer";
+import verifyOTPReducer from "./verifyOTPReducer";
 
 const combinedReducers = combineReducers({
     loginReducer,
@@ -11,6 +13,8 @@ const combinedReducers = combineReducers({
     mostViewedSongsReducer,
     searchSongsReducer,
     MusicPlayerReducer,
+    registerReducer,
+    verifyOTPReducer,
 })
 
 export default combinedReducers;

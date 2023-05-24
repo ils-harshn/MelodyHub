@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Register.scss";
 import { useNavigate } from "react-router-dom";
 import { set_and_validate_field } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import * as actionTypes from "../../store/actions/registerActions";
+import { RESET_VERIFY_OTP } from "../../store/actions/verifyOTPActions";
 
 const Register = () => {
     const [email, setEmail] = useState("");
@@ -20,10 +23,30 @@ const Register = () => {
     const [lastNameError, setLastNameError] = useState(true);
 
     const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const data = useSelector((reducers) => reducers.registerReducer);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch({ type: actionTypes.INITIATE_REGISTRATION, payload: {
+            email,
+            password,
+            confirmPassword,
+            firstName,
+            lastName,
+        }})
+    }
+
+    useEffect(() => {
+        if (data.success) {
+            dispatch({ type: RESET_VERIFY_OTP });
+            navigate('/accounts/verifyOTP/');
+        }
+    }, [data])
 
     return <div className="register-page">
         <div className="form-container">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="input-group">
                     <label>Email address</label>
                     <input placeholder="Email address" value={email} onChange={(e) => set_and_validate_field(e.target.value, setEmail, setEmailError, "email")} />
@@ -57,7 +80,6 @@ const Register = () => {
                     <label>Enter Confirm Password</label>
                     <input placeholder="Confirm Password" value={confirmPassword} type="password" onChange={(e) => {
                         let { is_valid } = set_and_validate_field(e.target.value, setConfirmPassword, setConfirmPasswordError, "*")
-                        console.log(e.target.value, password)
                         if (is_valid && (e.target.value == password)) {
                             setConfirmPasswordError(false)
                             setPasswordError(false)
@@ -68,12 +90,12 @@ const Register = () => {
                     }} />
                     <div className="error">{confirmPasswordError && confirmPasswordError}</div>
                 </div>
-                <div className="form-error">*Email or username already exists</div>
-                <button type="submit" disabled={emailError || firstNameError || lastNameError || passwordError || confirmPasswordError}>Register</button>
+                <div className="form-error">{data.error}</div>
+                <button type="submit" disabled={emailError || firstNameError || lastNameError || passwordError || confirmPasswordError || data.loading}>Register</button>
                 <div className="form-footer-seperator"></div>
                 <div className="form-footer">
                     <div>Already have an account?</div>
-                    <button >LOGIN HERE</button>
+                    <button onClick={() => navigate("/accounts/login/")}>LOGIN HERE</button>
                 </div>
             </form>
         </div>

@@ -4,6 +4,7 @@ import { get_token, set_and_validate_field } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionTypes from "../../store/actions/loginActions"
+import { REGISTRATION_STATE_RESET } from "../../store/actions/registerActions";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -14,17 +15,19 @@ const Login = () => {
     const [rememberMe, setRememberMe] = useState(false);
 
     const navigate = useNavigate()
-    
+
     const data = useSelector((reducers) => reducers.loginReducer);
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch({ type: actionTypes.INITIATE_LOGIN, payload: {
-            email,
-            password,
-            rememberMe,
-        }})
+        dispatch({
+            type: actionTypes.INITIATE_LOGIN, payload: {
+                email,
+                password,
+                rememberMe,
+            }
+        })
     }
 
     const check_if_user_logged_in = () => {
@@ -60,7 +63,7 @@ const Login = () => {
                 </div>
                 <div className="login-button-with-remember-me">
                     <div className="left">
-                        <input type="checkbox" value={rememberMe} onChange={(e) => setRememberMe(e.target.checked)}/>
+                        <input type="checkbox" value={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
                         <label>Remember Me</label>
                     </div>
                     <div className="right">
@@ -70,7 +73,10 @@ const Login = () => {
                 <div className="form-footer-seperator"></div>
                 <div className="form-footer">
                     <div>Don't have an account?</div>
-                    <button onClick={() => navigate("/accounts/register/")}>SIGN UP FOR FREE</button>
+                    <button onClick={() => {
+                        dispatch({ type: REGISTRATION_STATE_RESET })
+                        navigate("/accounts/register/")
+                    }}>SIGN UP FOR FREE</button>
                 </div>
             </form>
         </div>
