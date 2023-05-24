@@ -45,8 +45,8 @@ const Login = () => {
         <div className="form-container">
             <form onSubmit={handleSubmit}>
                 <div className="input-group">
-                    <label>Email address or username</label>
-                    <input placeholder="Email address or username" value={email} onChange={(e) => set_and_validate_field(e.target.value, setEmail, setEmailError, "email")} />
+                    <label>Email address</label>
+                    <input placeholder="Email address" value={email} onChange={(e) => set_and_validate_field(e.target.value, setEmail, setEmailError, "email")} />
                     <div className="error">{emailError && emailError}</div>
                 </div>
                 <div className="input-group">
@@ -70,7 +70,7 @@ const Login = () => {
                 <div className="form-footer-seperator"></div>
                 <div className="form-footer">
                     <div>Don't have an account?</div>
-                    <button>SIGN UP FOR FREE</button>
+                    <button onClick={() => navigate("/accounts/register/")}>SIGN UP FOR FREE</button>
                 </div>
             </form>
         </div>

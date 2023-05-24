@@ -24,6 +24,7 @@ const set_and_validate_field = (value, setValue, setError, validator_field) => {
     let { is_valid, msg } = validator[validator_field](value);
     if (is_valid) setError(false)
     else setError(msg)
+    return { is_valid, msg } 
 }
 
 const set_token = (token, rememberMe=false) => {

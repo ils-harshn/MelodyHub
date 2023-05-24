@@ -4,6 +4,7 @@ import Login from "./pages/Login/Login";
 import Layout from "./pages/Layouts/Layout";
 import Home from "./pages/Home/Home";
 import Search from "./pages/Search/Search";
+import Register from "./pages/Register/Register";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           </Route>
           <Route path="accounts" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
           </Route>
       </Routes>
     </BrowserRouter>
