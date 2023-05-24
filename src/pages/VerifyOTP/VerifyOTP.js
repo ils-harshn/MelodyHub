@@ -14,10 +14,12 @@ const VerifyOTP = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch({ type: INITIATE_VERIFY_OTP, payload: {
-            email,
-            code,
-        }});
+        dispatch({
+            type: INITIATE_VERIFY_OTP, payload: {
+                email,
+                code,
+            }
+        });
     }
 
     useEffect(() => {
@@ -28,23 +30,31 @@ const VerifyOTP = () => {
         if (data.success) navigate("/accounts/login/");
     }, [data])
 
+    if (email == null) return <></>
     return <div className="otp-page">
         <div className="form-container">
             <form onSubmit={handleSubmit}>
                 <div className="input-group">
                     <label>Email address</label>
-                    <input placeholder="Email address" value={email} disabled/>
+                    <input placeholder="Email address" value={email} disabled />
                 </div>
                 <div className="input-group">
                     <label>OTP</label>
-                    <input placeholder="Enter OTP" value={code} type="number" min={100000} max={999999} onChange={(e) => {
-                        setCode(e.target.value)
-                        if (e.target.value.length && e.target.value.length == 6) setCodeError(false)
+                    <input placeholder="Enter OTP" value={code}  min={100000} max={999999} onChange={(e) => {
+                        let codeInput = e.target.value;
+                        let pattern = /^[0-9]{0,6}$/;
+                        if (pattern.test(codeInput)) {
+                            setCode(codeInput);
+                        } else {
+                            e.target.value = code;
+                            codeInput = code;
+                        }
+                        if (codeInput.length && codeInput.length == 6) setCodeError(false)
                         else setCodeError("*6 digit OTP is required.")
-                    }}/>
+                    }} />
                     <div className="error"></div>
                 </div>
-                <div className="form-error">{ data.error }</div>
+                <div className="form-error">{data.error}</div>
                 <button type="submit" disabled={codeError || data.loading}>Verify</button>
             </form>
         </div>
