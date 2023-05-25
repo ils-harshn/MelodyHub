@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     path('accounts/', include("accounts.urls")),
+    path('admin/', include("adminApi.urls")),
     path('', include("songs.urls")),
 ]

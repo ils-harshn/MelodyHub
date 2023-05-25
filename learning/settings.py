@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'api.apps.ApiConfig',
     'songs.apps.SongsConfig',
+    'adminApi.apps.AdminapiConfig',
 ]
 
 MIDDLEWARE = [

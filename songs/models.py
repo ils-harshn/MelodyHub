@@ -6,15 +6,21 @@ from accounts.models import User
 class Album(models.Model):
     code = models.CharField(max_length=10, unique=True)
     title = models.CharField(max_length=500, unique=True)
-    year = models.IntegerField(validators=[MaxValueValidator(1000, 9999)])
+    year = models.IntegerField(validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     thumbnail300x300 = models.URLField()
     thumbnail = models.URLField()
 
     def __str__(self) -> str:
         return self.title
+    
+    class Meta:
+        ordering = ["title"]
 
 class Genre(models.Model):
     name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        ordering = ["name"]
 
     def __str__(self) -> str:
         return self.name
@@ -42,6 +48,9 @@ class Artist(models.Model):
     def __str__(self) -> str:
         return self.name
     
+    class Meta:
+        ordering = ["name"]
+    
 class Playlist(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, unique=True)
@@ -49,6 +58,9 @@ class Playlist(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.author.email} - {self.id})"
+    
+    class Meta:
+        ordering = ["title"]
 
 class SongReaction(models.Model):
     LIKE = 'like'
