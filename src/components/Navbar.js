@@ -1,8 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo-white.png";
 import NavbarPlaylist from "./NavbarPlaylist";
+import { useDispatch } from "react-redux";
+import { LOGOUT } from "../store/actions/loginActions";
 
 const Navbar = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     return (
         <div className="sidebar">
             <div className="logo">
@@ -46,8 +50,13 @@ const Navbar = () => {
                 </div>
             </div>
             <NavbarPlaylist/>
+            <div className="logout-button">
+                <button onClick={() => {
+                    dispatch({ type:  LOGOUT});
+                    navigate("/accounts/login");
+                }}>LOG OUT</button>
+            </div>
         </div>
     )
 }
-
 export default Navbar;

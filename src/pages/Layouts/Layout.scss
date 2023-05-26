@@ -7,6 +7,30 @@
             width: 224px;
             background-color: black;
             color: white;
+            position: relative;
+
+            .logout-button {
+                margin-left: 20px;
+                position: absolute;
+                bottom: 10px;
+
+                button {
+                    padding: 10px;
+                    outline: none;
+                    border: none;
+                    width: 184px;
+                    font-size: 12px;
+                    background-color: #646464;
+                    color: white;
+                    border-radius: 25px;
+                    transition: 300ms all;
+                }
+
+                button:hover {
+                    background-color: #ffffff;
+                    color: black;
+                }
+            }
 
             .logo {
                 height: 50px;

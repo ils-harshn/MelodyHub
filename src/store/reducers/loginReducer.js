@@ -1,4 +1,4 @@
-import { set_token } from "../../utils"
+import { set_token, remove_token } from "../../utils"
 import * as type from "../actions/loginActions.js"
 
 const initailState = {
@@ -47,6 +47,7 @@ const loginReducer = (state = initailState, action) => {
             }
 
         case type.LOGOUT:
+            remove_token()
             return {
                 ...state,
                 user: null,
