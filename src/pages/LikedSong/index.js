@@ -52,12 +52,15 @@ const LikedSongPage = () => {
                 <div className="description">
                     <h1>Favorite Songs</h1>
                     <div>A blend of music that have been liked by you.</div>
-                    <div>Containing about: { songsData.count } songs.</div>
+                    <div>Containing about: {songsData.count} songs.</div>
                 </div>
                 <div className="options">
-                    <span className="material-symbols-outlined play-arrow">
-                        play_arrow
-                    </span>
+                    {
+                        songsData.count > 0 &&
+                        <span className="material-symbols-outlined play-arrow">
+                            play_arrow
+                        </span>
+                    }
                 </div>
             </div>
             <div className="liked-songs-main" onScroll={(e) => {
@@ -109,7 +112,7 @@ const LikedSongPage = () => {
                                     {
                                         songsData.results.map((item, index) => (
                                             <tr key={index} className={item.song.id == musicPlayerData.current && "active"}
-                                            onClick={() => dispatch({ type: SET_SONG_ID, payload: { id: item.song.id } })}
+                                                onClick={() => dispatch({ type: SET_SONG_ID, payload: { id: item.song.id } })}
                                             >
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{item.song.original_name}</td>
