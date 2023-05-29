@@ -25,7 +25,7 @@ const CreatePlaylistMainScreen = () => {
         <div id="create-playlist-main-screen">
             <div className="form-container">
                 <div className="cross-button">
-                    <span className="material-symbols-outlined" onClick={() => navigate("/")}>
+                    <span className="material-symbols-outlined" onClick={() => navigate("/library/")}>
                         cancel
                     </span>
                 </div>
