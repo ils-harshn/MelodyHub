@@ -37,7 +37,7 @@ const LikedSongPage = () => {
     }, [page])
 
     useEffect(() => {
-        console.log(songsData)
+        console.log(page)
     }, [songsData])
 
     return (
