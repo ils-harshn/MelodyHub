@@ -8,6 +8,7 @@ import Register from "./pages/Register/Register";
 import VerifyOTP from "./pages/VerifyOTP/VerifyOTP";
 import Library from "./pages/Library";
 import LikedSongPage from "./pages/LikedSong";
+import CreatePlaylistMainScreenPage from "./pages/CreatePlaylistMainScreenPage/CreatePlaylistMainScreenPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/search/" element={<Search />} />
           <Route path="/library/" element={<Library />} />
           <Route path="/likedsongs/" element={<LikedSongPage />} />
+          <Route path="/createplaylist/" element={<CreatePlaylistMainScreenPage />} />
         </Route>
         <Route path="accounts" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />

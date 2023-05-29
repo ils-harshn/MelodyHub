@@ -139,3 +139,18 @@ export const verifyOTPApi = (email, code) => {
 
   return axios.request(config)
 }
+
+export const createPlaylistApi = (token, title) => {
+  let data = new FormData();
+  data.append('title', title);
+  let config = {
+    method: 'post',
+    url: `${BASE_URL}/api/songs/playlists/create/`,
+    headers: {
+      'Authorization': `Token ${token}`,
+    },
+    data: data
+  };
+
+  return axios.request(config)
+}

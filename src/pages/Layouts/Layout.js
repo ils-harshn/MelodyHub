@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { INITIATE_LOGIN_WITH_TOKEN } from "../../store/actions/loginActions";
 import FullPageLoader from "../../components/FullPageLoader";
 import { get_token } from "../../utils";
+import CreatePlaylistMainScreen from "../../components/CreatePlaylistMainScreen";
 
 const Layout = () => {
     const data = useSelector((reducers) => reducers.loginReducer);

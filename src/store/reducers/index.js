@@ -6,6 +6,7 @@ import searchSongsReducer from "./searchSongReducer";
 import MusicPlayerReducer from "./MusicPlayerReducer";
 import registerReducer from "./registerReducer";
 import verifyOTPReducer from "./verifyOTPReducer";
+import createPlaylistReducer from "./createPlaylistReducer";
 
 const combinedReducers = combineReducers({
     loginReducer,
@@ -15,6 +16,7 @@ const combinedReducers = combineReducers({
     MusicPlayerReducer,
     registerReducer,
     verifyOTPReducer,
+    createPlaylistReducer,
 })
 
 export default combinedReducers;
