@@ -42,7 +42,7 @@ const MusicPlayer = () => {
                 await neutralizeReactionApi(loginToken, songData.id);
                 setLiked(false);
             }
-        } catch {}
+        } catch { }
     }
 
     const handleLikeReaction = async () => {
@@ -51,7 +51,7 @@ const MusicPlayer = () => {
                 await likeSongApi(loginToken, songData.id)
                 setLiked(true)
             }
-        } catch {}
+        } catch { }
     }
 
     useEffect(() => {

@@ -1,0 +1,115 @@
+.liked-songs-page {
+    color: white;
+
+    .jumbotron {
+        background: linear-gradient(90deg, #285d67 0%, #3f70b9 100%);
+        padding: 20px;
+        display: flex;
+        align-items: center;
+
+        > span {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(90deg, #3DD5F3 0%, #3D8BFD 100%);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+        }
+
+        .description {
+            height: 100px;
+            margin-left: 20px;
+
+            h1 {
+                padding: 0;
+                margin: 10px 0 10px 0;
+            }
+
+            div {
+                font-size: 10px;
+                color: #B3B3B3;
+            }
+        }
+
+        .options {
+            flex-grow: 1;
+            display: flex;
+            justify-content: right;
+            margin-right: 50px;
+
+            span {
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50px;
+                background-color: #1DB954;
+            }
+        }
+    }
+
+    .liked-songs-main {
+        height: calc(100vh - 270px);
+        overflow-y: auto;
+        background-color: rgb(31, 31, 31);
+        padding: 20px;
+
+        .table {
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+            cursor: pointer;
+
+            thead {
+                text-align: left;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 10px;
+                line-height: 12px;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                color: #777777;
+
+                tr th {
+                    border-bottom: 0.5px solid #777777;
+                    padding-bottom: 10px;
+                }
+
+            }
+
+            tbody {
+                tr {
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 14px;
+                    height: 30px;
+                    color: #B3B3B3;
+                    transition: 300ms background-color;
+
+                    td:nth-child(2) {
+                        color: white;
+                    }
+                }
+
+                tr.active {
+                    td:nth-child(2) {
+                        color: #1DB954;
+                    }
+                }
+
+                tr:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                    ;
+                }
+            }
+        }
+
+        .table.loading {
+            font-family: 'Flow Circular', cursive;
+        }
+    }
+}
