@@ -1,7 +1,8 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./index.scss";
 import { useEffect, useState } from "react";
 import { getLikedSongsApi } from "../../Api";
+import { SET_SONG_ID } from "../../store/actions/MusicPlayerActions";
 
 const LikedSongPage = () => {
     const [songsData, setSongsData] = useState({
@@ -11,6 +12,8 @@ const LikedSongPage = () => {
         results: [],
     });
     const data = useSelector((reducers) => reducers.loginReducer);
+    const dispatch = useDispatch();
+    const musicPlayerData = useSelector((reducers) => reducers.MusicPlayerReducer);
     const [page, setPage] = useState(1);
     const [fetchingMore, setFetchingMore] = useState(false);
 
@@ -105,7 +108,9 @@ const LikedSongPage = () => {
                                 <tbody>
                                     {
                                         songsData.results.map((item, index) => (
-                                            <tr key={index}>
+                                            <tr key={index} className={item.song.id == musicPlayerData.current && "active"}
+                                            onClick={() => dispatch({ type: SET_SONG_ID, payload: { id: item.song.id } })}
+                                            >
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{item.song.original_name}</td>
                                                 <td>{item.song.album.title}</td>
