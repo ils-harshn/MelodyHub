@@ -39,6 +39,10 @@
         white-space: nowrap;
     }
 
+    .song-title.active {
+        color: #1DB954;
+    }
+
     .album,
     .artists {
         font-style: normal;

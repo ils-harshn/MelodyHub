@@ -52,7 +52,7 @@ const LikedSongPage = () => {
                 <div className="description">
                     <h1>Favorite Songs</h1>
                     <div>A blend of music that have been liked by you.</div>
-                    <div>Containing about: 50 songs.</div>
+                    <div>Containing about: { songsData.count } songs.</div>
                 </div>
                 <div className="options">
                     <span className="material-symbols-outlined play-arrow">
