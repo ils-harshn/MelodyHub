@@ -14,7 +14,7 @@ class Album(models.Model):
     uploaded_at = models.DateTimeField(_("uploaded_at"), default=timezone.now)
 
     class Meta:
-        ordering = ["uploaded_at"]
+        ordering = ["-uploaded_at"]
 
     def __str__(self) -> str:
         return self.title
@@ -38,7 +38,7 @@ class Song(models.Model):
     uploaded_at = models.DateTimeField(_("uploaded_at"), default=timezone.now)
 
     class Meta:
-        ordering = ["uploaded_at"]
+        ordering = ["-uploaded_at"]
 
     def __str__(self) -> str:
         return self.original_name
@@ -62,7 +62,7 @@ class Playlist(models.Model):
     created_at = models.DateTimeField(_("created_at"), default=timezone.now)
 
     class Meta:
-        ordering = ["created_at"]
+        ordering = ["-created_at"]
 
     def __str__(self):
         return f"{self.title} ({self.author.email} - {self.id})"
@@ -82,7 +82,7 @@ class SongReaction(models.Model):
     created_at = models.DateTimeField(_("created_at"), default=timezone.now)
 
     class Meta:
-        ordering = ["created_at"]
+        ordering = ["-created_at"]
         unique_together = ('user', 'song')
 
 
