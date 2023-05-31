@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from accounts.models import User
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class Album(models.Model):
@@ -9,12 +11,13 @@ class Album(models.Model):
     year = models.IntegerField(validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     thumbnail300x300 = models.URLField()
     thumbnail = models.URLField()
+    uploaded_at = models.DateTimeField(_("uploaded_at"), default=timezone.now)
+
+    class Meta:
+        ordering = ["uploaded_at"]
 
     def __str__(self) -> str:
         return self.title
-    
-    class Meta:
-        ordering = ["title"]
 
 class Genre(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -32,9 +35,10 @@ class Song(models.Model):
     original_name = models.CharField(max_length=500)
     views = models.IntegerField(default=0)
     genre = models.ForeignKey(Genre, on_delete=models.SET_DEFAULT, null=True, default=None)
+    uploaded_at = models.DateTimeField(_("uploaded_at"), default=timezone.now)
 
     class Meta:
-        ordering = ["title"]
+        ordering = ["uploaded_at"]
 
     def __str__(self) -> str:
         return self.original_name
@@ -55,12 +59,13 @@ class Playlist(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, unique=True)
     songs = models.ManyToManyField(Song)
+    created_at = models.DateTimeField(_("created_at"), default=timezone.now)
+
+    class Meta:
+        ordering = ["created_at"]
 
     def __str__(self):
         return f"{self.title} ({self.author.email} - {self.id})"
-    
-    class Meta:
-        ordering = ["title"]
 
 class SongReaction(models.Model):
     LIKE = 'like'
@@ -74,9 +79,12 @@ class SongReaction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
     reaction = models.CharField(max_length=20, choices=REACTION_CHOICES)
+    created_at = models.DateTimeField(_("created_at"), default=timezone.now)
 
     class Meta:
-        ordering = ["song__original_name"]
+        ordering = ["created_at"]
+        unique_together = ('user', 'song')
+
 
     def __str__(self):
         return f"{self.song.original_name} {self.reaction} by {self.user.email}"

@@ -1,8 +1,10 @@
 from django.contrib import admin
+from django import forms
 from .models import Song, Artist, Album, Playlist, SongReaction, Genre
 
 class SongAdmin(admin.ModelAdmin):
     search_fields = ['original_name']
+    fields = ["album", "title", "url", "original_name", "views", "genre"]
 
 class AlbumAdmin(admin.ModelAdmin):
     search_fields = ['title', 'code']
