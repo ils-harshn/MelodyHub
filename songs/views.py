@@ -281,8 +281,20 @@ class GetRandomSong(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
+        obj = Song.objects.order_by("?")[0]
+        obj = super().get_object()
+        obj.views += 1
+        obj.save()
+
+        try:
+            RecentSong(user=request.user, song=obj).save()
+        except IntegrityError:
+            recent_song = request.user.recentsong_set.get(song=obj)
+            recent_song.created_at = timezone.now()
+            recent_song.save()
+
         return Response(
-            data=SongSerializer(Song.objects.order_by("?")[0], context={'request': request}).data,
+            data=SongSerializer(obj, context={'request': request}).data,
             status=status.HTTP_200_OK
         )
     
