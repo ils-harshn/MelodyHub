@@ -1,5 +1,5 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, DestroyAPIView
-from songs.models import Song, Album, Artist, Genre
+from songs.models import Song, Album, Artist, Genre, RecentSong
 from songs.serializers import SongSerializer, ArtistSerializer, AlbumSerializer, PlaylistNameSerializer, GenreSerializer
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
@@ -11,7 +11,9 @@ from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from songs.serializers import SongReactionSerializer, SongReactionWithSongsSerializer
+from songs.serializers import SongReactionSerializer, SongReactionWithSongsSerializer, RecentSongSerializer
+from django.db import IntegrityError
+from django.utils import timezone
 
 class SongsListView(ListAPIView):
     permission_classes = [IsAuthenticated]
@@ -32,6 +34,11 @@ class SongView(RetrieveAPIView):
         obj = super().get_object()
         obj.views += 1
         obj.save()
+        try:
+            RecentSong(user=self.request.user, song=obj).save()
+        except IntegrityError:
+            recent_song = self.request.user.user.recentsong_set.get(song=obj)
+            recent_song.created_at = timezone.now()
         return obj
 
 
@@ -289,3 +296,12 @@ class DislikedSongsListView(APIView):
             return Response(status=status.HTTP_200_OK)
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
+        
+
+class RecentSongsListView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = RecentSongSerializer
+    pagination_class = PageNumberPagination
+
+    def get_queryset(self):
+        return self.request.user.recentsong_set.all()

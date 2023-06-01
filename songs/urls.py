@@ -25,4 +25,5 @@ urlpatterns = [
     path('songs/playlists/get/<int:playlist_id>/song/delete/<int:song_id>/', view=views.DeleteSongFromPlayList.as_view(), name="delete-song-in-playlist"),
     path('genres/', view=views.GenreListView.as_view(), name="genre-list"),
     path('genres/get/<int:id>/songs/', view=views.GenreSongsView.as_view(), name="genre-song-list"),
+    path('recent/songs/', view=views.RecentSongsListView.as_view(), name="recent-song-list"),
 ]

@@ -88,3 +88,12 @@ class SongReaction(models.Model):
 
     def __str__(self):
         return f"{self.song.original_name} {self.reaction} by {self.user.email}"
+    
+class RecentSong(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(_("created_at"), default=timezone.now)
+
+    class Meta:
+        ordering = ["-created_at"]
+        unique_together = ('user', 'song')

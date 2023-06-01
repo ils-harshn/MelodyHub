@@ -1,6 +1,5 @@
 from django.contrib import admin
-from django import forms
-from .models import Song, Artist, Album, Playlist, SongReaction, Genre
+from .models import Song, Artist, Album, Playlist, SongReaction, Genre, RecentSong
 
 class SongAdmin(admin.ModelAdmin):
     search_fields = ['original_name']
@@ -21,3 +20,4 @@ admin.site.register(Artist, ArtistAdmin)
 admin.site.register(Genre, GenreAdmin)
 admin.site.register(Playlist)
 admin.site.register(SongReaction)
+admin.site.register(RecentSong)

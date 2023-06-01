@@ -71,3 +71,10 @@ class SongReactionWithSongsSerializer(serializers.ModelSerializer):
     class Meta:
         model = SongReaction
         fields = ("song",)
+
+class RecentSongSerializer(serializers.ModelSerializer):
+    song = SongSerializerWithoutReaction(required=True)
+    
+    class Meta:
+        model = SongReaction
+        fields = ("song", "created_at")
