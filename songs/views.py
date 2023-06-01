@@ -282,7 +282,6 @@ class GetRandomSong(APIView):
 
     def get(self, request, format=None):
         obj = Song.objects.order_by("?")[0]
-        obj = super().get_object()
         obj.views += 1
         obj.save()
 
