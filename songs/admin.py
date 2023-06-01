@@ -14,10 +14,13 @@ class ArtistAdmin(admin.ModelAdmin):
 class GenreAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
+class RecentSongAdmin(admin.ModelAdmin):
+    search_fields = ['user__email']
+
 admin.site.register(Song, SongAdmin)
 admin.site.register(Album, AlbumAdmin)
 admin.site.register(Artist, ArtistAdmin)
 admin.site.register(Genre, GenreAdmin)
 admin.site.register(Playlist)
 admin.site.register(SongReaction)
-admin.site.register(RecentSong)
+admin.site.register(RecentSong, RecentSongAdmin)
