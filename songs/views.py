@@ -37,7 +37,7 @@ class SongView(RetrieveAPIView):
         try:
             RecentSong(user=self.request.user, song=obj).save()
         except IntegrityError:
-            recent_song = self.request.user.user.recentsong_set.get(song=obj)
+            recent_song = self.request.user.recentsong_set.get(song=obj)
             recent_song.created_at = timezone.now()
         return obj
 
