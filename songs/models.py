@@ -97,3 +97,6 @@ class RecentSong(models.Model):
     class Meta:
         ordering = ["-created_at"]
         unique_together = ('user', 'song')
+
+    def __str__(self):
+        return f"{self.user.first_name}: {self.song.original_name}"
