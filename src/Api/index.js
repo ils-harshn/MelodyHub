@@ -29,7 +29,10 @@ export const verifyTokenApi = (token) => {
 export const getLikedSongsApi = (token, page = 1) => {
   let config = {
     method: 'GET',
-    url: `/api/songs/liked/?page=${page}`,
+    url: `/api/songs/liked/`,
+    params: {
+      page,
+    }
   };
 
   return axiosWithAuth.request(config)
@@ -47,7 +50,16 @@ export const getMostViewedSongsApi = (token) => {
 export const searchSongsApi = (token, original_name = "", album__code = "", album__title = "", artist__name = "", year = "", genre = "", page = 1) => {
   let config = {
     method: 'GET',
-    url: `/api/songs/?page=${page}&original_name=${original_name}&album__code=${album__code}&album__title=${album__title}&artist__name=${artist__name}&year=${year}&genre=${genre}`,
+    url: "/api/songs/",
+    params: {
+      page,
+      original_name,
+      album__code,
+      album__title,
+      artist__name,
+      year,
+      genre,
+    }
   };
 
   return axiosWithAuth.request(config)
@@ -134,7 +146,10 @@ export const createPlaylistApi = (token, title) => {
 export const recentSongsApi = (token, page = 1) => {
   let config = {
     method: 'GET',
-    url: `/api/recent/songs/?page=${page}`,
+    url: `/api/recent/songs/`,
+    params: {
+      page,
+    }
   };
   return axiosWithAuth.request(config)
 }
@@ -142,7 +157,11 @@ export const recentSongsApi = (token, page = 1) => {
 export const getPlaylistsApi = (token, title = "", page = 1) => {
   let config = {
     method: 'GET',
-    url: `/api/songs/playlists/?title=${title}&page=${page}`,
+    url: `/api/songs/playlists/`,
+    params: {
+      title,
+      page,
+    }
   };
 
   return axiosWithAuth.request(config)
