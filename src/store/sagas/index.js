@@ -7,6 +7,7 @@ import { registerSaga } from "./registerSaga"
 import { verifyOTPSaga } from "./verifyOTPSaga"
 import { createPlaylistSaga } from "./createPlaylistSaga"
 import { getRecentSongsSaga } from "./recentSongsSaga"
+import { deletePlaylistSaga } from "./deletePlaylistSaga"
 
 export default function* rootSaga() {
   yield all([
@@ -19,5 +20,6 @@ export default function* rootSaga() {
     verifyOTPSaga(),
     createPlaylistSaga(),
     getRecentSongsSaga(),
+    deletePlaylistSaga(),
   ])
 }

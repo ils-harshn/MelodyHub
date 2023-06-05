@@ -7,9 +7,10 @@ const NavbarPlaylist = () => {
     const [playlistsData, setPlaylistsData] = useState();
     const [loading, setLoading] = useState(true);
     const data = useSelector((reducers) => reducers.loginReducer);
+    const createPlaylistData = useSelector(reducers => reducers.createPlaylistReducer)
 
-    const fetchPlaylistData = async () => {
-        setLoading(true)
+    const fetchPlaylistData = async (loading = true) => {
+        setLoading(loading)
         let playlist_data = await getPlaylistsApi(data.user.token);
         setPlaylistsData(playlist_data.data.results.slice(0, 5))
         setLoading(false)
@@ -18,6 +19,10 @@ const NavbarPlaylist = () => {
     useEffect(() => {
         fetchPlaylistData()
     }, [])
+
+    useEffect(() => {
+        if (loading == false) fetchPlaylistData(false);
+    }, [createPlaylistData])
 
     return (
         <div className="playlist-list">
@@ -39,7 +44,8 @@ const NavbarPlaylist = () => {
                     <div className="list">
                         {
                             playlistsData.map((item, index) =>
-                                <Link to={`/playlist/${item.title}`} key={index}>{item.title}</Link>
+                                <Link to={`/playlist/${item.title}`} key={index}>{item.title}
+                                </Link>
                             )}
                     </div>
                 </>

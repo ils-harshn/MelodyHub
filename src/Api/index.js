@@ -177,3 +177,15 @@ export const getPlaylistsApi = (token, title="", page=1) => {
   
   return axios.request(config)
 }
+
+export const deletePlaylistApi = (token, id) => {
+  let config = {
+    method: 'delete',
+    url: `${BASE_URL}/api/songs/playlists/delete/${id}/`,
+    headers: { 
+      'Authorization': `Token ${token}`, 
+    },
+  };
+  
+  return axios.request(config)
+}
