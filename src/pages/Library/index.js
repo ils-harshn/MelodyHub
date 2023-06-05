@@ -12,7 +12,7 @@ const Library = () => {
     const [page, setPage] = useState(1);
 
     useEffect(() => {
-        dispatch({ type: recentSongsActions.INITIATE_RECENT_SONGS, payload: { page: 1, token: data.user.token } });
+        dispatch({ type: recentSongsActions.INITIATE_RECENT_SONGS, payload: { page: page, token: data.user.token } });
     }, [])
 
     return (
@@ -25,7 +25,6 @@ const Library = () => {
                             <LikedSongsComponent title={"Recent Songs"} data={recentSongsData.data} />
                         </div>
                 }
-                {console.log(recentSongsData)}
             </div>
         </div>
     )

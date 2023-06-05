@@ -93,8 +93,13 @@
                     border-bottom: 1px solid #676767;
                 }
 
+                .title.none {
+                    border: none;
+                }
+
                 .list a {
                     // border: 1px solid red;
+                    width: 160px;
                     display: block;
                     color: white;
                     text-decoration: none;

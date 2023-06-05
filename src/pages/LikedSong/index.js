@@ -111,7 +111,7 @@ const LikedSongPage = () => {
                                 <tbody>
                                     {
                                         songsData.results.map((item, index) => (
-                                            <tr key={index} className={item.song.id == musicPlayerData.current && "active"}
+                                            <tr key={index} className={item.song.id == musicPlayerData.current ? "active": ""}
                                                 onClick={() => dispatch({ type: SET_SONG_ID, payload: { id: item.song.id } })}
                                             >
                                                 <th scope="row">{index + 1}</th>

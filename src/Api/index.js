@@ -165,3 +165,15 @@ export const recentSongsApi = (token, page = 1) => {
   };
   return axios.request(config)
 }
+
+export const getPlaylistsApi = (token, title="", page=1) => {
+  let config = {
+    method: 'get',
+    url: `${BASE_URL}/api/songs/playlists/?title=${title}&page=${page}`,
+    headers: { 
+      'Authorization': `Token ${token}`
+    }
+  };
+  
+  return axios.request(config)
+}
