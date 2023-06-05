@@ -1,5 +1,5 @@
 import { getToken, verifyTokenApi } from "../../Api";
-import * as actionsType from "../actions/loginActions";
+import * as actionsType from "../actionsTypes/loginActions";
 import { call, put, takeLatest } from 'redux-saga/effects'
 
 

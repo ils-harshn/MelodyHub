@@ -1,4 +1,4 @@
-import * as type from "../actions/createPlaylistReducerActions.js"
+import * as type from "../actionsTypes/createPlaylistReducerActions.js"
 
 const initailState = {
     error: null,

@@ -1,4 +1,4 @@
-import * as type from "../actions/registerActions.js"
+import * as type from "../actionsTypes/registerActions.js"
 
 const initailState = {
     error: null,

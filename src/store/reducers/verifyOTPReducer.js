@@ -1,4 +1,4 @@
-import * as type from "../actions/verifyOTPActions.js"
+import * as type from "../actionsTypes/verifyOTPActions.js"
 
 const initailState = {
     error: null,

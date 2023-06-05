@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./VerifyOTP.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { INITIATE_VERIFY_OTP } from "../../store/actions/verifyOTPActions";
+import { INITIATE_VERIFY_OTP } from "../../store/actionsTypes/verifyOTPActions";
 
 const VerifyOTP = () => {
     const navigate = useNavigate()

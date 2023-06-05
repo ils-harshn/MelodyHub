@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import * as actionsType from "../actions/createPlaylistReducerActions";
+import * as actionsType from "../actionsTypes/createPlaylistReducerActions";
 import { createPlaylistApi } from "../../Api";
 
 export function* handleCreatePlaylistSaga(action) {

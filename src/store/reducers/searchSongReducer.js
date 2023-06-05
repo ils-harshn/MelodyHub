@@ -1,4 +1,4 @@
-import * as type from "../actions/searchSongsActions.js"
+import * as type from "../actionsTypes/searchSongsActions.js"
 
 const initailState = {
     data: null,

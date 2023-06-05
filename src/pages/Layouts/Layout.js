@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 import MusicPlayer from "../../components/MusicPlayer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { INITIATE_LOGIN_WITH_TOKEN } from "../../store/actions/loginActions";
+import { INITIATE_LOGIN_WITH_TOKEN } from "../../store/actionsTypes/loginActions";
 import FullPageLoader from "../../components/FullPageLoader";
 import { get_token } from "../../utils";
 import CreatePlaylistMainScreen from "../../components/CreatePlaylistMainScreen";

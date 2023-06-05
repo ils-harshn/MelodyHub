@@ -1,5 +1,5 @@
 import { get_last_played_song, set_last_played_song } from "../../utils"
-import * as actionTypes from "../actions/MusicPlayerActions"
+import * as actionTypes from "../actionsTypes/MusicPlayerActions"
 
 const initailState = {
     current: get_last_played_song(),

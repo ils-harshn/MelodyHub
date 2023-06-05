@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import * as actionsType from "../../store/actions/mostViewedSongsActions"
+import * as actionsType from "../../store/actionsTypes/mostViewedSongsActions"
 import { getMostViewedSongsApi } from '../../Api';
 
 export function* handleMostViewedSongsSaga(action) {

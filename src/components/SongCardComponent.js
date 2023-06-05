@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/SongCardComponent.scss";
 import ImageWithSkeleton from "./ImageLoader";
-import { SET_SONG_ID } from "../store/actions/MusicPlayerActions";
+import { SET_SONG_ID } from "../store/actionsTypes/MusicPlayerActions";
 
 const SongCardComponent = ({ item }) => {
     const dispatch = useDispatch();
