@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/createPlaylistMainScreen.scss"
 import { useEffect, useState } from "react";
 import { set_and_validate_field } from "../utils";
@@ -12,6 +12,8 @@ const CreatePlaylistMainScreen = () => {
     const data = useSelector((reducers) => reducers.loginReducer);
     const createPlaylistData = useSelector(reducers => reducers.createPlaylistReducer);
     const dispatch = useDispatch();
+    const locationParams = new URLSearchParams(useLocation().search);
+    const lastLocation = locationParams.get("location") || "/library"
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,7 +27,7 @@ const CreatePlaylistMainScreen = () => {
         <div id="create-playlist-main-screen">
             <div className="form-container">
                 <div className="cross-button">
-                    <span className="material-symbols-outlined" onClick={() => navigate("/library/")}>
+                    <span className="material-symbols-outlined" onClick={() => navigate(lastLocation)}>
                         cancel
                     </span>
                 </div>

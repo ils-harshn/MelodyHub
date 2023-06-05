@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo-white.png";
 import NavbarPlaylist from "./NavbarPlaylist";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,8 @@ import { LOGOUT } from "../store/actions/loginActions";
 const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+
     return (
         <div className="sidebar">
             <div className="logo">
@@ -35,7 +37,7 @@ const Navbar = () => {
                     </NavLink>
                 </div>
                 <div className="bottom-nav-tabs">
-                    <NavLink to={"/createplaylist/"}>
+                    <NavLink to={`/createplaylist/?location=${location.pathname}`}>
                         <span className="material-symbols-outlined">
                             add
                         </span>

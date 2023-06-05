@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const BASE_URL = process.env.REACT_APP_BASEURL;
+axios.defaults.baseURL = process.env.REACT_APP_BASEURL;
 
 export const getToken = (username, password) => {
   let data = new FormData();
@@ -9,7 +8,7 @@ export const getToken = (username, password) => {
 
   let config = {
     method: 'post',
-    url: `${BASE_URL}/api/accounts/token`,
+    url: `/api/accounts/token`,
     data: data
   };
 
@@ -19,7 +18,7 @@ export const getToken = (username, password) => {
 export const verifyTokenApi = (token) => {
   let config = {
     method: 'post',
-    url: `${BASE_URL}/api/accounts/verifytoken`,
+    url: `/api/accounts/verifytoken`,
     headers: {
       'Authorization': `Token ${token}`,
     },
@@ -31,7 +30,7 @@ export const verifyTokenApi = (token) => {
 export const getLikedSongsApi = (token, page = 1) => {
   let config = {
     method: 'get',
-    url: `${BASE_URL}/api/songs/liked/?page=${page}`,
+    url: `/api/songs/liked/?page=${page}`,
     headers: {
       'Authorization': `Token ${token}`,
     },
@@ -44,7 +43,7 @@ export const getMostViewedSongsApi = (token) => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: `${BASE_URL}/api/songs/mostviewed/`,
+    url: `/api/songs/mostviewed/`,
     headers: {
       'Authorization': `Token ${token}`
     }
@@ -56,7 +55,7 @@ export const getMostViewedSongsApi = (token) => {
 export const searchSongsApi = (token, original_name = "", album__code = "", album__title = "", artist__name = "", year = "", genre = "", page = 1) => {
   let config = {
     method: 'get',
-    url: `${BASE_URL}/api/songs/?page=${page}&original_name=${original_name}&album__code=${album__code}&album__title=${album__title}&artist__name=${artist__name}&year=${year}&genre=${genre}`,
+    url: `/api/songs/?page=${page}&original_name=${original_name}&album__code=${album__code}&album__title=${album__title}&artist__name=${artist__name}&year=${year}&genre=${genre}`,
     headers: {
       'Authorization': `Token ${token}`
     }
@@ -68,7 +67,7 @@ export const searchSongsApi = (token, original_name = "", album__code = "", albu
 export const getSongByIdApi = (token, id) => {
   let config = {
     method: 'get',
-    url: `${BASE_URL}/api/songs/get/${id}/`,
+    url: `/api/songs/get/${id}/`,
     headers: {
       'Authorization': `Token ${token}`
     }
@@ -82,7 +81,7 @@ export const likeSongApi = (token, id) => {
   data.append('reaction', 'like');
   let config = {
     method: 'post',
-    url: `${BASE_URL}/api/songs/reaction/${id}/`,
+    url: `/api/songs/reaction/${id}/`,
     headers: {
       'Authorization': `Token ${token}`,
     },
@@ -98,7 +97,7 @@ export const neutralizeReactionApi = (token, id) => {
 
   let config = {
     method: 'post',
-    url: `${BASE_URL}/api/songs/neutral/`,
+    url: `/api/songs/neutral/`,
     headers: {
       'Authorization': `Token ${token}`,
     },
@@ -119,7 +118,7 @@ export const registerApi = (email, password, password2, first_name, last_name) =
 
   let config = {
     method: 'post',
-    url: `${BASE_URL}/api/accounts/register`,
+    url: `/api/accounts/register`,
     data: data
   };
 
@@ -133,7 +132,7 @@ export const verifyOTPApi = (email, code) => {
 
   let config = {
     method: 'post',
-    url: `${BASE_URL}/api/accounts/verify`,
+    url: `/api/accounts/verify`,
     data: data
   };
 
@@ -145,7 +144,7 @@ export const createPlaylistApi = (token, title) => {
   data.append('title', title);
   let config = {
     method: 'post',
-    url: `${BASE_URL}/api/songs/playlists/create/`,
+    url: `/api/songs/playlists/create/`,
     headers: {
       'Authorization': `Token ${token}`,
     },
@@ -158,7 +157,7 @@ export const createPlaylistApi = (token, title) => {
 export const recentSongsApi = (token, page = 1) => {
   let config = {
     method: 'get',
-    url: `${BASE_URL}/api/recent/songs/?page=${page}`,
+    url: `/api/recent/songs/?page=${page}`,
     headers: {
       'Authorization': `Token ${token}`
     }
@@ -169,7 +168,7 @@ export const recentSongsApi = (token, page = 1) => {
 export const getPlaylistsApi = (token, title="", page=1) => {
   let config = {
     method: 'get',
-    url: `${BASE_URL}/api/songs/playlists/?title=${title}&page=${page}`,
+    url: `/api/songs/playlists/?title=${title}&page=${page}`,
     headers: { 
       'Authorization': `Token ${token}`
     }
@@ -181,7 +180,7 @@ export const getPlaylistsApi = (token, title="", page=1) => {
 export const deletePlaylistApi = (token, id) => {
   let config = {
     method: 'delete',
-    url: `${BASE_URL}/api/songs/playlists/delete/${id}/`,
+    url: `/api/songs/playlists/delete/${id}/`,
     headers: { 
       'Authorization': `Token ${token}`, 
     },
