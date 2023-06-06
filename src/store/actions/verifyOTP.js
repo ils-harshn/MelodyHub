@@ -1,8 +1,8 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import * as actionsType from "../actions/types";
 import { verifyOTPApi } from "../../Api";
 
-export function* handleVerifyOTPSaga(action) {
+export function* verifyOTP(action) {
     try {
         yield call(verifyOTPApi, action.payload.email, action.payload.code);
         yield put({ type: actionsType.VERIFY_OTP_SUCCESS })
@@ -11,8 +11,4 @@ export function* handleVerifyOTPSaga(action) {
             error: "*Provided OTP is wrong or email do not exists.",
         } })
     }
-}
-
-export function* verifyOTPSaga() {
-    yield takeLatest(actionsType.INITIATE_VERIFY_OTP, handleVerifyOTPSaga);
 }

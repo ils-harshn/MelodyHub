@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import * as actionsType from "../../store/actions/types"
+import * as actionsType from "./types"
 import { searchSongsApi } from '../../Api';
 
-export function* handleGetSearchedSongsSaga(action) {
+export function* getSearchedSongs(action) {
     try {
         let data = yield call(
             searchSongsApi, 
@@ -19,8 +19,4 @@ export function* handleGetSearchedSongsSaga(action) {
     } catch {
         yield put({ type: actionsType.GET_SEARCHED_SONGS_ERROR, payload: { error: "FAILED" } })
     }
-}
-
-export function* getSearchedSongsSaga() {
-    yield takeLatest(actionsType.INITIATE_SEARCH_SONGS, handleGetSearchedSongsSaga)
 }

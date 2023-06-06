@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import * as actionsType from "../actions/types";
 import { registerApi } from "../../Api";
 
-export function* handleRegistrationSaga(action) {
+export function* register(action) {
     try {
         yield call(registerApi, action.payload.email, action.payload.password, action.payload.confirmPassword, action.payload.firstName, action.payload.lastName);
         yield put({ type: actionsType.REGISTRATION_SUCCESS, payload: { email: action.payload.email } })
@@ -11,8 +11,4 @@ export function* handleRegistrationSaga(action) {
             error: "*Email or username already exists",
         } })
     }
-}
-
-export function* registerSaga() {
-    yield takeLatest(actionsType.INITIATE_REGISTRATION, handleRegistrationSaga);
 }

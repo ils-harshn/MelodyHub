@@ -1,8 +1,8 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import * as actionsType from "../actions/types";
 import { deletePlaylistApi } from "../../Api";
 
-export function* handleDeletePlaylistSaga(action) {
+export function* deletePlaylist(action) {
     try {
         yield call(deletePlaylistApi, action.payload.token, action.payload.id);
         yield put({
@@ -17,8 +17,4 @@ export function* handleDeletePlaylistSaga(action) {
             }
         })
     }
-}
-
-export function* deletePlaylistSaga() {
-    yield takeLatest(actionsType.INITIATE_DELETE_PLAYLIST, handleDeletePlaylistSaga);
 }
