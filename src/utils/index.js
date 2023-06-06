@@ -93,4 +93,9 @@ const parseLikedSongs = (data) => {
     return data.map(item => item.song);
 }
 
-export { validator, set_and_validate_field, set_token, get_token, remove_token, set_volume, get_volume, get_last_played_song, set_last_played_song, parseLikedSongs }
+const clearStorage = () => {
+    localStorage.clear()
+    sessionStorage.clear()
+}
+
+export { validator, set_and_validate_field, set_token, get_token, remove_token, set_volume, get_volume, get_last_played_song, set_last_played_song, parseLikedSongs, clearStorage }

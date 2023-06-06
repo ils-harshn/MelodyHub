@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSongByIdApi, likeSongApi, neutralizeReactionApi } from "../Api";
 import Skeleton from "react-loading-skeleton";
-import { get_volume, set_volume } from "../utils";
-import { SET_NEXT_INDEX, SET_PREV_INDEX, SET_SONG_INDEX } from "../store/actions/types";
+import { clearStorage, get_volume, set_volume } from "../utils";
+import { SET_PREV_INDEX, SET_SONG_INDEX } from "../store/actions/types";
 
 const MusicPlayer = () => {
     const [timeRangeValue, setTimeRangeValue] = useState(0);
@@ -36,7 +36,8 @@ const MusicPlayer = () => {
             setSongData(song.data)
             setLiked(song.data.reaction == "like")
         } catch {
-            alert("Please reload the page")
+            clearStorage()
+            window.location.reload()
         }
         setFetching(false)
     }
