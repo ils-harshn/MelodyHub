@@ -1,4 +1,4 @@
-import * as type from "../actionsTypes"
+import * as type from "../actions/types"
 
 const initailState = {
     data: null,

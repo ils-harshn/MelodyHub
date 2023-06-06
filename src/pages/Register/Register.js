@@ -3,8 +3,8 @@ import "./Register.scss";
 import { useNavigate } from "react-router-dom";
 import { set_and_validate_field } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
-import * as actionTypes from "../../store/actionsTypes";
-import { RESET_VERIFY_OTP } from "../../store/actionsTypes";
+import * as actionTypes from "../../store/actions/types";
+import { RESET_VERIFY_OTP } from "../../store/actions/types";
 
 const Register = () => {
     const [email, setEmail] = useState("");

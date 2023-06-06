@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./index.scss";
 import { useEffect, useState } from "react";
 import { getLikedSongsApi } from "../../Api";
-import { SET_SONG_ID } from "../../store/actionsTypes";
+import { SET_SONG_ID } from "../../store/actions/types";
 
 const LikedSongPage = () => {
     const [songsData, setSongsData] = useState({

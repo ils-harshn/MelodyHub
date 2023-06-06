@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import * as actionsType from "../actionsTypes";
+import * as actionsType from "../actions/types";
 import { verifyOTPApi } from "../../Api";
 
 export function* handleVerifyOTPSaga(action) {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as recentSongsActions from "../../store/actionsTypes";
+import * as recentSongsActions from "../../store/actions/types";
 import LikedSongsComponent from "../../components/CardSongsCollections";
 import MainLoader from "../../components/MainLoader";
 import "./index.scss"
