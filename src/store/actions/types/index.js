@@ -27,6 +27,9 @@ export const GET_MOST_VIEWED_SONGS_ERROR = "GET_MOST_VIEWED_SONGS_ERROR";
 
 // Set Music Player Song Id
 export const SET_SONG_ID = "SET_SONG_ID";
+export const SET_SONG_INDEX = "SET_SONG_INDEX";
+export const SET_NEXT_INDEX = "SET_NEXT_INDEX";
+export const SET_PREV_INDEX = "SET_PREV_INDEX";
 
 // Recent Songs
 export const INITIATE_RECENT_SONGS = "INITIATE_RECENT_SONGS";

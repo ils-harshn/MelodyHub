@@ -1,10 +1,11 @@
 import MusicPlayerImageWithSkeleton from "./MusicPlayerImageLoader";
 import "../styles/MusicPlayer.scss";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getSongByIdApi, likeSongApi, neutralizeReactionApi } from "../Api";
 import Skeleton from "react-loading-skeleton";
 import { get_volume, set_volume } from "../utils";
+import { SET_NEXT_INDEX, SET_PREV_INDEX, SET_SONG_INDEX } from "../store/actions/types";
 
 const MusicPlayer = () => {
     const [timeRangeValue, setTimeRangeValue] = useState(0);
@@ -16,7 +17,11 @@ const MusicPlayer = () => {
     const [songData, setSongData] = useState({});
     const [liked, setLiked] = useState(false);
 
+    const dispatch = useDispatch()
+
     const [playing, setPlaying] = useState(false);
+    const [repeat, setRepeat] = useState(false);
+    const [shuffle, setShuffle] = useState(false);
 
     const [fetching, setFetching] = useState(true);
     const [canPlaySong, setCanPlaySong] = useState(false);
@@ -27,7 +32,7 @@ const MusicPlayer = () => {
         setCanPlaySong(false);
         setLiked(false)
         try {
-            let song = await getSongByIdApi(loginToken, data.current);
+            let song = await getSongByIdApi(loginToken, data.data[data.current].id);
             setSongData(song.data)
             setLiked(song.data.reaction == "like")
         } catch {
@@ -51,12 +56,28 @@ const MusicPlayer = () => {
                 await likeSongApi(loginToken, songData.id)
                 setLiked(true)
             }
-        } catch { }
+        } catch { 
+            alert("Error")
+        }
+    }
+
+    const handleAudioEnded = () => {
+        if (data.data.length > 1) {
+            if (repeat) dispatch({ type: SET_SONG_INDEX, payload: { index: data.current } })
+            else if (shuffle) dispatch({ type: SET_SONG_INDEX, payload: { index: Math.floor(Math.random() * data.data.length) }})
+            else dispatch({
+                type: SET_SONG_INDEX, payload: {
+                    index: (data.current + 1) % data.data.length,
+                }
+            })
+        } else {
+            if (repeat) dispatch({ type: SET_SONG_INDEX, payload: { index: data.current } })
+        }
     }
 
     useEffect(() => {
         fetchSong()
-        setTimeRangeValue(0);
+        setTimeRangeValue(0)
         timeSlider.current.style.background = `linear-gradient(to right, #82CFD0 0%, #82CFD0 0%, #fff 0%, white 100%)`
     }, [data])
 
@@ -73,7 +94,7 @@ const MusicPlayer = () => {
                     setPlaying(true)
                     audio.current.play();
                 }
-            }} style={{ display: "none" }} />}
+            }} style={{ display: "none" }} onEnded={handleAudioEnded} />}
             <input type="range" className="timer-range" min={0} max={100} value={timeRangeValue} step={0.02} ref={timeSlider} onChange={(e) => {
                 if (canPlaySong) {
                     let value = (e.target.value * audio.current.duration) / 100;
@@ -113,11 +134,14 @@ const MusicPlayer = () => {
                 }
             </div>
             <div className="controls">
-                <span className="material-symbols-outlined">
-                    {/* shuffle */}
-                    shuffle_on
+                <span className="material-symbols-outlined" onClick={() => setShuffle(!shuffle)}>
+                    {shuffle ? "shuffle_on" : "shuffle"}
                 </span>
-                <span className="material-symbols-outlined">
+                <span className={(data.data.length > 1 && data.current != 0) ? "material-symbols-outlined" : "material-symbols-outlined music-button-disabled"} onClick={() => {
+                    if ((data.data.length > 1 && data.current != 0)) {
+                        dispatch({ type: SET_PREV_INDEX })
+                    }
+                }}>
                     skip_previous
                 </span>
                 {
@@ -143,13 +167,20 @@ const MusicPlayer = () => {
                             downloading
                         </span>
                 }
-                <span className="material-symbols-outlined">
+                <span className={(data.data.length > 1) ? "material-symbols-outlined" : "material-symbols-outlined music-button-disabled"} onClick={() => {
+                    if ((data.data.length > 1)) {
+                        if (shuffle) dispatch({ type: SET_SONG_INDEX, payload: { index: Math.floor(Math.random() * data.data.length) }})
+                        else dispatch({
+                            type: SET_SONG_INDEX, payload: {
+                                index: (data.current + 1) % data.data.length,
+                            }
+                        })
+                    }
+                }}>
                     skip_next
                 </span>
-                <span className="material-symbols-outlined">
-                    repeat
-                    {/* repeat_one_on */}
-                    {/* repeat_on */}
+                <span className="material-symbols-outlined" onClick={() => setRepeat(!repeat)}>
+                    {repeat ? "repeat_one_on" : "repeat"}
                 </span>
             </div>
             <div className="options-2">

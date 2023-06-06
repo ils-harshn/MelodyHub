@@ -3,6 +3,7 @@ import "./index.scss";
 import { useEffect, useState } from "react";
 import { getLikedSongsApi } from "../../Api";
 import { SET_SONG_ID } from "../../store/actions/types";
+import { parseLikedSongs } from "../../utils";
 
 const LikedSongPage = () => {
     const [songsData, setSongsData] = useState({
@@ -111,8 +112,16 @@ const LikedSongPage = () => {
                                 <tbody>
                                     {
                                         songsData.results.map((item, index) => (
-                                            <tr key={index} className={item.song.id == musicPlayerData.current ? "active": ""}
-                                                onClick={() => dispatch({ type: SET_SONG_ID, payload: { id: item.song.id } })}
+                                            <tr key={index} className={item.song.id ==  musicPlayerData.data[musicPlayerData.current].id ? "active" : ""}
+                                                onClick={() => dispatch({
+                                                    type: SET_SONG_ID, payload: {
+                                                        song: item.song,
+                                                        index: index,
+                                                        data: parseLikedSongs(songsData.results),
+                                                        playlistId: -1,
+                                                        page: page,
+                                                    }
+                                                })}
                                             >
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{item.song.original_name}</td>
