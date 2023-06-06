@@ -1,5 +1,5 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import * as actionsType from "../../store/actionsTypes/recentSongsActions"
+import * as actionsType from "../../store/actionsTypes"
 import { recentSongsApi } from '../../Api';
 
 export function* handleGetRecentSongsSaga(action) {

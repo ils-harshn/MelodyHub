@@ -2,7 +2,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo-white.png";
 import NavbarPlaylist from "./NavbarPlaylist";
 import { useDispatch } from "react-redux";
-import { LOGOUT } from "../store/actionsTypes/loginActions";
+import { LOGOUT } from "../store/actionsTypes";
 
 const Navbar = () => {
     const dispatch = useDispatch();

@@ -3,9 +3,9 @@ import EmptyHeader from "../../components/EmptyHeader";
 import "./Home.scss";
 import MainLoader from "../../components/MainLoader";
 import { useDispatch, useSelector } from "react-redux";
-import * as likedSongsActions from "../../store/actionsTypes/likedSongsActions"
+import * as likedSongsActions from "../../store/actionsTypes"
 import LikedSongsComponent, { CommonSongsComponent } from "../../components/CardSongsCollections";
-import * as mostViewedSongsActions from "../../store/actionsTypes/mostViewedSongsActions";
+import * as mostViewedSongsActions from "../../store/actionsTypes";
 
 
 const Home = () => {

@@ -3,8 +3,8 @@ import "./Login.scss";
 import { get_token, set_and_validate_field } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import * as actionTypes from "../../store/actionsTypes/loginActions"
-import { REGISTRATION_STATE_RESET } from "../../store/actionsTypes/registerActions";
+import * as actionTypes from "../../store/actionsTypes"
+import { REGISTRATION_STATE_RESET } from "../../store/actionsTypes";
 
 const Login = () => {
     const [email, setEmail] = useState("");

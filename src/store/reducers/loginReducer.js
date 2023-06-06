@@ -1,5 +1,5 @@
 import { set_token, remove_token } from "../../utils"
-import * as type from "../actionsTypes/loginActions.js"
+import * as type from "../actionsTypes"
 
 const initailState = {
     user: null,

@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import * as actionsType from "../actionsTypes/deletePlaylistReducerActions";
+import * as actionsType from "../actionsTypes";
 import { deletePlaylistApi } from "../../Api";
 
 export function* handleDeletePlaylistSaga(action) {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/SearchHeader.scss"
 import { useDispatch, useSelector } from "react-redux";
-import { INITIATE_SEARCH_SONGS } from "../store/actionsTypes/searchSongsActions";
+import { INITIATE_SEARCH_SONGS } from "../store/actionsTypes";
 
 const SearchHeader = () => {
     const [index, setIndex] = useState(0);

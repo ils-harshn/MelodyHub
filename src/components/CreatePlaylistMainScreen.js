@@ -3,7 +3,7 @@ import "../styles/createPlaylistMainScreen.scss"
 import { useEffect, useState } from "react";
 import { set_and_validate_field } from "../utils";
 import { useDispatch, useSelector } from "react-redux";
-import { INITIATE_CREATE_PLAYLIST } from "../store/actionsTypes/createPlaylistReducerActions";
+import { INITIATE_CREATE_PLAYLIST } from "../store/actionsTypes";
 
 const CreatePlaylistMainScreen = () => {
     const navigate = useNavigate();

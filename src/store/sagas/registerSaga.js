@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import * as actionsType from "../actionsTypes/registerActions";
+import * as actionsType from "../actionsTypes";
 import { registerApi } from "../../Api";
 
 export function* handleRegistrationSaga(action) {
