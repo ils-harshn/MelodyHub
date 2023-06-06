@@ -66,7 +66,7 @@ const LikedSongPage = () => {
             <div className="liked-songs-main" onScroll={(e) => {
                 const element = e.target;
                 if ((element.scrollTop + element.clientHeight >=
-                    element.scrollHeight) && songsData.next && fetchingMore == false) {
+                    (element.scrollHeight - 2)) && songsData.next && fetchingMore == false) {
                     setPage(prevPage => prevPage + 1)
                 }
             }}>
