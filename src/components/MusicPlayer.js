@@ -198,7 +198,7 @@ const MusicPlayer = () => {
                             downloading
                         </span>
                 }
-                <span className={(data.data.length > 1) ? "material-symbols-outlined" : "material-symbols-outlined music-button-disabled"} onClick={() => {
+                <span className={"material-symbols-outlined"} onClick={() => {
                     if ((data.data.length > 1)) {
                         if (shuffle) dispatch({ type: SET_SONG_INDEX, payload: { index: Math.floor(Math.random() * data.data.length) } })
                         else dispatch({
@@ -206,6 +206,8 @@ const MusicPlayer = () => {
                                 index: (data.current + 1) % data.data.length,
                             }
                         })
+                    } else {
+                        fetchRandomSong()
                     }
                 }}>
                     skip_next
