@@ -2,10 +2,10 @@ import MusicPlayerImageWithSkeleton from "./MusicPlayerImageLoader";
 import "../styles/MusicPlayer.scss";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSongByIdApi, likeSongApi, neutralizeReactionApi } from "../Api";
+import { getRandomSongApi, getSongByIdApi, likeSongApi, neutralizeReactionApi } from "../Api";
 import Skeleton from "react-loading-skeleton";
 import { clearStorage, get_volume, set_volume } from "../utils";
-import { SET_PREV_INDEX, SET_SONG_INDEX } from "../store/actions/types";
+import { SET_PREV_INDEX, SET_SONG, SET_SONG_INDEX } from "../store/actions/types";
 
 const MusicPlayer = () => {
     const [timeRangeValue, setTimeRangeValue] = useState(0);
@@ -35,6 +35,32 @@ const MusicPlayer = () => {
             let song = await getSongByIdApi(loginToken, data.data[data.current].id);
             setSongData(song.data)
             setLiked(song.data.reaction == "like")
+        } catch {
+            clearStorage()
+            window.location.reload()
+        }
+        setFetching(false)
+    }
+
+    const fetchRandomSong = async () => {
+        setFetching(true)
+        setCanPlaySong(false);
+        setLiked(false)
+        try {
+            let song = await getRandomSongApi();
+            setSongData(song.data)
+            setLiked(song.data.reaction == "like")
+            
+            dispatch({
+                type: SET_SONG, payload: {
+                    song: song.data,
+                    index: 0,
+                    data: [song.data,],
+                    playlistId: null,
+                    page: null,
+                    randomly: true,
+                }
+            })
         } catch {
             clearStorage()
             window.location.reload()
@@ -73,11 +99,12 @@ const MusicPlayer = () => {
             })
         } else {
             if (repeat) dispatch({ type: SET_SONG_INDEX, payload: { index: data.current } })
+            else if (shuffle) fetchRandomSong()
         }
     }
 
     useEffect(() => {
-        fetchSong()
+        if (data.randomly == false) fetchSong()
         setTimeRangeValue(0)
         timeSlider.current.style.background = `linear-gradient(to right, #82CFD0 0%, #82CFD0 0%, #fff 0%, white 100%)`
     }, [data])

@@ -30,6 +30,7 @@ export const SET_SONG_ID = "SET_SONG_ID";
 export const SET_SONG_INDEX = "SET_SONG_INDEX";
 export const SET_NEXT_INDEX = "SET_NEXT_INDEX";
 export const SET_PREV_INDEX = "SET_PREV_INDEX";
+export const SET_SONG = "SET_SONG";
 
 // Recent Songs
 export const INITIATE_RECENT_SONGS = "INITIATE_RECENT_SONGS";

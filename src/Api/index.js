@@ -175,3 +175,12 @@ export const deletePlaylistApi = (token, id) => {
 
   return axiosWithAuth.request(config)
 }
+
+export const getRandomSongApi = () => {
+  let config = {
+    method: 'get',
+    url: `/api/random/song/`,
+  };
+
+  return axiosWithAuth.request(config)
+}
