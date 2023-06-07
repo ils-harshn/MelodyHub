@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRandomSongApi, getSongByIdApi, likeSongApi, neutralizeReactionApi } from "../Api";
 import Skeleton from "react-loading-skeleton";
 import { clearStorage, get_volume, set_volume } from "../utils";
-import { SET_PREV_INDEX, SET_SONG, SET_SONG_INDEX } from "../store/actions/types";
+import { SET_PREV_INDEX, SET_SONG, SET_SONG_INDEX, TOGGLE_PLAYLIST } from "../store/actions/types";
+import MusicPlaylistComponent from "./MusicPlaylistComponent";
 
 const MusicPlayer = () => {
     const [timeRangeValue, setTimeRangeValue] = useState(0);
@@ -50,7 +51,7 @@ const MusicPlayer = () => {
             let song = await getRandomSongApi();
             setSongData(song.data)
             setLiked(song.data.reaction == "like")
-            
+
             dispatch({
                 type: SET_SONG, payload: {
                     song: song.data,
@@ -83,7 +84,7 @@ const MusicPlayer = () => {
                 await likeSongApi(loginToken, songData.id)
                 setLiked(true)
             }
-        } catch { 
+        } catch {
             alert("Error")
         }
     }
@@ -91,7 +92,7 @@ const MusicPlayer = () => {
     const handleAudioEnded = () => {
         if (data.data.length > 1) {
             if (repeat) dispatch({ type: SET_SONG_INDEX, payload: { index: data.current } })
-            else if (shuffle) dispatch({ type: SET_SONG_INDEX, payload: { index: Math.floor(Math.random() * data.data.length) }})
+            else if (shuffle) dispatch({ type: SET_SONG_INDEX, payload: { index: Math.floor(Math.random() * data.data.length) } })
             else dispatch({
                 type: SET_SONG_INDEX, payload: {
                     index: (data.current + 1) % data.data.length,
@@ -109,7 +110,9 @@ const MusicPlayer = () => {
         timeSlider.current.style.background = `linear-gradient(to right, #82CFD0 0%, #82CFD0 0%, #fff 0%, white 100%)`
     }, [data])
 
-    return (
+    return (<>
+
+        <MusicPlaylistComponent />
         <div className="music-player">
             {fetching == false && <audio ref={audio} src={songData.url} onTimeUpdate={() => {
                 let value = (audio.current.currentTime * 100) / audio.current.duration;
@@ -197,7 +200,7 @@ const MusicPlayer = () => {
                 }
                 <span className={(data.data.length > 1) ? "material-symbols-outlined" : "material-symbols-outlined music-button-disabled"} onClick={() => {
                     if ((data.data.length > 1)) {
-                        if (shuffle) dispatch({ type: SET_SONG_INDEX, payload: { index: Math.floor(Math.random() * data.data.length) }})
+                        if (shuffle) dispatch({ type: SET_SONG_INDEX, payload: { index: Math.floor(Math.random() * data.data.length) } })
                         else dispatch({
                             type: SET_SONG_INDEX, payload: {
                                 index: (data.current + 1) % data.data.length,
@@ -215,7 +218,7 @@ const MusicPlayer = () => {
                 <span className="material-symbols-outlined">
                     playlist_add
                 </span>
-                <span className="material-symbols-outlined">
+                <span className="material-symbols-outlined" onClick={() => dispatch({ type: TOGGLE_PLAYLIST })}>
                     queue_music
                 </span>
                 <span className="material-symbols-outlined">
@@ -229,6 +232,7 @@ const MusicPlayer = () => {
                 }}></input>
             </div>
         </div>
+    </>
     )
 }
 
