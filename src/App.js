@@ -21,7 +21,7 @@ function App() {
     <ThemeProvider theme={currentTheme === 'light' ? ligththeme : darktheme}>
       <GlobalStyles changedTheme={changedTheme} />
       <ThemeChanger toggleTheme={toggleTheme} currentTheme={currentTheme} />
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/">
             <Route path="login" element={<AuthLayout />}>
