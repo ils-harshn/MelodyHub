@@ -48,8 +48,9 @@ const LoginForm = () => {
                     <FormInput name="password" type="password" onChange={handleChange} value={formik.values.password} placeholder="Password" />
                     <FormError>{formik.touched.password ? formik.errors.password : ""}</FormError>
                 </FormInputGroup>
-                <FormSubmitButton type="submit" disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}>Log In</FormSubmitButton>
-
+                <FormSubmitButton type="submit" disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}>
+                    { loginReducerState.loading ? 'Loading...': 'Log In' }
+                </FormSubmitButton>
                 <FormBottom>
                     <p>AR Songs Admin Panel</p>
                     <p>To listen songs go to <LinkStyled to={"https://ils-harshn.github.io/arsongs/"}>AR Songs</LinkStyled></p>

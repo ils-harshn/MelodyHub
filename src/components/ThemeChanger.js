@@ -8,6 +8,12 @@ const ThemeChangerStyled = styled.div`
         right: 0;
         padding: 10px;
 
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
         span {
             padding: 12px;
             border-radius: 50%;
@@ -19,7 +25,7 @@ const ThemeChangerStyled = styled.div`
 const ThemeChanger = ({ toggleTheme, currentTheme }) => {
     return (
         <ThemeChangerStyled onClick={toggleTheme}>
-            <span class="material-symbols-outlined">
+            <span className="material-symbols-outlined">
                 {currentTheme === "light" ? "dark_mode" : "light_mode"}
             </span>
         </ThemeChangerStyled>
