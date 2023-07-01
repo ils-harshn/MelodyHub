@@ -33,12 +33,16 @@ export const FormSubmitButton = styled.button`
     ${({ theme }) => css`
         outline: none;
         border: none;
-        background-color: ${theme.colors.buttonPrimaryBackground};
         padding: 14px;
         font-weight: 600;
         width: 100%;
         font-size: 14px;
         border-radius: 25px;
+        background-color: ${theme.colors.buttonPrimaryBackground};
         color: ${theme.colors.inputColor};
+
+        &:disabled {
+            background-color: ${theme.colors.buttonPrimaryBackgroundDisabled};
+        }
     `}
 `
