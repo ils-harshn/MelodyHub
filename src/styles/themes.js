@@ -12,6 +12,7 @@ const lighttheme = {
         LinkColor: "blue",
         LinkHoverColor: "#004cff",
         LinkVisitedColor: "purple",
+        themeChangerBackground: "#ededed",
     },
     imgs: {
         logo: `${process.env.PUBLIC_URL}/assets/icons/logo.ico`,
@@ -32,6 +33,7 @@ export const darktheme = {
         LinkColor: "#00e1ff",
         LinkHoverColor: "#2f9aa8",
         LinkVisitedColor: "#00ffae",
+        themeChangerBackground: "#000000",
     },
     imgs: {
         logo: `${process.env.PUBLIC_URL}/assets/icons/logo_white.ico`,
