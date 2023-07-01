@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/Auth/LoginPage";
+import { ThemeProvider } from "styled-components";
+import GlobalStyles from "./styles/GlobalStyles";
+import AuthLayout from "./pages/layouts/AuthLayout";
+import ligththeme from "./styles/themes";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={ligththeme}>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route path="login" element={<AuthLayout />}>
+              <Route index element={<LoginPage />} />
+            </Route>
+            <Route path="*" element={<h3>No Page Found</h3>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
