@@ -4,15 +4,22 @@ import { FormError, FormInput, FormInputGroup, FormInputLabel, FormSubmitButton 
 import Form, { FormBottom } from "../../styles/Forms/FormStyled.styles"
 import { LinkStyled } from "../../styles/Links/Links.styles"
 import validationSchema, { initialValues } from "../../formSchemas/loginFormSchema"
+import { initiateLoginAction } from "../../store/actions/loginActions"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 const LoginForm = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const loginReducerState = useSelector(reducers => reducers.loginReducer)
+
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validationSchema,
         validateOnChange: true,
         onSubmit: (values) => {
-            // dispatch(initiateLoginAction(values.email, values.password, values.rememberMe))
-            console.log(values)
+            dispatch(initiateLoginAction(values.email, values.password))
         }
     })
 
@@ -22,9 +29,15 @@ const LoginForm = () => {
         formik.setFieldValue(name, value);
     }
 
+    useEffect(() => {
+        if (loginReducerState.user) navigate("/")
+        formik.setSubmitting(loginReducerState.loading)
+        formik.setFieldError("email", loginReducerState.error)
+    }, [loginReducerState])
+
     return (
         <LoginFormContainer>
-            <Form>
+            <Form onSubmit={formik.handleSubmit}>
                 <FormInputGroup>
                     <FormInputLabel>Admin Email Address</FormInputLabel>
                     <FormInput type="text" name="email" onChange={handleChange} value={formik.values.email} placeholder="Email Address" />

@@ -38,5 +38,5 @@ export const darktheme = {
     }
 }
 
-export default darktheme
-// export default lighttheme
+// export default darktheme
+export default lighttheme
