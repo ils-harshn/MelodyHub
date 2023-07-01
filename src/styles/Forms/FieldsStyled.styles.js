@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 
 export const FormInputGroup = styled.div`
     margin-bottom: 10px;
@@ -12,11 +12,16 @@ export const FormInputLabel = styled.label`
 `
 
 export const FormInput = styled.input`
-    width: calc(100% - 28px);
-    outline: none;
-    border: 1px solid #878787;
-    border-radius: 8px;
-    padding: 14px;
+    ${({ theme }) => css`
+        width: calc(100% - 28px);
+        outline: none;
+        border: 1px solid ${theme.colors.inputBorder};
+        border-radius: 8px;
+        padding: 14px;
+        background-color: ${theme.colors.inputBackground};
+        color: ${theme.colors.inputColor};
+        margin-bottom: 4px;
+    `}
 `
 
 export const FormError = styled.div`
@@ -25,12 +30,15 @@ export const FormError = styled.div`
 `
 
 export const FormSubmitButton = styled.button`
-    outline: none;
-    border: none;
-    background-color: #1ed760;
-    padding: 14px;
-    font-weight: 600;
-    width: 100%;
-    font-size: 14px;
-    border-radius: 25px;
+    ${({ theme }) => css`
+        outline: none;
+        border: none;
+        background-color: ${theme.colors.buttonPrimaryBackground};
+        padding: 14px;
+        font-weight: 600;
+        width: 100%;
+        font-size: 14px;
+        border-radius: 25px;
+        color: ${theme.colors.inputColor};
+    `}
 `
