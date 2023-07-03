@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import AuthNavbar from "../../components/Navbars/AuthNavbar"
+import Navbar from "../../components/Navbars"
 
 const { Outlet, Navigate } = require("react-router-dom")
 
@@ -8,6 +8,7 @@ const Layout = () => {
     if (loginReducerState.user)
         return (
             <>
+                <Navbar />
                 <Outlet />
             </>
         )

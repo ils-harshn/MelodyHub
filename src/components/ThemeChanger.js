@@ -6,6 +6,7 @@ const ThemeChangerStyled = styled.div`
         position: absolute;
         z-index: 1000;
         right: 0;
+        bottom: 0;
         padding: 10px;
 
         -webkit-user-select: none;

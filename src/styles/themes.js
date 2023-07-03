@@ -13,6 +13,12 @@ const lighttheme = {
         LinkHoverColor: "#004cff",
         LinkVisitedColor: "purple",
         themeChangerBackground: "#ededed",
+        onHoverColor: "white",
+        onHoverBackground: "black",
+        dropDownBackground: "#ededed",
+    },
+    shadows: {
+        background: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
     },
     imgs: {
         logo: `${process.env.PUBLIC_URL}/assets/icons/logo.ico`,
@@ -34,6 +40,12 @@ export const darktheme = {
         LinkHoverColor: "#2f9aa8",
         LinkVisitedColor: "#00ffae",
         themeChangerBackground: "#000000",
+        onHoverColor: "black",
+        onHoverBackground: "white",
+        dropDownBackground: "#171717",
+    },
+    shadows: {
+        background: "rgba(255, 255, 255, 0.16) 0px 10px 36px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px",
     },
     imgs: {
         logo: `${process.env.PUBLIC_URL}/assets/icons/logo_white.ico`,

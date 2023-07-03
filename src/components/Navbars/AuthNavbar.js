@@ -6,7 +6,7 @@ const AuthNavbar = () => {
 
     return (
         <AuthNavbarStyled>
-            <img src={theme.imgs.logo}></img>
+            <img src={theme.imgs.logo} alt="" />
         </AuthNavbarStyled>
     )
 }
