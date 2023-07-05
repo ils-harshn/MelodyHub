@@ -149,10 +149,7 @@ REST_FRAMEWORK = {
 
 TIME_ZONE = 'Asia/Kolkata'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5500",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
