@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, DestroyAPIView
+from rest_framework.views import APIView
 from rest_framework import permissions
 from songs import models as songs_models
 from songs import filters as songs_filters
@@ -8,6 +9,10 @@ from adminApi import serializers
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework import status
+import os
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaIoBaseUpload
 
 
 class AlbumListViewAdmin(ListAPIView):
@@ -94,3 +99,34 @@ class SongCreateViewAdmin(CreateAPIView):
         for artist in artists:
             artist.songs.add(instance)
         print(instance, artists)
+
+class FileUploadView(APIView):
+    permission_classes = [permissions.IsAdminUser]
+    
+    def post(self, request):
+        folder_id = request.data.get("id")
+        file = request.FILES['file']
+        file_name = file.name
+
+        credentials = service_account.Credentials.from_service_account_file(
+            './adminApi/credentials/gcp.json',  # Path to your service account key file
+            scopes=['https://www.googleapis.com/auth/drive']
+        )
+        drive_service = build('drive', 'v3', credentials=credentials)
+
+        file_metadata = {
+            'name': file_name,
+            'mimeType': file.content_type,
+            'parents': [folder_id]
+        }
+
+        media = MediaIoBaseUpload(file, mimetype=file.content_type)
+
+        file = drive_service.files().create(
+            body=file_metadata,
+            media_body=media,
+            fields='id'
+        ).execute()
+
+        file_id = file.get('id')
+        return Response({'file_id': file_id})

@@ -10,4 +10,5 @@ urlpatterns = [
     path('genres/', view=views.GenreListViewAdmin.as_view()),
     path('create/genre/', view=views.GenreCreateViewAdmin.as_view()),
     path('create/song/', view=views.SongCreateViewAdmin.as_view()),
+    path('create/file/', view=views.FileUploadView.as_view()),
 ]
