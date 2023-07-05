@@ -20,11 +20,6 @@ const Home = () => {
             dispatch(initiateUploadAction(token, selectedFile))
         }
     }
-    
-    useEffect(() => {
-        // console.log("upload reducer", uploadReducerState);
-        // console.log("uploadProgress", uploadProgress)
-    }, [uploadReducerState, uploadProgress])
 
     return (
         <div>

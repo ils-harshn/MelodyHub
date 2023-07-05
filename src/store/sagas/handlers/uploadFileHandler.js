@@ -1,30 +1,42 @@
-import { put, call } from 'redux-saga/effects';
+import { put, call, take } from 'redux-saga/effects';
 import uploadAPIs from '../../../api/fileUploadAPIs';
 import { uploadErrorAction, uploadSetProgressAction, uploadSuccessAction } from '../../actions/uploadActions';
+import { END, eventChannel } from 'redux-saga';
 
-// function* updateProgress(progressEvent) {
-//     (progressEvent) => {
-//         const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
-//         console.log("progress", progress)
-//         yield put(uploadSetProgressAction(progress))
-//     }
-// }
+function createUploadEventChannel(action) {
+    return eventChannel((emitter) => {
+        const onUploadProgress = (progressEvent) => {
+            const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+            emitter(progress);
+        };
+        uploadAPIs.TEMP(action.payload.token, action.payload.file, onUploadProgress)
+            .then((response) => {
+                // Notify the event channel about the successful upload
+                emitter(response.data);
+                emitter(END); // Close the event channel
+            })
+            .catch((error) => {
+                // Notify the event channel about the upload failure
+                emitter(error);
+                emitter(END); // Close the event channel
+            });
 
-function* uploadProgressSaga(progress) {
-    yield put(uploadSetProgressAction(progress));
+        // Return the unsubscribe function for cleanup
+        return () => { };
+    });
 }
 
 export function* uploadFileHandler(action) {
     try {
-        const response = yield call(uploadAPIs.TEMP, action.payload.token, action.payload.file, (progressEvent) => {
-            const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
-            console.log(progress)
-            call(uploadProgressSaga, progress);
-        });
-        // console.log("response.data", response.data)
-        yield put(uploadSuccessAction(response.data));
+        const channel = yield call(createUploadEventChannel, action);
+        let progress = 0
+        while (progress != 100) {
+            progress = yield take(channel);
+            yield put(uploadSetProgressAction(progress));
+        }
+        const data = yield take(channel);
+        yield put(uploadSuccessAction(data));
     } catch (error) {
-        console.log(error)
         yield put(uploadErrorAction(error.message));
     }
 }
