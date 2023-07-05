@@ -7,6 +7,7 @@ import ligththeme, { darktheme } from "./styles/themes";
 import Layout from "./pages/layouts";
 import ThemeChanger from "./components/ThemeChanger";
 import { useState } from "react";
+import Home from "./pages/Home";
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState('dark');
@@ -29,9 +30,9 @@ function App() {
             </Route>
 
             <Route element={<Layout />}>
-              <Route index element={<h3>Home</h3>}/>
+              <Route index element={<Home />}/>
             </Route>
-
+            
             <Route path="*" element={<h3>No Page Found</h3>} />
           </Route>
         </Routes>
