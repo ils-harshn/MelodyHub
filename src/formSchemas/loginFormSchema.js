@@ -6,7 +6,6 @@ const validationSchema = Yup.object({
         .required('Email is required')
         .matches(EMAIL_REGEX, 'Invalid email address'),
     password: Yup.string()
-        // .matches(PASSWORD_REGEX, "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and atleast one special character from (@$!%*?&#)")
         .required('Password is required'),
 });
 

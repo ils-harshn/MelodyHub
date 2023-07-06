@@ -32,8 +32,19 @@ const AddAlbumConfirmStyled = styled.div`
                 font-weight: 600;
                 text-align: center;
                 animation: ${StatusInEffect} 300ms ease;
+                margin-bottom: 10px;
             }
-            margin-bottom: 10px;
+        }
+
+        div.status-error {
+            p {
+                font-size: 14px;
+                font-weight: 600;
+                text-align: center;
+                color: red;
+                animation: ${StatusInEffect} 300ms ease;
+                margin-bottom: 10px;
+            }
         }
     `}
 `

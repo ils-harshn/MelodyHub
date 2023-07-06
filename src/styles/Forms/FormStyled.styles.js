@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 
-// containers
 const Form = styled.form`
     padding: 10px;
 `
@@ -13,7 +12,6 @@ export const FormWhenCentered = styled.form`
     margin-top: 30px;
 `
 
-// elements
 export const FormBottom = styled.div`
     text-align: center;
     border-top: 1px solid #dfdfdf;
@@ -32,8 +30,6 @@ export const FormTitle = styled.div`
 
 export const FormGroupTwoColumn = styled.div`
     display: grid;
-    /* justify-content: space-between;
-    align-items: center; */
     grid-template-columns: calc(50% - 10px) calc(50% - 10px);
     gap: 20px;
 `

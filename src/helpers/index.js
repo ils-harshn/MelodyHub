@@ -1,0 +1,1 @@
+export const createDownloadLink = (id) => `https://drive.google.com/uc?id=${id}&export=download`

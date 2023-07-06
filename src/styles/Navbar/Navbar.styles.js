@@ -107,9 +107,7 @@ const NavbarStyled = styled.nav`
                 margin: 0;
                 list-style: none;
 
-                li {
-                    /* border-bottom: 1px solid ${theme.colors.navbarBorderBottom}; */
-                    
+                li {                    
                     a {
                         display: block;
                         padding: 10px 10px 10px 18px;
@@ -134,10 +132,6 @@ const NavbarStyled = styled.nav`
                             }
                         }
                     }
-                    
-                    /* &:last-child {
-                        border: none;
-                    } */
                 }
             }
         }

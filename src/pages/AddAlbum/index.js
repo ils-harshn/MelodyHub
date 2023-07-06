@@ -4,13 +4,14 @@ import { CenterElementsContainerWithScaleInEffectEffect } from "../../styles/Con
 import { FormCancelButton, FormError, FormFileInput, FormInput, FormInputGroup, FormInputLabel, FormInputNumber, FormSubmitButton } from "../../styles/Forms/FieldsStyled.styles"
 import { FormGroupTwoColumn, FormTitle, FormWhenCentered } from "../../styles/Forms/FormStyled.styles"
 import { validateYearOnKeyDown } from "../../helpers/regex"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { initiateAddAlbumAction } from "../../store/actions/addAlbumActions"
+import { initiateAddAlbumAction, resetAddAlbumAction } from "../../store/actions/addAlbumActions"
 import { useEffect, useState } from "react"
 import { resizeImage } from "../../helpers/imageResizers"
 import AddAlbumConfirmStyled from "../../styles/Containers/AddAlbumConfirmStyled.styles"
 import { Loader, LoaderInScreenCenter } from "../../styles/Loaders/Loaders.styles"
+import { checkAlbumCodeExistsAPI, checkAlbumTitleExistsAPI } from "../../api/adminAPIs"
 
 const ConfirmAddAlbumForm = ({ data, setOpenConfirmation }) => {
     const token = useSelector(reducers => reducers.loginReducer.user.token)
@@ -21,6 +22,7 @@ const ConfirmAddAlbumForm = ({ data, setOpenConfirmation }) => {
     const [image2, setImage2] = useState(null)
     const [image1Progress, setImage1Progress] = useState(0)
     const [image2Progress, setImage2Progress] = useState(0)
+    const navigate = useNavigate()
 
     const resizeImages = async () => {
         const resizedimage1 = await resizeImage(data.file, data.title, 300, 300)
@@ -40,6 +42,13 @@ const ConfirmAddAlbumForm = ({ data, setOpenConfirmation }) => {
     useEffect(() => {
         resizeImages()
     }, [])
+
+    useEffect(() => {
+        console.log(addAlbumReducerState)
+        if (addAlbumReducerState.success) {
+            navigate("/")            
+        }
+    }, [addAlbumReducerState])
 
     if (resizing) {
         return <LoaderInScreenCenter>
@@ -73,9 +82,13 @@ const ConfirmAddAlbumForm = ({ data, setOpenConfirmation }) => {
                             addAlbumReducerState.loading && <p>Please Wait</p>
                 }
             </div>
+            <div className="status-error">
+                { addAlbumReducerState.error && <p>{addAlbumReducerState.error}</p> }
+            </div>
+            
             <FormGroupTwoColumn>
                 <FormSubmitButton disabled={addAlbumReducerState.loading} onClick={() => dispatch(
-                    initiateAddAlbumAction(token, data.code, data.album, data.year, image1, image2, progressTracker(setImage1Progress), progressTracker(setImage2Progress))
+                    initiateAddAlbumAction(token, data.code, data.title, data.year, image1, image2, progressTracker(setImage1Progress), progressTracker(setImage2Progress))
                 )}>Confirm</FormSubmitButton>
                 <FormCancelButton disabled={addAlbumReducerState.loading} onClick={() => setOpenConfirmation(false)}>Back</FormCancelButton>
             </FormGroupTwoColumn>
@@ -85,25 +98,42 @@ const ConfirmAddAlbumForm = ({ data, setOpenConfirmation }) => {
 
 const AddAlbumForm = () => {
     const [openConfirmation, setOpenConfirmation] = useState(false)
+    const token = useSelector(reducers => reducers.loginReducer.user.token)
 
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validationSchema,
         validateOnChange: true,
         onSubmit: (values) => {
-            setOpenConfirmation({
-                code: values.code,
-                title: values.title,
-                year: values.year,
-                file: values.file
-            })
+            checkForm(values)
         }
     })
+
+    const checkForm = async (values) => {
+        try {
+            let codes = await checkAlbumCodeExistsAPI(token, values.code)
+            let titles = await checkAlbumTitleExistsAPI(token, values.title)
+            if (codes.data.length || titles.data.length) {
+                codes.data.length && formik.setFieldError("code", "Code already exists")
+                titles.data.length && formik.setFieldError("title", "Title already exists")
+            } else {
+                setOpenConfirmation({
+                    code: values.code,
+                    title: values.title,
+                    year: values.year,
+                    file: values.file
+                })
+            }
+        } catch (err) {
+            formik.setFieldError("code", err.message)
+        }
+        formik.setSubmitting(false)
+    }
 
 
     const handleChange = (e) => {
         let { name, value } = e.target;
-        formik.setFieldTouched(name, true); // Remember to mark the toched field first
+        formik.setFieldTouched(name, true);
         formik.setFieldValue(name, value);
     }
 
@@ -116,7 +146,7 @@ const AddAlbumForm = () => {
         <FormInputGroup>
             <FormInputLabel>Album Code</FormInputLabel>
             <FormInput type="text" placeholder="Enter Album Code" name="code" onChange={handleChange} value={formik.values.code} />
-            <FormError>{formik.touched.code ? formik.errors.title : ""}</FormError>
+            <FormError>{formik.touched.code ? formik.errors.code : ""}</FormError>
         </FormInputGroup>
         <FormInputGroup>
             <FormInputLabel>Album Title</FormInputLabel>
@@ -140,18 +170,21 @@ const AddAlbumForm = () => {
             }} />
             <FormError>{formik.touched.file ? formik.errors.file : ""}</FormError>
         </FormInputGroup>
-        <FormSubmitButton type="submit">
-            Submit
+        <FormSubmitButton type="submit" disabled={formik.isSubmitting}>
+            {formik.isSubmitting ? "Checking..." : "Submit"}
         </FormSubmitButton>
     </FormWhenCentered>
 }
 
 const AddAlbum = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(resetAddAlbumAction())
+    }, [])
     return <>
         <CenterElementsContainerWithScaleInEffectEffect>
             <AddAlbumForm />
         </CenterElementsContainerWithScaleInEffectEffect>
-        <Link to={"/"}>Home</Link>
     </>
 }
 

@@ -1,12 +1,12 @@
-import { ADD_ALBUM_FAILURE, ADD_ALBUM_SUCCESS, INITIATE_ADD_ALBUM } from "./types"
+import { ADD_ALBUM_FAILURE, ADD_ALBUM_SUCCESS, INITIATE_ADD_ALBUM, RESET_ADD_ALBUM } from "./types"
 
-export const initiateAddAlbumAction = (token, code, album, year, image1, image2, callback1, callback2) => {
+export const initiateAddAlbumAction = (token, code, title, year, image1, image2, callback1, callback2) => {
     return {
         type: INITIATE_ADD_ALBUM,
         payload: {
             token,
             code,
-            album, 
+            title, 
             year,
             image1,
             image2,
@@ -31,5 +31,11 @@ export const addAlbumErrorAction = (error) => {
         payload: {
             error,
         }
+    }
+}
+
+export const resetAddAlbumAction = () => {
+    return {
+        type: RESET_ADD_ALBUM,
     }
 }

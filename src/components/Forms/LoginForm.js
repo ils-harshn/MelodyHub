@@ -25,7 +25,7 @@ const LoginForm = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        formik.setFieldTouched(name, true); // Remember to mark the toched field first
+        formik.setFieldTouched(name, true);
         formik.setFieldValue(name, value);
     }
 

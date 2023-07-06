@@ -1,4 +1,3 @@
-// import { INITIATE_UPLOAD, SET_UPLOAD_PROGRESS, UPLOAD_FAILURE, UPLOAD_SUCCESS } from "./types"
 import { INITIATE_UPLOAD, UPLOAD_FAILURE, UPLOAD_SUCCESS } from "./types"
 
 export const initiateUploadAction = (token, file, callback) => {
@@ -29,12 +28,3 @@ export const uploadErrorAction = (error) => {
         }
     }
 }
-
-// export const uploadSetProgressAction = (value) => {
-//     return {
-//         type: SET_UPLOAD_PROGRESS,
-//         payload: {
-//             value,
-//         }
-//     }
-// }
