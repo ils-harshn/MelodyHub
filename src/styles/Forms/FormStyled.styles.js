@@ -30,4 +30,12 @@ export const FormTitle = styled.div`
     text-align: center;
 `
 
+export const FormGroupTwoColumn = styled.div`
+    display: grid;
+    /* justify-content: space-between;
+    align-items: center; */
+    grid-template-columns: calc(50% - 10px) calc(50% - 10px);
+    gap: 20px;
+`
+
 export default Form

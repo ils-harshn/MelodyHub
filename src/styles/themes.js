@@ -19,6 +19,8 @@ const lighttheme = {
         inputFileBackground: "white",
         inputFileBorder: "#999",
         inputFileBorderHover: "black",
+        buttonDangerBackground: "#ff0011",
+        buttonDangerBackgroundDisabled: "#ed5249",
     },
     shadows: {
         background: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
@@ -49,6 +51,8 @@ export const darktheme = {
         inputFileBackground: "black",
         inputFileBorder: "#404040",
         inputFileBorderHover: "white",
+        buttonDangerBackground: "#c91d12",
+        buttonDangerBackgroundDisabled: "#ed5249",
     },
     shadows: {
         background: "rgba(255, 255, 255, 0.16) 0px 10px 36px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px",

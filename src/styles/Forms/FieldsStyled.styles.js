@@ -55,6 +55,17 @@ export const FormSubmitButton = styled.button`
     `}
 `
 
+export const FormCancelButton = styled(FormSubmitButton)`
+    ${({ theme }) => css`
+        background-color: ${theme.colors.buttonDangerBackground};
+        color: ${theme.colors.inputColor};
+
+        &:disabled {
+            background-color: ${theme.colors.buttonDangerBackgroundDisabled};
+        }
+    `}
+`
+
 export const FormFileInput = styled.input.attrs({ type: 'file' })`
     ${({ theme, placeholder }) => css`
         margin-top: 2px;
