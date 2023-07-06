@@ -1,14 +1,17 @@
 import { ADD_ALBUM_FAILURE, ADD_ALBUM_SUCCESS, INITIATE_ADD_ALBUM } from "./types"
 
-export const initiateAddAlbumAction = (token, album, year, file, callback) => {
+export const initiateAddAlbumAction = (token, code, album, year, image1, image2, callback1, callback2) => {
     return {
         type: INITIATE_ADD_ALBUM,
         payload: {
             token,
+            code,
             album, 
             year,
-            file,
-            callback,
+            image1,
+            image2,
+            callback1,
+            callback2,
         }
     }
 }

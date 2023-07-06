@@ -21,6 +21,8 @@ const uploadFileAPI = (token, file, folder_id, onUploadProgress) => {
 
 const uploadAPIs = {
     TEMP: (token, file, onUploadProgress) => uploadFileAPI(token, file, "1stqR8PnPwraHY0ZGW5auInHbySaK0qcf", onUploadProgress),
+    ALBUM_300x300: (token, file, onUploadProgress) => uploadFileAPI(token, file, "1goBath6l_w_oxE-Cd2VARRkNnL3Nezu-", onUploadProgress),
+    ALBUM_1200x1200: (token, file, onUploadProgress) => uploadFileAPI(token, file, "16F1ICU8rlJ7pO3DY-rmT9WJkrIe1cW1G", onUploadProgress),
 }
 
 export default uploadAPIs

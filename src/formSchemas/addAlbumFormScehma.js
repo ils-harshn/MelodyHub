@@ -3,6 +3,7 @@ import * as Yup from "yup"
 const MAX_IMAGE_SIZE_IN_MB = 5
 
 const validationSchema = Yup.object({
+  code: Yup.string().required("Code is required"),
   title: Yup.string().required('Title is required'),
   year: Yup.number()
     .typeError('Year must be a valid number')
@@ -24,6 +25,7 @@ const validationSchema = Yup.object({
 });
 
 export const initialValues = {
+  code: "",
   title: "",
   year: "",
   file: null,

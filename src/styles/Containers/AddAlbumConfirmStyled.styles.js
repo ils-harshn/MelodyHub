@@ -1,16 +1,17 @@
 import { css, styled } from "styled-components";
+import { StatusInEffect } from "../AnimationContainers/AnimationContainers.styles";
 
 const AddAlbumConfirmStyled = styled.div`
     ${({ theme }) => css`
-        .preview-container {
+        animation: ${StatusInEffect} 300ms ease;
+        div.preview-container {
             width: 100%;
             min-width: 240px;
             max-width: 500px;
-            padding: 10px;
             margin-top: 30px;
         }
 
-        .image-preview {
+        div.image-preview {
             img {
                 margin-top: 4px;
                 margin-bottom: 8px;
@@ -21,9 +22,18 @@ const AddAlbumConfirmStyled = styled.div`
                 width: 100%;
                 aspect-ratio: 1 / 1;
                 object-fit: cover;
-                /* height: 300px; */
             }
             text-align: center;
+        }
+
+        div.status {
+            p {
+                font-size: 14px;
+                font-weight: 600;
+                text-align: center;
+                animation: ${StatusInEffect} 300ms ease;
+            }
+            margin-bottom: 10px;
         }
     `}
 `

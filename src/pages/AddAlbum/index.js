@@ -1,4 +1,4 @@
-import { Form, useFormik } from "formik"
+import { useFormik } from "formik"
 import validationSchema, { initialValues } from "../../formSchemas/addAlbumFormScehma"
 import { CenterElementsContainerWithScaleInEffectEffect } from "../../styles/Containers/CenterElementsContainer.styles"
 import { FormCancelButton, FormError, FormFileInput, FormInput, FormInputGroup, FormInputLabel, FormInputNumber, FormSubmitButton } from "../../styles/Forms/FieldsStyled.styles"
@@ -14,6 +14,7 @@ import { Loader, LoaderInScreenCenter } from "../../styles/Loaders/Loaders.style
 
 const ConfirmAddAlbumForm = ({ data, setOpenConfirmation }) => {
     const token = useSelector(reducers => reducers.loginReducer.user.token)
+    const addAlbumReducerState = useSelector(reducers => reducers.addAlbumReducer)
     const dispatch = useDispatch()
     const [resizing, setResizing] = useState(true)
     const [image1, setImage1] = useState(null)
@@ -29,6 +30,13 @@ const ConfirmAddAlbumForm = ({ data, setOpenConfirmation }) => {
         setResizing(false)
     }
 
+    const progressTracker = (setImageProgress) => {
+        return (progressEvent) => {
+            const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setImageProgress(progress)
+        }
+    }
+
     useEffect(() => {
         resizeImages()
     }, [])
@@ -39,19 +47,12 @@ const ConfirmAddAlbumForm = ({ data, setOpenConfirmation }) => {
         </LoaderInScreenCenter>
     }
 
-    // return <div>
-    {/* <div>{data.title}</div>
-        <div>{data.year}</div>
-        <img src={URL.createObjectURL(image1)} width={300} height={300} />
-        <img src={URL.createObjectURL(image1)} width={600} height={600} />
-        <button onClick={() => dispatch(initiateAddAlbumAction(token, data.album, data.year, image1, (progressEvent) => {
-            const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            setImage1Progress(progress)
-        }))}>Confirm</button>
-        <button onClick={() => setOpenConfirmation(false)}>Back</button> */}
-    // </div>
     return <AddAlbumConfirmStyled>
         <div className="preview-container">
+            <FormInputGroup>
+                <FormInputLabel>Album Code</FormInputLabel>
+                <FormInput value={data.code} disabled />
+            </FormInputGroup>
             <FormInputGroup>
                 <FormInputLabel>Album Title</FormInputLabel>
                 <FormInput value={data.title} disabled />
@@ -63,9 +64,20 @@ const ConfirmAddAlbumForm = ({ data, setOpenConfirmation }) => {
             <div className="image-preview">
                 <img src={URL.createObjectURL(image1)} />
             </div>
+            <div className="status">
+                {
+                    image1Progress > 0 && image1Progress < 100 ?
+                        <p>Uploading Image for 300x300: {image1Progress}%</p> :
+                        image2Progress > 0 && image2Progress < 100 ?
+                            <p>Uploading Image for 1200x1200: {image2Progress}%</p> :
+                            addAlbumReducerState.loading && <p>Please Wait</p>
+                }
+            </div>
             <FormGroupTwoColumn>
-                <FormSubmitButton>Confirm</FormSubmitButton>
-                <FormCancelButton onClick={() => setOpenConfirmation(false)}>Back</FormCancelButton>
+                <FormSubmitButton disabled={addAlbumReducerState.loading} onClick={() => dispatch(
+                    initiateAddAlbumAction(token, data.code, data.album, data.year, image1, image2, progressTracker(setImage1Progress), progressTracker(setImage2Progress))
+                )}>Confirm</FormSubmitButton>
+                <FormCancelButton disabled={addAlbumReducerState.loading} onClick={() => setOpenConfirmation(false)}>Back</FormCancelButton>
             </FormGroupTwoColumn>
         </div>
     </AddAlbumConfirmStyled>
@@ -80,6 +92,7 @@ const AddAlbumForm = () => {
         validateOnChange: true,
         onSubmit: (values) => {
             setOpenConfirmation({
+                code: values.code,
                 title: values.title,
                 year: values.year,
                 file: values.file
@@ -100,6 +113,11 @@ const AddAlbumForm = () => {
 
     return <FormWhenCentered onSubmit={formik.handleSubmit}>
         <FormTitle>Add Album</FormTitle>
+        <FormInputGroup>
+            <FormInputLabel>Album Code</FormInputLabel>
+            <FormInput type="text" placeholder="Enter Album Code" name="code" onChange={handleChange} value={formik.values.code} />
+            <FormError>{formik.touched.code ? formik.errors.title : ""}</FormError>
+        </FormInputGroup>
         <FormInputGroup>
             <FormInputLabel>Album Title</FormInputLabel>
             <FormInput type="text" placeholder="Enter Album Title" name="title" onChange={handleChange} value={formik.values.title} />
