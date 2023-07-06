@@ -3,7 +3,7 @@ import { INITIATE_UPLOAD, SET_UPLOAD_PROGRESS, UPLOAD_FAILURE, UPLOAD_SUCCESS } 
 // reducer.js
 const initialState = {
     loading: false,
-    uploadProgress: 0,
+    // uploadProgress: 0,
     uploadResponse: null,
     error: null,
 };
@@ -15,14 +15,13 @@ const uploadReducer = (state = initialState, action) => {
                 ...initialState,
                 loading: true,
             }
-        case SET_UPLOAD_PROGRESS:
-            console.log("Reducer Progress", action.payload.value)
-            return {
-                ...state,
-                uploadProgress: action.payload.value,
-              } 
+        // case SET_UPLOAD_PROGRESS:
+        //     console.log("Reducer Progress", action.payload.value)
+        //     return {
+        //         ...state,
+        //         uploadProgress: action.payload.value,
+        //       } 
         case UPLOAD_SUCCESS:
-            console.log("response.data", action.payload.success)
             return {
                 ...state,
                 loading: false,
