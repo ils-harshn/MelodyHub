@@ -16,6 +16,9 @@ const lighttheme = {
         onHoverColor: "white",
         onHoverBackground: "black",
         dropDownBackground: "#ededed",
+        inputFileBackground: "white",
+        inputFileBorder: "#999",
+        inputFileBorderHover: "black",
     },
     shadows: {
         background: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
@@ -43,6 +46,9 @@ export const darktheme = {
         onHoverColor: "black",
         onHoverBackground: "white",
         dropDownBackground: "#171717",
+        inputFileBackground: "black",
+        inputFileBorder: "#404040",
+        inputFileBorderHover: "white",
     },
     shadows: {
         background: "rgba(255, 255, 255, 0.16) 0px 10px 36px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px",

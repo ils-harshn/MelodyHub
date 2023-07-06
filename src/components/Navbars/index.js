@@ -17,6 +17,7 @@ const Navbar = () => {
             <div className="drop-down">
                 <ul>
                     <li><NavLink to={"/"}>HOME</NavLink></li>
+                    <li><NavLink to={"/add-album"}>ADD ALBUM</NavLink></li>
                     <li><NavLink to={"/analyze"}>ANALYZE</NavLink></li>
                     <li><Link to={"/"}>AR SONGS</Link></li>
                     <li><Link onClick={() => dispatch(logoutAction())}>LOG OUT</Link></li>

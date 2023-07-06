@@ -8,6 +8,7 @@ import Layout from "./pages/layouts";
 import ThemeChanger from "./components/ThemeChanger";
 import { useState } from "react";
 import Home from "./pages/Home";
+import AddAlbum from "./pages/AddAlbum";
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState('dark');
@@ -31,6 +32,7 @@ function App() {
 
             <Route element={<Layout />}>
               <Route index element={<Home />}/>
+              <Route path="add-album" element={<AddAlbum />} />
             </Route>
             
             <Route path="*" element={<h3>No Page Found</h3>} />
