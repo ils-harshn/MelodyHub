@@ -33,7 +33,8 @@ function App() {
 
             <Route element={<Layout />}>
               <Route index element={<Home />}/>
-              <Route path="add-album" element={<AddArtist />} />
+              <Route path="add-album" element={<AddAlbum />} />
+              <Route path="add-artist" element={<AddArtist />} />
             </Route>
             
             <Route path="*" element={<h3>No Page Found</h3>} />
