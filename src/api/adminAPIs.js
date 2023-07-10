@@ -44,3 +44,32 @@ export const checkAlbumTitleExistsAPI = (token, title) => {
 
     return axios.request(config)
 }
+
+export const createArtistAPI = (token, name, thumbnail300x300, thumbnail1200x1200) => {
+    let data = new FormData();
+    data.append('name', name);
+    data.append('artists_thumbnail300x300', thumbnail300x300);
+    data.append('artists_thumbnail', thumbnail1200x1200);
+
+    let config = {
+        method: 'post',
+        url: `/api/admin/create/artist/`,
+        headers: {
+            'Authorization': `Token ${token}`,
+        },
+        data,
+    };
+    return axios.request(config);
+}
+
+export const checkArtistNameExistsAPI = (token, name) => {
+    let config = {
+        method: 'get',
+        url: `/api/admin/artists/?name=${name}`,
+        headers: {
+            'Authorization': `Token ${token}`,
+        },
+    };
+
+    return axios.request(config)
+}
