@@ -101,7 +101,12 @@ export const FormFileInput = styled.input.attrs({ type: 'file' })`
 export const Selector = styled.div`
     border-radius: 8px;
     overflow: hidden;
+    cursor: pointer;
     animation: ${StatusInEffect} 300ms ease;
+`
+
+export const SelectedContainer = styled(Selector)`
+    margin-bottom: 4px;
 `
 
 export const SelectItem = styled.div`

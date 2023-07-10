@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { FormTitle, FormWhenCentered } from "../../styles/Forms/FormStyled.styles";
-import { FormError, FormFileInput, FormInput, FormInputGroup, FormInputLabel, FormSubmitButton, SelectItem, Selector } from "../../styles/Forms/FieldsStyled.styles";
+import { FormError, FormFileInput, FormInput, FormInputGroup, FormInputLabel, FormSubmitButton, SelectItem, SelectedContainer, Selector } from "../../styles/Forms/FieldsStyled.styles";
 import { CenterElementsContainerWithScaleInEffectEffect } from "../../styles/Containers/CenterElementsContainer.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { initiateSearchAlbumAction, resetSearchAlbumAction } from "../../store/actions/searchAlbumActions";
@@ -35,6 +35,7 @@ const AddSong = () => {
                     placeholder="Enter Album Title"
                     name="title"
                     value={data.album.title}
+                    autoComplete="off"
                     onChange={
                         (e) => {
                             setData(prev => ({ ...prev, album: { id: null, title: e.target.value } }))
@@ -57,7 +58,7 @@ const AddSong = () => {
             </FormInputGroup>
             <FormInputGroup>
                 <FormInputLabel>Artist</FormInputLabel>
-                <Selector>
+                <SelectedContainer>
                     {
                         data.artist.list.map((item) => (
                             <SelectItem key={item.id} onClick={() => {
@@ -73,13 +74,14 @@ const AddSong = () => {
                             }}>{item.name}</SelectItem>
                         ))
                     }
-                </Selector>
+                </SelectedContainer>
                 <FormInput type="text" placeholder="Enter Artist Name" name="artist" value={data.artist.current}
                     onChange={
                         (e) => {
                             setData(prev => ({ ...prev, artist: { list: prev.artist.list, current: e.target.value } }))
                             dispatch(initiateSearchArtistAction(token, e.target.value))
                         }}
+                    autoComplete="off"
                 />
                 {searchArtistReducerState.loading && <small>Loading</small>}
                 {
