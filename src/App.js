@@ -10,6 +10,7 @@ import { useState } from "react";
 import Home from "./pages/Home";
 import AddAlbum from "./pages/AddAlbum";
 import AddArtist from "./pages/AddArtist";
+import AddSong from "./pages/AddSong";
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState('dark');
@@ -35,6 +36,7 @@ function App() {
               <Route index element={<Home />}/>
               <Route path="add-album" element={<AddAlbum />} />
               <Route path="add-artist" element={<AddArtist />} />
+              <Route path="add-song" element={<AddSong />} />
             </Route>
             
             <Route path="*" element={<h3>No Page Found</h3>} />

@@ -6,6 +6,7 @@ export function* loginHandler(action) {
     try {
         let data = yield call(loginUserApi, action.payload.email, action.payload.password);
         if (data.data.is_admin === false) throw Error("This is not an admin account.")
+        console.log(data.data)
         yield put(loginSuccessAction(data.data))
     } catch (err) {
         if (err.response && err.response.status === 400) yield put(loginErrorAction("Email or password is invalid."))

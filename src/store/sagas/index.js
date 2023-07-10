@@ -3,6 +3,8 @@ import { loginWatcher } from "./watchers/loginWatcher";
 import { watchUploadFile } from "./watchers/uploadWatcher";
 import { addAlbumWatcher } from "./watchers/addAlbumWatcher";
 import { addArtistWatcher } from "./watchers/addArtistWatcher";
+import { searchAlbumWatcher } from "./watchers/searchAlbumWatcher";
+import { searchArtistWatcher } from "./watchers/searchArtistWatcher";
 
 export default function* rootSaga() {
     yield all([
@@ -10,6 +12,7 @@ export default function* rootSaga() {
         watchUploadFile(),
         addAlbumWatcher(),
         addArtistWatcher(),
+        searchAlbumWatcher(),
+        searchArtistWatcher(),
     ])
 }
-

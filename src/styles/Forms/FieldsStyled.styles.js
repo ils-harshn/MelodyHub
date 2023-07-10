@@ -1,4 +1,5 @@
 import { css, styled } from "styled-components";
+import { StatusInEffect } from "../AnimationContainers/AnimationContainers.styles";
 
 export const FormInputGroup = styled.div`
     margin-bottom: 10px;
@@ -95,4 +96,25 @@ export const FormFileInput = styled.input.attrs({ type: 'file' })`
             background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
         }
     `}
+`
+
+export const Selector = styled.div`
+    border-radius: 8px;
+    overflow: hidden;
+    animation: ${StatusInEffect} 300ms ease;
+`
+
+export const SelectItem = styled.div`
+    ${({ theme }) => css`
+        background-color: ${theme.colors.selectorBackground};
+        padding: 8px;
+        
+        &:hover {
+            background-color: ${theme.colors.selectorHoverBackground};
+            color: ${theme.colors.selectorHoverColor};
+        }
+
+        transition: background-color 300ms ease-in, color 300ms ease-in;
+    `}
+
 `
