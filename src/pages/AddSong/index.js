@@ -73,12 +73,12 @@ const AddSong = () => {
                         let finaldata = {
                             artists: data.artist.list.map(item => item.id),
                             genre: `${data.genre.id}`,
-                            title: data.title.current,
-                            original_name: `${data.album.code} - ${data.title.current}.mp3`,
+                            title: `${data.album.code} - ${data.title.current}.mp3`,
+                            original_name: data.title.current,
                             album: data.album.id,
                         }
 
-                        const renamedFile = new File([data.file.current], finaldata.original_name, {
+                        const renamedFile = new File([data.file.current], finaldata.title, {
                             type: "audio/mpeg",
                         });
                         let filedata = await uploadAPIs.MP3(token, renamedFile, (progressEvent) => {
@@ -237,7 +237,7 @@ const AddSong = () => {
             </FormInputGroup>
             <FormInputGroup>
                 <FormInputLabel>Audio File</FormInputLabel>
-                <FormFileInput placeholder="Select Image" accept="audio/mpeg, audio/mp3" name="file" onChange={handleFileChange} />
+                <FormFileInput placeholder="Select MP3" accept="audio/mpeg, audio/mp3" name="file" onChange={handleFileChange} />
                 <FormError>{data.file.error}</FormError>
             </FormInputGroup>
             <FormSubmitButton type="submit" disabled={submitting}>
