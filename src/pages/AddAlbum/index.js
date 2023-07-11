@@ -44,7 +44,6 @@ const ConfirmAddAlbumForm = ({ data, setOpenConfirmation }) => {
     }, [])
 
     useEffect(() => {
-        console.log(addAlbumReducerState)
         if (addAlbumReducerState.success) {
             navigate("/")            
         }

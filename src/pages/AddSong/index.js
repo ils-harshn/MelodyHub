@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FormTitle, FormWhenCentered } from "../../styles/Forms/FormStyled.styles";
 import { FormError, FormFileInput, FormInput, FormInputGroup, FormInputLabel, FormSubmitButton, SelectItem, SelectedContainer, Selector } from "../../styles/Forms/FieldsStyled.styles";
 import { CenterElementsContainerWithScaleInEffectEffect } from "../../styles/Containers/CenterElementsContainer.styles";
@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { initiateSearchAlbumAction, resetSearchAlbumAction } from "../../store/actions/searchAlbumActions";
 import { initiateSearchArtistAction, resetSearchArtistAction } from "../../store/actions/searchArtistActions";
 import { initiateSearchGenreAction, resetSearchGenreAction } from "../../store/actions/searchGenreActions";
+import { checkSongTitleExistsAPI, createSongAPI } from "../../api/adminAPIs";
+import uploadAPIs from "../../api/fileUploadAPIs";
+import { useNavigate } from "react-router-dom";
 
 const AddSong = () => {
     const [data, setData] = useState({
@@ -35,6 +38,10 @@ const AddSong = () => {
         }
     })
 
+    const [progress, setProgress] = useState(0)
+    const [submitting, setSubmitting] = useState(false)
+    const navigate = useNavigate()
+
     const dispatch = useDispatch()
     const token = useSelector(reducers => reducers.loginReducer.user.token)
     const searchAlbumReducerState = useSelector(reducers => reducers.searchAlbumReducer)
@@ -44,6 +51,7 @@ const AddSong = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setProgress(0)
         setData(prev => ({
             ...prev,
             title: { ...prev.title, error: prev.title.current.length ? null: "*Required"},
@@ -52,8 +60,47 @@ const AddSong = () => {
             album: { ...prev.album, error: prev.album.id ? null: "*Please select valid album"},
             file: { ...prev.file, error: prev.file.current ? null: "*Required" }
         }))
-        console.log(data)
+        setSubmitting(true)
     }
+
+    const submitdata = async () => {
+        if (submitting && (!data.title.error && !data.artist.error && !data.genre.error && !data.album.error && !data.file.error)) {
+            try {
+                let apidata = await checkSongTitleExistsAPI(token, data.title.current)
+                if (apidata.status == 200) {
+                    if (apidata.data.count) setData(prev => ({...prev, title: { ...prev.title, error: "*Matching title"}}))
+                    else {
+                        let finaldata = {
+                            artists: data.artist.list.map(item => item.id),
+                            genre: `${data.genre.id}`,
+                            title: data.title.current,
+                            original_name: `${data.album.code} - ${data.title.current}.mp3`,
+                            album: data.album.id,
+                        }
+
+                        const renamedFile = new File([data.file.current], finaldata.original_name, {
+                            type: "audio/mpeg",
+                        });
+                        let filedata = await uploadAPIs.MP3(token, renamedFile, (progressEvent) => {
+                            const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                            setProgress(progress)
+                        })
+                        finaldata["url"] = `https://drive.google.com/uc?id=${filedata.data.file_id}&export=download`
+                        let finalsong = await createSongAPI(token, finaldata)
+                        navigate("/")
+                    }
+                }
+            }
+            catch (err) {
+                setData(prev => ({...prev, title: { ...prev.title, error: err.message}}))
+            }
+        }
+        setSubmitting(false)
+    }
+
+    useEffect(() => {
+        submitdata()
+    }, [submitting])
 
     const handleFileChange = (e) => {
         let file = e.target.files[0]
@@ -193,8 +240,11 @@ const AddSong = () => {
                 <FormFileInput placeholder="Select Image" accept="audio/mpeg, audio/mp3" name="file" onChange={handleFileChange} />
                 <FormError>{data.file.error}</FormError>
             </FormInputGroup>
-            <FormSubmitButton type="submit">
-                {false ? "Checking..." : "Submit"}
+            <FormSubmitButton type="submit" disabled={submitting}>
+                {
+                    submitting ? 
+                    ((progress && progress < 100) ? `Uploading ${progress}%` : "Please Wait") : "Submit"
+                }
             </FormSubmitButton>
         </FormWhenCentered>
     </CenterElementsContainerWithScaleInEffectEffect>
