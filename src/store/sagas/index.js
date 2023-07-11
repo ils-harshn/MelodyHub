@@ -5,6 +5,7 @@ import { addAlbumWatcher } from "./watchers/addAlbumWatcher";
 import { addArtistWatcher } from "./watchers/addArtistWatcher";
 import { searchAlbumWatcher } from "./watchers/searchAlbumWatcher";
 import { searchArtistWatcher } from "./watchers/searchArtistWatcher";
+import { searchGenreWatcher } from "./watchers/searchGenreWatcher";
 
 export default function* rootSaga() {
     yield all([
@@ -14,5 +15,6 @@ export default function* rootSaga() {
         addArtistWatcher(),
         searchAlbumWatcher(),
         searchArtistWatcher(),
+        searchGenreWatcher(),
     ])
 }

@@ -73,3 +73,15 @@ export const checkArtistNameExistsAPI = (token, name) => {
 
     return axios.request(config)
 }
+
+export const checkGenreNameExistsAPI = (token, name) => {    
+    let config = {
+        method: 'get',
+        url: `/api/admin/genres/?name=${name}`,
+        headers: {
+            'Authorization': `Token ${token}`,
+        },
+    };
+
+    return axios.request(config)
+}
