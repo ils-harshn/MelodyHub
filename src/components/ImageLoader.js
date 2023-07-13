@@ -14,7 +14,7 @@ const ImageWithSkeleton = ({ src }) => {
             {isLoading && <Skeleton className="skeleton-loader-img-card"/>}
             <img
                 src={src}
-                alt="image"
+                alt
                 onLoad={handleImageLoad}
                 style={{ display: isLoading ? 'none' : 'block' }}
             />

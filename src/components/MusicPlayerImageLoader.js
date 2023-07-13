@@ -14,7 +14,7 @@ const MusicPlayerImageWithSkeleton = ({ src }) => {
             {isLoading && <Skeleton className="skeleton-loader-img-music-player"/>}
             <img
                 src={src}
-                alt="image"
+                alt
                 onLoad={handleImageLoad}
                 style={{ display: isLoading ? 'none' : 'block' }}
             />
