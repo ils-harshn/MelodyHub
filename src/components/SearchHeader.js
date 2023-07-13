@@ -26,12 +26,12 @@ const SearchHeader = () => {
         let payload = {
             page,
             token: data.user.token,
-            original_name: (index == 0 ? searchText : ""),
-            genre: (index == 1 ? searchText : ""),
-            artist__name: (index == 2 ? searchText : ""),
-            album__title: (index == 3 ? searchText : ""),
-            year: (index == 4 ? searchText : ""),
-            album__code: (index == 5 ? searchText : ""),
+            original_name: (index === 0 ? searchText : ""),
+            genre: (index === 1 ? searchText : ""),
+            artist__name: (index === 2 ? searchText : ""),
+            album__title: (index === 3 ? searchText : ""),
+            year: (index === 4 ? searchText : ""),
+            album__code: (index === 5 ? searchText : ""),
         }
         dispatch({ type: INITIATE_SEARCH_SONGS, payload });
     }, [searchText, page, index])
@@ -39,7 +39,7 @@ const SearchHeader = () => {
     return (
         <div className="SearchHeader">
             {
-                index == 4 ?
+                index === 4 ?
                     <input type="number" placeholder="Search" value={searchText} onChange={(e) => {
                         setPage(1);
                         setSearchText(e.target.value)
@@ -67,12 +67,12 @@ const SearchHeader = () => {
                 <>
                     <div className="search-song-pagination">
                         <div>
-                            <button disabled={songsdata.data.previous == null} onClick={() => {
+                            <button disabled={songsdata.data.previous === null} onClick={() => {
                                 if (songsdata.data.previous) setPage(page => page - 1);
                             }}><span className="material-symbols-outlined">
                                     navigate_before
                                 </span></button>
-                            <button disabled={songsdata.data.next == null} onClick={() => {
+                            <button disabled={songsdata.data.next === null} onClick={() => {
                                 if (songsdata.data.next) setPage(page => page + 1);
                             }}><span className="material-symbols-outlined">
                                     navigate_next

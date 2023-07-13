@@ -28,20 +28,7 @@ const MusicPlayer = () => {
     const [canPlaySong, setCanPlaySong] = useState(false);
     const timeSlider = useRef()
 
-    const fetchSong = async () => {
-        setFetching(true)
-        setCanPlaySong(false);
-        setLiked(false)
-        try {
-            let song = await getSongByIdApi(loginToken, data.data[data.current].id);
-            setSongData(song.data)
-            setLiked(song.data.reaction == "like")
-        } catch {
-            clearStorage()
-            window.location.reload()
-        }
-        setFetching(false)
-    }
+    
 
     const fetchRandomSong = async () => {
         setFetching(true)
@@ -50,7 +37,7 @@ const MusicPlayer = () => {
         try {
             let song = await getRandomSongApi();
             setSongData(song.data)
-            setLiked(song.data.reaction == "like")
+            setLiked(song.data.reaction === "like")
 
             dispatch({
                 type: SET_SONG, payload: {
@@ -71,7 +58,7 @@ const MusicPlayer = () => {
 
     const handleNeutralizeReaction = async () => {
         try {
-            if (fetching == false) {
+            if (fetching === false) {
                 await neutralizeReactionApi(loginToken, songData.id);
                 setLiked(false);
             }
@@ -80,7 +67,7 @@ const MusicPlayer = () => {
 
     const handleLikeReaction = async () => {
         try {
-            if (fetching == false) {
+            if (fetching === false) {
                 await likeSongApi(loginToken, songData.id)
                 setLiked(true)
             }
@@ -105,7 +92,21 @@ const MusicPlayer = () => {
     }
 
     useEffect(() => {
-        if (data.randomly == false) fetchSong()
+        const fetchSong = async () => {
+            setFetching(true)
+            setCanPlaySong(false);
+            setLiked(false)
+            try {
+                let song = await getSongByIdApi(loginToken, data.data[data.current].id);
+                setSongData(song.data)
+                setLiked(song.data.reaction === "like")
+            } catch {
+                clearStorage()
+                window.location.reload()
+            }
+            setFetching(false)
+        }
+        if (data.randomly === false) fetchSong()
         setTimeRangeValue(0)
         timeSlider.current.style.background = `linear-gradient(to right, #82CFD0 0%, #82CFD0 0%, #fff 0%, white 100%)`
     }, [data])
@@ -114,7 +115,7 @@ const MusicPlayer = () => {
 
         <MusicPlaylistComponent />
         <div className="music-player">
-            {fetching == false && <audio ref={audio} src={songData.url} onTimeUpdate={() => {
+            {fetching === false && <audio ref={audio} src={songData.url} onTimeUpdate={() => {
                 let value = (audio.current.currentTime * 100) / audio.current.duration;
                 setTimeRangeValue(value)
                 timeSlider.current.style.background = `linear-gradient(to right, #82CFD0 0%, #82CFD0 ${value}%, #fff ${value}%, white 100%)`

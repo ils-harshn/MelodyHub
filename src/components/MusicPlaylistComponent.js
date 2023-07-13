@@ -15,7 +15,7 @@ const MusicPlaylistComponent = () => {
                     data.data.map((item, index) => {
                         return (
                             <li key={item.id} onClick={() => dispatch({ type: SET_SONG_INDEX, payload: { index, } })}>
-                                <div className={index == data.current ? "active" : ""}>
+                                <div className={index === data.current ? "active" : ""}>
                                     <div className="index">
                                         {index + 1}
                                     </div>
@@ -27,7 +27,7 @@ const MusicPlaylistComponent = () => {
                                 </div>
                                 <div className="button">
                                     {
-                                        index == data.current &&
+                                        index === data.current &&
                                         <span className="material-symbols-outlined">
                                             play_arrow
                                         </span>

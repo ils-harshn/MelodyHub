@@ -66,12 +66,12 @@ const Register = () => {
                     <label>Enter Password</label>
                     <input placeholder="Password" value={password} type="password" onChange={(e) => {
                         let { is_valid } = set_and_validate_field(e.target.value, setPassword, setPasswordError, "password")
-                        if (is_valid && (e.target.value == confirmPassword)) {
+                        if (is_valid && (e.target.value === confirmPassword)) {
                             setPasswordError(false)
                             setConfirmPasswordError(false)
                         } else {
-                            if (is_valid && confirmPasswordError == false) setPasswordError("*Password Not Matching")
-                            if (confirmPasswordError == false) setConfirmPasswordError("*Password Not Matching")
+                            if (is_valid && confirmPasswordError === false) setPasswordError("*Password Not Matching")
+                            if (confirmPasswordError === false) setConfirmPasswordError("*Password Not Matching")
                         }
                     }} />
                     <div className="error">{passwordError && passwordError}</div>
@@ -80,12 +80,12 @@ const Register = () => {
                     <label>Enter Confirm Password</label>
                     <input placeholder="Confirm Password" value={confirmPassword} type="password" onChange={(e) => {
                         let { is_valid } = set_and_validate_field(e.target.value, setConfirmPassword, setConfirmPasswordError, "*")
-                        if (is_valid && (e.target.value == password)) {
+                        if (is_valid && (e.target.value === password)) {
                             setConfirmPasswordError(false)
                             setPasswordError(false)
                         } else {
                             if (is_valid) setConfirmPasswordError("*Password Not Matching")
-                            if (passwordError == false) setPasswordError(true)
+                            if (passwordError === false) setPasswordError(true)
                         }
                     }} />
                     <div className="error">{confirmPasswordError && confirmPasswordError}</div>

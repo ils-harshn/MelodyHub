@@ -67,12 +67,12 @@ const LikedSongPage = () => {
             <div className="liked-songs-main" onScroll={(e) => {
                 const element = e.target;
                 if ((element.scrollTop + element.clientHeight >=
-                    (element.scrollHeight - 2)) && songsData.next && fetchingMore == false) {
+                    (element.scrollHeight - 2)) && songsData.next && fetchingMore === false) {
                     setPage(prevPage => prevPage + 1)
                 }
             }}>
                 {
-                    (fetchingMore && page == 1) ? <table className="table loading">
+                    (fetchingMore && page === 1) ? <table className="table loading">
                         <thead>
                             <tr>
                                 <th>INDEX</th>
@@ -112,7 +112,7 @@ const LikedSongPage = () => {
                                 <tbody>
                                     {
                                         songsData.results.map((item, index) => (
-                                            <tr key={index} className={item.song.id ==  musicPlayerData.data[musicPlayerData.current].id ? "active" : ""}
+                                            <tr key={index} className={item.song.id ===  musicPlayerData.data[musicPlayerData.current].id ? "active" : ""}
                                                 onClick={() => dispatch({
                                                     type: SET_SONG_ID, payload: {
                                                         song: item.song,

@@ -27,7 +27,7 @@ const loginReducer = (state = initailState, action) => {
                 user: null,
             }
         case type.LOGIN_SUCCESS:
-            if (action.payload.rememberMe != undefined) {
+            if (action.payload.rememberMe !== undefined) {
                 set_token(action.payload.token, action.payload.rememberMe)
             } 
             return {

@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { INITIATE_LOGIN_WITH_TOKEN } from "../../store/actions/types";
 import FullPageLoader from "../../components/FullPageLoader";
 import { get_token } from "../../utils";
-import CreatePlaylistMainScreen from "../../components/CreatePlaylistMainScreen";
 
 const Layout = () => {
     const data = useSelector((reducers) => reducers.loginReducer);
@@ -16,15 +15,15 @@ const Layout = () => {
 
     const check_if_user_logged_in = () => {
         let token = get_token();
-        if (data.is_logged_in == false && token) dispatch({ type: INITIATE_LOGIN_WITH_TOKEN, payload: { token } });
-        else if (data.loading == false && data.is_logged_in == false) navigate("/accounts/login/")
+        if (data.is_logged_in === false && token) dispatch({ type: INITIATE_LOGIN_WITH_TOKEN, payload: { token } });
+        else if (data.loading === false && data.is_logged_in === false) navigate("/accounts/login/")
     }
-
+    
     useEffect(() => {
         check_if_user_logged_in();
     }, [])
     return <>
-        {(data.loading || data.is_logged_in == false) ? <FullPageLoader /> :
+        {(data.loading || data.is_logged_in === false) ? <FullPageLoader /> :
             <div className="layout">
                 <div className="container">
                     <Navbar />

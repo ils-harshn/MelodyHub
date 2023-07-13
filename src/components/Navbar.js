@@ -12,7 +12,7 @@ const Navbar = () => {
     return (
         <div className="sidebar">
             <div className="logo">
-                <img src={Logo} />
+                <img src={Logo} alt="image"/>
                 <div>ar songs</div>
             </div>
             <div className="nav-tabs">

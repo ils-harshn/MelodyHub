@@ -21,7 +21,7 @@ const NavbarPlaylist = () => {
     }, [])
 
     useEffect(() => {
-        if (loading == false) fetchPlaylistData(false);
+        if (loading === false) fetchPlaylistData(false);
     }, [createPlaylistData])
 
     return (
@@ -37,8 +37,8 @@ const NavbarPlaylist = () => {
                         <Link className={"loading"}>Erok</Link>
                     </div>
                 </> :
-                playlistsData.length == 0 ? <div className="title none">
-                    <div className="list"><a></a></div>
+                playlistsData.length === 0 ? <div className="title none">
+                    <div className="list"></div>
                 </div> : <>
                     <div className="title">Playlists</div>
                     <div className="list">

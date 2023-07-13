@@ -32,8 +32,8 @@ const Login = () => {
 
     const check_if_user_logged_in = () => {
         let token = get_token();
-        if (data.is_logged_in == false && token) dispatch({ type: actionTypes.INITIATE_LOGIN_WITH_TOKEN, payload: { token } });
-        else if (data.loading == false && data.is_logged_in == false) navigate("/accounts/login/")
+        if (data.is_logged_in === false && token) dispatch({ type: actionTypes.INITIATE_LOGIN_WITH_TOKEN, payload: { token } });
+        else if (data.loading === false && data.is_logged_in === false) navigate("/accounts/login/")
     }
 
     useEffect(() => {

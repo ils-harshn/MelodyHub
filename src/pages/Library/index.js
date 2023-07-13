@@ -9,10 +9,10 @@ const Library = () => {
     const data = useSelector((reducers) => reducers.loginReducer);
     const dispatch = useDispatch();
     const recentSongsData = useSelector((reducers) => reducers.recentSongsReducers);
-    const [page, setPage] = useState(1);
+    // const [page, setPage] = useState(1);
 
     useEffect(() => {
-        dispatch({ type: recentSongsActions.INITIATE_RECENT_SONGS, payload: { page: page, token: data.user.token } });
+        dispatch({ type: recentSongsActions.INITIATE_RECENT_SONGS, payload: { page: 1, token: data.user.token } });
     }, [])
 
     return (

@@ -23,14 +23,14 @@ const VerifyOTP = () => {
     }
 
     useEffect(() => {
-        if (email == null) navigate("/accounts/register/");
+        if (email === null) navigate("/accounts/register/");
     }, [])
 
     useEffect(() => {
         if (data.success) navigate("/accounts/login/");
     }, [data])
 
-    if (email == null) return <></>
+    if (email === null) return <></>
     return <div className="otp-page">
         <div className="form-container">
             <form onSubmit={handleSubmit}>
@@ -49,7 +49,7 @@ const VerifyOTP = () => {
                             e.target.value = code;
                             codeInput = code;
                         }
-                        if (codeInput.length && codeInput.length == 6) setCodeError(false)
+                        if (codeInput.length && codeInput.length === 6) setCodeError(false)
                         else setCodeError("*6 digit OTP is required.")
                     }} />
                     <div className="error"></div>
