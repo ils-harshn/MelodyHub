@@ -6,7 +6,7 @@ const AuthLayout = () => {
     return <div className="auth-layout">
         <nav>
             <div className="logo">
-                <img src={Logo} alt></img>
+                <img src={Logo} alt=""></img>
             </div>
         </nav>
         <Outlet/>
