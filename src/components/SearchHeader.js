@@ -78,7 +78,7 @@ const SearchHeader = () => {
                                     navigate_next
                                 </span></button>
                         </div>
-                        <div>Total Searchs: {songsdata.data.count}</div>
+                        <div>Total Searches: {songsdata.data.count}</div>
                     </div>
                 </>
             }
