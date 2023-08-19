@@ -1,3 +1,10 @@
+/*
+Types
+::::::::::
+CFAT - Constants For All Themes
+::::::::::
+*/
+
 :root, [data-theme="light"] {
     --bg-color: white;
 
@@ -8,4 +15,14 @@
     --secondary-color: white;
     --secondary-text-color: #6A6A6A;
     --secondary-border-color: #878787;
+
+    /* CFAT */
+    --blue-color: #1877F2;
+
+    /* CFAT loader */
+    --loader-border-primary-color: #f3f3f3;
+    --loader-border-top-primary-color: #1ED760;
+
+    --loader-border-secondary-color: #ffffff;
+    --loader-border-top-secondary-color: #f2ff00;
 }

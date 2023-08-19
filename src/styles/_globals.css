@@ -1,0 +1,16 @@
+/* text cases */
+.upper-case {
+  text-transform: uppercase;
+}
+
+.lower-case {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.none-text-case {
+  text-transform: none;
+}

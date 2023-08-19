@@ -7,7 +7,6 @@
   /* changes may be required */
   height: 48px;
   letter-spacing: 1.5px;
-  text-transform: uppercase;
   padding: 0 20px;
   border-radius: 500px;
   font-family: var(--primary-font-style);
@@ -35,7 +34,6 @@
   width: fit-content;
 }
 
-
 /* variations */
 
 .primary {
@@ -48,4 +46,9 @@
   background-color: var(--secondary-color);
   color: var(--secondary-text-color);
   border: 1px solid var(--secondary-border-color);
+}
+
+.blue {
+  background-color: var(--blue-color);
+  color: white;
 }

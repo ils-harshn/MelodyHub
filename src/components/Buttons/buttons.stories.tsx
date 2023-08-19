@@ -3,16 +3,23 @@ import { ButtonType } from "./buttons.types";
 import { Story } from "@storybook/react";
 
 export default {
-  title: "Button",
+  title: "Components/Buttons",
   component: Button,
 };
 
 const Template: Story<ButtonType> = (args) => <Button {...args}></Button>;
 
-export const Primary = Template.bind({});
+export const Variations = Template.bind({})
 
-Primary.args = {
+Variations.args = {
   varient: "primary",
   width: "fit",
-  children: "Primary",
-};
+  children: "Variations",
+  loading: false,
+  textcase: "upper-case",
+}
+
+export const Primary = () => <Button>Primary</Button>
+export const Secondary = () => <Button varient="secondary">Secondary</Button>
+export const Blue = () => <Button varient="blue">Blue</Button>
+
