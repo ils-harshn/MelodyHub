@@ -1,0 +1,11 @@
+[data-theme="dark"] {
+    --bg-color: black;
+
+    --primary-color: #1ED760;
+    --primary-text-color: white;
+    --primary-font-style: Inter;
+
+    --secondary-color: black;
+    --secondary-text-color: #e6e6e6;
+    --secondary-border-color: #878787;
+}

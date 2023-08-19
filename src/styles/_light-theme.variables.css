@@ -1,0 +1,11 @@
+:root, [data-theme="light"] {
+    --bg-color: white;
+
+    --primary-color: #1ED760;
+    --primary-text-color: #000;
+    --primary-font-style: Inter;
+    
+    --secondary-color: white;
+    --secondary-text-color: #6A6A6A;
+    --secondary-border-color: #878787;
+}

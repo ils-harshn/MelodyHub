@@ -1,0 +1,6 @@
+/* Font Imports */
+@import url("https://fonts.googleapis.com/css?family=Inter");
+
+/* variables imports */
+@import "./styles/_light-theme.variables.css";
+@import "./styles/_dark-theme.variables.css";
