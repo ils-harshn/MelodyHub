@@ -1,0 +1,36 @@
+.inputs {
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  padding: 14px;
+  height: calc(48px - 28px);
+
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* width */
+.initial {
+  width: initial;
+}
+
+.full {
+  width: calc(100% - 28px);
+}
+
+/* variations */
+.primary, .secondary {
+  background: var(--inputs-bg-color);
+  box-shadow: var(--inputs-box-shodow);
+  color: var(--inputs-text-color);
+}
+
+.primary::placeholder, .secondary::placeholder {
+  color: var(--inputs-placeholder-color);
+}
+
+.secondary {
+    border-radius: 500px;
+}

@@ -8,4 +8,10 @@
     --secondary-color: black;
     --secondary-text-color: #e6e6e6;
     --secondary-border-color: #878787;
+
+    /* inputs */
+    --inputs-box-shodow: 0px 0px 0px 1px #e8e8e8 inset;
+    --inputs-bg-color: #000000;
+    --inputs-text-color: #ffffff;
+    --inputs-placeholder-color: #979797;
 }

@@ -14,8 +14,9 @@ export const Variations = Template.bind({})
 Variations.args = {
   varient: "primary",
   width: "fit",
-  children: "Variations",
   loading: false,
+  disabled: false,
+  children: "Variations",
   textcase: "upper-case",
 }
 

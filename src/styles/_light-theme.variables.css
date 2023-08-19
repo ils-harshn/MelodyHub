@@ -16,6 +16,12 @@ CFAT - Constants For All Themes
     --secondary-text-color: #6A6A6A;
     --secondary-border-color: #878787;
 
+    /* inputs */
+    --inputs-box-shodow: 0px 0px 0px 1px #878787 inset;
+    --inputs-bg-color: #fff;
+    --inputs-text-color: black;
+    --inputs-placeholder-color: #6a6a6a;
+
     /* CFAT */
     --blue-color: #1877F2;
 
