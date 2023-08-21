@@ -2,6 +2,7 @@ import type { Preview } from "@storybook/react";
 import "../src/index.css";
 import "../src/App.css";
 import { themeChanger } from "./decorators";
+import { themes } from "../src/contexts/Context.types"; 
 
 const preview: Preview = {
   parameters: {
@@ -23,7 +24,7 @@ const preview: Preview = {
         title: 'Theme',
         icon: 'circlehollow',
         // Array of plain string values or MenuItem shape (see below)
-        items: ['light', 'dark'],
+        items: themes,
         // Change title based on selected value
         dynamicTitle: true,
       },

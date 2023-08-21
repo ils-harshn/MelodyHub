@@ -37,8 +37,12 @@ export const PasswordInput: React.FC<InputType> = ({
       className={getClassName(styles["password"], styles[`password-${width}`])}
     >
       <input
-        className={getClassName(className, styles["inputs"], styles[varient])}
-        type={show ? "text" : "password"}
+        className={getClassName(
+          className,
+          styles["inputs"],
+          styles[varient],
+        )}
+        type={show ? "text": "password"}
         {...props}
       ></input>
       <div className="icon" onClick={() => toggleShow(!show)}>

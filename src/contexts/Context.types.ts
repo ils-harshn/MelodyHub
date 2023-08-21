@@ -1,4 +1,6 @@
-export type ThemeTypes = "light" | "dark";
+export const themes = ["light", "dark"] as const;
+
+export type ThemeTypes = typeof themes[number];
 
 export type ThemeProviderType = {
   currentTheme: ThemeTypes;

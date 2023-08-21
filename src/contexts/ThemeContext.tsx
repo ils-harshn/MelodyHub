@@ -1,10 +1,9 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import {
   ThemeContextValue,
   ThemeProviderType,
   ThemeTypes,
 } from "./Context.types";
-import React from "react";
 
 export const ThemeContext = createContext<ThemeContextValue | null>(null);
 
@@ -22,6 +21,15 @@ export const ThemeProvider: React.FC<ThemeProviderType> = ({
     theme,
     toggleTheme,
   };
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
+
+  // Use It Only When Using Story Book
+  useEffect(() => {
+    setTheme(currentTheme)
+  }, [currentTheme]);
 
   return (
     <ThemeContext.Provider value={contextValue}>
