@@ -62,9 +62,11 @@
   cursor: pointer;
 }
 
-.password :global .icon > :first-child {
+.password :global .icon > svg {
   width: 20px;
   height: 20px;
+  /* fill: red; */
+  fill: var(--icon-color);
 }
 
 /* width password container width full */
