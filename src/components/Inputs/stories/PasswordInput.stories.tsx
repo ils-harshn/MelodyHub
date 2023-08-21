@@ -17,6 +17,7 @@ Password.args = {
   width: "initial",
   placeholder: "Password",
   varient: "primary",
+  passwordVisibility: false,
 };
 
 export const Primary = () => (
