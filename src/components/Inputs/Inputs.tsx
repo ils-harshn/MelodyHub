@@ -1,7 +1,7 @@
 import { InputType } from "./Inputs.types";
 import styles from "./Inputs.module.css";
 import { getClassName } from "../../utils";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export const TextInput: React.FC<InputType> = ({
   className = "",
@@ -37,12 +37,8 @@ export const PasswordInput: React.FC<InputType> = ({
       className={getClassName(styles["password"], styles[`password-${width}`])}
     >
       <input
-        className={getClassName(
-          className,
-          styles["inputs"],
-          styles[varient],
-        )}
-        type={show ? "text": "password"}
+        className={getClassName(className, styles["inputs"], styles[varient])}
+        type={show ? "text" : "password"}
         {...props}
       ></input>
       <div className="icon" onClick={() => toggleShow(!show)}>
