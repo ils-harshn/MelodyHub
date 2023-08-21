@@ -1,5 +1,6 @@
+import { EyeClosed, EyeOpen } from "../../../assests/icons";
 import { PasswordInput } from "../Inputs";
-import { InputType } from "../Inputs.types";
+import { PasswordInputType } from "../Inputs.types";
 import { Story } from "@storybook/react";
 
 export default {
@@ -7,7 +8,7 @@ export default {
   component: PasswordInput,
 };
 
-const Template: Story<InputType> = (args) => (
+const Template: Story<PasswordInputType> = (args) => (
   <PasswordInput {...args}></PasswordInput>
 );
 
@@ -18,11 +19,13 @@ Password.args = {
   placeholder: "Password",
   varient: "primary",
   passwordVisibility: false,
+  IconWhenVisible: EyeOpen,
+  IconWhenHidden: EyeClosed,
 };
 
 export const Primary = () => (
-  <Password varient="primary" placeholder="Password" />
+  <Password varient="primary" placeholder="Password" IconWhenHidden={EyeClosed} IconWhenVisible={EyeClosed} />
 );
 export const Secondary = () => (
-  <Password varient="secondary" placeholder="Password" />
+  <Password varient="secondary" placeholder="Password" IconWhenHidden={EyeClosed} IconWhenVisible={EyeClosed} />
 );

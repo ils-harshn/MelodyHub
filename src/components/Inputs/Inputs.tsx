@@ -1,8 +1,9 @@
-import { InputType } from "./Inputs.types";
+import { InputType, PasswordInputType } from "./Inputs.types";
 import styles from "./Inputs.module.css";
 import { getClassName } from "../../utils";
 import { useState } from "react";
-import { EyeClosed } from "../../assests/icons";
+import { EyeClosed, EyeOpen } from "../../assests/icons";
+// import { EyeClosed } from "../../assests/icons";
 
 export const TextInput: React.FC<InputType> = ({
   className = "",
@@ -24,11 +25,13 @@ export const TextInput: React.FC<InputType> = ({
   );
 };
 
-export const PasswordInput: React.FC<InputType> = ({
+export const PasswordInput: React.FC<PasswordInputType> = ({
   className = "",
   width = "initial",
   varient = "primary",
   passwordVisibility = false,
+  IconWhenVisible=EyeOpen,
+  IconWhenHidden=EyeClosed,
   ...props
 }) => {
   const [show, toggleShow] = useState(passwordVisibility);
@@ -38,16 +41,12 @@ export const PasswordInput: React.FC<InputType> = ({
       className={getClassName(styles["password"], styles[`password-${width}`])}
     >
       <input
-        className={getClassName(
-          className,
-          styles["inputs"],
-          styles[varient],
-        )}
-        type={show ? "text": "password"}
+        className={getClassName(className, styles["inputs"], styles[varient])}
+        type={show ? "text" : "password"}
         {...props}
       ></input>
       <div className="icon" onClick={() => toggleShow(!show)}>
-        <EyeClosed />
+        {show ? <IconWhenVisible />: <IconWhenHidden />}
       </div>
     </div>
   );
