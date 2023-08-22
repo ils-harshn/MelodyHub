@@ -5,38 +5,45 @@ CFAT - Constants For All Themes
 ::::::::::
 */
 
-:root, [data-theme="light"] {
-    --bg-color: white;
+:root,
+[data-theme="light"] {
+  --bg-color: white;
 
-    --primary-color: #1ED760;
-    --primary-text-color: #000;
-    --primary-font-style: Inter;
-    
-    --secondary-color: white;
-    --secondary-text-color: #6A6A6A;
-    --secondary-border-color: #878787;
+  --primary-color: #1ed760;
+  --primary-text-color: #000;
+  --primary-font-style: Inter;
 
-    /* inputs */
-    --inputs-box-shodow: 0px 0px 0px 1px #878787 inset;
-    --inputs-bg-color: #fff;
-    --inputs-text-color: black;
-    --inputs-placeholder-color: #6a6a6a;
+  --secondary-color: white;
+  --secondary-text-color: #6a6a6a;
+  --secondary-border-color: #878787;
 
-    /* icon colors */
-    --icon-color: #6A6A6A;
-    --logo-color: black;
+  /* inputs */
+  --inputs-box-shodow: 0px 0px 0px 1px #878787 inset;
+  --inputs-bg-color: #fff;
+  --inputs-text-color: black;
+  --inputs-placeholder-color: #6a6a6a;
 
-    /* CFAT */
-    --blue-color: #1877F2;
+  /* labels */
+  --label-text-color: #000;
 
-    /* CFAT loader */
-    --loader-border-primary-color: #f3f3f3;
-    --loader-border-top-primary-color: #1ED760;
+  /* icon colors */
+  --icon-color: #6a6a6a;
+  --logo-color: black;
 
-    --loader-border-secondary-color: #ffffff;
-    --loader-border-top-secondary-color: #f2ff00;
+  /* CFAT */
+  --blue-color: #1877f2;
 
-    /* CFAT Icon font style */
-    --icon-font-style: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+  /* CFAT Errors */
+  --error-text-color: red;
+
+  /* CFAT loader */
+  --loader-border-primary-color: #f3f3f3;
+  --loader-border-top-primary-color: #1ed760;
+
+  --loader-border-secondary-color: #ffffff;
+  --loader-border-top-secondary-color: #f2ff00;
+
+  /* CFAT Icon font style */
+  --icon-font-style: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }

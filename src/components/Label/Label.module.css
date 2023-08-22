@@ -1,0 +1,15 @@
+label {
+  color: var(--label-text-color);
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  line-height: normal;
+}
+
+.primary {
+  font-weight: 700;
+}
+
+.secondary {
+  font-weight: normal;
+}

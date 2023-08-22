@@ -1,0 +1,17 @@
+/* form {
+
+} */
+
+form :global .form-group {
+    height: 92px;
+    /* border: 1px solid red; */
+}
+
+form :global .form-group label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+form :global .form-group .error {
+    display: block;
+}

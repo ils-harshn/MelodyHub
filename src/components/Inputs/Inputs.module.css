@@ -76,7 +76,7 @@
 }
 
 .password-full input {
-  width: calc(100% - 62px);
+  width: calc(100% - 60px);
 }
 
 /* fit */

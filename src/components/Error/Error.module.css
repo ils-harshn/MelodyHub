@@ -1,0 +1,16 @@
+.error {
+  color: var(--error-text-color);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  line-height: normal;
+  display: inline;
+}
+
+.primary {
+  font-weight: normal;
+}
+
+.secondary {
+  font-weight: 700;
+}

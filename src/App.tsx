@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { AuthLayout } from "./pages/Layouts";
-import Login from "./pages/Login";
 import { useContext } from "react";
 import ThemeContext from "./contexts/ThemeContext";
+import { Login } from "./pages";
 
 function App() {
   const themeContext = useContext(ThemeContext);
