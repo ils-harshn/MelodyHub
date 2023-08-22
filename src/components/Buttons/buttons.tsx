@@ -8,9 +8,9 @@ const Button: React.FC<ButtonType> = ({
   className = "",
   varient = "primary",
   width = "fit",
-  textcase="upper-case",
-  icon,
-  rightIcon,
+  textcase = "upper-case",
+  Icon,
+  RightIcon,
   loading = false,
   ...props
 }) => {
@@ -21,7 +21,7 @@ const Button: React.FC<ButtonType> = ({
         styles["button"],
         styles[varient],
         styles[width],
-        textcase,
+        textcase
       )}
       {...props}
     >
@@ -29,9 +29,9 @@ const Button: React.FC<ButtonType> = ({
         <Loader size="small" varient="secondary" />
       ) : (
         <>
-          {icon}
+          {Icon ? <Icon /> : null}
           <div className={styles["button-children"]}>{children}</div>
-          {rightIcon}
+          {RightIcon ? <RightIcon /> : null}
         </>
       )}
     </button>
