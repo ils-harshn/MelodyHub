@@ -1,0 +1,46 @@
+.idol {
+  overflow: hidden;
+  display: inline-flex;
+  font-family: Inter;
+  font-weight: 500;
+  font-family: var(--icon-font-style);
+  font-size: 36px;
+  height: 44px;
+}
+
+.idol svg {
+  fill: var(--logo-color);
+  height: 54px;
+  margin-right: 4px;
+}
+
+/* sizes */
+/* large */
+.large {
+  font-size: 36px;
+  height: 44px;
+}
+
+.large svg {
+  height: 54px;
+}
+
+/* meidum */
+.medium {
+  font-size: 28px;
+  height: 34px;
+}
+
+.medium svg {
+  height: 44px;
+}
+
+/* small */
+.small {
+  font-size: 20px;
+  height: 24px;
+}
+
+.small svg {
+  height: 30px;
+}

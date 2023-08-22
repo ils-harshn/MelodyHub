@@ -1,32 +1,33 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { PasswordInput, TextInput } from "./components/Inputs/Inputs";
+import { AuthLayout } from "./pages/Layouts";
+import Login from "./pages/Login";
 import { useContext } from "react";
 import ThemeContext from "./contexts/ThemeContext";
-import { Button } from "./components/Buttons/buttons";
 
 function App() {
-  const themeContextValue = useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext);
 
   return (
-    <div className="App">
-      <PasswordInput placeholder="Enter Password" />
-      <hr />
-      <TextInput />
-      <hr />
-      <PasswordInput placeholder="Enter Password" width="full" />
-      <hr />
-      <TextInput width="full" />
-      <hr />
-      <Button
-        onClick={() => {
-          themeContextValue?.toggleTheme(
-            themeContextValue?.theme === "light" ? "dark" : "light"
-          );
-        }}
+    <BrowserRouter>
+      {/* temp-button */}
+      <button
+        className="theme-changer"
+        onClick={() =>
+          themeContext?.toggleTheme(
+            themeContext.theme === "light" ? "dark" : "light"
+          )
+        }
       >
-        Button
-      </Button>
-    </div>
+        T
+      </button>
+      <Routes>
+        <Route path="accounts" element={<AuthLayout />}>
+          <Route index element={<Login />} />
+          <Route path="login" element={<Login />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
