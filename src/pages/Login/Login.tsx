@@ -14,7 +14,7 @@ const Login: React.FC = () => {
           Don't have an account?
         </A>
         <Button width="full" varient="secondary">
-          Sign up for Spotify
+          Sign up for ARythm
         </Button>
       </div>
     </div>
