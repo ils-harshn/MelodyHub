@@ -24,4 +24,8 @@
 
   /* links colors */
   --link-text-color: white;
+
+  /* checkbox colors */
+  --checkbox-bg-color: #12e05a;
+  --checkbox-icon-color: white;
 }

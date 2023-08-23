@@ -3,15 +3,33 @@
 } */
 
 form :global .form-group {
-    height: 92px;
-    /* border: 1px solid red; */
+  height: 92px;
+  /* border: 1px solid red; */
 }
 
 form :global .form-group label {
-    display: block;
-    margin-bottom: 8px;
+  display: block;
+  margin-bottom: 8px;
 }
 
 form :global .form-group .error {
-    display: block;
+  display: block;
+}
+
+form :global .form-activator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form :global .form-activator .remember-me-container {
+  display: flex;
+}
+
+form :global .form-activator .remember-me-container label {
+  margin-left: 12px;
+}
+
+form :global .form-activator .submit-button-container {
+    width: 140px;
 }

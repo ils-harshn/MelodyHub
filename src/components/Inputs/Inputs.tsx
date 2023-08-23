@@ -1,8 +1,8 @@
-import { InputType, PasswordInputType } from "./Inputs.types";
+import { CheckBoxType, InputType, PasswordInputType } from "./Inputs.types";
 import styles from "./Inputs.module.css";
 import { getClassName } from "../../utils";
 import { useState } from "react";
-import { EyeClosed, EyeOpen } from "../../assests/icons";
+import { CheckMark, EyeClosed, EyeOpen } from "../../assests/icons";
 // import { EyeClosed } from "../../assests/icons";
 
 export const TextInput: React.FC<InputType> = ({
@@ -30,8 +30,8 @@ export const PasswordInput: React.FC<PasswordInputType> = ({
   width = "initial",
   varient = "primary",
   passwordVisibility = false,
-  IconWhenVisible=EyeOpen,
-  IconWhenHidden=EyeClosed,
+  IconWhenVisible = EyeOpen,
+  IconWhenHidden = EyeClosed,
   ...props
 }) => {
   const [show, toggleShow] = useState(passwordVisibility);
@@ -46,8 +46,20 @@ export const PasswordInput: React.FC<PasswordInputType> = ({
         {...props}
       ></input>
       <div className="icon" onClick={() => toggleShow(!show)}>
-        {show ? <IconWhenVisible />: <IconWhenHidden />}
+        {show ? <IconWhenVisible /> : <IconWhenHidden />}
       </div>
+    </div>
+  );
+};
+
+export const CheckBox: React.FC<CheckBoxType> = ({
+  className = "",
+  ...props
+}) => {
+  return (
+    <div className={getClassName(className, styles["checkbox"])}>
+      <input type="checkbox" {...props} />
+      <CheckMark />
     </div>
   );
 };

@@ -33,6 +33,10 @@ CFAT - Constants For All Themes
   /* links colors */
   --link-text-color: #000;
 
+  /* checkbox colors */
+  --checkbox-bg-color: #169b45;
+  --checkbox-icon-color: white;
+
   /* CFAT */
   --blue-color: #1877f2;
 

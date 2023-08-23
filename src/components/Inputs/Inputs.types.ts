@@ -1,9 +1,8 @@
 import { IconType } from "../../assests/icons.types";
 
-export type InputType = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  "type"
-> & {
+type Input = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">;
+
+export type InputType = Input & {
   varient?: "primary" | "secondary";
   width?: "initial" | "full";
   passwordVisibility?: boolean;
@@ -13,3 +12,5 @@ export type PasswordInputType = InputType & {
   IconWhenVisible?: IconType;
   IconWhenHidden?: IconType;
 };
+
+export type CheckBoxType = Input;

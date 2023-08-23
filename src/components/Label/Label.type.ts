@@ -1,4 +1,4 @@
-type LabelType = React.HTMLAttributes<HTMLLabelElement> & {
+type LabelType = React.LabelHTMLAttributes<HTMLLabelElement> & {
     children: string;
     varient?: "primary" | "secondary";
 }

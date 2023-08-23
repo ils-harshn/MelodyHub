@@ -87,3 +87,55 @@
 .password-initial input {
   width: 170px;
 }
+
+/* CHECKBOX */
+.checkbox {
+  display: inline-flex;
+  position: relative;
+  height: 16px;
+  width: 16px; 
+  overflow: hidden;
+}
+
+.checkbox svg {
+  position: absolute;
+  display: none;
+  user-select: none;  
+  pointer-events: none;
+
+  /* changes with variations */
+  top: 3px;
+  right: 0.8px;
+  width: 14px;
+  height: 14px;
+}
+
+.checkbox input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  display: inline-block;
+  vertical-align: middle;
+  background-origin: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  flex-shrink: 0;
+  margin: 0;
+
+  height: inherit;
+  width: inherit;
+  border: 1px solid var(--checkbox-bg-color);
+  border-radius: 4px;
+}
+
+.checkbox input[type="checkbox"]:checked {
+  background-color: var(--checkbox-bg-color);
+}
+
+.checkbox input[type="checkbox"]:checked + svg {
+  display: initial;
+  fill: var(--checkbox-icon-color);
+}
