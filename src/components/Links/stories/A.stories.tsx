@@ -15,5 +15,7 @@ export const Variations = Template.bind({});
 
 Variations.args = {
   size: "medium",
+  varient: "primary",
+  underline: "underline",
   children: "Uniform Resource Locator",
 };

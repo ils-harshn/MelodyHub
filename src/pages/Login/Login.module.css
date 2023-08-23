@@ -3,3 +3,20 @@
   margin: 0 auto;
   padding: 20px;
 }
+
+.container :global .seperator {
+  border: 1px solid var(--secondary-border-color);
+  margin: 22px 0;
+}
+
+.container :global .footer {
+  text-align: center;
+}
+
+.container :global .footer a {
+  display: block;
+}
+
+.container :global .footer button {
+  margin-top: 20px;
+}

@@ -7,11 +7,19 @@ const A: React.FC<AType> = ({
   children,
   className = "",
   size = "medium",
+  varient = "primary",
+  underline = "underline",
   ...props
 }) => {
   return (
     <Link
-      className={getClassName(className, styles["link"], styles[size])}
+      className={getClassName(
+        className,
+        styles["link"],
+        styles[size],
+        styles[varient],
+        underline
+      )}
       {...props}
     >
       {children}

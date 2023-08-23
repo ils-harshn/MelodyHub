@@ -1,16 +1,25 @@
 /* text cases */
 .upper-case {
-  text-transform: uppercase;
+  text-transform: uppercase !important;
 }
 
 .lower-case {
-  text-transform: lowercase;
+  text-transform: lowercase !important;
 }
 
 .capitalize {
-  text-transform: capitalize;
+  text-transform: capitalize !important;
 }
 
 .none-text-case {
-  text-transform: none;
+  text-transform: none !important;
+}
+
+/* underline */
+.underline-none {
+  text-decoration-line: none !important;
+}
+
+.underline {
+  text-decoration-line: underline;
 }

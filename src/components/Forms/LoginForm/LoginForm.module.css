@@ -20,6 +20,7 @@ form :global .form-activator {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
 }
 
 form :global .form-activator .remember-me-container {

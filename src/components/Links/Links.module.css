@@ -4,12 +4,12 @@
 
   font-style: normal;
 
-  font-weight: 400;
   
   line-height: normal;
   text-decoration-line: underline;
 }
 
+/* sizes */
 .large {
   font-size: 24px;
 }
@@ -20,4 +20,13 @@
 
 .small {
   font-size: 12px;
+}
+
+/* varients */
+.primary {
+  font-weight: 400;
+}
+
+.secondary {
+  font-weight: 700;
 }
