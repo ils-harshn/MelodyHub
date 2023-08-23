@@ -1,5 +1,5 @@
 type ErrorType = React.HTMLAttributes<HTMLDivElement> & {
-    children: string | null;
+    children?: string;
     varient?: "primary" | "secondary";
 }
 

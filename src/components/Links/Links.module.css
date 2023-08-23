@@ -1,0 +1,23 @@
+.link {
+  color: var(--link-text-color);
+  font-family: var(--link-font-style);
+
+  font-style: normal;
+
+  font-weight: 400;
+  
+  line-height: normal;
+  text-decoration-line: underline;
+}
+
+.large {
+  font-size: 24px;
+}
+
+.medium {
+  font-size: 16px;
+}
+
+.small {
+  font-size: 12px;
+}

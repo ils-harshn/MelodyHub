@@ -30,6 +30,9 @@ CFAT - Constants For All Themes
   --icon-color: #6a6a6a;
   --logo-color: black;
 
+  /* links colors */
+  --link-text-color: #000;
+
   /* CFAT */
   --blue-color: #1877f2;
 
@@ -46,4 +49,7 @@ CFAT - Constants For All Themes
   /* CFAT Icon font style */
   --icon-font-style: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+
+  /* CFAT link font style */
+  --link-font-style: Helvetica;
 }

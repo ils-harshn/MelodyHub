@@ -1,7 +1,9 @@
+import { FORGET_PASSWORD } from "../../../router/routes";
 import { getClassName } from "../../../utils";
 import Error from "../../Error/Error";
 import { PasswordInput, TextInput } from "../../Inputs/Inputs";
 import Label from "../../Label/Label";
+import A from "../../Links/Links";
 import styles from "./LoginForm.module.css";
 
 const LoginForm: React.FC = () => {
@@ -17,6 +19,7 @@ const LoginForm: React.FC = () => {
         <PasswordInput placeholder="Password" width="full" />
         <Error className="error">*Required</Error>
       </div>
+      <A to={FORGET_PASSWORD.endpoint}>Forgot your password?</A>
     </form>
   );
 };

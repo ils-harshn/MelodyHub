@@ -1,24 +1,27 @@
 [data-theme="dark"] {
-    --bg-color: black;
+  --bg-color: black;
 
-    --primary-color: #1ED760;
-    --primary-text-color: white;
-    --primary-font-style: Inter;
+  --primary-color: #1ed760;
+  --primary-text-color: white;
+  --primary-font-style: Inter;
 
-    --secondary-color: black;
-    --secondary-text-color: #e6e6e6;
-    --secondary-border-color: #878787;
+  --secondary-color: black;
+  --secondary-text-color: #e6e6e6;
+  --secondary-border-color: #878787;
 
-    /* inputs */
-    --inputs-box-shodow: 0px 0px 0px 1px #e8e8e8 inset;
-    --inputs-bg-color: #000000;
-    --inputs-text-color: #ffffff;
-    --inputs-placeholder-color: #979797;
+  /* inputs */
+  --inputs-box-shodow: 0px 0px 0px 1px #e8e8e8 inset;
+  --inputs-bg-color: #000000;
+  --inputs-text-color: #ffffff;
+  --inputs-placeholder-color: #979797;
 
-    /* labels */
-    --label-text-color: white;
+  /* labels */
+  --label-text-color: white;
 
-    /* icon colors */
-    --icon-color: #e8e8e8;
-    --logo-color: white;
+  /* icon colors */
+  --icon-color: #e8e8e8;
+  --logo-color: white;
+
+  /* links colors */
+  --link-text-color: white;
 }
