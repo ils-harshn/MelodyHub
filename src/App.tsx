@@ -2,9 +2,15 @@ import "./App.css";
 import { useContext } from "react";
 import ThemeContext from "./contexts/ThemeContext";
 import AppRouter from "./router/Router";
+import { useJsonHolderData } from "./apis/src/queryHooks";
 
 function App() {
   const themeContext = useContext(ThemeContext);
+  const { data, isLoading } = useJsonHolderData({
+    onSuccess: (data: any) => {
+      console.log(data);
+    },
+  });
 
   return (
     <>

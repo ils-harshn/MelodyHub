@@ -40,6 +40,7 @@ const LoginForm: React.FC = () => {
           name="email"
           onChange={handleTextChange}
           value={formik.values.email}
+          disabled={formik.isSubmitting}
         />
         <Error className="error">
           {formik.touched.email ? formik.errors.email : ""}
@@ -53,6 +54,7 @@ const LoginForm: React.FC = () => {
           name="password"
           onChange={handleTextChange}
           value={formik.values.password}
+          disabled={formik.isSubmitting}
         />
         <Error className="error">
           {formik.touched.password ? formik.errors.password : ""}
@@ -65,6 +67,7 @@ const LoginForm: React.FC = () => {
             name="rememberMe"
             onChange={formik.handleChange}
             checked={formik.values.rememberMe}
+            disabled={formik.isSubmitting}
           />
           <Label htmlFor={"rememberMe"} varient="secondary">
             Remember Me

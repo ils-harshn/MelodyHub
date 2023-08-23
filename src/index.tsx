@@ -4,15 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import BaseQueryProvider from "./apis";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ThemeProvider currentTheme="light">
-      <App />
-    </ThemeProvider>
+    <BaseQueryProvider>
+      <ThemeProvider currentTheme="light">
+        <App />
+      </ThemeProvider>
+    </BaseQueryProvider>
   </React.StrictMode>
 );
 
