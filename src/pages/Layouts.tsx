@@ -28,7 +28,7 @@ export const Layout = () => {
   const navigate = useNavigate();
 
   // to let animation complete
-  const delayedCall = 2000;
+  const delayedCall = 3000;
 
   const { mutate: verifyStorageToken } = useVerifyTokenMutation({
     onSuccess: () => {
