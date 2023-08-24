@@ -12,7 +12,7 @@ import validationSchema, {
 } from "../../../formSchemas/loginFormSchema";
 import { useLoginMutation } from "../../../apis/src/queryHooks";
 import { LoginResponseType } from "../../../apis/src/response.types";
-import { removeToken, setToken } from "../../../utils/helpers/tokenkeeper";
+import { setToken } from "../../../utils/helpers/tokenkeeper";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
@@ -20,7 +20,6 @@ const LoginForm: React.FC = () => {
 
   const { mutate, isLoading, isError } = useLoginMutation({
     onSuccess: (data: LoginResponseType) => {
-      removeToken();
       setToken(data.token, formik.values.rememberMe);
       navigate(INDEX.endpoint);
     },
