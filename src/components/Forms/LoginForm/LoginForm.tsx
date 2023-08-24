@@ -21,7 +21,9 @@ const LoginForm: React.FC = () => {
   const { mutate, isLoading, isError } = useLoginMutation({
     onSuccess: (data: LoginResponseType) => {
       setToken(data.token, formik.values.rememberMe);
-      navigate(INDEX.endpoint);
+      navigate(INDEX.endpoint, {
+        state: data.token,
+      });
     },
   });
 
