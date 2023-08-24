@@ -1,10 +1,12 @@
-import { useQuery } from "react-query";
-import { getData } from "./queryFunctions";
+import { useMutation } from "react-query";
 import QUERY_KEYS from "./queryKeys";
+import { loginUser } from "./queryFunctions";
+import { LoginPayloadType } from "./payload.types";
 
-export const useJsonHolderData = (config = {}) =>
-  useQuery({
-    queryKey: [QUERY_KEYS.LOGIN_USER],
-    queryFn: getData,
+export const useLoginMutation = (config = {}) =>
+  useMutation({
+    mutationFn: (payload: LoginPayloadType) =>
+      loginUser(payload.email, payload.password),
+    mutationKey: [QUERY_KEYS.LOGIN_USER],
     ...config,
   });

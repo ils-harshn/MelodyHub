@@ -1,16 +1,16 @@
 import * as Yup from "yup";
-import { EMAIL_REGEX, PASSWORD_REGEX } from "./utils";
+import { EMAIL_REGEX } from "./utils";
 
 const validationSchema = Yup.object({
   email: Yup.string()
     .required("Email is required")
     .matches(EMAIL_REGEX, "Invalid email address"),
   password: Yup.string()
-    .required("Password is required")
-    .matches(
-      PASSWORD_REGEX,
-      "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and atleast one special character from (@$!%*?&#)"
-    ),
+    .required("Password is required"),
+    // .matches(
+    //   PASSWORD_REGEX,
+    //   "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and atleast one special character from (@$!%*?&#)"
+    // ),
   rememberMe: Yup.boolean(),
 });
 

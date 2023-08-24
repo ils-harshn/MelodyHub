@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { FORGET_PASSWORD } from "../../../router/routes";
+import INDEX, { FORGET_PASSWORD } from "../../../router/routes";
 import { getClassName } from "../../../utils";
 import { Button } from "../../Buttons/buttons";
 import Error from "../../Error/Error";
@@ -10,14 +10,31 @@ import styles from "./LoginForm.module.css";
 import validationSchema, {
   initialValues,
 } from "../../../formSchemas/loginFormSchema";
+import { useLoginMutation } from "../../../apis/src/queryHooks";
+import { LoginResponseType } from "../../../apis/src/response.types";
+import { removeToken, setToken } from "../../../utils/helpers/tokenkeeper";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
+  const navigate = useNavigate();
+
+  const { mutate, isLoading, isError } = useLoginMutation({
+    onSuccess: (data: LoginResponseType) => {
+      removeToken();
+      setToken(data.token, formik.values.rememberMe);
+      navigate(INDEX.endpoint);
+    },
+  });
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
     validateOnChange: true,
     onSubmit: (values) => {
-      console.log(values);
+      mutate({
+        email: values.email,
+        password: values.password,
+      });
     },
   });
 
@@ -40,10 +57,14 @@ const LoginForm: React.FC = () => {
           name="email"
           onChange={handleTextChange}
           value={formik.values.email}
-          disabled={formik.isSubmitting}
+          disabled={isLoading}
         />
         <Error className="error">
-          {formik.touched.email ? formik.errors.email : ""}
+          {isError
+            ? "Email or password is wrong!"
+            : formik.touched.email
+            ? formik.errors.email
+            : ""}
         </Error>
       </div>
       <div className="form-group">
@@ -54,7 +75,7 @@ const LoginForm: React.FC = () => {
           name="password"
           onChange={handleTextChange}
           value={formik.values.password}
-          disabled={formik.isSubmitting}
+          disabled={isLoading}
         />
         <Error className="error">
           {formik.touched.password ? formik.errors.password : ""}
@@ -67,7 +88,7 @@ const LoginForm: React.FC = () => {
             name="rememberMe"
             onChange={formik.handleChange}
             checked={formik.values.rememberMe}
-            disabled={formik.isSubmitting}
+            disabled={isLoading}
           />
           <Label htmlFor={"rememberMe"} varient="secondary">
             Remember Me
@@ -75,9 +96,10 @@ const LoginForm: React.FC = () => {
         </div>
         <div className="submit-button-container">
           <Button
+            type="submit"
             width="full"
-            disabled={!formik.dirty || !formik.isValid || formik.isSubmitting}
-            loading={formik.isSubmitting}
+            disabled={!formik.dirty || !formik.isValid || isLoading}
+            loading={isLoading}
           >
             Submit
           </Button>
