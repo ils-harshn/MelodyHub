@@ -6,6 +6,7 @@ import { TokenType } from "../contexts/Context.types";
 import { getToken } from "../utils/helpers/tokenkeeper";
 import { LOGIN } from "../router/routes";
 import { useVerifyTokenMutation } from "../apis/src/queryHooks";
+import FullPageLoader from "../components/Loaders/Loaders";
 
 export const AuthLayout = () => {
   return (
@@ -26,19 +27,22 @@ export const Layout = () => {
 
   const navigate = useNavigate();
 
+  // to let animation complete
+  const delayedCall = 2000;
+
   const { mutate: verifyStorageToken } = useVerifyTokenMutation({
     onSuccess: () => {
       token.current = storageProvidedToken || "";
-      setLoading(false);
+      setTimeout(() => setLoading(false), delayedCall);
     },
     onError: () => {
-      navigate(LOGIN.endpoint);
+      setTimeout(() => navigate(LOGIN.endpoint), delayedCall);
     },
   });
 
   const chechTokenFromStorage = () => {
     if (storageProvidedToken === null) {
-      navigate(LOGIN.endpoint);
+      setTimeout(() => navigate(LOGIN.endpoint), delayedCall);
     } else {
       // api call to check token
       verifyStorageToken(storageProvidedToken);
@@ -52,7 +56,7 @@ export const Layout = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading</div>;
+    return <FullPageLoader />;
   }
 
   return (

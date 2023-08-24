@@ -1,10 +1,11 @@
 import { getClassName } from "../../utils";
 import { LoaderType } from "./Loaders.types";
 import styles from "./Loaders.module.css";
+import Idol from "../Idol/Idol";
 
-const Loader: React.FC<LoaderType> = ({
+export const Loader: React.FC<LoaderType> = ({
   size = "medium",
-  varient='primary',
+  varient = "primary",
   className = "",
   ...props
 }) => {
@@ -14,11 +15,22 @@ const Loader: React.FC<LoaderType> = ({
         className,
         styles["loader"],
         styles[size],
-        styles[varient],
+        styles[varient]
       )}
       {...props}
     ></div>
   );
 };
 
-export { Loader };
+const FullPageLoader: React.FC = () => {
+  return (
+    <div className={getClassName(styles["full-page-loader"])}>
+      <div className="container">
+        <Idol className="centered-logo" />
+        <div className="progress-bar"></div>
+      </div>
+    </div>
+  );
+};
+
+export default FullPageLoader;

@@ -3,9 +3,9 @@ import { getClassName } from "../../utils";
 import styles from "./Idol.module.css";
 import IdolType from "./Idol.type";
 
-const Idol: React.FC<IdolType> = ({ size = "large" }) => {
+const Idol: React.FC<IdolType> = ({ className = "", size = "large" }) => {
   return (
-    <div className={getClassName(styles["idol"], styles[size])}>
+    <div className={getClassName(className, styles["idol"], styles[size])}>
       <Logo />
       ARythms
     </div>

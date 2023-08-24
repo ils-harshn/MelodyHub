@@ -1,9 +1,9 @@
 import { Story } from "@storybook/react";
-import { Loader } from "./Loaders";
-import { LoaderType } from "./Loaders.types";
+import { Loader } from "../Loaders";
+import { LoaderType } from "../Loaders.types";
 
 export default {
-  title: "Components/Loaders",
+  title: "Components/Loaders/Circular",
   component: Loader,
 };
 
