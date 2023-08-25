@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AuthLayout, Layout } from "../pages/Layouts";
-import { Login } from "../pages";
+import { AuthLayout, Layout } from "../pages/Layouts/Layouts";
 import * as routes from "./routes";
+import Login from "../pages/Login";
 
 const AppRouter: React.FC = () => {
   return (

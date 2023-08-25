@@ -1,0 +1,48 @@
+/* Remove Upto Here */
+.triologicaldesign-layout :global {
+  display: flex;
+  height: 100vh;
+}
+
+.triologicaldesign-layout :global .sidebar {
+  background-color: black;
+  overflow: hidden;
+  width: 240px;
+}
+
+.triologicaldesign-layout :global .main {
+  flex-grow: 1;
+}
+
+.triologicaldesign-layout :global .main .header {
+  background-color: rgb(85, 85, 85);
+  height: 80px;
+}
+
+.triologicaldesign-layout :global .main .header .sidebar-opener {
+  display: none;
+}
+
+.triologicaldesign-layout :global .sidebar .sidebar-closer {
+  display: none;
+  position: absolute;
+  right: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .triologicaldesign-layout :global .sidebar {
+    position: absolute;
+    height: 100%;
+    transform: translateX(-240px);
+    transition: transform 300ms ease-in-out;
+  }
+
+  .triologicaldesign-layout :global .sidebar.open {
+    transform: translateX(0px);
+  }
+
+  .triologicaldesign-layout :global .main .header .sidebar-opener,
+  .triologicaldesign-layout :global .sidebar .sidebar-closer {
+    display: initial;
+  }
+}
