@@ -10,7 +10,7 @@ const AppRouter: React.FC = () => {
         {/* INDEX NESTED */}
         <Route path={routes.INDEX.path} element={<Layout />}>
           <Route index element={<h3>Home</h3>} />
-          <Route path={routes.HOME.path} element={<h3>Home</h3>} />
+          <Route path={routes.HOME.path} element={<h3>ABOUT</h3>} />
         </Route>
         {/* AUTH_LAYOUT NESTED */}
         <Route path={routes.AUTH_LAYOUT.path} element={<AuthLayout />}>

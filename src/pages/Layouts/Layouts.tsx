@@ -4,12 +4,14 @@ import { TokenProvider } from "../../contexts/TokenContext";
 import React, { useEffect, useRef, useState } from "react";
 import { TokenType } from "../../contexts/Context.types";
 import { getToken } from "../../utils/helpers/tokenkeeper";
-import { LOGIN } from "../../router/routes";
+import { HOME, LOGIN } from "../../router/routes";
 import { useVerifyTokenMutation } from "../../apis/src/queryHooks";
 import FullPageLoader from "../../components/Loaders/Loaders";
 
 import styles from "./Layouts.module.css";
 import { getClassName } from "../../utils";
+import MusicPlayer from "../../components/MusicPlayer/MusicPlayer";
+import { TRIOLOGY_ID } from "../../consts/ids";
 
 export const AuthLayout = () => {
   return (
@@ -23,9 +25,13 @@ export const AuthLayout = () => {
 const TrioLogicalDesign: React.FC = () => {
   // sidebar ref
   const sidebarContainerRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   return (
-    <div className={getClassName(styles["triologicaldesign-layout"])}>
+    <div
+      className={getClassName(styles["triologicaldesign-layout"])}
+      id={TRIOLOGY_ID}
+    >
       <div className="sidebar" ref={sidebarContainerRef}>
         <div
           className="sidebar-closer"
@@ -46,9 +52,11 @@ const TrioLogicalDesign: React.FC = () => {
           >
             O
           </div>
+          <button onClick={() => navigate(HOME.endpoint)}>Go to home</button>
         </div>
         <Outlet />
       </div>
+      <MusicPlayer />
     </div>
   );
 };

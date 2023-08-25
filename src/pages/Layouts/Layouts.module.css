@@ -2,6 +2,7 @@
 .triologicaldesign-layout :global {
   display: flex;
   height: 100vh;
+  transition: height 300ms;
 }
 
 .triologicaldesign-layout :global .sidebar {
