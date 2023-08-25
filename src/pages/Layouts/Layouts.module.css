@@ -1,5 +1,5 @@
 /* Remove Upto Here */
-.triologicaldesign-layout :global {
+.triologicaldesign-layout {
   display: flex;
   height: 100vh;
   transition: height 300ms;
