@@ -54,7 +54,9 @@ const TrioLogicalDesign: React.FC = () => {
           </div>
           <button onClick={() => navigate(HOME.endpoint)}>Go to home</button>
         </div>
-        <Outlet />
+        <div className="outlet">
+          <Outlet />
+        </div>
       </div>
       <MusicPlayer />
     </div>

@@ -30,7 +30,7 @@
   right: 0;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   .triologicaldesign-layout :global .sidebar {
     position: absolute;
     height: 100%;
