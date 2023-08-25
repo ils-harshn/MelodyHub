@@ -1,17 +1,17 @@
 [data-theme="dark"] {
-  --bg-color: black;
+  --bg-color: #333333;
 
   --primary-color: #1ed760;
   --primary-text-color: white;
   --primary-font-style: Inter;
 
-  --secondary-color: black;
+  --secondary-color: #333333;
   --secondary-text-color: #e6e6e6;
   --secondary-border-color: #878787;
 
   /* inputs */
   --inputs-box-shodow: 0px 0px 0px 1px #e8e8e8 inset;
-  --inputs-bg-color: #000000;
+  --inputs-bg-color: #333333;
   --inputs-text-color: #ffffff;
   --inputs-placeholder-color: #979797;
 
