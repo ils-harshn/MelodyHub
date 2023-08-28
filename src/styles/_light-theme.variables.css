@@ -67,4 +67,8 @@ CFAT - Constants For All Themes
 
   /* CFAT link font style */
   --link-font-style: Helvetica;
+
+  /* CFAT Inputs */
+  --tertiary-input-bg-color: #ffffff;
+  --tertiary-input-icon-color: #000000;
 }

@@ -37,8 +37,14 @@
   border-radius: 500px;
 }
 
+.tertiary {
+  border-radius: 500px;
+  background-color: var(--tertiary-input-bg-color);
+}
+
 /* PASSWORD */
-.password {
+.password,
+.input-with-icon {
   display: inline-block;
   position: relative;
 }
@@ -48,7 +54,8 @@
 }
 
 /* password icon container */
-.password :global .icon {
+.password :global .icon,
+.input-with-icon :global .icon {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -62,7 +69,8 @@
   cursor: pointer;
 }
 
-.password :global .icon > svg {
+.password :global .icon > svg,
+.input-with-icon :global .icon > svg {
   width: 20px;
   height: 20px;
   /* fill: red; */
@@ -71,20 +79,24 @@
 
 /* width password container width full */
 /* full */
-.password-full {
+.password-full,
+.input-with-icon-full {
   width: 100%;
 }
 
-.password-full input {
+.password-full input,
+.input-with-icon-full input {
   width: calc(100% - 60px);
 }
 
 /* fit */
-.password-initial {
+.password-initial,
+.input-with-icon-initial {
   width: fit-content;
 }
 
-.password-initial input {
+.password-initial input,
+.input-with-icon-initial input {
   width: 170px;
 }
 
@@ -93,14 +105,14 @@
   display: inline-flex;
   position: relative;
   height: 16px;
-  width: 16px; 
+  width: 16px;
   overflow: hidden;
 }
 
 .checkbox svg {
   position: absolute;
   display: none;
-  user-select: none;  
+  user-select: none;
   pointer-events: none;
 
   /* changes with variations */
@@ -138,4 +150,18 @@
 .checkbox input[type="checkbox"]:checked + svg {
   display: initial;
   fill: var(--checkbox-icon-color);
+}
+
+/*  */
+.input-with-icon input {
+  padding-left: 48px;
+}
+
+.input-with-icon :global .icon {
+  left: 12px;
+}
+
+/* overwrites needed */
+.password :global .tertiary-icon, .input-with-icon :global .tertiary-icon svg {
+  fill: var(--tertiary-input-icon-color);
 }

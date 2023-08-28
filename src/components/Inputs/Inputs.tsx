@@ -1,9 +1,13 @@
-import { CheckBoxType, InputType, PasswordInputType } from "./Inputs.types";
+import {
+  CheckBoxType,
+  InputType,
+  InputWithIconType,
+  PasswordInputType,
+} from "./Inputs.types";
 import styles from "./Inputs.module.css";
 import { getClassName } from "../../utils";
 import { useState } from "react";
-import { CheckMark, EyeClosed, EyeOpen } from "../../assests/icons";
-// import { EyeClosed } from "../../assests/icons";
+import { CheckMark, EyeClosed, EyeOpen, Search } from "../../assests/icons";
 
 export const TextInput: React.FC<InputType> = ({
   className = "",
@@ -45,9 +49,46 @@ export const PasswordInput: React.FC<PasswordInputType> = ({
         type={show ? "text" : "password"}
         {...props}
       ></input>
-      <div className="icon" onClick={() => toggleShow(!show)}>
+      <div
+        className={getClassName(
+          "icon",
+          varient === "tertiary" ? "tertiary-icon" : ""
+        )}
+        onClick={() => toggleShow(!show)}
+      >
         {show ? <IconWhenVisible /> : <IconWhenHidden />}
       </div>
+    </div>
+  );
+};
+
+export const InputWithIcon: React.FC<InputWithIconType> = ({
+  className = "",
+  width = "initial",
+  varient = "primary",
+  Icon = Search,
+  ...props
+}) => {
+  return (
+    <div
+      className={getClassName(
+        styles["input-with-icon"],
+        styles[`input-with-icon-${width}`]
+      )}
+    >
+      <div
+        className={getClassName(
+          "icon",
+          varient === "tertiary" ? "tertiary-icon" : ""
+        )}
+      >
+        <Icon />
+      </div>
+      <input
+        className={getClassName(className, styles["inputs"], styles[varient])}
+        type={"text"}
+        {...props}
+      ></input>
     </div>
   );
 };

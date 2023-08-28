@@ -18,6 +18,7 @@
 .triologicaldesign-layout :global .main .header {
   background-color: var(--header-bg-color);
   height: 80px;
+  display: flex;
 }
 
 .triologicaldesign-layout :global .main .header .sidebar-opener {

@@ -4,7 +4,7 @@ import { TokenProvider } from "../../contexts/TokenContext";
 import React, { useEffect, useRef, useState } from "react";
 import { TokenType } from "../../contexts/Context.types";
 import { getToken } from "../../utils/helpers/tokenkeeper";
-import { HOME, LOGIN } from "../../router/routes";
+import { LOGIN } from "../../router/routes";
 import { useVerifyTokenMutation } from "../../apis/src/queryHooks";
 import FullPageLoader from "../../components/Loaders/Loaders";
 
@@ -14,8 +14,9 @@ import MusicPlayer from "../../components/MusicPlayer/MusicPlayer";
 import { TRIOLOGY_ID } from "../../consts/ids";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Bread, Cross } from "../../assests/icons";
+import Header from "../../components/Header/Header";
 
-export const AuthLayout = () => {
+export const AuthLayout: React.FC = () => {
   return (
     <div className="layout">
       <AuthNavbar />
@@ -25,9 +26,7 @@ export const AuthLayout = () => {
 };
 
 const TrioLogicalDesign: React.FC = () => {
-  // sidebar ref
   const sidebarContainerRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
 
   return (
     <div
@@ -55,7 +54,7 @@ const TrioLogicalDesign: React.FC = () => {
           >
             <Bread />
           </div>
-          <button onClick={() => navigate(HOME.endpoint)}>Go to home</button>
+          <Header />
         </div>
         <div className="outlet">
           <Outlet />
