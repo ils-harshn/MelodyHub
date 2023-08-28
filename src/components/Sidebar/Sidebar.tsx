@@ -5,35 +5,20 @@ import { SidebarLink } from "../Links/Links";
 import styles from "./Sidebar.module.css";
 import * as routes from "../../router/routes";
 import { SidebarSongImageType } from "./Sidebar.type";
-import { useState } from "react";
-import { Loader } from "../Loaders/Loaders";
+import ImageWithLoader from "../ImageWithLoader/ImageWithLoader";
+import { useMusicPlayerData } from "../../hooks/MusicPlayerHooks";
 
-const ImageWithLoader: React.FC = () => {
-  const [loaded, setLoaded] = useState(false);
-
-  const handleImageLoad = () => {
-    setLoaded(true);
-  };
-
+const SidebarSongImage: React.FC<SidebarSongImageType> = ({
+  className = "",
+  ...props
+}) => {
+  const musicData = useMusicPlayerData();
   return (
-    <>
-      {!loaded && <Loader />}
-      <img
-        src={
-          "https://drive.google.com/uc?id=15IFPEtrZ9_aZ_a0T1ZeraswlNvElvkb0&export=download"
-        }
-        alt={"loading"}
-        onLoad={handleImageLoad}
-        style={{ display: loaded ? "block" : "none" }}
+    <div {...props} className={getClassName(className, musicData.open ? "show": "hide")}>
+      <ImageWithLoader
+        src="https://drive.google.com/uc?id=15IFPEtrZ9_aZ_a0T1ZeraswlNvElvkb0&export=download"
+        alt="Loading"
       />
-    </>
-  );
-};
-
-const SidebarSongImage: React.FC<SidebarSongImageType> = ({ ...props }) => {
-  return (
-    <div {...props}>
-      <ImageWithLoader />
     </div>
   );
 };

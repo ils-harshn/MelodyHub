@@ -89,6 +89,23 @@
     progressAnimationStrike 1800ms;
 }
 
+/* skeleton */
+.skeleton :global {
+  width: inherit;
+  height: inherit;
+  background-color: var(--skeleton-bg-color);
+  animation: skeleton-animation 600ms infinite alternate;
+}
+
+@keyframes :global(skeleton-animation) {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
 @keyframes :global(move-progress) {
   to {
     transform: translateY(0);

@@ -1,0 +1,13 @@
+.image-with-loader {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+}
+
+.image-with-loader:global.show {
+    display: block;
+}
+
+.image-with-loader:global.hide {
+    display: none;
+}

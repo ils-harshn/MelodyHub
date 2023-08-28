@@ -1,5 +1,5 @@
 import { getClassName } from "../../utils";
-import { LoaderType } from "./Loaders.types";
+import { LoaderType, SkeletonType } from "./Loaders.types";
 import styles from "./Loaders.module.css";
 import Idol from "../Idol/Idol";
 
@@ -31,6 +31,10 @@ const FullPageLoader: React.FC = () => {
       </div>
     </div>
   );
+};
+
+export const Skeleton: React.FC<SkeletonType> = ({ className = "" }) => {
+  return <div className={getClassName(styles["skeleton"], className)}></div>;
 };
 
 export default FullPageLoader;

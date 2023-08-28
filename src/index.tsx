@@ -14,7 +14,7 @@ root.render(
   // <React.StrictMode>
   <MusicPlayerProvider>
     <BaseQueryProvider>
-      <ThemeProvider currentTheme="dark">
+      <ThemeProvider currentTheme="light">
         <App />
       </ThemeProvider>
     </BaseQueryProvider>

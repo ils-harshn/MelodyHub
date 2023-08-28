@@ -36,4 +36,7 @@
 
   /* headers */
   --header-bg-color: #555555;
+
+  /* skeleton */
+  --skeleton-bg-color: #4e4e4e;
 }

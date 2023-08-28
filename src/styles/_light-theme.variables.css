@@ -45,6 +45,9 @@ CFAT - Constants For All Themes
   /* headers */
   --header-bg-color: #dbdbdb;
 
+  /* skeleton */
+  --skeleton-bg-color: #9c9c9c;
+
   /* CFAT */
   --blue-color: #1877f2;
 
