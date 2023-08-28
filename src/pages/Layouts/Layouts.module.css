@@ -24,11 +24,26 @@
   display: none;
 }
 
+.triologicaldesign-layout :global .main .header .sidebar-opener svg {
+  width: 34px;
+  height: 34px;
+  padding: 22px;
+  fill: var(--icon-color);
+}
+
 .triologicaldesign-layout :global .sidebar .sidebar-closer {
   display: none;
   position: absolute;
   right: 0;
   z-index: 1;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.triologicaldesign-layout :global .sidebar .sidebar-closer svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--icon-color)
 }
 
 @media only screen and (max-width: 1024px) {
@@ -37,6 +52,7 @@
     height: 100%;
     transform: translateX(-240px);
     transition: transform 300ms ease-in-out;
+    z-index: 2;
   }
 
   .triologicaldesign-layout :global .sidebar.open {

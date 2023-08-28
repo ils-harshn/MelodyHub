@@ -7,6 +7,19 @@ import { ReactComponent as Search } from "./icons/Search.svg";
 import { ReactComponent as Library } from "./icons/Library.svg";
 import { ReactComponent as Plus } from "./icons/Plus.svg";
 import { ReactComponent as Heart } from "./icons/Heart.svg";
+import { ReactComponent as Cross } from "./icons/Cross.svg";
+import { ReactComponent as Bread } from "./icons/Bread.svg";
 
 export default Logo;
-export { EyeClosed, EyeOpen, CheckMark, Home, Search, Library, Plus, Heart };
+export {
+  EyeClosed,
+  EyeOpen,
+  CheckMark,
+  Home,
+  Search,
+  Library,
+  Plus,
+  Heart,
+  Cross,
+  Bread,
+};

@@ -13,6 +13,7 @@ import { getClassName } from "../../utils";
 import MusicPlayer from "../../components/MusicPlayer/MusicPlayer";
 import { TRIOLOGY_ID } from "../../consts/ids";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import { Bread, Cross } from "../../assests/icons";
 
 export const AuthLayout = () => {
   return (
@@ -40,7 +41,7 @@ const TrioLogicalDesign: React.FC = () => {
             sidebarContainerRef.current?.classList.remove("open");
           }}
         >
-          C
+          <Cross />
         </div>
         <Sidebar />
       </div>
@@ -52,7 +53,7 @@ const TrioLogicalDesign: React.FC = () => {
               sidebarContainerRef.current?.classList.add("open");
             }}
           >
-            O
+            <Bread />
           </div>
           <button onClick={() => navigate(HOME.endpoint)}>Go to home</button>
         </div>
