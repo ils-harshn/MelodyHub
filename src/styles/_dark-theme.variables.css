@@ -2,7 +2,7 @@
   --bg-color: #333333;
 
   --primary-color: #1ed760;
-  --primary-text-color: white;
+  --primary-text-color: #ffffff;
   --primary-font-style: Inter;
 
   --secondary-color: #333333;
@@ -16,16 +16,22 @@
   --inputs-placeholder-color: #979797;
 
   /* labels */
-  --label-text-color: white;
+  --label-text-color: #ffffff;
 
   /* icon colors */
   --icon-color: #e8e8e8;
-  --logo-color: white;
+  --logo-color: #ffffff;
 
   /* links colors */
-  --link-text-color: white;
+  --link-text-color: #ffffff;
 
   /* checkbox colors */
   --checkbox-bg-color: #12e05a;
-  --checkbox-icon-color: white;
+  --checkbox-icon-color: #ffffff;
+
+  /* sidebar */
+  --sidebar-bg-color: #000000;
+
+  /* headers */
+  --header-bg-color: #555555;
 }

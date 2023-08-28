@@ -6,7 +6,7 @@
 }
 
 .triologicaldesign-layout :global .sidebar {
-  background-color: black;
+  background-color: var(--sidebar-bg-color);
   overflow: hidden;
   width: 240px;
 }
@@ -16,7 +16,7 @@
 }
 
 .triologicaldesign-layout :global .main .header {
-  background-color: rgb(85, 85, 85);
+  background-color: var(--header-bg-color);
   height: 80px;
 }
 
