@@ -4,7 +4,6 @@
 
   font-style: normal;
 
-  
   line-height: normal;
   text-decoration-line: underline;
 }
@@ -29,4 +28,46 @@
 
 .secondary {
   font-weight: 700;
+}
+
+/* sidebar link */
+.sidebar-link {
+  padding: 8px 16px 8px 24px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: left;
+  align-items: center;
+}
+
+.sidebar-link svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--sidebar-color-inactive);
+  margin-right: 16px;
+}
+
+.sidebar-link :global a {
+  color: var(--sidebar-color-inactive);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sidebar-link :global a.active {
+  color: var(--sidebar-color-active);
+}
+
+.sidebar-link :global a.active + svg {
+  fill: var(--sidebar-color-active);
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar-link :global a:hover {
+  color: var(--sidebar-color-active);
+}
+
+.sidebar-link :global a:hover + svg {
+  fill: var(--sidebar-color-active);
 }

@@ -12,6 +12,7 @@ import styles from "./Layouts.module.css";
 import { getClassName } from "../../utils";
 import MusicPlayer from "../../components/MusicPlayer/MusicPlayer";
 import { TRIOLOGY_ID } from "../../consts/ids";
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 export const AuthLayout = () => {
   return (
@@ -41,6 +42,7 @@ const TrioLogicalDesign: React.FC = () => {
         >
           C
         </div>
+        <Sidebar />
       </div>
       <div className="main">
         <div className="header">

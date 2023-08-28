@@ -31,6 +31,8 @@
 
   /* sidebar */
   --sidebar-bg-color: #000000;
+  --sidebar-color-inactive: #B3B3B3;
+  --sidebar-color-active: #ffffff;
 
   /* headers */
   --header-bg-color: #555555;

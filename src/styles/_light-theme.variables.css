@@ -39,6 +39,8 @@ CFAT - Constants For All Themes
 
   /* sidebar */
   --sidebar-bg-color: #bebebe;
+  --sidebar-color-inactive: rgba(0, 0, 0, 0.5);
+  --sidebar-color-active: #000000;
 
   /* headers */
   --header-bg-color: #dbdbdb;
