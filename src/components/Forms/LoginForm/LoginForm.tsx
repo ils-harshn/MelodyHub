@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import INDEX, { FORGET_PASSWORD } from "../../../router/routes";
+import { FORGET_PASSWORD, HOME } from "../../../router/routes";
 import { getClassName } from "../../../utils";
 import { Button } from "../../Buttons/buttons";
 import Error from "../../Error/Error";
@@ -21,7 +21,7 @@ const LoginForm: React.FC = () => {
   const { mutate, isLoading, isError } = useLoginMutation({
     onSuccess: (data: LoginResponseType) => {
       setToken(data.token, formik.values.rememberMe);
-      navigate(INDEX.endpoint, {
+      navigate(HOME.endpoint, {
         state: data.token,
       });
     },

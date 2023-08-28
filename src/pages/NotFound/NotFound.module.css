@@ -1,0 +1,25 @@
+.not-found {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+    z-index: 100;
+}
+
+.not-found > div {
+    text-align: center;
+}
+
+.not-found :global .text {
+    margin-left: 12px;
+    font-size: 18px;
+}
+
+.not-found :global .text a {
+    color: var(--primary-color);
+}
