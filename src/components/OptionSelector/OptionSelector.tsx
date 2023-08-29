@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef } from "react";
 import ThemeContext from "../../contexts/ThemeContext";
 import styles from "./OptionSelector.module.css";
 import { getClassName } from "../../utils";
-import { OPTION_SELECTOR, OPTION_SELECTOR_OPENER } from "../../consts/ids";
+import { OPTION_SELECTOR_OPENER } from "../../consts/ids";
 import { Bolt } from "../../assests/icons";
 
 const ThemeChanger: React.FC = () => {
