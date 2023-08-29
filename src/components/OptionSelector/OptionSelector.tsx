@@ -3,15 +3,12 @@ import ThemeContext from "../../contexts/ThemeContext";
 import styles from "./OptionSelector.module.css";
 import { getClassName } from "../../utils";
 import { OPTION_SELECTOR_OPENER } from "../../consts/ids";
-import { Bolt } from "../../assests/icons";
-import { ThemeTypes, themes } from "../../contexts/Context.types";
+import { Bolt, CollapseIn, CollapseOut } from "../../assests/icons";
+import { themes } from "../../contexts/Context.types";
 import { SelectInput } from "../Inputs/Inputs";
 import Label from "../Label/Label";
-
-type ThemeOptionType = {
-  value: ThemeTypes;
-  label: ThemeTypes;
-};
+import { ThemeOptionType } from "./OptionSelector.types";
+import { useState } from "react";
 
 const ThemeChanger: React.FC = () => {
   const themeContext = useContext(ThemeContext);
@@ -36,6 +33,35 @@ const ThemeChanger: React.FC = () => {
         onChange={(newValue: unknown) => onChange(newValue as ThemeOptionType)}
       />
     </>
+  );
+};
+
+const CollapseBox = () => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement
+        .requestFullscreen()
+        .then(() => setIsFullscreen(true))
+        .catch((err) => alert("Error while entering fullscreen"));
+    } else {
+      if (document.exitFullscreen) {
+        document
+          .exitFullscreen()
+          .then(() => setIsFullscreen(false))
+          .catch((err) => alert("Error while exiting fullscreen"));
+      }
+    }
+  };
+
+  return (
+    <div className="collapse-box">
+      <Label varient="secondary">Toggle Screen Resolution</Label>
+      <div onClick={toggleFullscreen} className="collapse-box-toggler">
+        {isFullscreen ? <CollapseIn /> : <CollapseOut />}
+      </div>
+    </div>
   );
 };
 
@@ -81,6 +107,9 @@ const OptionSelector: React.FC = () => {
         <div className="title">Settings</div>
         <div className="option">
           <ThemeChanger />
+        </div>
+        <div className="option">
+          <CollapseBox />
         </div>
       </div>
     </div>

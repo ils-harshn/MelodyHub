@@ -51,5 +51,21 @@
 }
 
 .option-selector :global .option {
-  margin: 10px 0 10px 0;
+  margin: 20px 0 20px 0;
+}
+
+.option-selector :global .collapse-box {
+  display: flex;
+  align-items: center;
+}
+
+.option-selector :global .collapse-box-toggler {
+  display: flex;
+  margin-left: 10px;
+}
+
+.option-selector :global .collapse-box-toggler svg {
+  fill: var(--icon-color);
+  width: 14px;
+  height: 14px;
 }
