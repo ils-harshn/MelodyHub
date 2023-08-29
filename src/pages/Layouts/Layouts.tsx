@@ -11,7 +11,7 @@ import FullPageLoader from "../../components/Loaders/Loaders";
 import styles from "./Layouts.module.css";
 import { getClassName } from "../../utils";
 import MusicPlayer from "../../components/MusicPlayer/MusicPlayer";
-import { TRIOLOGY_ID } from "../../consts/ids";
+import { TRIOLOGY_ID, SIDEBAR_CONTAINER_ID, SIDEBAR_OPENER_ID } from "../../consts/ids";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Bread, Cross } from "../../assests/icons";
 import Header from "../../components/Header/Header";
@@ -33,7 +33,7 @@ const TrioLogicalDesign: React.FC = () => {
       className={getClassName(styles["triologicaldesign-layout"])}
       id={TRIOLOGY_ID}
     >
-      <div className="sidebar" ref={sidebarContainerRef}>
+      <div className="sidebar" ref={sidebarContainerRef} id={SIDEBAR_CONTAINER_ID}>
         <div
           className="sidebar-closer"
           onClick={() => {
@@ -52,7 +52,7 @@ const TrioLogicalDesign: React.FC = () => {
               sidebarContainerRef.current?.classList.add("open");
             }}
           >
-            <Bread />
+            <Bread id={SIDEBAR_OPENER_ID} />
           </div>
           <Header />
         </div>
