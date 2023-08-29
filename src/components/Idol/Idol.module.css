@@ -10,7 +10,7 @@
 
 .idol svg {
   fill: var(--logo-color);
-  height: 54px;
+  height: 42px;
   margin-right: 4px;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .large svg {
-  height: 54px;
+  height: 42px;
 }
 
 /* meidum */
@@ -32,7 +32,7 @@
 }
 
 .medium svg {
-  height: 44px;
+  height: 34px;
 }
 
 /* small */
@@ -42,5 +42,5 @@
 }
 
 .small svg {
-  height: 30px;
+  height: 24px;
 }

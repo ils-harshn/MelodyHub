@@ -9,6 +9,7 @@ import { ReactComponent as Plus } from "./icons/Plus.svg";
 import { ReactComponent as Heart } from "./icons/Heart.svg";
 import { ReactComponent as Cross } from "./icons/Cross.svg";
 import { ReactComponent as Bread } from "./icons/Bread.svg";
+import { ReactComponent as Bolt } from "./icons/Bolt.svg";
 
 export default Logo;
 export {
@@ -22,4 +23,5 @@ export {
   Heart,
   Cross,
   Bread,
+  Bolt,
 };

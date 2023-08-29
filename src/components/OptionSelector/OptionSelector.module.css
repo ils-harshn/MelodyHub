@@ -1,0 +1,31 @@
+.option-selector-container {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+}
+
+.option-selector-container :global .opener {
+  position: absolute;
+  right: 0;
+  padding: 4px;
+}
+
+.option-selector-container :global .opener svg {
+  width: 24px;
+  height: 24px;
+  user-select: none;
+  pointer-events: none;
+  fill: var(--icon-color);
+}
+
+.option-selector {
+  padding: 20px;
+  background-color: red;
+  transform: scale(0);
+  transform-origin: top right;
+  transition: 300ms ease-in;
+}
+
+.option-selector:global.open {
+  transform: scale(1);
+}
