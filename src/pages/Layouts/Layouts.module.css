@@ -65,3 +65,7 @@
     display: initial;
   }
 }
+
+.triologicaldesign-layout :global .main .outlet {
+  height: calc(100% - 80px);
+}
