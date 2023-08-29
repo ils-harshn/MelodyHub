@@ -39,4 +39,7 @@
 
   /* skeleton */
   --skeleton-bg-color: #4e4e4e;
+
+  /* option select */
+  --option-selector-shadow-color: #ffffffbf;
 }

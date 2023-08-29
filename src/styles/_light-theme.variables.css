@@ -48,6 +48,9 @@ CFAT - Constants For All Themes
   /* skeleton */
   --skeleton-bg-color: #9c9c9c;
 
+  /* option select */
+  --option-selector-shadow-color: #000000bf;
+
   /* CFAT */
   --blue-color: #1877f2;
 

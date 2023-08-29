@@ -20,10 +20,14 @@
 
 .option-selector {
   padding: 20px;
-  background-color: red;
+  background-color: var(--bg-color);
+  -webkit-box-shadow: -2px 22px 86px -9px var(--option-selector-shadow-color);
+  -moz-box-shadow: -2px 22px 86px -9px var(--option-selector-shadow-color);
+  box-shadow: -2px 22px 86px -9px var(--option-selector-shadow-color);
+  border-bottom-left-radius: 8px;
   transform: scale(0);
   transform-origin: top right;
-  transition: 300ms ease-in;
+  transition: transform 300ms ease-in;
 }
 
 .option-selector:global.open {

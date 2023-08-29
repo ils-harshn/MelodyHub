@@ -4,9 +4,11 @@ import styles from "./OptionSelector.module.css";
 import { getClassName } from "../../utils";
 import { OPTION_SELECTOR_OPENER } from "../../consts/ids";
 import { Bolt } from "../../assests/icons";
+import { themes } from "../../contexts/Context.types";
 
 const ThemeChanger: React.FC = () => {
   const themeContext = useContext(ThemeContext);
+  console.log(themes)
   return (
     <button
       className="theme-changer"
