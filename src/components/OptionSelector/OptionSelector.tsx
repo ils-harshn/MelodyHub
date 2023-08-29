@@ -4,22 +4,38 @@ import styles from "./OptionSelector.module.css";
 import { getClassName } from "../../utils";
 import { OPTION_SELECTOR_OPENER } from "../../consts/ids";
 import { Bolt } from "../../assests/icons";
-import { themes } from "../../contexts/Context.types";
+import { ThemeTypes, themes } from "../../contexts/Context.types";
+import { SelectInput } from "../Inputs/Inputs";
+import Label from "../Label/Label";
+
+type ThemeOptionType = {
+  value: ThemeTypes;
+  label: ThemeTypes;
+};
 
 const ThemeChanger: React.FC = () => {
   const themeContext = useContext(ThemeContext);
-  console.log(themes)
+  const options: ThemeOptionType[] = themes.map((themeName) => ({
+    value: themeName,
+    label: themeName,
+  }));
+
+  const onChange = (option: ThemeOptionType | null) => {
+    themeContext?.toggleTheme(option ? option.value : "light");
+  };
+
   return (
-    <button
-      className="theme-changer"
-      onClick={() =>
-        themeContext?.toggleTheme(
-          themeContext.theme === "light" ? "dark" : "light"
-        )
-      }
-    >
-      {themeContext?.theme === "light" ? "D" : "L"}
-    </button>
+    <>
+      <Label varient="secondary">Select Theme (Change)</Label>
+      <SelectInput
+        defaultValue={{
+          value: themeContext?.theme,
+          label: themeContext?.theme,
+        }}
+        options={options}
+        onChange={(newValue: unknown) => onChange(newValue as ThemeOptionType)}
+      />
+    </>
   );
 };
 
@@ -56,10 +72,16 @@ const OptionSelector: React.FC = () => {
         <Bolt />
       </div>
       <div
-        className={getClassName(styles["option-selector"])}
+        className={getClassName(
+          styles["option-selector"],
+          "primary-scroll-bar"
+        )}
         ref={optionSelectorRef}
       >
-        <ThemeChanger />
+        <div className="title">Settings</div>
+        <div className="option">
+          <ThemeChanger />
+        </div>
       </div>
     </div>
   );

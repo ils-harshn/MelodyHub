@@ -3,11 +3,13 @@ import {
   InputType,
   InputWithIconType,
   PasswordInputType,
+  SelectInputType,
 } from "./Inputs.types";
 import styles from "./Inputs.module.css";
 import { getClassName } from "../../utils";
 import { useState } from "react";
 import { CheckMark, EyeClosed, EyeOpen, Search } from "../../assests/icons";
+import Select from "react-select";
 
 export const TextInput: React.FC<InputType> = ({
   className = "",
@@ -102,5 +104,24 @@ export const CheckBox: React.FC<CheckBoxType> = ({
       <input type="checkbox" {...props} />
       <CheckMark />
     </div>
+  );
+};
+
+export const SelectInput: React.FC<SelectInputType> = ({
+  className = "",
+  ...props
+}) => {
+  return (
+    <Select
+      className={getClassName(className, styles["select-input"])}
+      classNamePrefix={"select-input"}
+      components={{
+        IndicatorSeparator: () => null,
+      }}
+      classNames={{
+        menuList: () => "primary-scroll-bar",
+      }}
+      {...props}
+    ></Select>
   );
 };

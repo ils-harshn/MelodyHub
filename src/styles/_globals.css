@@ -23,3 +23,22 @@
 .underline {
   text-decoration-line: underline;
 }
+
+/* custom scroll bar */
+.primary-scroll-bar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.primary-scroll-bar::-webkit-scrollbar-track {
+  background: #d8d8d8;
+  border-radius: 8px;
+}
+
+.primary-scroll-bar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+}
+
+.primary-scroll-bar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

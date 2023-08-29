@@ -1,4 +1,5 @@
 import { IconType } from "../../assests/icons.types";
+import { Props as ReactSelectType } from "react-select";
 
 type Input = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">;
 
@@ -18,3 +19,7 @@ export type PasswordInputType = InputType & {
 };
 
 export type CheckBoxType = Input;
+
+export type SelectInputType = ReactSelectType & {
+  
+};

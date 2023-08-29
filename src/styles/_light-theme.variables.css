@@ -51,6 +51,17 @@ CFAT - Constants For All Themes
   /* option select */
   --option-selector-shadow-color: #000000bf;
 
+  /* input selector */
+  --input-select-control-border-color: #d5d5d5;
+  --input-select-control-border-hover-color: #c3c3c3;
+  --input-select-single-text-color: #464646;
+  --input-select-menu-bg-color: #ffffff9e;
+  --input-select-option-bg-color: #e1e1e1;
+  --input-select-option-is-focused-bg-color: #d5d5d5;
+  --input-select-option-is-selected-bg-color: #00ccffcd;
+  --input-select-option-is-selected-text-color: #000000;
+  --input-select-option-is-active-bg-color: #00ccff;
+
   /* CFAT */
   --blue-color: #1877f2;
 

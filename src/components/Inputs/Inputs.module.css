@@ -23,7 +23,7 @@
 /* variations */
 .primary,
 .secondary {
-  background: var(--inputs-bg-color);
+  background-color: var(--inputs-bg-color);
   box-shadow: var(--inputs-box-shodow);
   color: var(--inputs-text-color);
 }
@@ -162,6 +162,70 @@
 }
 
 /* overwrites needed */
-.password :global .tertiary-icon, .input-with-icon :global .tertiary-icon svg {
+.password :global .tertiary-icon,
+.input-with-icon :global .tertiary-icon svg {
   fill: var(--tertiary-input-icon-color);
+}
+
+/* React Select Input css */
+.select-input :global .select-input__control {
+  transition: none;
+  color: var(--inputs-placeholder-color);
+  background-color: var(--inputs-bg-color);
+  border: 1px solid var(--input-select-control-border-color);
+  box-shadow: none;
+}
+
+.select-input :global .select-input__control:hover {
+  border: 1px solid var(--input-select-control-border-hover-color);
+}
+
+.select-input :global .select-input__single-value {
+  color: var(--input-select-single-text-color);
+}
+
+.select-input :global .select-input__menu {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 0;
+  border-radius: 8px;
+  background-color: var(--input-select-menu-bg-color);
+  padding: 8px 4px 8px 8px;
+}
+
+.select-input :global .select-input__menu-list {
+  padding: 0;
+  padding-right: 4px;
+}
+
+.select-input :global .select-input__option:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.select-input :global .select-input__option:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.select-input :global .select-input__option {
+  background-color: var(--input-select-option-bg-color);
+}
+
+.select-input :global .select-input__option--is-focused {
+  background-color: var(--input-select-option-is-focused-bg-color);
+}
+
+.select-input :global .select-input__option--is-selected {
+  font-weight: 700;
+  color: var(--input-select-option-is-selected-text-color);
+  background-color: var(--input-select-option-is-selected-bg-color);
+}
+
+.select-input :global .select-input__option:active {
+  background-color: var(--input-select-option-is-active-bg-color);
+}
+
+.select-input :global .select-input__input-container {
+  color: var(--primary-text-color);
 }

@@ -42,4 +42,15 @@
 
   /* option select */
   --option-selector-shadow-color: #ffffffbf;
+
+  /* input selector */
+  --input-select-control-border-color: #a0a0a0;
+  --input-select-control-border-hover-color: #ffffff;
+  --input-select-single-text-color: #d2d2d2;
+  --input-select-menu-bg-color: #3e3e3e;
+  --input-select-option-bg-color: #656565b3;
+  --input-select-option-is-focused-bg-color: #a1a1a1;
+  --input-select-option-is-selected-bg-color: #00ff00c8;
+  --input-select-option-is-selected-text-color: #ffffff;
+  --input-select-option-is-active-bg-color: #00ff00;
 }
