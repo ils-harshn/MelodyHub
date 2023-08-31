@@ -1,7 +1,7 @@
 .song-card {
   padding: 16px;
   border-radius: 8px;
-  background: #181818;
+  background: var(--song-card-bg-color);
 }
 
 .song-card :global .thumbnail {
@@ -37,13 +37,13 @@
 
 .song-card :global .details .description {
   margin-top: 2px;
-  color: #a7a7a7;
+  color: var(--song-card-description-color);
   font-size: 12px;
   font-weight: 400;
 }
 
 .song-card :global .details .song-name {
-  color: #fff;
+  color: var(--song-card-song-name-color);
   font-size: 15px;
   font-weight: 700;
 }
@@ -53,18 +53,18 @@
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  color: white;
+  color: var(--song-card-song-name-color);
 }
 .song-card :global .listens-and-option svg {
   width: 12px;
   height: 12px;
-  fill: #ffffff80;
+  fill: var(--song-card-menu-color);
   transition: fill 300ms ease;
   cursor: pointer;
 }
 
 .song-card :global .listens-and-option svg:hover {
-  fill: white;
+  fill: var(--song-card-menu-hover-color);
 }
 
 @media screen and (max-width: 600px) {

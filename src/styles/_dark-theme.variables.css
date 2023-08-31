@@ -31,7 +31,7 @@
 
   /* sidebar */
   --sidebar-bg-color: #000000;
-  --sidebar-color-inactive: #B3B3B3;
+  --sidebar-color-inactive: #b3b3b3;
   --sidebar-color-active: #ffffff;
 
   /* headers */
@@ -53,4 +53,11 @@
   --input-select-option-is-selected-bg-color: #00ff00c8;
   --input-select-option-is-selected-text-color: #ffffff;
   --input-select-option-is-active-bg-color: #00ff00;
+
+  /* song card */
+  --song-card-bg-color: #181818;
+  --song-card-description-color: #a7a7a7;
+  --song-card-song-name-color: #ffffff;
+  --song-card-menu-color: #ffffff80;
+  --song-card-menu-hover-color: #ffffff;
 }
