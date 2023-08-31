@@ -20,11 +20,13 @@ const SongCard: React.FC = () => {
         </div>
       </div>
       <div className="details">
-        <div className="song-name truncate">Tum Ho</div>
-        <div className="description">
-          <div className="album-name truncate">Rockstar (2007)</div>
-          <div className="artists-name truncate">
-            Udit Narayan, Alka Yagnik, Lata Mangeshker
+        <div>
+          <div className="song-name truncate">Tum Ho</div>
+          <div className="description">
+            <div className="album-name truncate">Rockstar (2007)</div>
+            <div className="artists-name truncate">
+              Udit Narayan, Alka Yagnik, Lata Mangeshker
+            </div>
           </div>
         </div>
         <div className="listens-and-option">

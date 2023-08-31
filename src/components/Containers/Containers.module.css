@@ -3,3 +3,9 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 24px;
 }
+
+@media screen and (max-width: 600px) {
+  .song-card-container {
+    grid-template-columns: repeat(1, 100%);
+  }
+}

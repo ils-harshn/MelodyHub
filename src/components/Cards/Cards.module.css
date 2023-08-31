@@ -1,10 +1,7 @@
 .song-card {
-  /* max-width: 185px; */
-  /* height: 274px; */
   padding: 16px;
   border-radius: 8px;
   background: #181818;
-  /* margin: 10px; */
 }
 
 .song-card :global .thumbnail {
@@ -70,9 +67,29 @@
   fill: white;
 }
 
-@media only screen and (min-width: 1536px) {
-  /* .song-card {
-    border: 1px solid red;
-    max-width: 185px;
-  } */
+@media screen and (max-width: 600px) {
+  .song-card {
+    height: 80px;
+    display: flex;
+    align-items: center;
+  }
+
+  .song-card :global .thumbnail {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+  }
+
+  .song-card :global .thumbnail img {
+    width: 80px;
+    height: 80px;
+  }
+  .song-card :global .thumbnail .thumbnail-button {
+    bottom: 20px;
+    right: 24px;
+  }
+  .song-card :global .details {
+    width: calc(100% - 100px);
+    flex-grow: 1;
+  }
 }
