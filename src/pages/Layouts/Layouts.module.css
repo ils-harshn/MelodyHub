@@ -47,6 +47,17 @@
   fill: var(--icon-color);
 }
 
+
+.triologicaldesign-layout :global .main .outlet {
+  width: calc(100vw - 240px);
+  height: calc(100% - 80px);
+  overflow-y: auto;
+}
+
+.triologicaldesign-layout :global .main .header .sidebar-opener svg path {
+  pointer-events: none;
+}
+
 @media only screen and (max-width: 1024px) {
   .triologicaldesign-layout :global .sidebar {
     position: absolute;
@@ -64,12 +75,8 @@
   .triologicaldesign-layout :global .sidebar .sidebar-closer {
     display: initial;
   }
-}
 
-.triologicaldesign-layout :global .main .outlet {
-  height: calc(100% - 80px);
-}
-
-.triologicaldesign-layout :global .main .header .sidebar-opener svg path {
-  pointer-events: none;
+  .triologicaldesign-layout :global .main .outlet { 
+    width: 100vw;
+  }
 }

@@ -42,3 +42,11 @@
 .primary-scroll-bar::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* truncate text */
+.truncate {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: nowrap;
+}

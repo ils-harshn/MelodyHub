@@ -9,3 +9,9 @@ export type ButtonType = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   RightIcon?: IconType;
   loading?: boolean;
 };
+
+export type PlayPauseButtonType =
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    size?: "medium" | "large";
+    playing: boolean;
+  };

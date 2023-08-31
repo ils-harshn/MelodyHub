@@ -1,5 +1,5 @@
-import { Button } from "./buttons";
-import { ButtonType } from "./buttons.types";
+import { Button } from "../buttons";
+import { ButtonType } from "../buttons.types";
 import { Story } from "@storybook/react";
 
 export default {
@@ -9,7 +9,7 @@ export default {
 
 const Template: Story<ButtonType> = (args) => <Button {...args}></Button>;
 
-export const Variations = Template.bind({})
+export const Variations = Template.bind({});
 
 Variations.args = {
   varient: "primary",
@@ -18,9 +18,8 @@ Variations.args = {
   disabled: false,
   children: "Variations",
   textcase: "upper-case",
-}
+};
 
-export const Primary = () => <Button>Primary</Button>
-export const Secondary = () => <Button varient="secondary">Secondary</Button>
-export const Blue = () => <Button varient="blue">Blue</Button>
-
+export const Primary = () => <Button>Primary</Button>;
+export const Secondary = () => <Button varient="secondary">Secondary</Button>;
+export const Blue = () => <Button varient="blue">Blue</Button>;

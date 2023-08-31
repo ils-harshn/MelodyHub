@@ -12,6 +12,9 @@ import { ReactComponent as Bread } from "./icons/Bread.svg";
 import { ReactComponent as Bolt } from "./icons/Bolt.svg";
 import { ReactComponent as CollapseOut } from "./icons/CollapseOut.svg";
 import { ReactComponent as CollapseIn } from "./icons/CollapseIn.svg";
+import { ReactComponent as Play } from "./icons/Play.svg";
+import { ReactComponent as Pause } from "./icons/Pause.svg";
+import { ReactComponent as Options } from "./icons/Options.svg";
 
 export default Logo;
 export {
@@ -28,4 +31,7 @@ export {
   Bolt,
   CollapseOut,
   CollapseIn,
+  Play,
+  Pause,
+  Options,
 };

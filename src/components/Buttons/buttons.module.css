@@ -3,7 +3,7 @@
   border: none;
   line-height: normal;
   cursor: pointer;
-  
+
   /* changes may be required */
   height: 48px;
   letter-spacing: 1.5px;
@@ -55,4 +55,46 @@
 .blue {
   background-color: var(--blue-color);
   color: white;
+}
+
+/* play pause button */
+.play-pause-button {
+  background-color: var(--primary-color);
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.play-pause-button svg {
+  fill: var(--primary-text-color);
+}
+
+/* sizes */
+.play-pause-button:global.large {
+  width: 56px;
+  height: 56px;
+}
+.play-pause-button:global.large svg {
+  width: 20px;
+}
+
+.play-pause-button:global.pause.large svg {
+  margin-left: 4px;
+}
+
+.play-pause-button:global.medium {
+  width: 32px;
+  height: 32px;
+}
+
+.play-pause-button:global.medium svg {
+  width: 10px;
+}
+
+.play-pause-button:global.pause.medium svg {
+  margin-left: 2px;
 }

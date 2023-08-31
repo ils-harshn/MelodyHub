@@ -56,7 +56,7 @@ const TrioLogicalDesign: React.FC = () => {
           </div>
           <Header />
         </div>
-        <div className="outlet">
+        <div className="outlet primary-scroll-bar">
           <Outlet />
         </div>
       </div>

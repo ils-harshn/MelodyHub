@@ -1,7 +1,8 @@
+import { Pause, Play } from "../../assests/icons";
 import { getClassName } from "../../utils";
 import { Loader } from "../Loaders/Loaders";
 import styles from "./buttons.module.css";
-import { ButtonType } from "./buttons.types";
+import { ButtonType, PlayPauseButtonType } from "./buttons.types";
 
 const Button: React.FC<ButtonType> = ({
   children,
@@ -38,4 +39,25 @@ const Button: React.FC<ButtonType> = ({
   );
 };
 
-export { Button };
+const PlayPauseButton: React.FC<PlayPauseButtonType> = ({
+  className = "",
+  playing = false,
+  size = "medium",
+  ...props
+}) => {
+  return (
+    <button
+      className={getClassName(
+        className,
+        styles["play-pause-button"],
+        size,
+        playing ? "playing" : "pause"
+      )}
+      {...props}
+    >
+      {playing ? <Pause /> : <Play />}
+    </button>
+  );
+};
+
+export { Button, PlayPauseButton };
