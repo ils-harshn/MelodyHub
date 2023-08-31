@@ -44,7 +44,7 @@
 .triologicaldesign-layout :global .sidebar .sidebar-closer svg {
   width: 14px;
   height: 14px;
-  fill: var(--icon-color)
+  fill: var(--icon-color);
 }
 
 @media only screen and (max-width: 1024px) {
@@ -68,4 +68,8 @@
 
 .triologicaldesign-layout :global .main .outlet {
   height: calc(100% - 80px);
+}
+
+.triologicaldesign-layout :global .main .header .sidebar-opener svg path {
+  pointer-events: none;
 }
