@@ -7,6 +7,7 @@ CFAT - Constants For All Themes
 
 :root,
 [data-theme="light"] {
+  --bg-linear-gradient: linear-gradient(180deg, #ffffff99 0%, #6d6d6d 100%);
   --bg-color: #e9e9e9;
 
   --primary-color: #1ed760;

@@ -47,11 +47,11 @@
   fill: var(--icon-color);
 }
 
-
 .triologicaldesign-layout :global .main .outlet {
   width: calc(100vw - 240px);
   height: calc(100% - 80px);
   overflow-y: auto;
+  background: var(--bg-linear-gradient);
 }
 
 .triologicaldesign-layout :global .main .header .sidebar-opener svg path {
@@ -76,7 +76,7 @@
     display: initial;
   }
 
-  .triologicaldesign-layout :global .main .outlet { 
+  .triologicaldesign-layout :global .main .outlet {
     width: 100vw;
   }
 }
