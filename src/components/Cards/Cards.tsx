@@ -1,5 +1,8 @@
 import { Options } from "../../assests/icons";
-import { useMusicPlayerDispatch } from "../../hooks/MusicPlayerHooks";
+import {
+  useMusicPlayerData,
+  useMusicPlayerDispatch,
+} from "../../hooks/MusicPlayerHooks";
 import { getClassName } from "../../utils";
 import { generateURLFromID } from "../../utils/helpers/urls";
 import { PlayPauseButton } from "../Buttons/buttons";
@@ -9,13 +12,17 @@ import { SongCardType } from "./Cards.types";
 
 const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
   const dispatch = useMusicPlayerDispatch();
+  const musicPlayerData = useMusicPlayerData();
 
   const handleThumbnailClick = () => {
     dispatch({
       type: "TOGGLE",
       payload: {
         open: true,
-        playing: true,
+        playing:
+          musicPlayerData.data?.id === data.id
+            ? !musicPlayerData.playing
+            : true,
         data: {
           id: data.id,
           album_image_id: data.album.thumbnail,
@@ -34,8 +41,18 @@ const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
             className: "skeleton",
           }}
         />
-        <div className="thumbnail-button">
-          <PlayPauseButton playing={false} size="medium" />
+        <div
+          className={getClassName(
+            "thumbnail-button",
+            musicPlayerData.data?.id === data.id ? "selected" : ""
+          )}
+        >
+          <PlayPauseButton
+            playing={
+              musicPlayerData.data?.id === data.id && musicPlayerData.playing
+            }
+            size="medium"
+          />
         </div>
       </div>
       <div className="details">

@@ -6,23 +6,26 @@ import { TRIOLOGY_ID } from "../../consts/ids";
 import { useMusicPlayerData } from "../../hooks/MusicPlayerHooks";
 
 const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {
-  const { open } = useMusicPlayerData();
+  const musicPlayerData = useMusicPlayerData();
 
   useEffect(() => {
     const ele = document.getElementById(TRIOLOGY_ID);
     if (ele) {
-      ele.style.height = open === true ? "calc(100vh - 90px)" : "100vh";
+      ele.style.height =
+        musicPlayerData.open === true ? "calc(100vh - 90px)" : "100vh";
     }
-  }, [open]);
+  }, [musicPlayerData.open]);
 
   return (
     <div
       className={getClassName(
         className,
         styles["music-player"],
-        open === true ? "open" : ""
+        musicPlayerData.open === true ? "open" : ""
       )}
-    ></div>
+    >
+      {musicPlayerData.data?.id}
+    </div>
   );
 };
 

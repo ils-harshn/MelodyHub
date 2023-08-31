@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer } from "react";
 
 type InitialStateType = {
   open?: boolean;
-  playing?: boolean;
+  playing: boolean;
   data?: {
     id: number;
     album_image_id: string;
@@ -44,7 +44,7 @@ function musicPlayerReducer(state = initialState, action: actionType) {
 export const MusicPlayerProvider: React.FC<MusicPlayerProviderType> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(musicPlayerReducer, {/* Initialize the state */});
+  const [state, dispatch] = useReducer(musicPlayerReducer, { playing: false });
 
   return (
     <DispatchContext.Provider value={dispatch}>
