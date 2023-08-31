@@ -26,10 +26,6 @@
   opacity: 0.75;
 }
 
-.song-card :global .thumbnail .thumbnail-button.selected {
-  opacity: 1;
-}
-
 .song-card :global .details {
   margin-top: 14px;
 }
@@ -69,6 +65,15 @@
 
 .song-card :global .listens-and-option svg:hover {
   fill: var(--song-card-menu-hover-color);
+}
+
+/* when card selected */
+.song-card:global.selected .thumbnail .thumbnail-button {
+  opacity: 1;
+}
+
+.song-card:global.selected .song-name {
+  color: var(--primary-color);
 }
 
 @media screen and (max-width: 600px) {

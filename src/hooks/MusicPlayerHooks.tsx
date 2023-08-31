@@ -34,6 +34,7 @@ function musicPlayerReducer(state = initialState, action: actionType) {
   switch (action.type) {
     case ActionTypes.TOGGLE:
       return {
+        ...state,
         ...action.payload,
       };
     default:

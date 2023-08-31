@@ -32,7 +32,13 @@ const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
   };
 
   return (
-    <div className={getClassName(styles["song-card"])} {...props}>
+    <div
+      className={getClassName(
+        styles["song-card"],
+        musicPlayerData.data?.id === data.id ? "selected" : ""
+      )}
+      {...props}
+    >
       <div className="thumbnail" onClick={handleThumbnailClick}>
         <ImageWithLoader
           src={generateURLFromID(data.album.thumbnail300x300)}
@@ -41,12 +47,7 @@ const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
             className: "skeleton",
           }}
         />
-        <div
-          className={getClassName(
-            "thumbnail-button",
-            musicPlayerData.data?.id === data.id ? "selected" : ""
-          )}
-        >
+        <div className={"thumbnail-button"}>
           <PlayPauseButton
             playing={
               musicPlayerData.data?.id === data.id && musicPlayerData.playing
