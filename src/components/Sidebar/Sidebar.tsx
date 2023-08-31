@@ -9,23 +9,26 @@ import ImageWithLoader from "../ImageWithLoader/ImageWithLoader";
 import { useMusicPlayerData } from "../../hooks/MusicPlayerHooks";
 import { useEffect } from "react";
 import { SIDEBAR_CONTAINER_ID, SIDEBAR_OPENER_ID } from "../../consts/ids";
+import { generateURLFromID } from "../../utils/helpers/urls";
 
 const SidebarSongImage: React.FC<SidebarSongImageType> = ({
   className = "",
   ...props
 }) => {
   const musicData = useMusicPlayerData();
-  return (
-    <div
-      {...props}
-      className={getClassName(className, musicData.open ? "show" : "hide")}
-    >
-      <ImageWithLoader
-        src="https://drive.google.com/uc?id=15IFPEtrZ9_aZ_a0T1ZeraswlNvElvkb0&export=download"
-        alt="Loading"
-      />
-    </div>
-  );
+  if (musicData.data?.album_image_id === undefined) return null;
+  else
+    return (
+      <div
+        {...props}
+        className={getClassName(className, musicData.open ? "show" : "hide")}
+      >
+        <ImageWithLoader
+          src={generateURLFromID(musicData.data.album_image_id)}
+          alt="Loading"
+        />
+      </div>
+    );
 };
 
 const Sidebar: React.FC = () => {

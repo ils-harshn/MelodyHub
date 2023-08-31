@@ -3,6 +3,7 @@ import { useState } from "react";
 import ImageWithLoaderType from "./ImageWithLoader.type";
 import { getClassName } from "../../utils";
 import styles from "./ImageWithLoader.module.css";
+import { useEffect } from "react";
 
 const ImageWithLoader: React.FC<ImageWithLoaderType> = ({
   className = "",
@@ -18,6 +19,10 @@ const ImageWithLoader: React.FC<ImageWithLoaderType> = ({
   };
 
   const { className: skeletonClassName = "", ...skeletonProps } = skeleton;
+
+  useEffect(() => {
+    setLoaded(false);
+  }, [src]);
 
   return (
     <>

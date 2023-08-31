@@ -1,4 +1,5 @@
 import { Options } from "../../assests/icons";
+import { useMusicPlayerDispatch } from "../../hooks/MusicPlayerHooks";
 import { getClassName } from "../../utils";
 import { generateURLFromID } from "../../utils/helpers/urls";
 import { PlayPauseButton } from "../Buttons/buttons";
@@ -7,9 +8,25 @@ import styles from "./Cards.module.css";
 import { SongCardType } from "./Cards.types";
 
 const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
+  const dispatch = useMusicPlayerDispatch();
+
+  const handleThumbnailClick = () => {
+    dispatch({
+      type: "TOGGLE",
+      payload: {
+        open: true,
+        playing: true,
+        data: {
+          id: data.id,
+          album_image_id: data.album.thumbnail,
+        },
+      },
+    });
+  };
+
   return (
     <div className={getClassName(styles["song-card"])} {...props}>
-      <div className="thumbnail">
+      <div className="thumbnail" onClick={handleThumbnailClick}>
         <ImageWithLoader
           src={generateURLFromID(data.album.thumbnail300x300)}
           alt="Loading"

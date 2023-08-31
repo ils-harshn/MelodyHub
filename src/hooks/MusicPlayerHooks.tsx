@@ -1,15 +1,26 @@
 import { createContext, useContext, useReducer } from "react";
 
+type InitialStateType = {
+  open?: boolean;
+  playing?: boolean;
+  data?: {
+    id: number;
+    album_image_id: string;
+  };
+};
+
 type actionType = {
   type: "TOGGLE";
+  payload: InitialStateType;
 };
 
 type MusicPlayerProviderType = {
   children: React.ReactNode;
 };
 
-const initialState = {
+const initialState: InitialStateType = {
   open: false,
+  playing: false,
 };
 
 const MusiPlayerContext = createContext(initialState);
@@ -23,8 +34,7 @@ function musicPlayerReducer(state = initialState, action: actionType) {
   switch (action.type) {
     case ActionTypes.TOGGLE:
       return {
-        ...state,
-        open: !state.open,
+        ...action.payload,
       };
     default:
       return state;
@@ -34,7 +44,7 @@ function musicPlayerReducer(state = initialState, action: actionType) {
 export const MusicPlayerProvider: React.FC<MusicPlayerProviderType> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(musicPlayerReducer, { open: false });
+  const [state, dispatch] = useReducer(musicPlayerReducer, {/* Initialize the state */});
 
   return (
     <DispatchContext.Provider value={dispatch}>
