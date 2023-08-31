@@ -1,5 +1,6 @@
 const QUERY_KEYS = {
   LOGIN_USER: "LOGIN_USER",
+  MOST_POPULAR_SONGS: "MOST_POPULAR_SONGS",
 };
 
 export default QUERY_KEYS;

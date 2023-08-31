@@ -37,4 +37,12 @@ export const Skeleton: React.FC<SkeletonType> = ({ className = "" }) => {
   return <div className={getClassName(styles["skeleton"], className)}></div>;
 };
 
+export const FullLoader: React.FC<LoaderType> = ({ ...props }) => {
+  return (
+    <div className={getClassName(styles["full-loader"])}>
+      <Loader {...props} />
+    </div>
+  );
+};
+
 export default FullPageLoader;

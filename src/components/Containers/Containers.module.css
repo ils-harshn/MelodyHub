@@ -1,3 +1,21 @@
+.container :global .heading {
+  margin-bottom: 16px;
+  font-family: var(--link-font-style);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.container :global .heading div:first-child {
+  font-size: 21px;
+}
+
+.container :global .heading div:nth-child(2) {
+  font-size: 13px;
+  cursor: pointer;
+}
+
 .song-card-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

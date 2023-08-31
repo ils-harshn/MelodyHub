@@ -3,6 +3,8 @@
   display: flex;
   height: 100vh;
   transition: height 300ms;
+  /* To avoid body overlay color difference */
+  background-color: white;
 }
 
 .triologicaldesign-layout :global .sidebar {

@@ -98,6 +98,15 @@
   animation: skeleton-animation 600ms infinite alternate;
 }
 
+/* full loader */
+.full-loader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @keyframes :global(skeleton-animation) {
   from {
     opacity: 1;

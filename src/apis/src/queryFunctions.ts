@@ -24,3 +24,14 @@ export const verifyToken = async (token: TokenType) => {
   });
   return response.data;
 };
+
+export const getMostPopularSong = async (token: TokenType) => {
+  const response = await api({
+    method: "get",
+    url: ENDPOINTS.MOST_POPULAR_SONGS,
+    headers: {
+      ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};

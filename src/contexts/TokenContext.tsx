@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { TokenProviderType, TokenType } from "./Context.types";
 
-export const TokenContext = createContext<TokenType | null>(null);
+export const TokenContext = createContext<TokenType>("");
 
 export const TokenProvider: React.FC<TokenProviderType> = ({
   children,

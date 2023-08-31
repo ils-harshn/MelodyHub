@@ -1,15 +1,17 @@
 import { Options } from "../../assests/icons";
 import { getClassName } from "../../utils";
+import { generateURLFromID } from "../../utils/helpers/urls";
 import { PlayPauseButton } from "../Buttons/buttons";
 import ImageWithLoader from "../ImageWithLoader/ImageWithLoader";
 import styles from "./Cards.module.css";
+import { SongCardType } from "./Cards.types";
 
-const SongCard: React.FC = () => {
+const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
   return (
-    <div className={getClassName(styles["song-card"])}>
+    <div className={getClassName(styles["song-card"])} {...props}>
       <div className="thumbnail">
         <ImageWithLoader
-          src="https://drive.google.com/uc?id=15IFPEtrZ9_aZ_a0T1ZeraswlNvElvkb0&export=download"
+          src={generateURLFromID(data.album.thumbnail300x300)}
           alt="Loading"
           skeleton={{
             className: "skeleton",
@@ -21,11 +23,13 @@ const SongCard: React.FC = () => {
       </div>
       <div className="details">
         <div>
-          <div className="song-name truncate">Tum Ho</div>
+          <div className="song-name truncate">{data.original_name}</div>
           <div className="description">
-            <div className="album-name truncate">Rockstar (2007)</div>
+            <div className="album-name truncate">
+              {data.album.title} ({data.album.year})
+            </div>
             <div className="artists-name truncate">
-              Udit Narayan, Alka Yagnik, Lata Mangeshker
+              {data.artist_set.map((item) => item.name).join(", ")}
             </div>
           </div>
         </div>

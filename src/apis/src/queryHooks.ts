@@ -1,6 +1,6 @@
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import QUERY_KEYS from "./queryKeys";
-import { loginUser, verifyToken } from "./queryFunctions";
+import { getMostPopularSong, loginUser, verifyToken } from "./queryFunctions";
 import { LoginPayloadType } from "./payload.types";
 import { TokenType } from "../../contexts/Context.types";
 
@@ -15,5 +15,12 @@ export const useLoginMutation = (config = {}) =>
 export const useVerifyTokenMutation = (config = {}) =>
   useMutation({
     mutationFn: (payload: TokenType) => verifyToken(payload),
+    ...config,
+  });
+
+export const useMostPopularSongs = (token: TokenType, config = {}) =>
+  useQuery({
+    queryKey: [QUERY_KEYS.MOST_POPULAR_SONGS],
+    queryFn: () => getMostPopularSong(token),
     ...config,
   });
