@@ -1,5 +1,5 @@
 import { getClassName } from "../../utils";
-import { InputWithIcon } from "../Inputs/Inputs";
+import { InputWithIcon, SelectInput } from "../Inputs/Inputs";
 import styles from "./Header.module.css";
 import { SEARCH } from "../../router/routes";
 import {
@@ -18,12 +18,16 @@ const SearchAndFilters: React.FC = () => {
       type: "TOGGLE",
       payload: {
         text: e.target.value || "",
+        page: searchBoxData.page,
+        option: searchBoxData.option,
       },
     });
   };
 
   return (
-    <div className="search-input">
+    <div
+      className="search-input"
+    >
       <InputWithIcon
         varient="tertiary"
         placeholder="What do you want to listen to?"
@@ -32,7 +36,9 @@ const SearchAndFilters: React.FC = () => {
         onFocus={() => navigate(SEARCH.endpoint)}
         onChange={handleTextChange}
       />
-      <div className="search-options">Tap to search</div>
+      <div className="search-options">
+        Filter By: <SelectInput />
+      </div>
     </div>
   );
 };

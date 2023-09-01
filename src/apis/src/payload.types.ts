@@ -3,12 +3,16 @@ export type LoginPayloadType = {
   password: string;
 };
 
+export type FilterOptionType =
+  | "original_name"
+  | "album__code"
+  | "album__title"
+  | "artist__name"
+  | "year"
+  | "genre";
+
 export type FilterSongsPayloadType = {
-  page?: number;
-  original_name?: string;
-  album__code?: string;
-  album__title?: string;
-  artist__name?: string;
-  year?: number | "";
-  genre?: string;
+  page: number;
+  text: string;
+  option: FilterOptionType;
 };

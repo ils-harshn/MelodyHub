@@ -15,8 +15,9 @@ const Search: React.FC = () => {
   const debouncedSearchBoxData = useDebounce(searchBoxData, 500);
   const token = useContext(TokenContext);
   const { data, isLoading, isFetching } = useFilterSongs(token, {
+    text: debouncedSearchBoxData.text,
     page: 1,
-    original_name: debouncedSearchBoxData.text,
+    option: "original_name",
   });
 
   if (isLoading) return <FullLoader />;

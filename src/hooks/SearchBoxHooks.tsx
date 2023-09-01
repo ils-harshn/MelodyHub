@@ -1,7 +1,10 @@
 import { createContext, useContext, useReducer } from "react";
+import { FilterOptionType } from "../apis/src/payload.types";
 
 type InitialStateType = {
   text: string;
+  page: number;
+  option: FilterOptionType;
 };
 
 type actionType = {
@@ -15,6 +18,8 @@ type SearchBoxProviderType = {
 
 const initialState: InitialStateType = {
   text: "",
+  page: 1,
+  option: "original_name",
 };
 
 const SearchBoxContext = createContext(initialState);
@@ -39,7 +44,11 @@ function searchBoxReducer(state = initialState, action: actionType) {
 export const SearchBoxProvider: React.FC<SearchBoxProviderType> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(searchBoxReducer, { text: "" });
+  const [state, dispatch] = useReducer(searchBoxReducer, {
+    text: "",
+    page: 1,
+    option: "original_name",
+  });
 
   return (
     <DispatchContext.Provider value={dispatch}>

@@ -8,7 +8,7 @@ const ENDPOINTS = {
     album__code = "",
     album__title = "",
     artist__name = "",
-    year: number | "" = "",
+    year = "",
     genre = ""
   ) =>
     `/api/songs/?page=${page}&original_name=${original_name}&album__code=${album__code}&album__title=${album__title}&artist__name=${artist__name}&year=${year}&genre=${genre}`,
