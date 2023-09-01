@@ -6,8 +6,10 @@ import {
   useSearchBoxData,
   useSearchBoxDispatch,
 } from "../../hooks/SearchBoxHooks";
+import { useNavigate } from "react-router-dom";
 
 const SearchAndFilters: React.FC = () => {
+  const navigate = useNavigate();
   const searchBoxData = useSearchBoxData();
   const dispatch = useSearchBoxDispatch();
 
@@ -27,6 +29,7 @@ const SearchAndFilters: React.FC = () => {
         placeholder="What do you want to listen to?"
         width="full"
         value={searchBoxData.text}
+        onFocus={() => navigate(SEARCH.endpoint)}
         onChange={handleTextChange}
       />
       <div className="search-options">Tap to search</div>
