@@ -36,7 +36,7 @@ export const useFilterSongs = (
   config = {}
 ) =>
   useQuery({
-    queryKey: [QUERY_KEYS.FILTERED_SONGS],
+    queryKey: [QUERY_KEYS.FILTERED_SONGS, payload.original_name],
     queryFn: () => getFilterSongs(token, payload),
     ...config,
   });

@@ -6,19 +6,22 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import BaseQueryProvider from "./apis";
 import { MusicPlayerProvider } from "./hooks/MusicPlayerHooks";
+import { SearchBoxProvider } from "./hooks/SearchBoxHooks";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   // <React.StrictMode>
-  <MusicPlayerProvider>
-    <BaseQueryProvider>
-      <ThemeProvider currentTheme="dark">
-        <App />
-      </ThemeProvider>
-    </BaseQueryProvider>
-  </MusicPlayerProvider>
+  <SearchBoxProvider>
+    <MusicPlayerProvider>
+      <BaseQueryProvider>
+        <ThemeProvider currentTheme="dark">
+          <App />
+        </ThemeProvider>
+      </BaseQueryProvider>
+    </MusicPlayerProvider>
+  </SearchBoxProvider>
   // </React.StrictMode>
 );
 
