@@ -1,15 +1,15 @@
 import { DecoratorFn } from "@storybook/react";
 import { ComponentType } from "react";
 
-export const LoginFormWrapper: DecoratorFn = (
+export const ImageWithLoaderWrapper: DecoratorFn = (
   Story: ComponentType,
   context
 ) => {
   return (
     <div
       style={{
-        maxWidth: "500px",
-        margin: "0 auto",
+        width: "280px",
+        height: "280px",
         padding: "20px",
       }}
     >

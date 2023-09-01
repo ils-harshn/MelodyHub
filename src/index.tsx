@@ -3,25 +3,16 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import BaseQueryProvider from "./apis";
-import { MusicPlayerProvider } from "./hooks/MusicPlayerHooks";
-import { SearchBoxProvider } from "./hooks/SearchBoxHooks";
+import Provider from "./Provider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   // <React.StrictMode>
-  <SearchBoxProvider>
-    <MusicPlayerProvider>
-      <BaseQueryProvider>
-        <ThemeProvider currentTheme="dark">
-          <App />
-        </ThemeProvider>
-      </BaseQueryProvider>
-    </MusicPlayerProvider>
-  </SearchBoxProvider>
+  <Provider>
+    <App />
+  </Provider>
   // </React.StrictMode>
 );
 
