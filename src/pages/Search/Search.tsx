@@ -23,14 +23,18 @@ const Search: React.FC = () => {
   if (isLoading) return <FullLoader />;
   return (
     <div className={getClassName(styles["search"])}>
-      <SongCardContainer
-        title="What you wanna listen?"
-        optionTitle={isFetching ? "Reloading" : ""}
-      >
-        {data.results.map((item: SongType, index: number) => {
-          return <SongCard data={item} key={index} />;
-        })}
-      </SongCardContainer>
+      {data.count === 0 ? (
+        <h2>Found Nothing</h2>
+      ) : (
+        <SongCardContainer
+          title="What you wanna listen?"
+          optionTitle={isFetching ? "Reloading" : ""}
+        >
+          {data.results.map((item: SongType, index: number) => {
+            return <SongCard data={item} key={index} />;
+          })}
+        </SongCardContainer>
+      )}
     </div>
   );
 };
