@@ -44,3 +44,10 @@ export type SongType = {
   views: number;
   uploaded_at: string;
 };
+
+export type FilterSongsResponseType = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: SongType[];
+};

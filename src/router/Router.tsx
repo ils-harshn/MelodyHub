@@ -4,6 +4,7 @@ import * as routes from "./routes";
 import Login from "../pages/Login/Login";
 import Home from "../pages/Home/Home";
 import NotFound from "../pages/NotFound/NotFound";
+import Search from "../pages/Search/Search";
 
 const AppRouter: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const AppRouter: React.FC = () => {
         {/* INDEX NESTED */}
         <Route path={routes.INDEX.path} element={<Layout />}>
           <Route path={routes.HOME.path} element={<Home />} />
-          <Route path={routes.SEARCH.path} element={<h2>Search</h2>} />
+          <Route path={routes.SEARCH.path} element={<Search />} />
           <Route path={routes.LIBRARY.path} element={<h2>Library</h2>} />
           <Route
             path={routes.CREATE_PLAYLIST.path}

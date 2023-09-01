@@ -1,6 +1,7 @@
 import { TokenType } from "../../contexts/Context.types";
 import api, { getAuthHeader } from "../api";
 import ENDPOINTS from "./apiEndPoints";
+import { FilterSongsPayloadType } from "./payload.types";
 
 export const loginUser = async (email: string, password: string) => {
   const response = await api({
@@ -35,3 +36,14 @@ export const getMostPopularSong = async (token: TokenType) => {
   });
   return response.data;
 };
+
+export const getFilterSongs = async (token: TokenType, payload: FilterSongsPayloadType) => {
+  const response = await api({
+    method: "get",
+    url: ENDPOINTS.GET_FILTERED_SONGS(payload.page, payload.original_name, payload.album__code, payload.album__title, payload.artist__name, payload.year, payload.genre),
+    headers: {
+      ...getAuthHeader(token),
+    }
+  })
+  return response.data;
+}
