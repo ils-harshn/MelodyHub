@@ -35,7 +35,6 @@ const SearchAndFilters: React.FC = () => {
   };
 
   const onFilterOptionChange = (option: FilterSelectorOptionType | null) => {
-    console.log(option);
     dispatch({
       type: "TOGGLE",
       payload: {
@@ -44,6 +43,11 @@ const SearchAndFilters: React.FC = () => {
         option: option ? option.value : searchBoxData.option,
       },
     });
+  };
+
+  const defaultValue: FilterSelectorOptionType = {
+    value: "original_name",
+    label: "Song",
   };
 
   return (
@@ -63,6 +67,7 @@ const SearchAndFilters: React.FC = () => {
       <div className="search-options">
         Filter By:{" "}
         <SelectInput
+          defaultValue={defaultValue}
           size="small"
           className="option-selector"
           options={options}
