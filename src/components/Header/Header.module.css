@@ -15,11 +15,29 @@
 
 .header :global .search-input .search-options {
     position: absolute;
+    left: 4px;
+    width: 60%;
     background-color: var(--bg-color);
     font-size: 12px;
-    padding: 4px 8px;
+    padding: 8px 12px;
     border-radius: 8px;
     margin-top: 4px;
+    transition: opacity 100ms ease-in, transform 100ms ease-in;
+    z-index: 1;
+}
+
+.header :global .search-input .search-options .option-selector {
+    margin-top: 6px;
+}
+
+.header :global .search-input .search-options {
+    opacity: 0;
+    transform: translateY(-40px);
+}
+
+.header :global .search-input:hover .search-options {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @media only screen and (max-width: 1024px) {

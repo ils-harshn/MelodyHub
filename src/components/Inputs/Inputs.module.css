@@ -229,3 +229,35 @@
 .select-input :global .select-input__input-container {
   color: var(--primary-text-color);
 }
+
+
+/* sizes for select input */
+/* small */
+.select-input:global.small {
+  font-size: 12px;
+}
+
+.select-input:global.small .select-input__control {
+  min-height: 28px;
+  height: 28px;
+}
+
+.select-input:global.small .select-input__value-container {
+  min-height: 28px;
+  height: 28px;
+  padding: 0 6px;
+}
+
+.select-input:global.small .select-input__input {
+  border: 1px solid red;
+  margin: 0;
+}
+
+.select-input:global.small .select-input__indicators {
+  height: 28px;
+}
+
+.select-input:global.small .select-input__option {
+  height: 28px;
+  padding: 5px 12px;
+}

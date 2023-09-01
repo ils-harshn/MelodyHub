@@ -21,5 +21,5 @@ export type PasswordInputType = InputType & {
 export type CheckBoxType = Input;
 
 export type SelectInputType = ReactSelectType & {
-  
+  size?: "small" | "large";
 };

@@ -109,11 +109,12 @@ export const CheckBox: React.FC<CheckBoxType> = ({
 
 export const SelectInput: React.FC<SelectInputType> = ({
   className = "",
+  size = "large",
   ...props
 }) => {
   return (
     <Select
-      className={getClassName(className, styles["select-input"])}
+      className={getClassName(className, styles["select-input"], size)}
       classNamePrefix={"select-input"}
       components={{
         IndicatorSeparator: () => null,

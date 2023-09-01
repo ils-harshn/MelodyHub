@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { getClassName } from "../../utils";
 import styles from "./Search.module.css";
 import { TokenContext } from "../../contexts/TokenContext";
@@ -17,7 +17,7 @@ const Search: React.FC = () => {
   const { data, isLoading, isFetching } = useFilterSongs(token, {
     text: debouncedSearchBoxData.text,
     page: 1,
-    option: "original_name",
+    option: debouncedSearchBoxData.option,
   });
 
   if (isLoading) return <FullLoader />;
