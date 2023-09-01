@@ -69,6 +69,7 @@ export const InputWithIcon: React.FC<InputWithIconType> = ({
   width = "initial",
   varient = "primary",
   Icon = Search,
+  type = "text",
   ...props
 }) => {
   return (
@@ -88,7 +89,7 @@ export const InputWithIcon: React.FC<InputWithIconType> = ({
       </div>
       <input
         className={getClassName(className, styles["inputs"], styles[varient])}
-        type={"text"}
+        type={type}
         {...props}
       ></input>
     </div>

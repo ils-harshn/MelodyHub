@@ -35,7 +35,7 @@ const SearchAndFilters: React.FC = () => {
   };
 
   const onFilterOptionChange = (option: FilterSelectorOptionType | null) => {
-    console.log(option)
+    console.log(option);
     dispatch({
       type: "TOGGLE",
       payload: {
@@ -49,6 +49,7 @@ const SearchAndFilters: React.FC = () => {
   return (
     <div className="search-input">
       <InputWithIcon
+        className="remove-arrows-from-input"
         varient="tertiary"
         placeholder="What do you want to listen to?"
         width="full"
@@ -57,6 +58,7 @@ const SearchAndFilters: React.FC = () => {
           navigate(SEARCH.endpoint);
         }}
         onChange={handleTextChange}
+        type={searchBoxData.option === "year" ? "number" : "text"}
       />
       <div className="search-options">
         Filter By:{" "}

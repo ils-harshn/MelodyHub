@@ -50,3 +50,15 @@
   word-wrap: break-word;
   white-space: nowrap;
 }
+
+/* hide arrows from number input */
+.remove-arrows-from-input::-webkit-outer-spin-button,
+.remove-arrows-from-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.remove-arrows-from-input {
+  -moz-appearance: textfield;
+}

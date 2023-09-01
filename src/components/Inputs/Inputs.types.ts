@@ -8,8 +8,10 @@ export type InputType = Input & {
   width?: "initial" | "full";
 };
 
-export type InputWithIconType = InputType & {
+export type InputWithIconType = React.InputHTMLAttributes<HTMLInputElement> & {
   Icon?: IconType;
+  varient?: "primary" | "secondary" | "tertiary";
+  width?: "initial" | "full";
 };
 
 export type PasswordInputType = InputType & {
