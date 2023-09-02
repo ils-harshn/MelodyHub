@@ -119,11 +119,7 @@ class AlbumWithSongsView(RetrieveAPIView):
         serialized_related_objects = SongSerializer(
             paginated_objects, many=True, context={'request': request}).data
 
-        serializer = self.get_serializer(instance)
-        response_data = serializer.data
-        response_data['songs'] = serialized_related_objects
-
-        return paginator.get_paginated_response(response_data)
+        return paginator.get_paginated_response(serialized_related_objects)
 
 
 class UserPlaylists(ListAPIView):
