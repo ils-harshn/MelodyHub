@@ -1,0 +1,9 @@
+from django.contrib import admin
+from django.urls import path, include
+from . import views
+
+urlpatterns = [
+    path('accounts/', include("accounts.urls")),
+    path('admin/', include("adminApi.urls")),
+    path('', include("songs.urls")),
+]
