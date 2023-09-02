@@ -75,17 +75,29 @@ class SongSerializerWithoutReaction(serializers.ModelSerializer):
         read_only_fields = ["views"]
 
 
-class SongReactionWithSongsSerializer(serializers.ModelSerializer):
-    song = SongSerializerWithoutReaction(required=True)
+class ExtractSongsFromReactionSerializer(serializers.ModelSerializer):
+    song = SongSerializer(required=True)
 
     class Meta:
         model = SongReaction
         fields = ("song",)
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        song_data = representation.pop('song')
+        representation.update(song_data)
+        return representation
 
-# class RecentSongSerializer(serializers.ModelSerializer):
-#     song = SongSerializerWithoutReaction(required=True)
 
-#     class Meta:
-#         model = RecentSong
-#         fields = ("song", "created_at")
+class ExtractSongsFromRecentSerializer(serializers.ModelSerializer):
+    song = SongSerializer(required=True)
+
+    class Meta:
+        model = RecentSong
+        fields = ("song",)
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        song_data = representation.pop('song')
+        representation.update(song_data)
+        return representation

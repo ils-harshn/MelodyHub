@@ -11,7 +11,7 @@ from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from songs.serializers import SongReactionSerializer, SongReactionWithSongsSerializer
+from songs.serializers import SongReactionSerializer, ExtractSongsFromRecentSerializer, ExtractSongsFromReactionSerializer
 from django.db import IntegrityError
 from django.utils import timezone
 
@@ -269,7 +269,7 @@ class GenreSongsView(RetrieveAPIView):
 
 class LikedSongsListView(ListAPIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = SongReactionWithSongsSerializer
+    serializer_class = ExtractSongsFromReactionSerializer
     pagination_class = PageNumberPagination
 
     def get_queryset(self):
@@ -278,7 +278,7 @@ class LikedSongsListView(ListAPIView):
 
 class DislikedSongsListView(ListAPIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = SongReactionWithSongsSerializer
+    serializer_class = ExtractSongsFromReactionSerializer
     pagination_class = PageNumberPagination
 
     def get_queryset(self):
@@ -318,28 +318,12 @@ class DislikedSongsListView(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-
-# Editing out this RecentSongsListView
-# class RecentSongsListView(ListAPIView):
-#     permission_classes = [IsAuthenticated]
-#     serializer_class = RecentSongSerializer
-#     pagination_class = PageNumberPagination
-
-#     def get_queryset(self):
-#         return self.request.user.recentsong_set.all()
-
 # RecentSongsListView
-class RecentSongsListView(APIView):
-    # Use the pagination class defined in settings
+
+
+class RecentSongsListView(ListAPIView):
+    serializer_class = ExtractSongsFromRecentSerializer
     pagination_class = PageNumberPagination
 
-    def get(self, request):
-        queryset = request.user.recentsong_set.objects.all()
-        page = self.paginate_queryset(queryset)  # Paginate the queryset
-
-        if page is not None:
-            serializer = SongSerializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-
-        serializer = SongSerializer(queryset, many=True)
-        return Response(serializer.data)
+    def get_queryset(self):
+        return self.request.user.recentsong_set.all()
