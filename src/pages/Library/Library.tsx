@@ -37,7 +37,7 @@ const Recent25Songs: React.FC = () => {
 const Library: React.FC = () => {
   return (
     <div className={getClassName(styles["library"])}>
-      <ContentCardContainer title="Library">
+      <ContentCardContainer title="Library" className="container">
         <ContentCard title="Liked Songs" Icon={Heart} />
         <ContentCard title="Playlists" Icon={Playlist} />
         <ContentCard title="Artists" Icon={Artist} />
