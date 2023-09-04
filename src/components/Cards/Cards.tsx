@@ -10,10 +10,21 @@ import ImageWithLoader from "../ImageWithLoader/ImageWithLoader";
 import styles from "./Cards.module.css";
 import { ContentCardType, OptionPopupType, SongCardType } from "./Cards.types";
 
-const OptionPopup: React.FC<OptionPopupType> = ({ data }) => {
+const OptionPopup: React.FC<OptionPopupType> = ({
+  data,
+  handlePlay,
+  isPlaying,
+}) => {
   return (
     <div className="option-button">
       <Options />
+      <div className="options">
+        <div className="option">Add To Playlist</div>
+        <div className="option">Add To Queue</div>
+        <div className="option" onClick={handlePlay}>
+          {isPlaying ? "Pause" : "Play"}
+        </div>
+      </div>
     </div>
   );
 };
@@ -77,7 +88,11 @@ const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
           </div>
         </div>
         <div className="listens-and-option">
-          <OptionPopup data={data} />
+          <OptionPopup
+            data={data}
+            handlePlay={handleThumbnailClick}
+            isPlaying={musicPlayerData.data?.id === data.id && musicPlayerData.playing}
+          />
           <div>604 Listened</div>
         </div>
       </div>

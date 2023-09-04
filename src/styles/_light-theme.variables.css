@@ -69,6 +69,9 @@ CFAT - Constants For All Themes
   --song-card-song-name-color: #000000;
   --song-card-menu-color: #6e6e6e80;
   --song-card-menu-hover-color: #000000;
+  /* song card options */
+  --song-card-options-bg-color: #ececec;
+  --song-card-option-hover-color: #3246b8;
 
   /* content card */
   --content-card-bg-color: #d6d6d6;

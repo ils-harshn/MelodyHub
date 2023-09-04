@@ -12,4 +12,6 @@ export type ContentCardType = React.HTMLAttributes<HTMLDivElement> & {
 
 export type OptionPopupType = {
   data: SongType;
+  handlePlay: () => void;
+  isPlaying: boolean;
 };

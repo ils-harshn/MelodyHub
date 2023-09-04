@@ -63,8 +63,43 @@
   cursor: pointer;
 }
 
-.song-card :global .listens-and-option svg:hover {
+/* option button */
+.song-card :global .listens-and-option .option-button {
+  position: relative;
+}
+
+.song-card :global .listens-and-option .option-button .options {
+  position: absolute;
+  bottom: 16px;
+  min-width: 120px;
+  background-color: var(--song-card-options-bg-color);
+
+  padding: 10px;
+  transform-origin: bottom left;
+  cursor: pointer;
+  border-radius: 4px;
+  transform: scale(0);
+  transition: transform 300ms ease;
+}
+
+.song-card :global .listens-and-option .option-button:hover .options {
+  transform: scale(1);
+}
+
+.song-card :global .listens-and-option .option-button:hover svg {
   fill: var(--song-card-menu-hover-color);
+}
+
+.song-card :global .listens-and-option .option-button .options .option {
+  padding: 4px 8px 4px 8px;
+  border-radius: 4px;
+  transition: all 100ms ease-in;
+  user-select: none;
+}
+
+.song-card :global .listens-and-option .option-button .options .option:hover {
+  background-color: var(--song-card-option-hover-color);
+  color: var(--primary-color);
 }
 
 /* when card selected */
@@ -104,60 +139,6 @@
 }
 
 /* content card */
-/* .content-card {
-  background-color: var(--content-card-bg-color);
-  padding: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 300ms ease;
-}
-
-.content-card :global .icon {
-  margin-right: 20px;
-  width: 100%;
-  border-radius: 8px;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--content-card-icon-bg-color);
-  transition: background-color 300ms ease;
-}
-
-.content-card :global .icon svg {
-  width: 60%;
-  height: 60%;
-  fill: var(--content-card-icon-color);
-  transition: fill 300ms ease;
-}
-
-.content-card :global .title {
-  color: var(--content-card-title-color);
-  font-family: Inter;
-  font-size: 14px;
-  text-align: center;
-  font-style: normal;
-  font-weight: 700;
-  margin-top: 20px;
-  transition: color 300ms ease;
-}
-
-.content-card:global:hover {
-  background-color: var(--content-card-bg-hover-color);
-}
-
-.content-card:global:hover .icon {
-  background-color: var(--content-card-icon-bg-hover-color);
-}
-
-.content-card:global:hover .icon svg {
-  fill: var(--content-card-icon-hover-color);
-}
-
-.content-card:global:hover .title {
-  color: var(--content-card-title-hover-color);
-} */
 .content-card {
   background-color: var(--content-card-bg-color);
   padding: 16px;

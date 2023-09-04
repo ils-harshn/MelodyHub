@@ -61,6 +61,9 @@
   --song-card-song-name-color: #ffffff;
   --song-card-menu-color: #ffffff80;
   --song-card-menu-hover-color: #ffffff;
+  /* song card options */
+  --song-card-options-bg-color: #3a3a3a;
+  --song-card-option-hover-color: #f0f8ff;
 
   /* content card */
   --content-card-bg-color: #1d1d1d;
