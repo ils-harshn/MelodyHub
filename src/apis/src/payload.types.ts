@@ -12,7 +12,7 @@ export type FilterOptionType =
   | "genre";
 
 export type FilterSongsPayloadType = {
-  page: number;
+  page?: number;
   text: string;
   option: FilterOptionType;
 };

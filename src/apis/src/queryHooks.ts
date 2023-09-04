@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "react-query";
+import { useInfiniteQuery, useMutation, useQuery } from "react-query";
 import QUERY_KEYS from "./queryKeys";
 import {
   getFilterSongs,
@@ -38,5 +38,19 @@ export const useFilterSongs = (
   useQuery({
     queryKey: [QUERY_KEYS.FILTERED_SONGS, payload],
     queryFn: () => getFilterSongs(token, payload),
+    ...config,
+  });
+
+export const useFilterSongsInfiniteQuery = (
+  token: TokenType,
+  payload: FilterSongsPayloadType,
+  config = {}
+) =>
+  useInfiniteQuery({
+    queryFn: ({ pageParam = 1 }) => {
+      payload.page = pageParam;
+      return getFilterSongs(token, payload);
+    },
+    queryKey: [QUERY_KEYS.FILTERED_SONGS_INFINITE_QUERY, payload],
     ...config,
   });

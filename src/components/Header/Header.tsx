@@ -28,7 +28,7 @@ const SearchAndFilters: React.FC = () => {
       type: "TOGGLE",
       payload: {
         text: e.target.value || "",
-        page: searchBoxData.page,
+        // page: searchBoxData.page,
         option: searchBoxData.option,
       },
     });
@@ -39,7 +39,7 @@ const SearchAndFilters: React.FC = () => {
       type: "TOGGLE",
       payload: {
         text: searchBoxData.text,
-        page: searchBoxData.page,
+        // page: searchBoxData.page,
         option: option ? option.value : searchBoxData.option,
       },
     });

@@ -12,3 +12,9 @@ export const generateFilterSongsPayload = (payload: FilterSongsPayloadType) => {
   newPayload[payload.option] = payload.text;
   return newPayload;
 };
+
+export const getPageNumberFromBEUrl = (url: string) => {
+  let urlParams = new URLSearchParams(url);
+  let pageValue = urlParams.get("page");
+  return pageValue !== null ? pageValue : 1;
+};
