@@ -102,3 +102,128 @@
     flex-grow: 1;
   }
 }
+
+/* content card */
+/* .content-card {
+  background-color: var(--content-card-bg-color);
+  padding: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 300ms ease;
+}
+
+.content-card :global .icon {
+  margin-right: 20px;
+  width: 100%;
+  border-radius: 8px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--content-card-icon-bg-color);
+  transition: background-color 300ms ease;
+}
+
+.content-card :global .icon svg {
+  width: 60%;
+  height: 60%;
+  fill: var(--content-card-icon-color);
+  transition: fill 300ms ease;
+}
+
+.content-card :global .title {
+  color: var(--content-card-title-color);
+  font-family: Inter;
+  font-size: 14px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 700;
+  margin-top: 20px;
+  transition: color 300ms ease;
+}
+
+.content-card:global:hover {
+  background-color: var(--content-card-bg-hover-color);
+}
+
+.content-card:global:hover .icon {
+  background-color: var(--content-card-icon-bg-hover-color);
+}
+
+.content-card:global:hover .icon svg {
+  fill: var(--content-card-icon-hover-color);
+}
+
+.content-card:global:hover .title {
+  color: var(--content-card-title-hover-color);
+} */
+.content-card {
+  background-color: var(--content-card-bg-color);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 300ms ease;
+}
+
+.content-card :global .icon {
+  margin-right: 20px;
+  width: 30%;
+  border-radius: 8px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--content-card-icon-bg-color);
+  transition: background-color 300ms ease;
+}
+
+.content-card :global .icon svg {
+  width: 60%;
+  height: 60%;
+  fill: var(--content-card-icon-color);
+  transition: fill 300ms ease;
+}
+
+.content-card :global .title {
+  color: var(--content-card-title-color);
+  font-family: Inter;
+  font-size: 14px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 700;
+  /* margin-top: 20px; */
+  transition: color 300ms ease;
+}
+
+.content-card:global:hover {
+  background-color: var(--content-card-bg-hover-color);
+}
+
+.content-card:global:hover .icon {
+  background-color: var(--content-card-icon-bg-hover-color);
+}
+
+.content-card:global:hover .icon svg {
+  fill: var(--content-card-icon-hover-color);
+}
+
+.content-card:global:hover .title {
+  color: var(--content-card-title-hover-color);
+}
+
+
+@media only screen and (max-width: 600px) {
+  .content-card {
+    display: block;
+  }
+  
+  .content-card :global .icon {
+    margin-right: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

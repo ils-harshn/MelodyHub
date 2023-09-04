@@ -70,6 +70,17 @@ CFAT - Constants For All Themes
   --song-card-menu-color: #6e6e6e80;
   --song-card-menu-hover-color: #000000;
 
+  /* content card */
+  --content-card-bg-color: #d6d6d6;
+  --content-card-icon-bg-color: #a1a1a1;
+  --content-card-icon-color: #505050;
+  --content-card-title-color: #b4b4b4;
+  /*content card hover */
+  --content-card-bg-hover-color: #ffffff;
+  --content-card-icon-bg-hover-color: #ececec;
+  --content-card-icon-hover-color: #080808;
+  --content-card-title-hover-color: #080808;
+
   /* CFAT */
   --blue-color: #1877f2;
 

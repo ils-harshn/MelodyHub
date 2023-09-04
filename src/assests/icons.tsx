@@ -15,6 +15,10 @@ import { ReactComponent as CollapseIn } from "./icons/CollapseIn.svg";
 import { ReactComponent as Play } from "./icons/Play.svg";
 import { ReactComponent as Pause } from "./icons/Pause.svg";
 import { ReactComponent as Options } from "./icons/Options.svg";
+import { ReactComponent as Album } from "./icons/Album.svg";
+import { ReactComponent as Artist } from "./icons/Artist.svg";
+import { ReactComponent as Playlist } from "./icons/Playlist.svg";
+import { ReactComponent as Genre } from "./icons/Genre.svg";
 
 export default Logo;
 export {
@@ -34,4 +38,8 @@ export {
   Play,
   Pause,
   Options,
+  Album,
+  Artist,
+  Playlist,
+  Genre,
 };

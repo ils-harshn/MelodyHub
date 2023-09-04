@@ -1,4 +1,4 @@
-import { Options } from "../../assests/icons";
+import { Album, Options } from "../../assests/icons";
 import {
   useMusicPlayerData,
   useMusicPlayerDispatch,
@@ -8,7 +8,7 @@ import { generateURLFromID } from "../../utils/helpers/urls";
 import { PlayPauseButton } from "../Buttons/buttons";
 import ImageWithLoader from "../ImageWithLoader/ImageWithLoader";
 import styles from "./Cards.module.css";
-import { SongCardType } from "./Cards.types";
+import { ContentCardType, SongCardType } from "./Cards.types";
 
 const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
   const dispatch = useMusicPlayerDispatch();
@@ -75,6 +75,22 @@ const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
           <div>604 Listened</div>
         </div>
       </div>
+    </div>
+  );
+};
+
+export const ContentCard: React.FC<ContentCardType> = ({
+  title,
+  Icon = Album,
+  className = "",
+  ...props
+}) => {
+  return (
+    <div className={getClassName(styles["content-card"], className)} {...props}>
+      <div className="icon">
+        <Icon />
+      </div>
+      <div className="title">{title}</div>
     </div>
   );
 };

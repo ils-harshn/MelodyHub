@@ -1,3 +1,7 @@
 .library {
     padding: 24px;
 }
+
+.library :global .container {
+    margin: 40px 0 24px 0;
+}
