@@ -10,7 +10,7 @@ import SongCard from "../../components/Cards/Cards";
 import { useSearchBoxData } from "../../hooks/SearchBoxHooks";
 import { useDebounce } from "@uidotdev/usehooks";
 import { getPageNumberFromBEUrl } from "../../apis/src/utils";
-import { OUTLET_MAIN } from "../../consts/ids";
+import { Button } from "../../components/Buttons/buttons";
 
 const Search: React.FC = () => {
   const searchBoxData = useSearchBoxData();
@@ -38,35 +38,6 @@ const Search: React.FC = () => {
     }
   );
 
-  const [scrolledToBottom, setScrolledToBottom] = useState(false);
-
-  const handleScrolledToBottom = () => {
-    if (!isFetching && !isLoading && !isFetchingNextPage && hasNextPage) {
-      fetchNextPage();
-    }
-  };
-
-  useEffect(() => {
-    const outletElement = document.getElementById(OUTLET_MAIN);
-    outletElement?.addEventListener("scroll", () => {
-      const isScrolledToBottom =
-        outletElement.scrollTop >=
-        outletElement.scrollHeight - outletElement.clientHeight - 80;
-
-      if (isScrolledToBottom) {
-        setScrolledToBottom(true);
-      } else {
-        setScrolledToBottom(false);
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    if (scrolledToBottom) {
-      handleScrolledToBottom();
-    }
-  }, [scrolledToBottom]);
-
   if (isLoading) return <FullLoader />;
   return (
     <div className={getClassName(styles["search"])}>
@@ -83,13 +54,19 @@ const Search: React.FC = () => {
           ))}
         </SongCardContainer>
       )}
-      <FullLoader
-        size="small"
-        className={getClassName(
-          "search-loader",
-          isFetchingNextPage ? "" : "hide"
-        )}
-      />
+
+      {hasNextPage ? (
+        <div className="search-loader">
+          <Button
+            varient="secondary"
+            width="full"
+            loading={isFetching}
+            onClick={() => fetchNextPage()}
+          >
+            Load More
+          </Button>
+        </div>
+      ) : null}
     </div>
   );
 };

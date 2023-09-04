@@ -4,10 +4,8 @@
 }
 
 .search :global .search-loader {
-  margin-top: 40px;
-  display: block;
-}
-
-.search :global .search-loader.hide {
-  display: none;
+  width: 35%;
+  min-width: 200px;
+  margin: auto;
+  margin-top: 24px;
 }
