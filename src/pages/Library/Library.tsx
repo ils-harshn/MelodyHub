@@ -17,9 +17,7 @@ const Recent25Songs: React.FC = () => {
   if (isLoading === true) return <FullLoader />;
   return (
     <>
-      {!data || !data.pages || data.pages[0].count === 0 ? (
-        <h2>Found Nothing</h2>
-      ) : (
+      {!data || !data.pages || data.pages[0].count === 0 ? null : (
         <SongCardContainer title="History" optionTitle="See All">
           {data.pages.map((group, index) => (
             <Fragment key={index}>
