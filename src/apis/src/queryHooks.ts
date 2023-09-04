@@ -8,6 +8,7 @@ import {
 } from "./queryFunctions";
 import { FilterSongsPayloadType, LoginPayloadType } from "./payload.types";
 import { TokenType } from "../../contexts/Context.types";
+import { getPageNumberFromBEUrl } from "./utils";
 
 export const useLoginMutation = (config = {}) =>
   useMutation({
@@ -52,5 +53,10 @@ export const useFilterSongsInfiniteQuery = (
       return getFilterSongs(token, payload);
     },
     queryKey: [QUERY_KEYS.FILTERED_SONGS_INFINITE_QUERY, payload],
+    getNextPageParam: (lastpage: any) => {
+      return lastpage.next && lastpage.count
+        ? getPageNumberFromBEUrl(lastpage.next)
+        : undefined;
+    },
     ...config,
   });

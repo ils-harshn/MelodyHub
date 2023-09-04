@@ -1,4 +1,4 @@
-import { useContext, Fragment, useEffect, useState } from "react";
+import { useContext, Fragment } from "react";
 import { getClassName } from "../../utils";
 import styles from "./Search.module.css";
 import { TokenContext } from "../../contexts/TokenContext";
@@ -9,7 +9,6 @@ import { SongType } from "../../apis/src/response.types";
 import SongCard from "../../components/Cards/Cards";
 import { useSearchBoxData } from "../../hooks/SearchBoxHooks";
 import { useDebounce } from "@uidotdev/usehooks";
-import { getPageNumberFromBEUrl } from "../../apis/src/utils";
 import { Button } from "../../components/Buttons/buttons";
 
 const Search: React.FC = () => {
@@ -23,20 +22,10 @@ const Search: React.FC = () => {
     hasNextPage,
     isFetching,
     fetchNextPage,
-  } = useFilterSongsInfiniteQuery(
-    token,
-    {
-      text: debouncedSearchBoxData.text,
-      option: debouncedSearchBoxData.option,
-    },
-    {
-      getNextPageParam: (lastpage: any) => {
-        return lastpage.next && lastpage.count
-          ? getPageNumberFromBEUrl(lastpage.next)
-          : undefined;
-      },
-    }
-  );
+  } = useFilterSongsInfiniteQuery(token, {
+    text: debouncedSearchBoxData.text,
+    option: debouncedSearchBoxData.option,
+  });
 
   if (isLoading) return <FullLoader />;
   return (
