@@ -19,6 +19,7 @@ import { ReactComponent as Album } from "./icons/Album.svg";
 import { ReactComponent as Artist } from "./icons/Artist.svg";
 import { ReactComponent as Playlist } from "./icons/Playlist.svg";
 import { ReactComponent as Genre } from "./icons/Genre.svg";
+import { ReactComponent as Queue } from "./icons/Queue.svg";
 
 export default Logo;
 export {
@@ -42,4 +43,5 @@ export {
   Artist,
   Playlist,
   Genre,
+  Queue,
 };

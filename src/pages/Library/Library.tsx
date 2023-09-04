@@ -9,7 +9,7 @@ import { TokenContext } from "../../contexts/TokenContext";
 import { FullLoader } from "../../components/Loaders/Loaders";
 import { SongType } from "../../apis/src/response.types";
 import SongCard, { ContentCard } from "../../components/Cards/Cards";
-import { Artist, Genre, Heart, Playlist } from "../../assests/icons";
+import { Artist, Genre, Playlist, Queue } from "../../assests/icons";
 
 const Recent25Songs: React.FC = () => {
   const token = useContext(TokenContext);
@@ -38,11 +38,11 @@ const Library: React.FC = () => {
   return (
     <div className={getClassName(styles["library"])}>
       <ContentCardContainer title="Library" className="container">
-        <ContentCard title="Liked Songs" Icon={Heart} />
         <ContentCard title="Playlists" Icon={Playlist} />
         <ContentCard title="Artists" Icon={Artist} />
         <ContentCard title="Albums" />
         <ContentCard title="Genres" Icon={Genre} />
+        <ContentCard title="Queue" Icon={Queue} />
       </ContentCardContainer>
       <Recent25Songs />
     </div>
