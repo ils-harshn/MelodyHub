@@ -61,6 +61,7 @@ const Search: React.FC = () => {
             varient="secondary"
             width="full"
             loading={isFetching}
+            disabled={isFetchingNextPage || isFetching || isLoading}
             onClick={() => fetchNextPage()}
           >
             Load More
