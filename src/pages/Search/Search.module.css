@@ -1,3 +1,13 @@
 .search {
   padding: 24px;
+  /* position: relative; */
+}
+
+.search :global .search-loader {
+  margin-top: 40px;
+  display: block;
+}
+
+.search :global .search-loader.hide {
+  display: none;
 }

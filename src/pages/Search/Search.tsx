@@ -1,4 +1,4 @@
-import { useContext, Fragment } from "react";
+import { useContext, Fragment, useEffect, useState } from "react";
 import { getClassName } from "../../utils";
 import styles from "./Search.module.css";
 import { TokenContext } from "../../contexts/TokenContext";
@@ -10,26 +10,62 @@ import SongCard from "../../components/Cards/Cards";
 import { useSearchBoxData } from "../../hooks/SearchBoxHooks";
 import { useDebounce } from "@uidotdev/usehooks";
 import { getPageNumberFromBEUrl } from "../../apis/src/utils";
+import { OUTLET_MAIN } from "../../consts/ids";
 
 const Search: React.FC = () => {
   const searchBoxData = useSearchBoxData();
   const debouncedSearchBoxData = useDebounce(searchBoxData, 500);
   const token = useContext(TokenContext);
-  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useFilterSongsInfiniteQuery(
-      token,
-      {
-        text: debouncedSearchBoxData.text,
-        option: debouncedSearchBoxData.option,
+  const {
+    data,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    isFetching,
+    fetchNextPage,
+  } = useFilterSongsInfiniteQuery(
+    token,
+    {
+      text: debouncedSearchBoxData.text,
+      option: debouncedSearchBoxData.option,
+    },
+    {
+      getNextPageParam: (lastpage: any) => {
+        return lastpage.next && lastpage.count
+          ? getPageNumberFromBEUrl(lastpage.next)
+          : undefined;
       },
-      {
-        getNextPageParam: (lastpage: any) => {
-          return lastpage.next && lastpage.count
-            ? getPageNumberFromBEUrl(lastpage.next)
-            : undefined;
-        },
+    }
+  );
+
+  const [scrolledToBottom, setScrolledToBottom] = useState(false);
+
+  const handleScrolledToBottom = () => {
+    if (!isFetching && !isLoading && !isFetchingNextPage && hasNextPage) {
+      fetchNextPage();
+    }
+  };
+
+  useEffect(() => {
+    const outletElement = document.getElementById(OUTLET_MAIN);
+    outletElement?.addEventListener("scroll", () => {
+      const isScrolledToBottom =
+        outletElement.scrollTop >=
+        outletElement.scrollHeight - outletElement.clientHeight - 80;
+
+      if (isScrolledToBottom) {
+        setScrolledToBottom(true);
+      } else {
+        setScrolledToBottom(false);
       }
-    );
+    });
+  }, []);
+
+  useEffect(() => {
+    if (scrolledToBottom) {
+      handleScrolledToBottom();
+    }
+  }, [scrolledToBottom]);
 
   if (isLoading) return <FullLoader />;
   return (
@@ -47,6 +83,13 @@ const Search: React.FC = () => {
           ))}
         </SongCardContainer>
       )}
+      <FullLoader
+        size="small"
+        className={getClassName(
+          "search-loader",
+          isFetchingNextPage ? "" : "hide"
+        )}
+      />
     </div>
   );
 };
