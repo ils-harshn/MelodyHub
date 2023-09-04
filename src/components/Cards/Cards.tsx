@@ -8,7 +8,15 @@ import { generateURLFromID } from "../../utils/helpers/urls";
 import { PlayPauseButton } from "../Buttons/buttons";
 import ImageWithLoader from "../ImageWithLoader/ImageWithLoader";
 import styles from "./Cards.module.css";
-import { ContentCardType, SongCardType } from "./Cards.types";
+import { ContentCardType, OptionPopupType, SongCardType } from "./Cards.types";
+
+const OptionPopup: React.FC<OptionPopupType> = ({ data }) => {
+  return (
+    <div className="option-button">
+      <Options />
+    </div>
+  );
+};
 
 const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
   const dispatch = useMusicPlayerDispatch();
@@ -69,9 +77,7 @@ const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
           </div>
         </div>
         <div className="listens-and-option">
-          <div className="option-button">
-            <Options />
-          </div>
+          <OptionPopup data={data} />
           <div>604 Listened</div>
         </div>
       </div>

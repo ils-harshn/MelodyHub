@@ -9,3 +9,7 @@ export type ContentCardType = React.HTMLAttributes<HTMLDivElement> & {
   title: string;
   Icon?: IconType;
 };
+
+export type OptionPopupType = {
+  data: SongType;
+};
