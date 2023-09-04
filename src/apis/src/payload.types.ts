@@ -16,3 +16,7 @@ export type FilterSongsPayloadType = {
   text: string;
   option: FilterOptionType;
 };
+
+export type OnlyPagePayloadType = {
+  page?: number;
+};

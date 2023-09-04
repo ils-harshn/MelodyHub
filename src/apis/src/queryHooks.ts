@@ -3,10 +3,15 @@ import QUERY_KEYS from "./queryKeys";
 import {
   getFilterSongs,
   getMostPopularSong,
+  getRecentSongs,
   loginUser,
   verifyToken,
 } from "./queryFunctions";
-import { FilterSongsPayloadType, LoginPayloadType } from "./payload.types";
+import {
+  FilterSongsPayloadType,
+  LoginPayloadType,
+  OnlyPagePayloadType,
+} from "./payload.types";
 import { TokenType } from "../../contexts/Context.types";
 import { getPageNumberFromBEUrl } from "./utils";
 
@@ -53,6 +58,25 @@ export const useFilterSongsInfiniteQuery = (
       return getFilterSongs(token, payload);
     },
     queryKey: [QUERY_KEYS.FILTERED_SONGS_INFINITE_QUERY, payload],
+    getNextPageParam: (lastpage: any) => {
+      return lastpage.next && lastpage.count
+        ? getPageNumberFromBEUrl(lastpage.next)
+        : undefined;
+    },
+    ...config,
+  });
+
+export const useRecentSongsInfiniteQuery = (
+  token: TokenType,
+  payload: OnlyPagePayloadType,
+  config = {}
+) =>
+  useInfiniteQuery({
+    queryFn: ({ pageParam = 1 }) => {
+      payload.page = pageParam;
+      return getRecentSongs(token, payload);
+    },
+    queryKey: [QUERY_KEYS.RECENT_SONGS_INFINITE_QUERY, payload],
     getNextPageParam: (lastpage: any) => {
       return lastpage.next && lastpage.count
         ? getPageNumberFromBEUrl(lastpage.next)
