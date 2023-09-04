@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import Home from "../pages/Home/Home";
 import NotFound from "../pages/NotFound/NotFound";
 import Search from "../pages/Search/Search";
+import Library from "../pages/Library/Library";
 
 const AppRouter: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const AppRouter: React.FC = () => {
         <Route path={routes.INDEX.path} element={<Layout />}>
           <Route path={routes.HOME.path} element={<Home />} />
           <Route path={routes.SEARCH.path} element={<Search />} />
-          <Route path={routes.LIBRARY.path} element={<h2>Library</h2>} />
+          <Route path={routes.LIBRARY.path} element={<Library />} />
           <Route
             path={routes.CREATE_PLAYLIST.path}
             element={<h2>CREATE_PLAYLIST</h2>}
