@@ -5,6 +5,7 @@ import {
   AlbumsPayloadType,
   ArtistsPayloadType,
   FilterSongsPayloadType,
+  GetAlbumDetailPayload,
   OnlyPagePayloadType,
 } from "./payload.types";
 import {
@@ -112,6 +113,20 @@ export const getArtists = async (
   const response = await api({
     method: "get",
     url: ENDPOINTS.GET_ARTISTS(payload.page, generatedPayload.name),
+    headers: {
+      ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};
+
+export const getAlbumDetail = async (
+  token: TokenType,
+  payload: GetAlbumDetailPayload
+) => {
+  const response = await api({
+    method: "get",
+    url: ENDPOINTS.GET_ALBUM_DETAIL(payload.id),
     headers: {
       ...getAuthHeader(token),
     },

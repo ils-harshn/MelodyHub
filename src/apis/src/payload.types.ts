@@ -36,3 +36,7 @@ export type ArtistsPayloadType = {
 export type OnlyPagePayloadType = {
   page?: number;
 };
+
+export type GetAlbumDetailPayload = {
+  id: number;
+};

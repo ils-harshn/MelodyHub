@@ -1,6 +1,7 @@
 import { useInfiniteQuery, useMutation, useQuery } from "react-query";
 import QUERY_KEYS from "./queryKeys";
 import {
+  getAlbumDetail,
   getAlbums,
   getArtists,
   getFilterSongs,
@@ -13,6 +14,7 @@ import {
   AlbumsPayloadType,
   ArtistsPayloadType,
   FilterSongsPayloadType,
+  GetAlbumDetailPayload,
   LoginPayloadType,
   OnlyPagePayloadType,
 } from "./payload.types";
@@ -124,5 +126,16 @@ export const useArtistsInfiniteQuery = (
         ? getPageNumberFromBEUrl(lastpage.next)
         : undefined;
     },
+    ...config,
+  });
+
+export const useAlbumDetail = (
+  token: TokenType,
+  payload: GetAlbumDetailPayload,
+  config = {}
+) =>
+  useQuery({
+    queryFn: () => getAlbumDetail(token, payload),
+    queryKey: [QUERY_KEYS.GET_ALBUM_DETAIL, payload],
     ...config,
   });

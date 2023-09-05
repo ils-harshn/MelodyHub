@@ -6,3 +6,7 @@ export type AlbumsSelectorOptionType = {
   value: AlbumsOptionType;
   label: AlbumsSelectorOptionLabelType;
 };
+
+export type AlbumDetailType = {
+  id: number;
+};
