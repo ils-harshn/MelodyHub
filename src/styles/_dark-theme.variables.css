@@ -75,4 +75,9 @@
   --content-card-icon-bg-hover-color: #5e5e5e;
   --content-card-icon-hover-color: #ffffff;
   --content-card-title-hover-color: #ffffff;
+
+  /* image card */
+  --image-card-title-bg-color: #000000b0;
+  --image-card-title-bottom-bg-color: #000000b0;
+  --image-card-title-color: #ffffff;
 }

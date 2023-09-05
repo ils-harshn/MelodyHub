@@ -214,6 +214,7 @@
   cursor: pointer;
   border-radius: 8px;
   overflow: hidden;
+  color: var(--image-card-title-color);
 }
 
 .image-card :global .title {
@@ -225,7 +226,7 @@
 
   font-size: 14px;
 
-  background-color: #000000b0;
+  background-color: var(--image-card-title-bg-color);
   opacity: 0;
   transition: 300ms opacity ease;
 
@@ -241,7 +242,7 @@
 
   font-size: 12px;
 
-  background-color: #2a2a2ab0;
+  background-color: var(--image-card-title-bottom-bg-color);
   opacity: 0;
   transition: 300ms opacity ease;
 
