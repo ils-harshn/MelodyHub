@@ -47,7 +47,11 @@ const Library: React.FC = () => {
     <div className={getClassName(styles["library"])}>
       <ContentCardContainer title="Library" className="container">
         <ContentCard title="Playlists" Icon={Playlist} />
-        <ContentCard title="Artists" Icon={Artist} />
+        <ContentCard
+          title="Artists"
+          Icon={Artist}
+          onClick={() => navigate(routes.ARTIST.endpoint)}
+        />
         <ContentCard
           title="Albums"
           onClick={() => navigate(routes.ALBUM.endpoint)}
