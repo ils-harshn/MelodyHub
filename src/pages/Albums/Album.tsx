@@ -52,7 +52,6 @@ const Album: React.FC = () => {
     option: debouncedFilterBoxData.option,
   });
 
-  if (isLoading) return <FullLoader />;
   return (
     <div className={getClassName(styles["album"])}>
       <div className="filter-box">
@@ -86,7 +85,10 @@ const Album: React.FC = () => {
           </div>
         </div>
       </div>
-      {!data || !data.pages || data.pages[0].count === 0 ? (
+
+      {isLoading ? (
+        <FullLoader />
+      ) : !data || !data.pages || data.pages[0].count === 0 ? (
         <h2>Found Nothing</h2>
       ) : (
         <ImageCardContainer title="">
