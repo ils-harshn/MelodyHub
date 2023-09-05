@@ -17,6 +17,14 @@ export type FilterSongsPayloadType = {
   option: FilterOptionType;
 };
 
+export type AlbumsOptionType = "title" | "code" | "year";
+
+export type AlbumsPayloadType = {
+  page?: number;
+  text: string;
+  option: AlbumsOptionType;
+};
+
 export type OnlyPagePayloadType = {
   page?: number;
 };

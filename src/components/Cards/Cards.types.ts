@@ -15,3 +15,16 @@ export type OptionPopupType = {
   handlePlay: () => void;
   isPlaying: boolean;
 };
+
+export type ImageCardType = React.HTMLAttributes<HTMLDivElement> & {
+  title: string;
+  optionTitle?: string;
+  src: string;
+  alt?: string;
+};
+
+export type LoadMoreCardType = React.HTMLAttributes<HTMLDivElement> & {
+  title: string;
+  isLoading: boolean;
+  isDisabled: boolean;
+};

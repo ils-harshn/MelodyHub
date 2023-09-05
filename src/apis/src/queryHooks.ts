@@ -1,6 +1,7 @@
 import { useInfiniteQuery, useMutation, useQuery } from "react-query";
 import QUERY_KEYS from "./queryKeys";
 import {
+  getAlbums,
   getFilterSongs,
   getMostPopularSong,
   getRecentSongs,
@@ -8,6 +9,7 @@ import {
   verifyToken,
 } from "./queryFunctions";
 import {
+  AlbumsPayloadType,
   FilterSongsPayloadType,
   LoginPayloadType,
   OnlyPagePayloadType,
@@ -77,6 +79,25 @@ export const useRecentSongsInfiniteQuery = (
       return getRecentSongs(token, payload);
     },
     queryKey: [QUERY_KEYS.RECENT_SONGS_INFINITE_QUERY, payload],
+    getNextPageParam: (lastpage: any) => {
+      return lastpage.next && lastpage.count
+        ? getPageNumberFromBEUrl(lastpage.next)
+        : undefined;
+    },
+    ...config,
+  });
+
+export const useAlbumsInfiniteQuery = (
+  token: TokenType,
+  payload: AlbumsPayloadType,
+  config = {}
+) =>
+  useInfiniteQuery({
+    queryFn: ({ pageParam = 1 }) => {
+      payload.page = pageParam;
+      return getAlbums(token, payload);
+    },
+    queryKey: [QUERY_KEYS.ALBUMS_INFINITE_QUERY, payload],
     getNextPageParam: (lastpage: any) => {
       return lastpage.next && lastpage.count
         ? getPageNumberFromBEUrl(lastpage.next)

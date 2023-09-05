@@ -7,8 +7,15 @@ import { getClassName } from "../../utils";
 import { generateURLFromID } from "../../utils/helpers/urls";
 import { PlayPauseButton } from "../Buttons/buttons";
 import ImageWithLoader from "../ImageWithLoader/ImageWithLoader";
+import { FullLoader } from "../Loaders/Loaders";
 import styles from "./Cards.module.css";
-import { ContentCardType, OptionPopupType, SongCardType } from "./Cards.types";
+import {
+  ContentCardType,
+  ImageCardType,
+  LoadMoreCardType,
+  OptionPopupType,
+  SongCardType,
+} from "./Cards.types";
 
 const OptionPopup: React.FC<OptionPopupType> = ({
   data,
@@ -91,7 +98,9 @@ const SongCard: React.FC<SongCardType> = ({ data, ...props }) => {
           <OptionPopup
             data={data}
             handlePlay={handleThumbnailClick}
-            isPlaying={musicPlayerData.data?.id === data.id && musicPlayerData.playing}
+            isPlaying={
+              musicPlayerData.data?.id === data.id && musicPlayerData.playing
+            }
           />
           <div>604 Listened</div>
         </div>
@@ -116,4 +125,49 @@ export const ContentCard: React.FC<ContentCardType> = ({
   );
 };
 
+export const ImageCard: React.FC<ImageCardType> = ({
+  className = "",
+  title,
+  optionTitle = "",
+  src,
+  alt = "image",
+  ...props
+}) => {
+  return (
+    <div className={getClassName(styles["image-card"], className)} {...props}>
+      <ImageWithLoader
+        src={src}
+        alt={alt}
+        skeleton={{
+          className: "skeleton",
+        }}
+      />
+      <div className="title">
+        <p className="truncate">{title}</p>
+      </div>
+      <div className="title-bottom">
+        <p className="truncate">{optionTitle}</p>
+      </div>
+    </div>
+  );
+};
+
+export const LoadMoreCard: React.FC<LoadMoreCardType> = ({
+  className = "",
+  title,
+  isDisabled,
+  onClick,
+  isLoading,
+  ...props
+}) => {
+  return (
+    <div
+      className={getClassName(styles["load-more-card"], className)}
+      {...props}
+      onClick={isDisabled ? undefined : onClick}
+    >
+      {isLoading ? <FullLoader size="small" /> : <p>{title}</p>}
+    </div>
+  );
+};
 export default SongCard;

@@ -6,7 +6,7 @@ import { useFilterSongsInfiniteQuery } from "../../apis/src/queryHooks";
 import { FullLoader } from "../../components/Loaders/Loaders";
 import SongCardContainer from "../../components/Containers/Containers";
 import { SongType } from "../../apis/src/response.types";
-import SongCard from "../../components/Cards/Cards";
+import SongCard, { LoadMoreCard } from "../../components/Cards/Cards";
 import { useSearchBoxData } from "../../hooks/SearchBoxHooks";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Button } from "../../components/Buttons/buttons";
@@ -41,22 +41,17 @@ const Search: React.FC = () => {
               ))}
             </Fragment>
           ))}
+
+          {hasNextPage ? (
+            <LoadMoreCard
+              isLoading={isFetching || isLoading || isFetchingNextPage}
+              isDisabled={isFetching || isLoading || isFetchingNextPage}
+              title="Load More Songs"
+              onClick={() => fetchNextPage()}
+            />
+          ) : null}
         </SongCardContainer>
       )}
-
-      {hasNextPage ? (
-        <div className="search-loader">
-          <Button
-            varient="secondary"
-            width="full"
-            loading={isFetching}
-            disabled={isFetchingNextPage || isFetching || isLoading}
-            onClick={() => fetchNextPage()}
-          >
-            Load More
-          </Button>
-        </div>
-      ) : null}
     </div>
   );
 };
