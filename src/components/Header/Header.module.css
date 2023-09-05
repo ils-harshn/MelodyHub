@@ -33,11 +33,13 @@
 .header :global .search-input .search-options {
     opacity: 0;
     transform: translateY(-40px);
+    pointer-events: none;
 }
 
 .header :global .search-input:hover .search-options {
     opacity: 1;
     transform: translateY(0);
+    pointer-events: all;
 }
 
 @media only screen and (max-width: 1024px) {

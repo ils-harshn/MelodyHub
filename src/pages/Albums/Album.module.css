@@ -1,3 +1,40 @@
 .album {
   padding: 24px;
 }
+
+.album :global .filter-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.album :global .inputs-with-filters {
+  position: relative;
+  width: 60%;
+  max-width: 280px;
+}
+
+.album :global .inputs-with-filters .filters {
+  position: absolute;
+  width: 60%;
+  background-color: var(--bg-color);
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 4px;
+  transition: opacity 100ms ease-in, transform 100ms ease-in;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-30px)
+}
+
+.album :global .inputs-with-filters:hover .filters {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.album :global .inputs-with-filters .filters .title {
+  margin-bottom: 8px;
+}
