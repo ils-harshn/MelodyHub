@@ -1,29 +1,83 @@
 import { makeRoute } from "../utils";
 
 // Account Nested
-export const INDEX = makeRoute("/");
-export const AUTH_LAYOUT = makeRoute("account");
-
-// INDEX NESTED URLS
-export const HOME = makeRoute("home", INDEX.endpoint);
-export const SEARCH = makeRoute("search", INDEX.endpoint);
-export const LIBRARY = makeRoute("library", INDEX.endpoint);
-export const CREATE_PLAYLIST = makeRoute("createplaylist", INDEX.endpoint);
-export const LIKED_SONGS = makeRoute("likedsongs", INDEX.endpoint);
-
-// INDEX - ALBUM_NESTED
-export const ALBUM_NESTED = makeRoute("album");
-export const ALBUM = makeRoute("list", INDEX.endpoint, ALBUM_NESTED.endpoint);
-
-// INDEX - ARTIST_NESTED
-export const ARTIST_NESTED = makeRoute("artist");
-export const ARTIST = makeRoute("list", INDEX.endpoint, ARTIST_NESTED.endpoint);
+export const AUTH_LAYOUT = {
+  path: "account",
+  endpoint: makeRoute("account"),
+};
 
 // AUTH_LAYOUT NESTED URLS
-export const LOGIN = makeRoute("login", AUTH_LAYOUT.endpoint);
-export const FORGET_PASSWORD = makeRoute(
-  "forgetpassword",
-  AUTH_LAYOUT.endpoint
-);
+export const LOGIN = {
+  path: "login",
+  endpoint: makeRoute("login", AUTH_LAYOUT.endpoint),
+};
+
+export const FORGET_PASSWORD = {
+  path: "forgetpassword",
+  endpoint: makeRoute("forgetpassword", AUTH_LAYOUT.endpoint),
+};
+
+// INDEX NESTED URLS
+export const INDEX = {
+  path: "/",
+  endpoint: makeRoute("/"),
+};
+
+export const HOME = {
+  path: "home",
+  endpoint: makeRoute("home", INDEX.endpoint),
+};
+
+export const SEARCH = {
+  path: "search",
+  endpoint: makeRoute("search", INDEX.endpoint),
+};
+
+export const LIBRARY = {
+  path: "library",
+  endpoint: makeRoute("library", INDEX.endpoint),
+};
+
+export const CREATE_PLAYLIST = {
+  path: "createplaylist",
+  endpoint: makeRoute("createplaylist", INDEX.endpoint),
+};
+
+export const LIKED_SONGS = {
+  path: "likedsongs",
+  endpoint: makeRoute("likedsongs", INDEX.endpoint),
+};
+
+// INDEX - ALBUM_NESTED
+export const ALBUM_NESTED = {
+  path: "album",
+  endpoint: makeRoute("album", INDEX.endpoint),
+};
+
+export const ALBUM = {
+  path: "list",
+  endpoint: makeRoute("list", ALBUM_NESTED.endpoint),
+};
+
+export const ALBUM_SONGS = {
+  path: "get/:id",
+  endpoint: (id: number) => makeRoute(`get/${id}`, ALBUM_NESTED.endpoint),
+};
+
+// INDEX - ARTIST_NESTED
+export const ARTIST_NESTED = {
+  path: "artist",
+  endpoint: makeRoute("artist", INDEX.endpoint),
+};
+
+export const ARTIST = {
+  path: "list",
+  endpoint: makeRoute("list", ARTIST_NESTED.endpoint),
+};
+
+export const ARTIST_SONGS = {
+  path: "get/:id",
+  endpoint: (id: number) => makeRoute(`get/${id}`, ARTIST_NESTED.endpoint),
+};
 
 export default INDEX;
