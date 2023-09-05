@@ -18,6 +18,7 @@
 .album-with-songs :global .album-info .skeleton {
   width: 300px;
   height: 300px;
+  border-radius: 8px;
 }
 
 .album-with-songs :global .songs {
