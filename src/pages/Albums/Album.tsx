@@ -12,8 +12,11 @@ import { useContext, Fragment, useState } from "react";
 import { AlbumsPayloadType } from "../../apis/src/payload.types";
 import { AlbumsSelectorOptionType } from "./Album.type";
 import { FullLoader } from "../../components/Loaders/Loaders";
+import { useNavigate } from "react-router-dom";
+import { ALBUM_SONGS } from "../../router/routes";
 
 const Album: React.FC = () => {
+  const navigate = useNavigate();
   const token = useContext(TokenContext);
   const [filterBoxData, setFilterBoxData] = useState<AlbumsPayloadType>({
     text: "",
@@ -100,6 +103,7 @@ const Album: React.FC = () => {
                   key={item.id}
                   src={generateURLFromID(item.thumbnail300x300)}
                   optionTitle={`${item.year}`}
+                  onClick={() => navigate(ALBUM_SONGS.endpoint(item.id))}
                 />
               ))}
             </Fragment>
