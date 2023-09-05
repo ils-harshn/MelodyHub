@@ -3,11 +3,7 @@ import { useAlbumsInfiniteQuery } from "../../apis/src/queryHooks";
 import { AlbumType } from "../../apis/src/response.types";
 import { ImageCard, LoadMoreCard } from "../../components/Cards/Cards";
 import { ImageCardContainer } from "../../components/Containers/Containers";
-import {
-  InputWithIcon,
-  SelectInput,
-  TextInput,
-} from "../../components/Inputs/Inputs";
+import { InputWithIcon, SelectInput } from "../../components/Inputs/Inputs";
 import { TokenContext } from "../../contexts/TokenContext";
 import { getClassName } from "../../utils";
 import { generateURLFromID } from "../../utils/helpers/urls";

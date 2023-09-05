@@ -8,6 +8,10 @@
   justify-content: space-between;
 }
 
+.album :global .filter-box .title {
+  font-size: 21px;
+}
+
 .album :global .inputs-with-filters {
   position: relative;
   width: 60%;
