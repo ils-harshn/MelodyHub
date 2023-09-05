@@ -15,6 +15,8 @@ const ENDPOINTS = {
   GET_RECENT_SONGS: (page = 1) => `/api/recent/songs/?page=${page}`,
   GET_ALBUMS: (page = 1, title = "", code = "", year = "") =>
     `/api/albums/?page=${page}&title=${title}&code=${code}&year=${year}`,
+  GET_ARTISTS: (page = 1, name = "") =>
+    `/api/artists/?name=${name}&page=${page}`,
 };
 
 export default ENDPOINTS;

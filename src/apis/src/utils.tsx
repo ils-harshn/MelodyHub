@@ -1,4 +1,8 @@
-import { AlbumsPayloadType, FilterSongsPayloadType } from "./payload.types";
+import {
+  AlbumsPayloadType,
+  ArtistsPayloadType,
+  FilterSongsPayloadType,
+} from "./payload.types";
 
 export const generateFilterSongsPayload = (payload: FilterSongsPayloadType) => {
   const newPayload = {
@@ -18,11 +22,20 @@ export const generteAlbumsPayload = (payload: AlbumsPayloadType) => {
     title: "",
     code: "",
     year: "",
-  }
+  };
 
   newPayload[payload.option] = payload.text;
-  return newPayload
-}
+  return newPayload;
+};
+
+export const generteArtistsPayload = (payload: ArtistsPayloadType) => {
+  const newPayload = {
+    name: "",
+  };
+
+  newPayload[payload.option] = payload.text;
+  return newPayload;
+};
 
 export const getPageNumberFromBEUrl = (url: string) => {
   let urlParams = new URLSearchParams(url);

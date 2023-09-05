@@ -3,10 +3,15 @@ import api, { getAuthHeader } from "../api";
 import ENDPOINTS from "./apiEndPoints";
 import {
   AlbumsPayloadType,
+  ArtistsPayloadType,
   FilterSongsPayloadType,
   OnlyPagePayloadType,
 } from "./payload.types";
-import { generateFilterSongsPayload, generteAlbumsPayload } from "./utils";
+import {
+  generateFilterSongsPayload,
+  generteAlbumsPayload,
+  generteArtistsPayload,
+} from "./utils";
 
 export const loginUser = async (email: string, password: string) => {
   const response = await api({
@@ -92,6 +97,21 @@ export const getAlbums = async (
       generatedPayload.code,
       generatedPayload.year
     ),
+    headers: {
+      ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};
+
+export const getArtists = async (
+  token: TokenType,
+  payload: ArtistsPayloadType
+) => {
+  const generatedPayload = generteArtistsPayload(payload);
+  const response = await api({
+    method: "get",
+    url: ENDPOINTS.GET_ARTISTS(payload.page, generatedPayload.name),
     headers: {
       ...getAuthHeader(token),
     },

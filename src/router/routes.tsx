@@ -15,6 +15,10 @@ export const LIKED_SONGS = makeRoute("likedsongs", INDEX.endpoint);
 export const ALBUM_NESTED = makeRoute("album");
 export const ALBUM = makeRoute("list", INDEX.endpoint, ALBUM_NESTED.endpoint);
 
+// INDEX - ARTIST_NESTED
+export const ARTIST_NESTED = makeRoute("artist");
+export const ARTIST = makeRoute("list", INDEX.endpoint, ARTIST_NESTED.endpoint);
+
 // AUTH_LAYOUT NESTED URLS
 export const LOGIN = makeRoute("login", AUTH_LAYOUT.endpoint);
 export const FORGET_PASSWORD = makeRoute(

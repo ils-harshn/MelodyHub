@@ -1,0 +1,13 @@
+.artist {
+  padding: 24px;
+}
+
+.artist :global .filter-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.artist :global .filter-box .title {
+  font-size: 21px;
+}

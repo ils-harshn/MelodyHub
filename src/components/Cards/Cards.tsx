@@ -145,9 +145,11 @@ export const ImageCard: React.FC<ImageCardType> = ({
       <div className="title">
         <p className="truncate">{title}</p>
       </div>
-      <div className="title-bottom">
-        <p className="truncate">{optionTitle}</p>
-      </div>
+      {optionTitle === "" ? null : (
+        <div className="title-bottom">
+          <p className="truncate">{optionTitle}</p>
+        </div>
+      )}
     </div>
   );
 };

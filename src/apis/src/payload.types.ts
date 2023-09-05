@@ -25,6 +25,14 @@ export type AlbumsPayloadType = {
   option: AlbumsOptionType;
 };
 
+export type ArtistsOptionType = "name";
+
+export type ArtistsPayloadType = {
+  page?: number;
+  text: string;
+  option: ArtistsOptionType;
+};
+
 export type OnlyPagePayloadType = {
   page?: number;
 };
