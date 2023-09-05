@@ -10,6 +10,8 @@ import { FullLoader } from "../../components/Loaders/Loaders";
 import { SongType } from "../../apis/src/response.types";
 import SongCard, { ContentCard } from "../../components/Cards/Cards";
 import { Artist, Genre, Playlist, Queue } from "../../assests/icons";
+import { useNavigate } from "react-router-dom";
+import * as routes from "../../router/routes";
 
 const Recent25Songs: React.FC = () => {
   const token = useContext(TokenContext);
@@ -21,7 +23,11 @@ const Recent25Songs: React.FC = () => {
   return (
     <>
       {!data || !data.pages || data.pages[0].count === 0 ? null : (
-        <SongCardContainer title="History" optionTitle="See All" className="container">
+        <SongCardContainer
+          title="History"
+          optionTitle="See All"
+          className="container"
+        >
           {data.pages.map((group, index) => (
             <Fragment key={index}>
               {group.results.map((item: SongType) => (
@@ -35,12 +41,17 @@ const Recent25Songs: React.FC = () => {
   );
 };
 const Library: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={getClassName(styles["library"])}>
       <ContentCardContainer title="Library" className="container">
         <ContentCard title="Playlists" Icon={Playlist} />
         <ContentCard title="Artists" Icon={Artist} />
-        <ContentCard title="Albums" />
+        <ContentCard
+          title="Albums"
+          onClick={() => navigate(routes.ALBUM.endpoint)}
+        />
         <ContentCard title="Genres" Icon={Genre} />
         <ContentCard title="Queue" Icon={Queue} />
       </ContentCardContainer>

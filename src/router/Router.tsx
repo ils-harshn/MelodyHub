@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home";
 import NotFound from "../pages/NotFound/NotFound";
 import Search from "../pages/Search/Search";
 import Library from "../pages/Library/Library";
+import Album from "../pages/Albums/Album";
 
 const AppRouter: React.FC = () => {
   return (
@@ -13,6 +14,8 @@ const AppRouter: React.FC = () => {
       <Routes>
         {/* INDEX NESTED */}
         <Route path={routes.INDEX.path} element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path={routes.HOME.path} element={<Home />} />
           <Route path={routes.HOME.path} element={<Home />} />
           <Route path={routes.SEARCH.path} element={<Search />} />
           <Route path={routes.LIBRARY.path} element={<Library />} />
@@ -24,9 +27,13 @@ const AppRouter: React.FC = () => {
             path={routes.LIKED_SONGS.path}
             element={<h2>LIKED_SONGS</h2>}
           />
+          {/* INDEX - ALBUM_NESTED */}
+          <Route path={routes.ALBUM_NESTED.path}>
+            <Route index element={<Album />} />
+            <Route path={routes.ALBUM.path} element={<Album />} />
+          </Route>
 
           {/* Page Not Found */}
-          <Route index element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         {/* AUTH_LAYOUT NESTED */}
@@ -36,11 +43,9 @@ const AppRouter: React.FC = () => {
 
           {/* Page Not Found */}
           <Route path="*" element={<NotFound />} />
-          <Route index element={<NotFound />} />
         </Route>
 
         {/* Page Not Found */}
-        <Route index element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
