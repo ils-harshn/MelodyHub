@@ -278,4 +278,5 @@
   padding: 10px;
   background: var(--load-more-card-bg-gradient);
   cursor: pointer;
+  aspect-ratio: 1 / 1;
 }
