@@ -89,6 +89,14 @@ CFAT - Constants For All Themes
   --image-card-title-bottom-bg-color: #c5c5c5b0;
   --image-card-title-color: #000000;
 
+  /* load more card */
+  --load-more-card-bg-gradient: linear-gradient(
+    355deg,
+    #bfbfbf 0%,
+    #c5c5c5 20%,
+    #525556 100%
+  );
+
   /* CFAT */
   --blue-color: #1877f2;
 

@@ -80,4 +80,12 @@
   --image-card-title-bg-color: #000000b0;
   --image-card-title-bottom-bg-color: #000000b0;
   --image-card-title-color: #ffffff;
+
+  /* load more card */
+  --load-more-card-bg-gradient: linear-gradient(
+    355deg,
+    #000000 0%,
+    #000000 20%,
+    #525556 100%
+  );
 }

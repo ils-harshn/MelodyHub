@@ -263,16 +263,19 @@
   margin: 10px;
 }
 
-.image-card:global:hover .title, .image-card:global:hover .title-bottom  {
+.image-card:global:hover .title,
+.image-card:global:hover .title-bottom {
   opacity: 1;
 }
 
 /* Load more card */
 .load-more-card {
-  background-color: #363636;
+  /* background-color: #363636; */
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
+  background: var(--load-more-card-bg-gradient);
+  cursor: pointer;
 }
