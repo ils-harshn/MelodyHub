@@ -11,6 +11,7 @@ import styles from "./Album.module.css";
 import { useContext, Fragment, useState } from "react";
 import { AlbumsPayloadType } from "../../apis/src/payload.types";
 import { AlbumsSelectorOptionType } from "./Album.type";
+import { FullLoader } from "../../components/Loaders/Loaders";
 
 const Album: React.FC = () => {
   const token = useContext(TokenContext);
@@ -51,6 +52,7 @@ const Album: React.FC = () => {
     option: debouncedFilterBoxData.option,
   });
 
+  if (isLoading) return <FullLoader />;
   return (
     <div className={getClassName(styles["album"])}>
       <div className="filter-box">

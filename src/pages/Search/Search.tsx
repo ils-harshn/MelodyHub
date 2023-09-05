@@ -9,7 +9,6 @@ import { SongType } from "../../apis/src/response.types";
 import SongCard, { LoadMoreCard } from "../../components/Cards/Cards";
 import { useSearchBoxData } from "../../hooks/SearchBoxHooks";
 import { useDebounce } from "@uidotdev/usehooks";
-import { Button } from "../../components/Buttons/buttons";
 
 const Search: React.FC = () => {
   const searchBoxData = useSearchBoxData();
