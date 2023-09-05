@@ -7,8 +7,8 @@ import { useContext } from "react";
 import { AlbumDetailType } from "./Album.type";
 import styles from "./AlbumDetail.module.css";
 import { Skeleton } from "../../components/Loaders/Loaders";
-import ImageWithLoader from "../../components/ImageWithLoader/ImageWithLoader";
 import { generateURLFromID } from "../../utils/helpers/urls";
+import { ImageCard } from "../../components/Cards/Cards";
 
 const AlbumSongs: React.FC<AlbumDetailType> = ({ id }) => {
   return <div className="songs"></div>;
@@ -26,11 +26,10 @@ const AlbumInfo: React.FC<AlbumDetailType> = ({ id }) => {
       ) : (
         <>
           <div className="image-container">
-            <ImageWithLoader
+            <ImageCard
+              title={data.title}
+              className="image-container"
               src={generateURLFromID(data.thumbnail)}
-              skeleton={{
-                className: "skeleton",
-              }}
             />
           </div>
         </>
