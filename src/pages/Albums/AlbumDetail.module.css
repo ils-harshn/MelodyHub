@@ -7,7 +7,7 @@
 }
 
 .album-with-songs :global .album-info {
-    margin-right: 40px;
+  margin-right: 24px;
 }
 
 .album-with-songs :global .album-info .image-container img {
@@ -22,8 +22,33 @@
 }
 
 .album-with-songs :global .songs {
-    flex-grow: 1;
-    height: 100%;
-    border: 1px solid red;
-    overflow-y: auto;
+  flex-grow: 1;
+  height: 100%;
+  border: 1px solid red;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .album-with-songs {
+    flex-direction: column;
+  }
+
+  .album-with-songs :global .album-info .image-container img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .album-with-songs :global .album-info .skeleton {
+    width: 180px;
+    height: 180px;
+  }
+
+  .album-with-songs :global .album-info {
+    margin-right: 0;
+  }
+
+  .album-with-songs :global .songs {
+    margin-top: 24px;
+    width: 100%;
+  }
 }
