@@ -7,10 +7,7 @@
 }
 
 .album-with-songs :global .album-info {
-}
-
-.album-with-songs :global .album-info .image-container {
-  margin-right: 40px;
+    margin-right: 40px;
 }
 
 .album-with-songs :global .album-info .image-container img {
@@ -18,7 +15,7 @@
   height: 300px;
 }
 
-.album-with-songs :global .album-info .image-container .skeleton {
+.album-with-songs :global .album-info .skeleton {
   width: 300px;
   height: 300px;
 }
