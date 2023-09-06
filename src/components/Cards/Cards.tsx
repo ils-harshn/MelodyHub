@@ -109,7 +109,7 @@ const SongCard: React.FC<SongCardType> = ({
               musicPlayerData.data?.id === data.id && musicPlayerData.playing
             }
           />
-          <div>604 Listened</div>
+          <div>{data.views} Listened</div>
         </div>
       </div>
     </div>
