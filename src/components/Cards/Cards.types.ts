@@ -28,3 +28,7 @@ export type LoadMoreCardType = React.HTMLAttributes<HTMLDivElement> & {
   isLoading: boolean;
   isDisabled: boolean;
 };
+
+export type SongCardLandscapeType = SongCardType & {
+  index: number;
+};

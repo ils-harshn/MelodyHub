@@ -2,6 +2,7 @@ import { useInfiniteQuery, useMutation, useQuery } from "react-query";
 import QUERY_KEYS from "./queryKeys";
 import {
   getAlbumDetail,
+  getAlbumSongs,
   getAlbums,
   getArtists,
   getFilterSongs,
@@ -15,6 +16,7 @@ import {
   ArtistsPayloadType,
   FilterSongsPayloadType,
   GetAlbumDetailPayload,
+  GetAlbumSongsPayload,
   LoginPayloadType,
   OnlyPagePayloadType,
 } from "./payload.types";
@@ -137,5 +139,24 @@ export const useAlbumDetail = (
   useQuery({
     queryFn: () => getAlbumDetail(token, payload),
     queryKey: [QUERY_KEYS.GET_ALBUM_DETAIL, payload],
+    ...config,
+  });
+
+export const useAlbumSongsInfiniteQuery = (
+  token: TokenType,
+  payload: GetAlbumSongsPayload,
+  config = {}
+) =>
+  useInfiniteQuery({
+    queryFn: ({ pageParam = 1 }) => {
+      payload.page = pageParam;
+      return getAlbumSongs(token, payload);
+    },
+    queryKey: [QUERY_KEYS.GET_ALBUM_SONGS_INFINITE_QUERY, payload],
+    getNextPageParam: (lastpage: any) => {
+      return lastpage.next && lastpage.count
+        ? getPageNumberFromBEUrl(lastpage.next)
+        : undefined;
+    },
     ...config,
   });

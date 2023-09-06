@@ -97,6 +97,14 @@ CFAT - Constants For All Themes
     #525556 100%
   );
 
+  /* album with songs container background */
+  --album-with-songs-bg-color: #cccccc;
+
+  /* song card landscape */
+  --song-card-landscape-text-color: #000000bf;
+  --song-card-landscape--song-name-text-color: #000000;
+  --song-card-landscape-selected: #ffffff9c;
+
   /* CFAT */
   --blue-color: #1877f2;
 

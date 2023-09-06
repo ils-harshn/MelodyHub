@@ -42,3 +42,11 @@ export const getPageNumberFromBEUrl = (url: string) => {
   let pageValue = urlParams.get("page");
   return pageValue !== null ? pageValue : 1;
 };
+
+export const getIndexForInfiniteQuery = (
+  pagesIndex: number,
+  songIndex: number,
+  indexing: 0 | 1 = 1
+) => {
+  return (songIndex + indexing) * (pagesIndex + 1);
+};

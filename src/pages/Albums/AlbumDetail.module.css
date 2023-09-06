@@ -1,5 +1,5 @@
 .album-with-songs {
-  background-color: #323232;
+  background-color: var(--album-with-songs-bg-color);
   height: calc(100% - 48px);
   padding: 24px;
   display: flex;
@@ -23,9 +23,14 @@
 
 .album-with-songs :global .songs {
   flex-grow: 1;
-  height: 100%;
-  border: 1px solid red;
+  height: fit-content;
+  padding: 24px;
+  max-height: calc(100% - 48px);
   overflow-y: auto;
+}
+
+.album-with-songs :global .songs .song-item {
+  margin-bottom: 8px;
 }
 
 @media screen and (max-width: 768px) {

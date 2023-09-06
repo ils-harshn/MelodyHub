@@ -88,4 +88,12 @@
     #000000 20%,
     #525556 100%
   );
+
+  /* album with songs container background */
+  --album-with-songs-bg-color: #323232;
+
+  /* song card landscape */
+  --song-card-landscape-text-color: #ffffffbf;
+  --song-card-landscape--song-name-text-color: #ffffff;
+  --song-card-landscape-selected: #5b5b5b41;
 }

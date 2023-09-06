@@ -5,4 +5,5 @@ type SongContainerType = React.HTMLAttributes<HTMLDivElement> & {
 
 export type ContentContainerType = SongContainerType;
 export type ImageCardContainerType = SongContainerType;
+export type SongCardLandscapeContainerType = SongContainerType;
 export default SongContainerType;

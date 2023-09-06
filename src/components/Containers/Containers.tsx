@@ -2,6 +2,7 @@ import { getClassName } from "../../utils";
 import SongContainerType, {
   ContentContainerType,
   ImageCardContainerType,
+  SongCardLandscapeContainerType,
 } from "./Containers.types";
 import styles from "./Containers.module.css";
 
@@ -62,6 +63,22 @@ export const ImageCardContainer: React.FC<ImageCardContainerType> = ({
         {optionTitle ? <div onClick={onClick}>{optionTitle}</div> : null}
       </div>
       <div className={getClassName(styles["image-card-container"])}>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export const SongCardLandscapeContainer: React.FC<
+  SongCardLandscapeContainerType
+> = ({ className = "", children, onClick, title, optionTitle, ...props }) => {
+  return (
+    <div className={getClassName(className, styles["container"])} {...props}>
+      <div className="heading">
+        <div className="truncate">{title}</div>
+        {optionTitle ? <div onClick={onClick}>{optionTitle}</div> : null}
+      </div>
+      <div className={getClassName(styles["song-card-landscape-container"])}>
         {children}
       </div>
     </div>

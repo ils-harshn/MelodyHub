@@ -270,7 +270,6 @@
 
 /* Load more card */
 .load-more-card {
-  /* background-color: #363636; */
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -278,5 +277,91 @@
   padding: 10px;
   background: var(--load-more-card-bg-gradient);
   cursor: pointer;
-  aspect-ratio: 1 / 1;
+}
+
+/* song-card-landscape */
+.song-card-landscape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  padding: 2px 14px 2px 14px;
+}
+
+.song-card-landscape :global .index {
+  margin-right: 8px;
+  color: var(--song-card-landscape-text-color);
+}
+
+.song-card-landscape :global .details {
+  flex-grow: 1;
+  min-width: 0;
+  margin-right: 20px;
+  color: var(--song-card-landscape-text-color);
+  cursor: pointer;
+}
+
+.song-card-landscape :global .details .song-name {
+  font-weight: bolder;
+  color: var(--song-card-landscape--song-name-text-color);
+}
+
+.song-card-landscape :global .details:hover .song-name,
+.song-card-landscape:global.selected .details .song-name {
+  color: var(--primary-color);
+}
+
+.song-card-landscape:global.selected {
+  background-color: var(--song-card-landscape-selected);
+  border-radius: 2px;
+}
+
+.song-card-landscape :global .details .artists-name {
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.song-card-landscape :global .option-button {
+  /* position: relative; */
+  width: 14px;
+  min-width: 14px;
+}
+
+.song-card-landscape :global .option-button .options {
+  position: absolute;
+  font-size: 14px;
+  min-width: 120px;
+  background-color: var(--song-card-options-bg-color);
+  padding: 10px;
+  transform-origin: top right;
+  cursor: pointer;
+  border-radius: 4px;
+  transform: scale(0);
+  transition: transform 300ms ease;
+  z-index: 1;
+}
+
+.song-card-landscape :global .option-button:hover .options {
+  transform: scale(1);
+}
+.song-card-landscape :global .option-button svg {
+  fill: var(--song-card-menu-color);
+  transition: fill 300ms ease;
+  cursor: pointer;
+}
+
+.song-card-landscape :global .option-button:hover svg {
+  fill: var(--song-card-menu-hover-color);
+}
+
+.song-card-landscape :global .option-button .options .option {
+  transition: all 100ms ease-in;
+  padding: 4px 8px 4px 8px;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.song-card-landscape :global .option-button .options .option:hover {
+  background-color: var(--song-card-option-hover-color);
+  color: var(--primary-color);
 }

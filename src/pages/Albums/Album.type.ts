@@ -9,4 +9,5 @@ export type AlbumsSelectorOptionType = {
 
 export type AlbumDetailType = {
   id: number;
+  isError: React.Dispatch<React.SetStateAction<boolean>>;
 };

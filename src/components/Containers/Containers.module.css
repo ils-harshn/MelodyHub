@@ -14,6 +14,8 @@
 .container :global .heading div:nth-child(2) {
   font-size: 13px;
   cursor: pointer;
+  min-width: fit-content;
+  margin-left: 20px;
 }
 
 /* song card container */
