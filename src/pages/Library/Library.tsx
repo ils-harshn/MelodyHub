@@ -1,7 +1,8 @@
-import { useContext, Fragment } from "react";
+import { useContext, Fragment, useState, useEffect, useRef } from "react";
 import { useRecentSongsInfiniteQuery } from "../../apis/src/queryHooks";
 import SongCardContainer, {
   ContentCardContainer,
+  PlaylistCardContainer,
 } from "../../components/Containers/Containers";
 import { getClassName } from "../../utils";
 import styles from "./Library.module.css";
@@ -12,6 +13,60 @@ import SongCard, { ContentCard } from "../../components/Cards/Cards";
 import { Artist, Genre, Playlist, Queue } from "../../assests/icons";
 import { useNavigate } from "react-router-dom";
 import * as routes from "../../router/routes";
+import { PlaylistFetcherComponentType } from "./Library.type";
+
+const PlaylistFetcherComponent: React.FC<PlaylistFetcherComponentType> = ({
+  open,
+  toggleOpen,
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const containerEle = containerRef.current;
+    const handleClick = (event: MouseEvent) => {
+      if (containerEle) {
+        if (event.target === containerEle) {
+          toggleOpen(false);
+        }
+      }
+    };
+    if (containerEle) {
+      containerEle.addEventListener("click", handleClick);
+    }
+    return () => {
+      if (containerEle) {
+        containerEle.removeEventListener("click", handleClick);
+      }
+    };
+  }, [toggleOpen]);
+
+  return (
+    <div
+      className={getClassName("playlist-container", open ? "" : "hide")}
+      ref={containerRef}
+    >
+      <PlaylistCardContainer
+        title="Your Playlists"
+        onClickClose={() => toggleOpen(false)}
+        className="main-playlist-container"
+      ></PlaylistCardContainer>
+    </div>
+  );
+};
+
+const Playlists: React.FC = () => {
+  const [open, toggleOpen] = useState(false);
+  return (
+    <>
+      <ContentCard
+        title="Playlists"
+        Icon={Playlist}
+        onClick={() => toggleOpen(true)}
+      />
+      <PlaylistFetcherComponent open={open} toggleOpen={toggleOpen} />
+    </>
+  );
+};
 
 const Recent25Songs: React.FC = () => {
   const token = useContext(TokenContext);
@@ -46,7 +101,7 @@ const Library: React.FC = () => {
   return (
     <div className={getClassName(styles["library"])}>
       <ContentCardContainer title="Library" className="container">
-        <ContentCard title="Playlists" Icon={Playlist} />
+        <Playlists />
         <ContentCard
           title="Artists"
           Icon={Artist}

@@ -52,3 +52,25 @@
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
 }
+
+/* playlist card container */
+.playlist-card-container {
+  width: 100%;
+  min-width: 180px;
+  max-width: 400px;
+  min-height: 90%;
+  padding: 24px;
+  background-color: black;
+  border-radius: 8px;
+}
+
+.playlist-card-container :global .heading div:first-child {
+  font-size: 21px;
+}
+
+.playlist-card-container :global .heading .cross-button svg {
+  fill: var(--icon-color);
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}

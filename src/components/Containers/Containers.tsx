@@ -2,9 +2,11 @@ import { getClassName } from "../../utils";
 import SongContainerType, {
   ContentContainerType,
   ImageCardContainerType,
+  PlaylistCardContainerType,
   SongCardLandscapeContainerType,
 } from "./Containers.types";
 import styles from "./Containers.module.css";
+import { Cross } from "../../assests/icons";
 
 const SongCardContainer: React.FC<SongContainerType> = ({
   className = "",
@@ -81,6 +83,31 @@ export const SongCardLandscapeContainer: React.FC<
       <div className={getClassName(styles["song-card-landscape-container"])}>
         {children}
       </div>
+    </div>
+  );
+};
+
+export const PlaylistCardContainer: React.FC<PlaylistCardContainerType> = ({
+  className = "",
+  children,
+  onClick,
+  title,
+  optionTitle,
+  onClickClose,
+  ...props
+}) => {
+  return (
+    <div
+      className={getClassName(styles["playlist-card-container"], className)}
+      {...props}
+    >
+      <div className="heading">
+        <div className="truncate">{title}</div>
+        <div className="cross-button" onClick={onClickClose}>
+          <Cross />
+        </div>
+      </div>
+      <div className={"playlist-card-items "}>{children}</div>
     </div>
   );
 };
