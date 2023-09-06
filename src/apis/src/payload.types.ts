@@ -45,3 +45,12 @@ export type GetAlbumSongsPayload = {
   page?: number;
   id: number;
 };
+
+export type GetArtistDetailPayload = {
+  id: number;
+};
+
+export type GetArtistSongsPayload = {
+  page?: number;
+  id: number;
+};

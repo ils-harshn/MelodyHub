@@ -9,6 +9,7 @@ import Library from "../pages/Library/Library";
 import Album from "../pages/Albums/Album";
 import Artist from "../pages/Artists/Artist";
 import AlbumDetail from "../pages/Albums/AlbumDetail";
+import ArtistDetail from "../pages/Artists/ArtistDetail";
 
 const AppRouter: React.FC = () => {
   return (
@@ -40,6 +41,7 @@ const AppRouter: React.FC = () => {
           <Route path={routes.ARTIST_NESTED.path}>
             <Route index element={<Artist />} />
             <Route path={routes.ARTIST.path} element={<Artist />} />
+            <Route path={routes.ARTIST_SONGS.path} element={<ArtistDetail />} />
           </Route>
 
           {/* Page Not Found */}

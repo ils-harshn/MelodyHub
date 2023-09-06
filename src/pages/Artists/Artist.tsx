@@ -11,8 +11,11 @@ import styles from "./Artist.module.css";
 import { useContext, Fragment, useState } from "react";
 import { ArtistsPayloadType } from "../../apis/src/payload.types";
 import { FullLoader } from "../../components/Loaders/Loaders";
+import { useNavigate } from "react-router-dom";
+import { ARTIST_SONGS } from "../../router/routes";
 
 const Artist: React.FC = () => {
+  const navigate = useNavigate();
   const token = useContext(TokenContext);
   const [filterBoxData, setFilterBoxData] = useState<ArtistsPayloadType>({
     text: "",
@@ -68,6 +71,7 @@ const Artist: React.FC = () => {
                   key={item.id}
                   src={generateURLFromID(item.artists_thumbnail300x300)}
                   optionTitle=""
+                  onClick={() => navigate(ARTIST_SONGS.endpoint(item.id))}
                 />
               ))}
             </Fragment>

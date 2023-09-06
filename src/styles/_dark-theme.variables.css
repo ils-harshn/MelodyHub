@@ -91,6 +91,7 @@
 
   /* album with songs container background */
   --album-with-songs-bg-color: #323232;
+  --artist-with-songs-bg-color: #323232;
 
   /* song card landscape */
   --song-card-landscape-text-color: #ffffffbf;

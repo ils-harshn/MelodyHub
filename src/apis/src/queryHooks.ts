@@ -4,6 +4,8 @@ import {
   getAlbumDetail,
   getAlbumSongs,
   getAlbums,
+  getArtistDetail,
+  getArtistSongs,
   getArtists,
   getFilterSongs,
   getMostPopularSong,
@@ -17,6 +19,8 @@ import {
   FilterSongsPayloadType,
   GetAlbumDetailPayload,
   GetAlbumSongsPayload,
+  GetArtistDetailPayload,
+  GetArtistSongsPayload,
   LoginPayloadType,
   OnlyPagePayloadType,
 } from "./payload.types";
@@ -153,6 +157,36 @@ export const useAlbumSongsInfiniteQuery = (
       return getAlbumSongs(token, payload);
     },
     queryKey: [QUERY_KEYS.GET_ALBUM_SONGS_INFINITE_QUERY, payload],
+    getNextPageParam: (lastpage: any) => {
+      return lastpage.next && lastpage.count
+        ? getPageNumberFromBEUrl(lastpage.next)
+        : undefined;
+    },
+    ...config,
+  });
+
+export const useArtistDetail = (
+  token: TokenType,
+  payload: GetArtistDetailPayload,
+  config = {}
+) =>
+  useQuery({
+    queryFn: () => getArtistDetail(token, payload),
+    queryKey: [QUERY_KEYS.GET_ARTIST_DETAIL, payload],
+    ...config,
+  });
+
+export const useArtistSongsInfiniteQuery = (
+  token: TokenType,
+  payload: GetArtistSongsPayload,
+  config = {}
+) =>
+  useInfiniteQuery({
+    queryFn: ({ pageParam = 1 }) => {
+      payload.page = pageParam;
+      return getArtistSongs(token, payload);
+    },
+    queryKey: [QUERY_KEYS.GET_ARTIST_SONGS_INFINITE_QUERY, payload],
     getNextPageParam: (lastpage: any) => {
       return lastpage.next && lastpage.count
         ? getPageNumberFromBEUrl(lastpage.next)

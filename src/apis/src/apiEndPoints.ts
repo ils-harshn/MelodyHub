@@ -20,6 +20,9 @@ const ENDPOINTS = {
   GET_ALBUM_DETAIL: (id: number) => `/api/albums/get/${id}/`,
   GET_ARTISTS: (page = 1, name = "") =>
     `/api/artists/?name=${name}&page=${page}`,
+  GET_ARTIST_DETAIL: (id: number) => `/api/artists/get/${id}/`,
+  GET_ARTIST_SONGS: (page = 1, id: number) =>
+    `/api/artists/get/${id}/songs/?page=${page}`,
 };
 
 export default ENDPOINTS;
