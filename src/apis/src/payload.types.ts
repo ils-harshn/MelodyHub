@@ -54,3 +54,8 @@ export type GetArtistSongsPayload = {
   page?: number;
   id: number;
 };
+
+export type GetPlaylistsWithFilterPayload = {
+  page?: number;
+  text: string;
+};

@@ -58,9 +58,10 @@
   width: 100%;
   min-width: 180px;
   max-width: 400px;
-  min-height: 90%;
+  min-height: 400px;
+  height: 90vh;
   padding: 24px;
-  background-color: black;
+  background-color: var(--playlist-card-container-bg-color);
   border-radius: 8px;
 }
 

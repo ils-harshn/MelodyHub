@@ -9,6 +9,7 @@ import {
   getArtists,
   getFilterSongs,
   getMostPopularSong,
+  getPlaylistsWithFilter,
   getRecentSongs,
   loginUser,
   verifyToken,
@@ -21,6 +22,7 @@ import {
   GetAlbumSongsPayload,
   GetArtistDetailPayload,
   GetArtistSongsPayload,
+  GetPlaylistsWithFilterPayload,
   LoginPayloadType,
   OnlyPagePayloadType,
 } from "./payload.types";
@@ -187,6 +189,25 @@ export const useArtistSongsInfiniteQuery = (
       return getArtistSongs(token, payload);
     },
     queryKey: [QUERY_KEYS.GET_ARTIST_SONGS_INFINITE_QUERY, payload],
+    getNextPageParam: (lastpage: any) => {
+      return lastpage.next && lastpage.count
+        ? getPageNumberFromBEUrl(lastpage.next)
+        : undefined;
+    },
+    ...config,
+  });
+
+export const useFilterPlaylistsInfiniteQuery = (
+  token: TokenType,
+  payload: GetPlaylistsWithFilterPayload,
+  config = {}
+) =>
+  useInfiniteQuery({
+    queryFn: ({ pageParam = 1 }) => {
+      payload.page = pageParam;
+      return getPlaylistsWithFilter(token, payload);
+    },
+    queryKey: [QUERY_KEYS.FILTERED_PLAYLISTS_INFINITE_QUERY, payload],
     getNextPageParam: (lastpage: any) => {
       return lastpage.next && lastpage.count
         ? getPageNumberFromBEUrl(lastpage.next)

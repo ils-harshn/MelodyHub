@@ -107,7 +107,7 @@ export const PlaylistCardContainer: React.FC<PlaylistCardContainerType> = ({
           <Cross />
         </div>
       </div>
-      <div className={"playlist-card-items "}>{children}</div>
+      <div className={"playlist-card-items"}>{children}</div>
     </div>
   );
 };

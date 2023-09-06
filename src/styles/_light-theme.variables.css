@@ -106,6 +106,13 @@ CFAT - Constants For All Themes
   --song-card-landscape--song-name-text-color: #000000;
   --song-card-landscape-selected: #ffffff9c;
 
+  /* playlist card */
+  --playlist-card-border-bottom-color: #88888852;
+  --playlist-card-border-bottom-hover-color: #c1c1c1e1;
+
+  /* playlist card container */
+  --playlist-card-container-bg-color: #ffffff;
+
   /* CFAT */
   --blue-color: #1877f2;
 

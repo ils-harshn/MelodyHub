@@ -1,5 +1,8 @@
 import { useContext, Fragment, useState, useEffect, useRef } from "react";
-import { useRecentSongsInfiniteQuery } from "../../apis/src/queryHooks";
+import {
+  useFilterPlaylistsInfiniteQuery,
+  useRecentSongsInfiniteQuery,
+} from "../../apis/src/queryHooks";
 import SongCardContainer, {
   ContentCardContainer,
   PlaylistCardContainer,
@@ -8,17 +11,37 @@ import { getClassName } from "../../utils";
 import styles from "./Library.module.css";
 import { TokenContext } from "../../contexts/TokenContext";
 import { FullLoader } from "../../components/Loaders/Loaders";
-import { SongType } from "../../apis/src/response.types";
-import SongCard, { ContentCard } from "../../components/Cards/Cards";
+import { PlaylistResponseType, SongType } from "../../apis/src/response.types";
+import SongCard, {
+  ContentCard,
+  LoadMoreCard,
+  PlaylistCard,
+} from "../../components/Cards/Cards";
 import { Artist, Genre, Playlist, Queue } from "../../assests/icons";
 import { useNavigate } from "react-router-dom";
 import * as routes from "../../router/routes";
 import { PlaylistFetcherComponentType } from "./Library.type";
+import { getIndexForInfiniteQuery } from "../../apis/src/utils";
+import { TextInput } from "../../components/Inputs/Inputs";
+import { useDebounce } from "@uidotdev/usehooks";
 
 const PlaylistFetcherComponent: React.FC<PlaylistFetcherComponentType> = ({
   open,
   toggleOpen,
 }) => {
+  const token = useContext(TokenContext);
+  const [text, setText] = useState("");
+  const debouncedText = useDebounce(text, 500);
+  const {
+    data,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    isFetching,
+    fetchNextPage,
+  } = useFilterPlaylistsInfiniteQuery(token, {
+    text: debouncedText,
+  });
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,15 +64,51 @@ const PlaylistFetcherComponent: React.FC<PlaylistFetcherComponentType> = ({
   }, [toggleOpen]);
 
   return (
-    <div
-      className={getClassName("playlist-container", open ? "" : "hide")}
-      ref={containerRef}
-    >
+    <div className={getClassName("playlist-container")} ref={containerRef}>
       <PlaylistCardContainer
         title="Your Playlists"
         onClickClose={() => toggleOpen(false)}
         className="main-playlist-container"
-      ></PlaylistCardContainer>
+      >
+        <div className="right-shift">
+          <TextInput
+            varient="secondary"
+            placeholder="Search Playlist"
+            className="playlist-search-input"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+        </div>
+        {isLoading ? (
+          <FullLoader />
+        ) : !data || !data.pages || data.pages[0].count === 0 ? (
+          <h2>No Playlist Created</h2>
+        ) : (
+          <div className="paylist-cards-items-container primary-scroll-bar">
+            {data.pages.map((group, index) => (
+              <Fragment key={index}>
+                {group.results.map((item: PlaylistResponseType, i: number) => (
+                  <PlaylistCard
+                    className="playlist-item"
+                    data={item}
+                    key={item.id}
+                    index={getIndexForInfiniteQuery(index, i)}
+                  />
+                ))}
+              </Fragment>
+            ))}
+            {hasNextPage ? (
+              <LoadMoreCard
+                className="more-loader"
+                isLoading={isFetching || isLoading || isFetchingNextPage}
+                isDisabled={isFetching || isLoading || isFetchingNextPage}
+                title="Load More Playlist"
+                onClick={() => fetchNextPage()}
+              />
+            ) : null}
+          </div>
+        )}
+      </PlaylistCardContainer>
     </div>
   );
 };
@@ -63,7 +122,9 @@ const Playlists: React.FC = () => {
         Icon={Playlist}
         onClick={() => toggleOpen(true)}
       />
-      <PlaylistFetcherComponent open={open} toggleOpen={toggleOpen} />
+      {open ? (
+        <PlaylistFetcherComponent open={open} toggleOpen={toggleOpen} />
+      ) : null}
     </>
   );
 };

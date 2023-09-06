@@ -365,3 +365,47 @@
   background-color: var(--song-card-option-hover-color);
   color: var(--primary-color);
 }
+
+/* playlist card */
+.playlist-card {
+  cursor: pointer;
+  padding: 4px 2px 4px 2px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--song-card-landscape-text-color);
+  border-bottom: 1px solid var(--playlist-card-border-bottom-color);
+}
+
+.playlist-card :global .index {
+  margin-right: 8px;
+}
+
+.playlist-card :global .title {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.playlist-card:global:hover .title {
+  color: var(--primary-color);
+}
+
+.playlist-card:global:hover {
+  border-color: var(--playlist-card-border-bottom-hover-color);
+}
+
+.playlist-card :global .trash-icon {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.playlist-card:global:hover .trash-icon {
+  opacity: 1;
+}
+
+.playlist-card :global .trash-icon svg {
+  pointer-events: none;
+  fill: var(--icon-color);
+  width: 14px;
+  height: 14px;
+}

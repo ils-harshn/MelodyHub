@@ -9,6 +9,7 @@ import {
   GetAlbumSongsPayload,
   GetArtistDetailPayload,
   GetArtistSongsPayload,
+  GetPlaylistsWithFilterPayload,
   OnlyPagePayloadType,
 } from "./payload.types";
 import {
@@ -172,6 +173,20 @@ export const getArtistSongs = async (
   const response = await api({
     method: "get",
     url: ENDPOINTS.GET_ARTIST_SONGS(payload.page, payload.id),
+    headers: {
+      ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};
+
+export const getPlaylistsWithFilter = async (
+  token: TokenType,
+  payload: GetPlaylistsWithFilterPayload
+) => {
+  const response = await api({
+    method: "get",
+    url: ENDPOINTS.GET_PLAYLISTS_WITH_FILTER(payload.page, payload.text),
     headers: {
       ...getAuthHeader(token),
     },

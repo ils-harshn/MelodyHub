@@ -23,6 +23,8 @@ const ENDPOINTS = {
   GET_ARTIST_DETAIL: (id: number) => `/api/artists/get/${id}/`,
   GET_ARTIST_SONGS: (page = 1, id: number) =>
     `/api/artists/get/${id}/songs/?page=${page}`,
+  GET_PLAYLISTS_WITH_FILTER: (page = 1, title: string) =>
+    `/api/songs/playlists/?title=${title}&page=${page}`,
 };
 
 export default ENDPOINTS;

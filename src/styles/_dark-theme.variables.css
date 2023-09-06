@@ -97,4 +97,11 @@
   --song-card-landscape-text-color: #ffffffbf;
   --song-card-landscape--song-name-text-color: #ffffff;
   --song-card-landscape-selected: #5b5b5b41;
+
+  /* playlist card */
+  --playlist-card-border-bottom-color: #88888852;
+  --playlist-card-border-bottom-hover-color: #c1c1c1e1;
+
+  /* playlist card container */
+  --playlist-card-container-bg-color: #000000;
 }

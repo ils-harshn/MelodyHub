@@ -51,3 +51,8 @@ export type FilterSongsResponseType = {
   previous: string | null;
   results: SongType[];
 };
+
+export type PlaylistResponseType = {
+  id: number;
+  title: string;
+};

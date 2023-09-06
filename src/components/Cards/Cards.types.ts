@@ -1,4 +1,4 @@
-import { SongType } from "../../apis/src/response.types";
+import { PlaylistResponseType, SongType } from "../../apis/src/response.types";
 import { IconType } from "../../assests/icons.types";
 
 export type SongCardType = React.HTMLAttributes<HTMLDivElement> & {
@@ -30,5 +30,10 @@ export type LoadMoreCardType = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 export type SongCardLandscapeType = SongCardType & {
+  index: number;
+};
+
+export type PlaylistCardType = React.HTMLAttributes<HTMLDivElement> & {
+  data: PlaylistResponseType;
   index: number;
 };

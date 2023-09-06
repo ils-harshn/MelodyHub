@@ -1,4 +1,4 @@
-import { Album, Options } from "../../assests/icons";
+import { Album, Options, Trash } from "../../assests/icons";
 import {
   useMusicPlayerData,
   useMusicPlayerDispatch,
@@ -15,6 +15,7 @@ import {
   ImageCardType,
   LoadMoreCardType,
   OptionPopupType,
+  PlaylistCardType,
   SongCardLandscapeType,
   SongCardType,
 } from "./Cards.types";
@@ -284,6 +285,26 @@ export const SongCardLandscape: React.FC<SongCardLandscapeType> = ({
           musicPlayerData.data?.id === data.id && musicPlayerData.playing
         }
       />
+    </div>
+  );
+};
+
+export const PlaylistCard: React.FC<PlaylistCardType> = ({
+  data,
+  index,
+  className = "",
+  ...props
+}) => {
+  return (
+    <div
+      className={getClassName(styles["playlist-card"], className)}
+      {...props}
+    >
+      <div className="index">{index}.</div>
+      <div className="title truncate">{data.title}</div>
+      <div className="trash-icon">
+        <Trash />
+      </div>
     </div>
   );
 };
