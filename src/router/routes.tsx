@@ -38,11 +38,6 @@ export const LIBRARY = {
   endpoint: makeRoute("library", INDEX.endpoint),
 };
 
-export const CREATE_PLAYLIST = {
-  path: "createplaylist",
-  endpoint: makeRoute("createplaylist", INDEX.endpoint),
-};
-
 export const LIKED_SONGS = {
   path: "likedsongs",
   endpoint: makeRoute("likedsongs", INDEX.endpoint),

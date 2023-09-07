@@ -7,7 +7,7 @@ import { getClassName } from "../../utils";
 import { generateURLFromID } from "../../utils/helpers/urls";
 import { PlayPauseButton } from "../Buttons/buttons";
 import ImageWithLoader from "../ImageWithLoader/ImageWithLoader";
-import { FullLoader, Loader } from "../Loaders/Loaders";
+import { FullLoader } from "../Loaders/Loaders";
 import styles from "./Cards.module.css";
 import { useRef, useEffect, useState, useContext } from "react";
 import {

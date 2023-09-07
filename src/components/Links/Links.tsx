@@ -31,11 +31,16 @@ export const SidebarLink: React.FC<SidebarLinkType> = ({
   title,
   Icon,
   className = "",
+  activeLinkType = true,
   ...props
 }) => {
   return (
     <div className={getClassName(styles["sidebar-link"], className)}>
-      <NavLink {...props}>{title}</NavLink>
+      {activeLinkType ? (
+        <NavLink {...props}>{title}</NavLink>
+      ) : (
+        <Link {...props}>{title}</Link>
+      )}
       <Icon />
     </div>
   );

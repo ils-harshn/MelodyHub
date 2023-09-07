@@ -83,7 +83,11 @@ const Sidebar: React.FC = () => {
         <SidebarLink
           Icon={Plus}
           title="Create Playlist"
-          to={routes.CREATE_PLAYLIST.endpoint}
+          to={routes.LIBRARY.endpoint}
+          state={{
+            openPlaylists: true,
+          }}
+          activeLinkType={false}
           onClick={hideSideBar}
         />
         <SidebarLink

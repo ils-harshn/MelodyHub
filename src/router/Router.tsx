@@ -23,10 +23,6 @@ const AppRouter: React.FC = () => {
           <Route path={routes.SEARCH.path} element={<Search />} />
           <Route path={routes.LIBRARY.path} element={<Library />} />
           <Route
-            path={routes.CREATE_PLAYLIST.path}
-            element={<h2>CREATE_PLAYLIST</h2>}
-          />
-          <Route
             path={routes.LIKED_SONGS.path}
             element={<h2>LIKED_SONGS</h2>}
           />

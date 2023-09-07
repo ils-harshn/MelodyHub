@@ -10,12 +10,13 @@ import { FullLoader } from "../../components/Loaders/Loaders";
 import { SongType } from "../../apis/src/response.types";
 import SongCard, { ContentCard } from "../../components/Cards/Cards";
 import { Artist, Genre, Playlist, Queue } from "../../assests/icons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as routes from "../../router/routes";
 import { PlaylistFetcherComponent } from "../../components/PlaylistFetcher/PlaylistFetcher";
 
 const Playlists: React.FC = () => {
-  const [open, toggleOpen] = useState(false);
+  const location = useLocation();
+  const [open, toggleOpen] = useState(location.state?.openPlaylists || false);
   return (
     <>
       <ContentCard
