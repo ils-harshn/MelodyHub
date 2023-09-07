@@ -1,4 +1,4 @@
-import { useContext, Fragment, useState } from "react";
+import { useContext, Fragment } from "react";
 import { useRecentSongsInfiniteQuery } from "../../apis/src/queryHooks";
 import SongCardContainer, {
   ContentCardContainer,
@@ -10,26 +10,9 @@ import { FullLoader } from "../../components/Loaders/Loaders";
 import { SongType } from "../../apis/src/response.types";
 import SongCard, { ContentCard } from "../../components/Cards/Cards";
 import { Artist, Genre, Playlist, Queue } from "../../assests/icons";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as routes from "../../router/routes";
-import { PlaylistFetcherComponent } from "../../components/PlaylistFetcher/PlaylistFetcher";
-
-const Playlists: React.FC = () => {
-  const location = useLocation();
-  const [open, toggleOpen] = useState(location.state?.openPlaylists || false);
-  return (
-    <>
-      <ContentCard
-        title="Playlists"
-        Icon={Playlist}
-        onClick={() => toggleOpen(true)}
-      />
-      {open ? (
-        <PlaylistFetcherComponent open={open} toggleOpen={toggleOpen} />
-      ) : null}
-    </>
-  );
-};
+import { usePlaylistComponentDispatch } from "../../hooks/PlaylistComponentHooks";
 
 const Recent25Songs: React.FC = () => {
   const token = useContext(TokenContext);
@@ -60,11 +43,16 @@ const Recent25Songs: React.FC = () => {
 };
 const Library: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch = usePlaylistComponentDispatch();
 
   return (
     <div className={getClassName(styles["library"])}>
       <ContentCardContainer title="Library" className="container">
-        <Playlists />
+        <ContentCard
+          title="Playlists"
+          Icon={Playlist}
+          onClick={() => dispatch({ type: "TOGGLE", payload: { open: true } })}
+        />
         <ContentCard
           title="Artists"
           Icon={Artist}

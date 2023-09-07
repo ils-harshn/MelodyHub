@@ -21,17 +21,26 @@ import {
 } from "./Cards.types";
 import { useDeletePlaylistMutation } from "../../apis/src/queryHooks";
 import { TokenContext } from "../../contexts/TokenContext";
+import { usePlaylistComponentDispatch } from "../../hooks/PlaylistComponentHooks";
 
 const OptionPopup: React.FC<OptionPopupType> = ({
   data,
   handlePlay,
   isPlaying,
 }) => {
+  const dispatchPlaylistData = usePlaylistComponentDispatch();
   return (
     <div className="option-button">
       <Options />
       <div className="options">
-        <div className="option">Add To Playlist</div>
+        <div
+          className="option"
+          onClick={() =>
+            dispatchPlaylistData({ type: "TOGGLE", payload: { open: true } })
+          }
+        >
+          Add To Playlist
+        </div>
         <div className="option">Add To Queue</div>
         <div className="option" onClick={handlePlay}>
           {isPlaying ? "Pause" : "Play"}

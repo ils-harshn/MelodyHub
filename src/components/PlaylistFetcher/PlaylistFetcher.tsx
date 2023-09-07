@@ -18,6 +18,10 @@ import { TextInput } from "../../components/Inputs/Inputs";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Button } from "../../components/Buttons/buttons";
 import Error from "../../components/Error/Error";
+import {
+  usePlaylistComponentData,
+  usePlaylistComponentDispatch,
+} from "../../hooks/PlaylistComponentHooks";
 
 const PlaylistCreator: React.FC<PlaylistCreatorType> = ({ onSuccessAdd }) => {
   const token = useContext(TokenContext);
@@ -135,7 +139,7 @@ export const PlaylistFetcherComponent: React.FC<
           {isLoading ? (
             <FullLoader />
           ) : !data || !data.pages || data.pages[0].count === 0 ? (
-            <h2>No Playlist Created</h2>
+            <h2>No Playlist Found</h2>
           ) : (
             <>
               {data.pages.map((group, index) => (
@@ -165,5 +169,25 @@ export const PlaylistFetcherComponent: React.FC<
         <PlaylistCreator onSuccessAdd={() => refetch()} />
       </PlaylistCardContainer>
     </div>
+  );
+};
+
+export const PlaylistShower: React.FC = () => {
+  const playlistData = usePlaylistComponentData();
+  const dispatch = usePlaylistComponentDispatch();
+
+  if (playlistData.open === false) return null;
+  return (
+    <PlaylistFetcherComponent
+      open={false}
+      toggleOpen={() => {
+        dispatch({
+          type: "TOGGLE",
+          payload: {
+            open: false,
+          },
+        });
+      }}
+    />
   );
 };

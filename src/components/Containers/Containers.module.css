@@ -59,14 +59,24 @@
   min-width: 180px;
   max-width: 400px;
   min-height: 400px;
-  height: 90vh;
+  height: 90%;
   padding: 24px;
   background-color: var(--playlist-card-container-bg-color);
   border-radius: 8px;
 }
 
+.playlist-card-container :global .heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .playlist-card-container :global .heading div:first-child {
   font-size: 21px;
+}
+
+.playlist-card-container :global .heading .cross-button {
+  cursor: pointer;
 }
 
 .playlist-card-container :global .heading .cross-button svg {
