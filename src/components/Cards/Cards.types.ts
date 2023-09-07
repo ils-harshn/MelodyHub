@@ -35,5 +35,5 @@ export type SongCardLandscapeType = SongCardType & {
 
 export type PlaylistCardType = React.HTMLAttributes<HTMLDivElement> & {
   data: PlaylistResponseType;
-  index: number;
+  onDeleteSuccess?: () => void;
 };

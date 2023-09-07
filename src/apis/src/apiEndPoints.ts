@@ -25,6 +25,8 @@ const ENDPOINTS = {
     `/api/artists/get/${id}/songs/?page=${page}`,
   GET_PLAYLISTS_WITH_FILTER: (page = 1, title: string) =>
     `/api/songs/playlists/?title=${title}&page=${page}`,
+  DELETE_PLAYLIST: (id: number) => `/api/songs/playlists/delete/${id}/`,
+  CREATE_PLAYLIST: `/api/songs/playlists/create/`,
 };
 
 export default ENDPOINTS;

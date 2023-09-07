@@ -7,9 +7,9 @@ import { getClassName } from "../../utils";
 import { generateURLFromID } from "../../utils/helpers/urls";
 import { PlayPauseButton } from "../Buttons/buttons";
 import ImageWithLoader from "../ImageWithLoader/ImageWithLoader";
-import { FullLoader } from "../Loaders/Loaders";
+import { FullLoader, Loader } from "../Loaders/Loaders";
 import styles from "./Cards.module.css";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
 import {
   ContentCardType,
   ImageCardType,
@@ -19,6 +19,8 @@ import {
   SongCardLandscapeType,
   SongCardType,
 } from "./Cards.types";
+import { useDeletePlaylistMutation } from "../../apis/src/queryHooks";
+import { TokenContext } from "../../contexts/TokenContext";
 
 const OptionPopup: React.FC<OptionPopupType> = ({
   data,
@@ -291,18 +293,38 @@ export const SongCardLandscape: React.FC<SongCardLandscapeType> = ({
 
 export const PlaylistCard: React.FC<PlaylistCardType> = ({
   data,
-  index,
   className = "",
+  onDeleteSuccess,
   ...props
 }) => {
+  const [deleted, setDeleted] = useState(false);
+  const token = useContext(TokenContext);
+  const { mutate, isLoading } = useDeletePlaylistMutation(token, {
+    onSuccess: () => {
+      if (onDeleteSuccess) onDeleteSuccess();
+      setDeleted(true);
+    },
+  });
+
+  const handleDelete = () => {
+    if (!isLoading)
+      mutate({
+        id: data.id,
+      });
+  };
+
+  if (deleted) return null;
   return (
     <div
-      className={getClassName(styles["playlist-card"], className)}
+      className={getClassName(
+        styles["playlist-card"],
+        className,
+        isLoading ? "deleting" : ""
+      )}
       {...props}
     >
-      <div className="index">{index}.</div>
       <div className="title truncate">{data.title}</div>
-      <div className="trash-icon">
+      <div className="trash-icon" onClick={handleDelete}>
         <Trash />
       </div>
     </div>

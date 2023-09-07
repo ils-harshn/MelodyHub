@@ -4,6 +4,8 @@ import ENDPOINTS from "./apiEndPoints";
 import {
   AlbumsPayloadType,
   ArtistsPayloadType,
+  CreatePlaylistPayload,
+  DeletePlatlistPayload,
   FilterSongsPayloadType,
   GetAlbumDetailPayload,
   GetAlbumSongsPayload,
@@ -189,6 +191,37 @@ export const getPlaylistsWithFilter = async (
     url: ENDPOINTS.GET_PLAYLISTS_WITH_FILTER(payload.page, payload.text),
     headers: {
       ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};
+
+export const deletePlaylist = async (
+  token: TokenType,
+  payload: DeletePlatlistPayload
+) => {
+  const response = await api({
+    method: "delete",
+    url: ENDPOINTS.DELETE_PLAYLIST(payload.id),
+    headers: {
+      ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};
+
+export const createPlaylist = async (
+  token: TokenType,
+  payload: CreatePlaylistPayload
+) => {
+  const response = await api({
+    method: "post",
+    url: ENDPOINTS.CREATE_PLAYLIST,
+    headers: {
+      ...getAuthHeader(token),
+    },
+    data: {
+      title: payload.text,
     },
   });
   return response.data;

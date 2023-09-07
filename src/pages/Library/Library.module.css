@@ -36,9 +36,42 @@
   .paylist-cards-items-container {
   overflow-y: auto;
   height: 65vh;
+  margin-bottom: 20px;
   padding-right: 10px;
 }
 
 .library :global .playlist-container .main-playlist-container .playlist-item {
   margin-bottom: 10px;
+}
+
+.library :global .playlist-creator {
+  display: flex;
+  justify-content: space-between;
+}
+
+.library :global .playlist-creator input {
+  min-width: 80px;
+  width: 100%;
+  margin-right: 20px;
+}
+
+.library :global .playlist-creator .add-playlist-button-container {
+  width: 150px;
+}
+
+.library :global .playlist-creator-error {
+  animation: disappear 2000ms forwards;
+}
+
+@keyframes :global(disappear) {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
 }

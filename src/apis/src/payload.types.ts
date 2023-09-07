@@ -37,9 +37,11 @@ export type OnlyPagePayloadType = {
   page?: number;
 };
 
-export type GetAlbumDetailPayload = {
+export type OnlyIdPayloadType = {
   id: number;
 };
+
+export type GetAlbumDetailPayload = OnlyIdPayloadType;
 
 export type GetAlbumSongsPayload = {
   page?: number;
@@ -57,5 +59,10 @@ export type GetArtistSongsPayload = {
 
 export type GetPlaylistsWithFilterPayload = {
   page?: number;
+  text: string;
+};
+
+export type DeletePlatlistPayload = OnlyIdPayloadType;
+export type CreatePlaylistPayload = {
   text: string;
 };

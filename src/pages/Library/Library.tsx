@@ -1,5 +1,6 @@
 import { useContext, Fragment, useState, useEffect, useRef } from "react";
 import {
+  useCreatePlaylistMutation,
   useFilterPlaylistsInfiniteQuery,
   useRecentSongsInfiniteQuery,
 } from "../../apis/src/queryHooks";
@@ -20,10 +21,62 @@ import SongCard, {
 import { Artist, Genre, Playlist, Queue } from "../../assests/icons";
 import { useNavigate } from "react-router-dom";
 import * as routes from "../../router/routes";
-import { PlaylistFetcherComponentType } from "./Library.type";
-import { getIndexForInfiniteQuery } from "../../apis/src/utils";
+import {
+  PlaylistCreatorType,
+  PlaylistFetcherComponentType,
+} from "./Library.type";
 import { TextInput } from "../../components/Inputs/Inputs";
 import { useDebounce } from "@uidotdev/usehooks";
+import { Button } from "../../components/Buttons/buttons";
+import Error from "../../components/Error/Error";
+
+const PlaylistCreator: React.FC<PlaylistCreatorType> = ({ onSuccessAdd }) => {
+  const token = useContext(TokenContext);
+  const [text, setText] = useState("");
+  const { mutate, isLoading, isError } = useCreatePlaylistMutation(token, {
+    onSuccess: () => {
+      setText("");
+      onSuccessAdd && onSuccessAdd();
+    },
+  });
+
+  const handleCreate = () => {
+    if (!isLoading && text)
+      mutate({
+        text,
+      });
+  };
+
+  return (
+    <>
+      <div className="playlist-creator">
+        <TextInput
+          varient="secondary"
+          placeholder="Enter Playlist Name"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          maxLength={80}
+        />
+        <div className="add-playlist-button-container">
+          <Button
+            varient="primary"
+            width="full"
+            disabled={!text || isLoading}
+            loading={isLoading}
+            onClick={handleCreate}
+          >
+            Add
+          </Button>
+        </div>
+      </div>
+      {isError && (
+        <div className="playlist-creator-error">
+          <Error>*Playlist already exists with this name!</Error>
+        </div>
+      )}
+    </>
+  );
+};
 
 const PlaylistFetcherComponent: React.FC<PlaylistFetcherComponentType> = ({
   open,
@@ -38,6 +91,7 @@ const PlaylistFetcherComponent: React.FC<PlaylistFetcherComponentType> = ({
     isFetchingNextPage,
     hasNextPage,
     isFetching,
+    refetch,
     fetchNextPage,
   } = useFilterPlaylistsInfiniteQuery(token, {
     text: debouncedText,
@@ -79,35 +133,38 @@ const PlaylistFetcherComponent: React.FC<PlaylistFetcherComponentType> = ({
             onChange={(e) => setText(e.target.value)}
           />
         </div>
-        {isLoading ? (
-          <FullLoader />
-        ) : !data || !data.pages || data.pages[0].count === 0 ? (
-          <h2>No Playlist Created</h2>
-        ) : (
-          <div className="paylist-cards-items-container primary-scroll-bar">
-            {data.pages.map((group, index) => (
-              <Fragment key={index}>
-                {group.results.map((item: PlaylistResponseType, i: number) => (
-                  <PlaylistCard
-                    className="playlist-item"
-                    data={item}
-                    key={item.id}
-                    index={getIndexForInfiniteQuery(index, i)}
-                  />
-                ))}
-              </Fragment>
-            ))}
-            {hasNextPage ? (
-              <LoadMoreCard
-                className="more-loader"
-                isLoading={isFetching || isLoading || isFetchingNextPage}
-                isDisabled={isFetching || isLoading || isFetchingNextPage}
-                title="Load More Playlist"
-                onClick={() => fetchNextPage()}
-              />
-            ) : null}
-          </div>
-        )}
+        <div className="paylist-cards-items-container primary-scroll-bar">
+          {isLoading ? (
+            <FullLoader />
+          ) : !data || !data.pages || data.pages[0].count === 0 ? (
+            <h2>No Playlist Created</h2>
+          ) : (
+            <>
+              {data.pages.map((group, index) => (
+                <Fragment key={index}>
+                  {group.results.map((item: PlaylistResponseType) => (
+                    <PlaylistCard
+                      className="playlist-item"
+                      data={item}
+                      key={item.id}
+                      onDeleteSuccess={refetch}
+                    />
+                  ))}
+                </Fragment>
+              ))}
+              {hasNextPage ? (
+                <LoadMoreCard
+                  className="more-loader"
+                  isLoading={isFetching || isLoading || isFetchingNextPage}
+                  isDisabled={isFetching || isLoading || isFetchingNextPage}
+                  title="Load More Playlist"
+                  onClick={() => fetchNextPage()}
+                />
+              ) : null}
+            </>
+          )}
+        </div>
+        <PlaylistCreator onSuccessAdd={() => refetch()} />
       </PlaylistCardContainer>
     </div>
   );

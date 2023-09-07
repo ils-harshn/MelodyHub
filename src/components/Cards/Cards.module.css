@@ -409,3 +409,7 @@
   width: 14px;
   height: 14px;
 }
+
+.playlist-card:global.deleting .title {
+  color: var(--error-text-color);
+}

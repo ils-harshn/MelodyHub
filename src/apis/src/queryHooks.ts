@@ -1,6 +1,8 @@
 import { useInfiniteQuery, useMutation, useQuery } from "react-query";
 import QUERY_KEYS from "./queryKeys";
 import {
+  createPlaylist,
+  deletePlaylist,
   getAlbumDetail,
   getAlbumSongs,
   getAlbums,
@@ -17,6 +19,8 @@ import {
 import {
   AlbumsPayloadType,
   ArtistsPayloadType,
+  CreatePlaylistPayload,
+  DeletePlatlistPayload,
   FilterSongsPayloadType,
   GetAlbumDetailPayload,
   GetAlbumSongsPayload,
@@ -213,5 +217,19 @@ export const useFilterPlaylistsInfiniteQuery = (
         ? getPageNumberFromBEUrl(lastpage.next)
         : undefined;
     },
+    ...config,
+  });
+
+export const useDeletePlaylistMutation = (token: TokenType, config = {}) =>
+  useMutation({
+    mutationFn: (payload: DeletePlatlistPayload) =>
+      deletePlaylist(token, payload),
+    ...config,
+  });
+
+export const useCreatePlaylistMutation = (token: TokenType, config = {}) =>
+  useMutation({
+    mutationFn: (payload: CreatePlaylistPayload) =>
+      createPlaylist(token, payload),
     ...config,
   });
