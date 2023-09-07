@@ -1,6 +1,7 @@
 import { useInfiniteQuery, useMutation, useQuery } from "react-query";
 import QUERY_KEYS from "./queryKeys";
 import {
+  addSongToPlaylist,
   createPlaylist,
   deletePlaylist,
   getAlbumDetail,
@@ -17,6 +18,7 @@ import {
   verifyToken,
 } from "./queryFunctions";
 import {
+  AddSongToPlaylistPayload,
   AlbumsPayloadType,
   ArtistsPayloadType,
   CreatePlaylistPayload,
@@ -231,5 +233,12 @@ export const useCreatePlaylistMutation = (token: TokenType, config = {}) =>
   useMutation({
     mutationFn: (payload: CreatePlaylistPayload) =>
       createPlaylist(token, payload),
+    ...config,
+  });
+
+export const useAddSongToPlaylistMutation = (token: TokenType, config = {}) =>
+  useMutation({
+    mutationFn: (payload: AddSongToPlaylistPayload) =>
+      addSongToPlaylist(token, payload),
     ...config,
   });

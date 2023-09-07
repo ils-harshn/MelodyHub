@@ -403,7 +403,8 @@
   opacity: 1;
 }
 
-.playlist-card :global .trash-icon svg {
+.playlist-card :global .trash-icon svg,
+.playlist-card :global .add-icon svg {
   pointer-events: none;
   fill: var(--icon-color);
   width: 14px;
@@ -412,4 +413,28 @@
 
 .playlist-card:global.deleting .title {
   color: var(--error-text-color);
+}
+
+.playlist-card:global.adding-song .title {
+  opacity: 0.75;
+}
+
+.playlist-card:global.adding-song .add-icon {
+  display: none;
+}
+
+.playlist-card:global.added-song .title {
+  color: var(--primary-color);
+}
+
+.playlist-card:global.added-song .add-icon {
+  display: none;
+}
+
+.playlist-card:global.add-song-error .title {
+  color: var(--error-text-color);
+}
+
+.playlist-card:global.add-song-error .add-icon {
+  display: none;
 }

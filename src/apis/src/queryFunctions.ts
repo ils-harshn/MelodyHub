@@ -2,6 +2,7 @@ import { TokenType } from "../../contexts/Context.types";
 import api, { getAuthHeader } from "../api";
 import ENDPOINTS from "./apiEndPoints";
 import {
+  AddSongToPlaylistPayload,
   AlbumsPayloadType,
   ArtistsPayloadType,
   CreatePlaylistPayload,
@@ -222,6 +223,20 @@ export const createPlaylist = async (
     },
     data: {
       title: payload.text,
+    },
+  });
+  return response.data;
+};
+
+export const addSongToPlaylist = async (
+  token: TokenType,
+  payload: AddSongToPlaylistPayload
+) => {
+  const response = await api({
+    method: "post",
+    url: ENDPOINTS.ADD_SONG_TO_PLAYLIST(payload.playlist_id, payload.song_id),
+    headers: {
+      ...getAuthHeader(token),
     },
   });
   return response.data;

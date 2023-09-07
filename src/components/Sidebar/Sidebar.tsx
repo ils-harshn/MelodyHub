@@ -10,6 +10,7 @@ import { useMusicPlayerData } from "../../hooks/MusicPlayerHooks";
 import { useEffect } from "react";
 import { SIDEBAR_CONTAINER_ID, SIDEBAR_OPENER_ID } from "../../consts/ids";
 import { generateURLFromID } from "../../utils/helpers/urls";
+import { usePlaylistComponentDispatch } from "../../hooks/PlaylistComponentHooks";
 
 const SidebarSongImage: React.FC<SidebarSongImageType> = ({
   className = "",
@@ -32,6 +33,7 @@ const SidebarSongImage: React.FC<SidebarSongImageType> = ({
 };
 
 const Sidebar: React.FC = () => {
+  const playlistDispatchData = usePlaylistComponentDispatch();
   useEffect(() => {
     const sidebarcontainer = document.getElementById(SIDEBAR_CONTAINER_ID);
     const handleClick = (event: MouseEvent) => {
@@ -88,7 +90,13 @@ const Sidebar: React.FC = () => {
             openPlaylists: true,
           }}
           activeLinkType={false}
-          onClick={hideSideBar}
+          onClick={() => {
+            hideSideBar();
+            playlistDispatchData({
+              type: "TOGGLE",
+              payload: { open: true, addToSong: undefined },
+            });
+          }}
         />
         <SidebarLink
           Icon={Heart}

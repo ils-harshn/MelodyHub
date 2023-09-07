@@ -1,8 +1,9 @@
 import { createContext, useContext, useReducer } from "react";
+import { SongType } from "../apis/src/response.types";
 
 type InitialStateType = {
   open?: boolean;
-  addToSongid?: number;
+  addToSong?: SongType;
 };
 
 type actionType = {

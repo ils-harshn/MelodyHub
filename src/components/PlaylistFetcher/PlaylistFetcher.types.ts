@@ -1,7 +1,9 @@
+import { SongType } from "../../apis/src/response.types";
+
 export type PlaylistFetcherComponentType = {
   open: boolean;
   toggleOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  addToSongid?: number,
+  addToSong?: SongType,
 };
 
 export type PlaylistCreatorType = {

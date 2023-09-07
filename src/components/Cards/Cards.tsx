@@ -1,4 +1,4 @@
-import { Album, Options, Trash } from "../../assests/icons";
+import { Album, Options, Plus, Trash } from "../../assests/icons";
 import {
   useMusicPlayerData,
   useMusicPlayerDispatch,
@@ -19,7 +19,10 @@ import {
   SongCardLandscapeType,
   SongCardType,
 } from "./Cards.types";
-import { useDeletePlaylistMutation } from "../../apis/src/queryHooks";
+import {
+  useAddSongToPlaylistMutation,
+  useDeletePlaylistMutation,
+} from "../../apis/src/queryHooks";
 import { TokenContext } from "../../contexts/TokenContext";
 import { usePlaylistComponentDispatch } from "../../hooks/PlaylistComponentHooks";
 
@@ -38,7 +41,7 @@ const OptionPopup: React.FC<OptionPopupType> = ({
           onClick={() =>
             dispatchPlaylistData({
               type: "TOGGLE",
-              payload: { open: true, addToSongid: data.id },
+              payload: { open: true, addToSong: data },
             })
           }
         >
@@ -306,16 +309,30 @@ export const SongCardLandscape: React.FC<SongCardLandscapeType> = ({
 export const PlaylistCard: React.FC<PlaylistCardType> = ({
   data,
   className = "",
-  addToSongid,
+  addToSong,
   onDeleteSuccess,
+  onSongAddSuccess,
   ...props
 }) => {
   const [deleted, setDeleted] = useState(false);
+  const [addedSong, setAddedSong] = useState(false);
   const token = useContext(TokenContext);
   const { mutate, isLoading } = useDeletePlaylistMutation(token, {
     onSuccess: () => {
       if (onDeleteSuccess) onDeleteSuccess();
       setDeleted(true);
+    },
+  });
+
+  const {
+    mutate: addSongMutate,
+    isLoading: addSongLoading,
+    isSuccess: addSongSuccess,
+    isError: isAddSongError,
+  } = useAddSongToPlaylistMutation(token, {
+    onSuccess: () => {
+      if (onSongAddSuccess) onSongAddSuccess();
+      setAddedSong(true);
     },
   });
 
@@ -326,19 +343,33 @@ export const PlaylistCard: React.FC<PlaylistCardType> = ({
       });
   };
 
+  const handleAddSong = () => {
+    if (!addSongLoading && addToSong) {
+      addSongMutate({
+        song_id: addToSong.id,
+        playlist_id: data.id,
+      });
+    }
+  };
+
   if (deleted) return null;
   return (
     <div
       className={getClassName(
         styles["playlist-card"],
         className,
-        isLoading ? "deleting" : ""
+        isLoading ? "deleting" : "",
+        addSongLoading ? "adding-song" : "",
+        addSongSuccess ? "added-song" : "",
+        isAddSongError ? "add-song-error" : ""
       )}
       {...props}
     >
       <div className="title truncate">{data.title}</div>
-      {addToSongid ? (
-        <></>
+      {addToSong ? (
+        <div className="add-icon" onClick={handleAddSong}>
+          <Plus />
+        </div>
       ) : (
         <div className="trash-icon" onClick={handleDelete}>
           <Trash />

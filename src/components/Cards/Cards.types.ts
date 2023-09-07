@@ -36,5 +36,6 @@ export type SongCardLandscapeType = SongCardType & {
 export type PlaylistCardType = React.HTMLAttributes<HTMLDivElement> & {
   data: PlaylistResponseType;
   onDeleteSuccess?: () => void;
-  addToSongid?: number;
+  onSongAddSuccess?: () => void;
+  addToSong?: SongType;
 };

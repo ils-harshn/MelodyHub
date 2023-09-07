@@ -66,3 +66,8 @@ export type DeletePlatlistPayload = OnlyIdPayloadType;
 export type CreatePlaylistPayload = {
   text: string;
 };
+
+export type AddSongToPlaylistPayload = {
+  playlist_id: number;
+  song_id: number;
+};

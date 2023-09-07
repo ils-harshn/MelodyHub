@@ -51,7 +51,12 @@ const Library: React.FC = () => {
         <ContentCard
           title="Playlists"
           Icon={Playlist}
-          onClick={() => dispatch({ type: "TOGGLE", payload: { open: true } })}
+          onClick={() =>
+            dispatch({
+              type: "TOGGLE",
+              payload: { open: true, addToSong: undefined },
+            })
+          }
         />
         <ContentCard
           title="Artists"
