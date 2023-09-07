@@ -80,7 +80,7 @@ const PlaylistCreator: React.FC<PlaylistCreatorType> = ({ onSuccessAdd }) => {
 
 export const PlaylistFetcherComponent: React.FC<
   PlaylistFetcherComponentType
-> = ({ open, toggleOpen }) => {
+> = ({ open, toggleOpen, addToSongid }) => {
   const token = useContext(TokenContext);
   const [text, setText] = useState("");
   const debouncedText = useDebounce(text, 500);
@@ -150,6 +150,7 @@ export const PlaylistFetcherComponent: React.FC<
                       data={item}
                       key={item.id}
                       onDeleteSuccess={refetch}
+                      addToSongid={addToSongid}
                     />
                   ))}
                 </Fragment>
@@ -188,6 +189,7 @@ export const PlaylistShower: React.FC = () => {
           },
         });
       }}
+      addToSongid={playlistData.addToSongid}
     />
   );
 };

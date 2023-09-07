@@ -36,7 +36,10 @@ const OptionPopup: React.FC<OptionPopupType> = ({
         <div
           className="option"
           onClick={() =>
-            dispatchPlaylistData({ type: "TOGGLE", payload: { open: true } })
+            dispatchPlaylistData({
+              type: "TOGGLE",
+              payload: { open: true, addToSongid: data.id },
+            })
           }
         >
           Add To Playlist
@@ -303,6 +306,7 @@ export const SongCardLandscape: React.FC<SongCardLandscapeType> = ({
 export const PlaylistCard: React.FC<PlaylistCardType> = ({
   data,
   className = "",
+  addToSongid,
   onDeleteSuccess,
   ...props
 }) => {
@@ -333,9 +337,13 @@ export const PlaylistCard: React.FC<PlaylistCardType> = ({
       {...props}
     >
       <div className="title truncate">{data.title}</div>
-      <div className="trash-icon" onClick={handleDelete}>
-        <Trash />
-      </div>
+      {addToSongid ? (
+        <></>
+      ) : (
+        <div className="trash-icon" onClick={handleDelete}>
+          <Trash />
+        </div>
+      )}
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { createContext, useContext, useReducer } from "react";
 
 type InitialStateType = {
   open?: boolean;
+  addToSongid?: number;
 };
 
 type actionType = {
