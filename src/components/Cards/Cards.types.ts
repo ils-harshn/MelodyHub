@@ -17,6 +17,11 @@ export type OptionPopupType = {
   isPlaying: boolean;
 };
 
+export type OptionPopupSongCardLandscapeType = OptionPopupType & {
+  showingForPlaylistId?: number;
+  onRemoveFromPlaylistSuccess?: () => void;
+};
+
 export type ImageCardType = React.HTMLAttributes<HTMLDivElement> & {
   title: string;
   optionTitle?: string;
@@ -32,6 +37,8 @@ export type LoadMoreCardType = React.HTMLAttributes<HTMLDivElement> & {
 
 export type SongCardLandscapeType = SongCardType & {
   index: number;
+  showingForPlaylistId?: number;
+  onRemoveFromPlaylistSuccess?: () => void;
 };
 
 export type PlaylistCardType = React.HTMLAttributes<HTMLDivElement> & {

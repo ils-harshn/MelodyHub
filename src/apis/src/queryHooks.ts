@@ -16,6 +16,7 @@ import {
   getPlaylistsWithFilter,
   getRecentSongs,
   loginUser,
+  removeSongFromPlaylist,
   verifyToken,
 } from "./queryFunctions";
 import {
@@ -33,6 +34,7 @@ import {
   GetPlaylistsWithFilterPayload,
   LoginPayloadType,
   OnlyPagePayloadType,
+  RemoveSongFromPlaylistPayload,
 } from "./payload.types";
 import { TokenType } from "../../contexts/Context.types";
 import { getPageNumberFromBEUrl } from "./utils";
@@ -261,5 +263,15 @@ export const usePlaylistSongsInfiniteQuery = (
         ? getPageNumberFromBEUrl(lastpage.next)
         : undefined;
     },
+    ...config,
+  });
+
+export const useRemoveSongFromPlaylistMutation = (
+  token: TokenType,
+  config = {}
+) =>
+  useMutation({
+    mutationFn: (payload: RemoveSongFromPlaylistPayload) =>
+      removeSongFromPlaylist(token, payload),
     ...config,
   });

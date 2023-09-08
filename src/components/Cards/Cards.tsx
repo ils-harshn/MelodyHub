@@ -14,6 +14,7 @@ import {
   ContentCardType,
   ImageCardType,
   LoadMoreCardType,
+  OptionPopupSongCardLandscapeType,
   OptionPopupType,
   PlaylistCardType,
   SongCardLandscapeType,
@@ -22,6 +23,7 @@ import {
 import {
   useAddSongToPlaylistMutation,
   useDeletePlaylistMutation,
+  useRemoveSongFromPlaylistMutation,
 } from "../../apis/src/queryHooks";
 import { TokenContext } from "../../contexts/TokenContext";
 import { usePlaylistComponentDispatch } from "../../hooks/PlaylistComponentHooks";
@@ -208,14 +210,30 @@ export const LoadMoreCard: React.FC<LoadMoreCardType> = ({
   );
 };
 
-const OptionPopupSongCardLandscape: React.FC<OptionPopupType> = ({
+const OptionPopupSongCardLandscape: React.FC<
+  OptionPopupSongCardLandscapeType
+> = ({
   data,
   handlePlay,
   isPlaying,
+  onRemoveFromPlaylistSuccess,
+  showingForPlaylistId,
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
   const dispatchPlaylistData = usePlaylistComponentDispatch();
+
+  const token = useContext(TokenContext);
+
+  const {
+    mutate: removeSongFromPlaylistMutate,
+    isLoading: removing,
+    isSuccess: removed,
+  } = useRemoveSongFromPlaylistMutation(token, {
+    onSuccess: () => {
+      if (onRemoveFromPlaylistSuccess) onRemoveFromPlaylistSuccess();
+    },
+  });
 
   useEffect(() => {
     const parentElement = parentRef.current;
@@ -247,22 +265,40 @@ const OptionPopupSongCardLandscape: React.FC<OptionPopupType> = ({
     };
   }, []);
 
+  if (removed) return null;
+
   return (
     <div className="option-button" ref={parentRef}>
       <Options />
       <div className="options" ref={optionsRef}>
-        <div
-          className="option"
-          onClick={() =>
-            dispatchPlaylistData({
-              type: "TOGGLE",
-              payload: { open: true, addToSong: data },
-            })
-          }
-        >
-          Add To Playlist
-        </div>
+        {showingForPlaylistId ? null : (
+          <div
+            className="option"
+            onClick={() =>
+              dispatchPlaylistData({
+                type: "TOGGLE",
+                payload: { open: true, addToSong: data },
+              })
+            }
+          >
+            Add To Playlist
+          </div>
+        )}
         <div className="option">Add To Queue</div>
+        {showingForPlaylistId ? (
+          <div
+            className="option"
+            onClick={() => {
+              if (!removing)
+                removeSongFromPlaylistMutate({
+                  playlist_id: showingForPlaylistId,
+                  song_id: data.id,
+                });
+            }}
+          >
+            Remove
+          </div>
+        ) : null}
         <div className="option" onClick={handlePlay}>
           {isPlaying ? "Pause" : "Play"}
         </div>
@@ -275,6 +311,8 @@ export const SongCardLandscape: React.FC<SongCardLandscapeType> = ({
   data,
   index,
   className = "",
+  showingForPlaylistId,
+  onRemoveFromPlaylistSuccess,
   ...props
 }) => {
   const dispatch = useMusicPlayerDispatch();
@@ -317,6 +355,8 @@ export const SongCardLandscape: React.FC<SongCardLandscapeType> = ({
         </div>
       </div>
       <OptionPopupSongCardLandscape
+        showingForPlaylistId={showingForPlaylistId}
+        onRemoveFromPlaylistSuccess={onRemoveFromPlaylistSuccess}
         data={data}
         handlePlay={handleThumbnailClick}
         isPlaying={

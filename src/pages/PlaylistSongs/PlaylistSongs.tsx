@@ -5,10 +5,7 @@ import { TokenContext } from "../../contexts/TokenContext";
 import PlaylistSongsContainerType from "./PlaylistSongs.types";
 import { getClassName, isNumeric } from "../../utils";
 import NotFound from "../NotFound/NotFound";
-import {
-  LoadMoreCard,
-  SongCardLandscape,
-} from "../../components/Cards/Cards";
+import { LoadMoreCard, SongCardLandscape } from "../../components/Cards/Cards";
 import { SongType } from "../../apis/src/response.types";
 import { PlaylistSongsLandscapeContainer } from "../../components/Containers/Containers";
 import styles from "./PlaylistSongs.module.css";
@@ -25,6 +22,7 @@ const SongsContainer: React.FC<PlaylistSongsContainerType> = ({ id, name }) => {
     isFetching,
     fetchNextPage,
     isError,
+    refetch,
   } = usePlaylistSongsInfiniteQuery(
     token,
     {
@@ -44,12 +42,14 @@ const SongsContainer: React.FC<PlaylistSongsContainerType> = ({ id, name }) => {
       ) : (
         <PlaylistSongsLandscapeContainer
           title={`${name} [${data.pages[0].count}]`}
-          optionTitle="Play All"
+          optionTitle={isFetching ? "Please Wait" : "Play All"}
         >
           {data.pages.map((group, index) => (
             <Fragment key={index}>
               {group.results.map((item: SongType, i: number) => (
                 <SongCardLandscape
+                  showingForPlaylistId={id}
+                  onRemoveFromPlaylistSuccess={() => refetch()}
                   data={item}
                   key={item.id}
                   index={getIndexForInfiniteQuery(index, i)}

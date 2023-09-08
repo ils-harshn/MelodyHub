@@ -15,6 +15,7 @@ import {
   GetPlaylistSongsPayloadType,
   GetPlaylistsWithFilterPayload,
   OnlyPagePayloadType,
+  RemoveSongFromPlaylistPayload,
 } from "./payload.types";
 import {
   generateFilterSongsPayload,
@@ -250,6 +251,23 @@ export const getPlaylistSongs = async (
   const response = await api({
     method: "get",
     url: ENDPOINTS.GET_PLAYLIST_SONGS(payload.page, payload.id),
+    headers: {
+      ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};
+
+export const removeSongFromPlaylist = async (
+  token: TokenType,
+  payload: RemoveSongFromPlaylistPayload
+) => {
+  const response = await api({
+    method: "delete",
+    url: ENDPOINTS.REMOVE_SONG_FROM_PLAYLIST(
+      payload.playlist_id,
+      payload.song_id
+    ),
     headers: {
       ...getAuthHeader(token),
     },

@@ -72,6 +72,7 @@ export type AddSongToPlaylistPayload = {
   song_id: number;
 };
 
+export type RemoveSongFromPlaylistPayload = AddSongToPlaylistPayload;
 export type GetPlaylistSongsPayloadType = {
   page?: number;
   id: number;
