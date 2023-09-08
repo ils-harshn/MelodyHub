@@ -13,6 +13,7 @@ import { SongType } from "../../apis/src/response.types";
 import { PlaylistSongsLandscapeContainer } from "../../components/Containers/Containers";
 import styles from "./PlaylistSongs.module.css";
 import { getIndexForInfiniteQuery } from "../../apis/src/utils";
+import { FullLoader } from "../../components/Loaders/Loaders";
 
 const SongsContainer: React.FC<PlaylistSongsContainerType> = ({ id, name }) => {
   const token = useContext(TokenContext);
@@ -35,6 +36,7 @@ const SongsContainer: React.FC<PlaylistSongsContainerType> = ({ id, name }) => {
   );
 
   if (isError) return <NotFound />;
+  if (isLoading) return <FullLoader />;
   return (
     <div className={getClassName(styles["playlist-songs"])}>
       {!data || !data.pages || data.pages[0].count === 0 ? (
