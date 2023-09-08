@@ -205,6 +205,7 @@ const OptionPopupSongCardLandscape: React.FC<OptionPopupType> = ({
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
+  const dispatchPlaylistData = usePlaylistComponentDispatch();
 
   useEffect(() => {
     const parentElement = parentRef.current;
@@ -240,7 +241,17 @@ const OptionPopupSongCardLandscape: React.FC<OptionPopupType> = ({
     <div className="option-button" ref={parentRef}>
       <Options />
       <div className="options" ref={optionsRef}>
-        <div className="option">Add To Playlist</div>
+        <div
+          className="option"
+          onClick={() =>
+            dispatchPlaylistData({
+              type: "TOGGLE",
+              payload: { open: true, addToSong: data },
+            })
+          }
+        >
+          Add To Playlist
+        </div>
         <div className="option">Add To Queue</div>
         <div className="option" onClick={handlePlay}>
           {isPlaying ? "Pause" : "Play"}
@@ -327,7 +338,6 @@ export const PlaylistCard: React.FC<PlaylistCardType> = ({
   const {
     mutate: addSongMutate,
     isLoading: addSongLoading,
-    isSuccess: addSongSuccess,
     isError: isAddSongError,
   } = useAddSongToPlaylistMutation(token, {
     onSuccess: () => {
@@ -360,7 +370,7 @@ export const PlaylistCard: React.FC<PlaylistCardType> = ({
         className,
         isLoading ? "deleting" : "",
         addSongLoading ? "adding-song" : "",
-        addSongSuccess ? "added-song" : "",
+        addedSong ? "added-song" : "",
         isAddSongError ? "add-song-error" : ""
       )}
       {...props}
