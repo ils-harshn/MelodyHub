@@ -71,3 +71,8 @@ export type AddSongToPlaylistPayload = {
   playlist_id: number;
   song_id: number;
 };
+
+export type GetPlaylistSongsPayloadType = {
+  page?: number;
+  id: number;
+};

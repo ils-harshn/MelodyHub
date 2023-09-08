@@ -12,6 +12,7 @@ import {
   getArtists,
   getFilterSongs,
   getMostPopularSong,
+  getPlaylistSongs,
   getPlaylistsWithFilter,
   getRecentSongs,
   loginUser,
@@ -28,6 +29,7 @@ import {
   GetAlbumSongsPayload,
   GetArtistDetailPayload,
   GetArtistSongsPayload,
+  GetPlaylistSongsPayloadType,
   GetPlaylistsWithFilterPayload,
   LoginPayloadType,
   OnlyPagePayloadType,
@@ -240,5 +242,24 @@ export const useAddSongToPlaylistMutation = (token: TokenType, config = {}) =>
   useMutation({
     mutationFn: (payload: AddSongToPlaylistPayload) =>
       addSongToPlaylist(token, payload),
+    ...config,
+  });
+
+export const usePlaylistSongsInfiniteQuery = (
+  token: TokenType,
+  payload: GetPlaylistSongsPayloadType,
+  config = {}
+) =>
+  useInfiniteQuery({
+    queryFn: ({ pageParam = 1 }) => {
+      payload.page = pageParam;
+      return getPlaylistSongs(token, payload);
+    },
+    queryKey: [QUERY_KEYS.GET_PLAYLIST_SONGS_INFINITE_QUERY, payload],
+    getNextPageParam: (lastpage: any) => {
+      return lastpage.next && lastpage.count
+        ? getPageNumberFromBEUrl(lastpage.next)
+        : undefined;
+    },
     ...config,
   });

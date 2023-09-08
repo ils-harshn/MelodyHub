@@ -3,6 +3,7 @@ import SongContainerType, {
   ContentContainerType,
   ImageCardContainerType,
   PlaylistCardContainerType,
+  PlaylistSongsLandscapeContainerType,
   SongCardLandscapeContainerType,
 } from "./Containers.types";
 import styles from "./Containers.module.css";
@@ -112,4 +113,19 @@ export const PlaylistCardContainer: React.FC<PlaylistCardContainerType> = ({
   );
 };
 
+export const PlaylistSongsLandscapeContainer: React.FC<
+  PlaylistSongsLandscapeContainerType
+> = ({ className = "", children, onClick, title, optionTitle, ...props }) => {
+  return (
+    <div className={getClassName(className, styles["container"])} {...props}>
+      <div className="heading">
+        <div>{title}</div>
+        {optionTitle ? <div onClick={onClick}>{optionTitle}</div> : null}
+      </div>
+      <div className={getClassName(styles["playlist-song-landscape-card-container"])}>
+        {children}
+      </div>
+    </div>
+  );
+};
 export default SongCardContainer;

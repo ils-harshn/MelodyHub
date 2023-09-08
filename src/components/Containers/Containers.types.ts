@@ -9,4 +9,6 @@ export type SongCardLandscapeContainerType = SongContainerType;
 export type PlaylistCardContainerType = SongContainerType & {
   onClickClose: () => void;
 };
+
+export type PlaylistSongsLandscapeContainerType = SongContainerType;
 export default SongContainerType;

@@ -12,6 +12,7 @@ import {
   GetAlbumSongsPayload,
   GetArtistDetailPayload,
   GetArtistSongsPayload,
+  GetPlaylistSongsPayloadType,
   GetPlaylistsWithFilterPayload,
   OnlyPagePayloadType,
 } from "./payload.types";
@@ -235,6 +236,20 @@ export const addSongToPlaylist = async (
   const response = await api({
     method: "post",
     url: ENDPOINTS.ADD_SONG_TO_PLAYLIST(payload.playlist_id, payload.song_id),
+    headers: {
+      ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};
+
+export const getPlaylistSongs = async (
+  token: TokenType,
+  payload: GetPlaylistSongsPayloadType
+) => {
+  const response = await api({
+    method: "get",
+    url: ENDPOINTS.GET_PLAYLIST_SONGS(payload.page, payload.id),
     headers: {
       ...getAuthHeader(token),
     },

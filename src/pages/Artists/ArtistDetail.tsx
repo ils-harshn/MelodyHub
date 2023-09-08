@@ -43,9 +43,6 @@ const ArtistSongs: React.FC<ArtistDetailType> = ({ id, isError }) => {
       onError: () => {
         isError(true);
       },
-      onSuccess: (data: any) => {
-        console.log(data);
-      },
     }
   );
   return (

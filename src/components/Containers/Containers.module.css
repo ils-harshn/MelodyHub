@@ -25,6 +25,13 @@
   gap: 24px;
 }
 
+/* playlist song landscape card container */
+.playlist-song-landscape-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
 /* image card container */
 .image-card-container {
   display: grid;
