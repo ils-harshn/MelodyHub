@@ -149,6 +149,10 @@
   transition: background-color 300ms ease;
 }
 
+.content-card:global.disabled {
+  opacity: 0.4;
+}
+
 .content-card :global .icon {
   margin-right: 20px;
   width: 30%;

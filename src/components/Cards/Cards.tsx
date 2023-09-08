@@ -138,10 +138,18 @@ export const ContentCard: React.FC<ContentCardType> = ({
   title,
   Icon = Album,
   className = "",
+  disabled = false,
   ...props
 }) => {
   return (
-    <div className={getClassName(styles["content-card"], className)} {...props}>
+    <div
+      className={getClassName(
+        styles["content-card"],
+        disabled ? "disabled" : "",
+        className
+      )}
+      {...props}
+    >
       <div className="icon">
         <Icon />
       </div>

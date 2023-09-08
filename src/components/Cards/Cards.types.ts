@@ -8,6 +8,7 @@ export type SongCardType = React.HTMLAttributes<HTMLDivElement> & {
 export type ContentCardType = React.HTMLAttributes<HTMLDivElement> & {
   title: string;
   Icon?: IconType;
+  disabled?: boolean;
 };
 
 export type OptionPopupType = {

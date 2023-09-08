@@ -67,8 +67,8 @@ const Library: React.FC = () => {
           title="Albums"
           onClick={() => navigate(routes.ALBUM.endpoint)}
         />
-        <ContentCard title="Genres" Icon={Genre} />
-        <ContentCard title="Queue" Icon={Queue} />
+        <ContentCard title="Genres" Icon={Genre} disabled={true} />
+        <ContentCard title="Queue" Icon={Queue} disabled={true} />
       </ContentCardContainer>
       <Recent25Songs />
     </div>
