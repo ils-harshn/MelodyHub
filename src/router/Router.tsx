@@ -10,6 +10,7 @@ import Album from "../pages/Albums/Album";
 import Artist from "../pages/Artists/Artist";
 import AlbumDetail from "../pages/Albums/AlbumDetail";
 import ArtistDetail from "../pages/Artists/ArtistDetail";
+import PlaylistSongs from "../pages/PlaylistSongs/PlaylistSongs";
 
 const AppRouter: React.FC = () => {
   return (
@@ -22,6 +23,10 @@ const AppRouter: React.FC = () => {
           <Route path={routes.HOME.path} element={<Home />} />
           <Route path={routes.SEARCH.path} element={<Search />} />
           <Route path={routes.LIBRARY.path} element={<Library />} />
+          <Route
+            path={routes.PLAYLIST_SONGS.path}
+            element={<PlaylistSongs />}
+          />
           <Route
             path={routes.LIKED_SONGS.path}
             element={<h2>LIKED_SONGS</h2>}

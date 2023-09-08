@@ -25,6 +25,8 @@ import {
 } from "../../apis/src/queryHooks";
 import { TokenContext } from "../../contexts/TokenContext";
 import { usePlaylistComponentDispatch } from "../../hooks/PlaylistComponentHooks";
+import { useNavigate } from "react-router-dom";
+import * as routes from "../../router/routes";
 
 const OptionPopup: React.FC<OptionPopupType> = ({
   data,
@@ -370,6 +372,9 @@ export const PlaylistCard: React.FC<PlaylistCardType> = ({
     }
   };
 
+  const navigate = useNavigate();
+  const playlistComponentDispatch = usePlaylistComponentDispatch();
+
   if (deleted) return null;
   return (
     <div
@@ -383,7 +388,23 @@ export const PlaylistCard: React.FC<PlaylistCardType> = ({
       )}
       {...props}
     >
-      <div className="title truncate">{data.title}</div>
+      <div
+        className="title truncate"
+        onClick={() => {
+          if (!deleted && !addToSong && !addSongLoading && !isLoading) {
+            playlistComponentDispatch({
+              type: "TOGGLE",
+              payload: {
+                addToSong: undefined,
+                open: false,
+              },
+            });
+            navigate(routes.PLAYLIST_SONGS.endpoint(data.title, data.id));
+          }
+        }}
+      >
+        {data.title}
+      </div>
       {addToSong ? (
         <div className="add-icon" onClick={handleAddSong}>
           <Plus />
