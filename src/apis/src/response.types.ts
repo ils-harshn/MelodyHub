@@ -1,12 +1,6 @@
-export type LoginResponseType = {
-  token: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  is_admin: boolean;
-  date_joined: string;
-  is_active: boolean;
-};
+import { UserDataType } from "../../hooks/TokenHooks";
+
+export type LoginResponseType = UserDataType;
 
 export type ArtistType = {
   id: number;

@@ -11,7 +11,7 @@ import { ThemeOptionType } from "./OptionSelector.types";
 import { useState } from "react";
 import { useToken, useTokenDispatch } from "../../hooks/TokenHooks";
 
-const LogoutOutOption: React.FC = () => {
+const LogoutOption: React.FC = () => {
   const { token } = useToken();
   const dispatch = useTokenDispatch();
 
@@ -138,7 +138,7 @@ const OptionSelector: React.FC = () => {
           <CollapseBox />
         </div>
         <div className="option">
-          <LogoutOutOption />
+          <LogoutOption />
         </div>
       </div>
     </div>

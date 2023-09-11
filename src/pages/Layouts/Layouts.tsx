@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { AuthNavbar } from "../../components/Navbars/navbars";
 import React, { useEffect, useRef, useState } from "react";
 import { getToken } from "../../utils/helpers/tokenkeeper";
@@ -20,6 +20,7 @@ import Header from "../../components/Header/Header";
 import { PlaylistComponentProvider } from "../../hooks/PlaylistComponentHooks";
 import { PlaylistShower } from "../../components/PlaylistFetcher/PlaylistFetcher";
 import { useToken, useTokenDispatch } from "../../hooks/TokenHooks";
+import { LoginResponseType } from "../../apis/src/response.types";
 
 export const AuthLayout: React.FC = () => {
   return (
@@ -97,11 +98,12 @@ export const Layout = () => {
   const delayedCall = 3000;
 
   const { mutate: verifyStorageToken } = useVerifyTokenMutation({
-    onSuccess: () => {
+    onSuccess: (data: LoginResponseType) => {
       dispatchTokenData({
         type: "SET_ACTION",
         payload: {
-          token: storageProvidedToken || token,
+          ...data,
+          token: storageProvidedToken || "",
         },
       });
       setTimeout(() => setLoading(false), delayedCall);

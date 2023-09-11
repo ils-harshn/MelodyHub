@@ -1,11 +1,19 @@
 import { createContext, useContext, useReducer } from "react";
-import { clearStorage, removeToken } from "../utils/helpers/tokenkeeper";
+import { clearStorage } from "../utils/helpers/tokenkeeper";
 
 export type TokenType = string;
 
-type InitialStateType = {
+export type UserDataType = {
+  email: string;
+  first_name: string;
+  last_name: string;
+  is_admin: boolean;
+  date_joined: string;
+  is_active: boolean;
   token: TokenType;
 };
+
+type InitialStateType = UserDataType;
 
 type SetTokenAction = {
   type: "SET_ACTION";
@@ -23,6 +31,12 @@ type TokenProviderType = {
 };
 
 const initialState: InitialStateType = {
+  email: "",
+  first_name: "",
+  last_name: "",
+  is_active: false,
+  is_admin: false,
+  date_joined: "",
   token: "",
 };
 
@@ -45,7 +59,7 @@ function tokenReducer(state = initialState, action: actionType) {
 }
 
 export const TokenProvider: React.FC<TokenProviderType> = ({ children }) => {
-  const [state, dispatch] = useReducer(tokenReducer, { token: "" });
+  const [state, dispatch] = useReducer(tokenReducer, initialState);
 
   return (
     <DispatchContext.Provider value={dispatch}>

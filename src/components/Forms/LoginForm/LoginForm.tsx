@@ -25,9 +25,7 @@ const LoginForm: React.FC = () => {
       setToken(data.token, formik.values.rememberMe);
       dispatchTokenData({
         type: "SET_ACTION",
-        payload: {
-          token: data.token,
-        },
+        payload: data,
       });
       navigate(HOME.endpoint);
     },
