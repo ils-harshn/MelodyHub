@@ -1,6 +1,6 @@
 export const removeToken = () => {
-  localStorage.removeItem("token");
-  sessionStorage.removeItem("token");
+  localStorage.clear();
+  sessionStorage.clear();
 };
 
 export const setToken = (token: string, rememberMe = false) => {

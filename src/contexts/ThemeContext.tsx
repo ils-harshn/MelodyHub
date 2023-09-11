@@ -4,6 +4,7 @@ import {
   ThemeProviderType,
   ThemeTypes,
 } from "./Context.types";
+import { setThemeToStorage } from "../utils/helpers/themekeeper";
 
 export const ThemeContext = createContext<ThemeContextValue | null>(null);
 
@@ -15,6 +16,7 @@ export const ThemeProvider: React.FC<ThemeProviderType> = ({
 
   const toggleTheme = (themeName: ThemeTypes) => {
     setTheme(themeName);
+    setThemeToStorage(themeName);
   };
 
   const contextValue: ThemeContextValue = {
@@ -28,7 +30,7 @@ export const ThemeProvider: React.FC<ThemeProviderType> = ({
 
   // Use It Only When Using Story Book
   useEffect(() => {
-    setTheme(currentTheme)
+    setTheme(currentTheme);
   }, [currentTheme]);
 
   return (
