@@ -9,7 +9,7 @@ const TimerSlider: React.FC = () => {
   const [value, setValue] = useState(0);
 
   const getBackgroundSize = () => {
-    return { backgroundSize: `${(value * 100) / 100}% 100%` };
+    return { backgroundSize: `${value}% 100%` };
   };
 
   return (
