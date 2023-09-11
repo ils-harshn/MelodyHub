@@ -3,7 +3,6 @@
   bottom: 0;
 
   background-color: var(--musicplayer-bg-color);
-  border-top: 2px solid var(--musicplayer-border-top-color);
 
   height: 90px;
   width: 100vw;
@@ -13,4 +12,62 @@
 
 .music-player:global.open {
   transform: translateY(0);
+}
+
+/* timer-range */
+.music-player :global .timer-range {
+  top: 0px;
+}
+
+.music-player:global.open .timer-range {
+  top: -2px;
+}
+
+.music-player :global .timer-range {
+  position: absolute;
+  left: -2px;
+  height: 2px;
+  width: 100%;
+  outline: none;
+}
+
+.music-player :global .timer-range {
+  cursor: pointer;
+  -webkit-appearance: none;
+  height: 3px;
+  background: var(--timer-range-bg);
+  border-radius: 5px;
+  background-image: linear-gradient(
+    var(--timer-range-completed-upto-color),
+    var(--timer-range-completed-upto-color)
+  );
+  background-repeat: no-repeat;
+}
+
+.music-player :global .timer-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 2px;
+  width: 2px;
+  border-radius: 50%;
+  background: var(--timer-range-thumb-color);
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.music-player :global .timer-range::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.music-player :global .timer-range::-webkit-slider-thumb:hover {
+  box-shadow: var(--timer-range-thumb-focused-box-shadow);
+}
+
+.music-player :global .timer-range::-webkit-slider-thumb:active {
+  box-shadow: var(--timer-range-thumb-focused-box-shadow);
+  transition: box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    bottom 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
