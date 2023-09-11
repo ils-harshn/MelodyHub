@@ -60,6 +60,7 @@ const SongsContainer: React.FC<PlaylistSongsContainerType> = ({ id, name }) => {
 
           {hasNextPage ? (
             <LoadMoreCard
+              varient="secondary"
               isLoading={isFetching || isLoading || isFetchingNextPage}
               isDisabled={isFetching || isLoading || isFetchingNextPage}
               title="Load More Songs"

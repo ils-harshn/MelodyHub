@@ -283,6 +283,16 @@
   cursor: pointer;
 }
 
+.load-more-card:global.primary {
+  background: var(--load-more-card-bg-gradient);
+}
+
+.load-more-card:global.secondary {
+  background: transparent;
+  width: fit-content;
+  font-weight: bolder;
+}
+
 /* song-card-landscape */
 .song-card-landscape {
   display: flex;

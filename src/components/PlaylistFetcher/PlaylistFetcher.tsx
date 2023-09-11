@@ -159,6 +159,7 @@ export const PlaylistFetcherComponent: React.FC<
               ))}
               {hasNextPage ? (
                 <LoadMoreCard
+                  varient="secondary"
                   className="more-loader"
                   isLoading={isFetching || isLoading || isFetchingNextPage}
                   isDisabled={isFetching || isLoading || isFetchingNextPage}

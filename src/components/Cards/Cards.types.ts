@@ -33,6 +33,7 @@ export type LoadMoreCardType = React.HTMLAttributes<HTMLDivElement> & {
   title: string;
   isLoading: boolean;
   isDisabled: boolean;
+  varient?: "primary" | "secondary";
 };
 
 export type SongCardLandscapeType = SongCardType & {

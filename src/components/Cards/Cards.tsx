@@ -193,6 +193,7 @@ export const ImageCard: React.FC<ImageCardType> = ({
 
 export const LoadMoreCard: React.FC<LoadMoreCardType> = ({
   className = "",
+  varient = "primary",
   title,
   isDisabled,
   onClick,
@@ -201,7 +202,7 @@ export const LoadMoreCard: React.FC<LoadMoreCardType> = ({
 }) => {
   return (
     <div
-      className={getClassName(styles["load-more-card"], className)}
+      className={getClassName(styles["load-more-card"], varient, className)}
       {...props}
       onClick={isDisabled ? undefined : onClick}
     >
