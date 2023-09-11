@@ -11,6 +11,51 @@ import { ThemeOptionType } from "./OptionSelector.types";
 import { useState } from "react";
 import { useToken, useTokenDispatch } from "../../hooks/TokenHooks";
 
+const ProfileDetails: React.FC = () => {
+  const {
+    first_name,
+    last_name,
+    email,
+    date_joined,
+    is_admin,
+    is_active,
+    token,
+  } = useToken();
+
+  if (token === "") return null;
+  return (
+    <div className="profile">
+      <Label varient="secondary">View Profile</Label>
+      <div className="profile-data">
+        <div className="data-item">
+          <Label varient="secondary">Name</Label>
+          <Label className="truncate">{`${first_name} ${last_name}`}</Label>
+        </div>
+        <div className="data-item">
+          <Label varient="secondary">Email</Label>
+          <Label className="truncate">{`${email}`}</Label>
+        </div>
+        <div className="data-item">
+          <Label varient="secondary">Date Joined</Label>
+          <Label className="truncate">{`${date_joined}`}</Label>
+        </div>
+        <div className="data-item">
+          <Label varient="secondary">Account Type</Label>
+          <Label className="truncate">{`${
+            is_admin ? "Admin Account" : "User Account"
+          }`}</Label>
+        </div>
+        <div className="data-item">
+          <Label varient="secondary">Actived/Deactived Account</Label>
+          <Label className="truncate">{`${
+            is_active ? "Actived" : "Deactived"
+          }`}</Label>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const LogoutOption: React.FC = () => {
   const { token } = useToken();
   const dispatch = useTokenDispatch();
@@ -136,6 +181,9 @@ const OptionSelector: React.FC = () => {
         </div>
         <div className="option">
           <CollapseBox />
+        </div>
+        <div className="option">
+          <ProfileDetails />
         </div>
         <div className="option">
           <LogoutOption />

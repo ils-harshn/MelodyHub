@@ -76,3 +76,40 @@
 .option-selector :global .logout-box {
   cursor: pointer;
 }
+
+.option-selector :global .profile {
+  cursor: pointer;
+}
+
+.option-selector :global .profile:hover > label {
+  color: var(--primary-color);
+}
+
+.option-selector :global .profile:hover {
+  pointer-events: all;
+}
+
+.option-selector :global .profile .profile-data {
+  opacity: 0;
+  max-height: 0;
+  pointer-events: none;
+  transition: max-height 300ms ease-out, opacity 300ms ease-out;
+}
+
+.option-selector :global .profile:hover .profile-data {
+  max-height: 400px;
+  opacity: 1;
+  transition: max-height 300ms ease-in, opacity 300ms ease-out;
+}
+
+.option-selector :global .profile .profile-data .data-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0 4px 0;
+  padding: 4px 2px 4px 2px;
+}
+
+.option-selector :global .profile .profile-data .data-item > label:first-child {
+  margin-right: 8px;
+}
