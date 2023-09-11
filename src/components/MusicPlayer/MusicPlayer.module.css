@@ -1,15 +1,16 @@
 .music-player {
-    position: fixed;
-    bottom: 0;
+  position: fixed;
+  bottom: 0;
 
-    background-color: red;
-    
-    height: 90px;
-    width: 100vw;
-    transform: translateY(90px);
-    transition: transform 300ms;
+  background-color: var(--musicplayer-bg-color);
+  border-top: 2px solid var(--musicplayer-border-top-color);
+
+  height: 90px;
+  width: 100vw;
+  transform: translateY(90px);
+  transition: transform 300ms;
 }
 
 .music-player:global.open {
-    transform: translateY(0);
+  transform: translateY(0);
 }

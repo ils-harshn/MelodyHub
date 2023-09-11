@@ -104,4 +104,8 @@
 
   /* playlist card container */
   --playlist-card-container-bg-color: #000000;
+
+  /* music player */
+  --musicplayer-bg-color: #141414;
+  --musicplayer-border-top-color: #4e4e4e;
 }
