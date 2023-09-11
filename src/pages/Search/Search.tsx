@@ -1,7 +1,6 @@
-import { useContext, Fragment } from "react";
+import { Fragment } from "react";
 import { getClassName } from "../../utils";
 import styles from "./Search.module.css";
-import { TokenContext } from "../../contexts/TokenContext";
 import { useFilterSongsInfiniteQuery } from "../../apis/src/queryHooks";
 import { FullLoader } from "../../components/Loaders/Loaders";
 import SongCardContainer from "../../components/Containers/Containers";
@@ -9,11 +8,12 @@ import { SongType } from "../../apis/src/response.types";
 import SongCard, { LoadMoreCard } from "../../components/Cards/Cards";
 import { useSearchBoxData } from "../../hooks/SearchBoxHooks";
 import { useDebounce } from "@uidotdev/usehooks";
+import { useToken } from "../../hooks/TokenHooks";
 
 const Search: React.FC = () => {
   const searchBoxData = useSearchBoxData();
   const debouncedSearchBoxData = useDebounce(searchBoxData, 500);
-  const token = useContext(TokenContext);
+  const { token } = useToken();
   const {
     data,
     isLoading,

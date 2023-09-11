@@ -1,8 +1,6 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AuthNavbar } from "../../components/Navbars/navbars";
-import { TokenProvider } from "../../contexts/TokenContext";
 import React, { useEffect, useRef, useState } from "react";
-import { TokenType } from "../../contexts/Context.types";
 import { getToken } from "../../utils/helpers/tokenkeeper";
 import { LOGIN } from "../../router/routes";
 import { useVerifyTokenMutation } from "../../apis/src/queryHooks";
@@ -21,6 +19,7 @@ import { Bread, Cross } from "../../assests/icons";
 import Header from "../../components/Header/Header";
 import { PlaylistComponentProvider } from "../../hooks/PlaylistComponentHooks";
 import { PlaylistShower } from "../../components/PlaylistFetcher/PlaylistFetcher";
+import { useToken, useTokenDispatch } from "../../hooks/TokenHooks";
 
 export const AuthLayout: React.FC = () => {
   return (
@@ -75,13 +74,22 @@ const TrioLogicalDesign: React.FC = () => {
   );
 };
 
+type AuthWrapperType = {
+  children: React.ReactNode;
+};
+
+const AuthWrapper: React.FC<AuthWrapperType> = ({ children }) => {
+  const { token } = useToken();
+  if (token === "") return <Navigate to={LOGIN.endpoint} />;
+  return <>{children}</>;
+};
+
 export const Layout = () => {
-  const { state: locationProvidedToken } = useLocation();
+  const dispatchTokenData = useTokenDispatch();
+  const { token } = useToken();
   const storageProvidedToken = getToken();
 
-  const [loading, setLoading] = useState(locationProvidedToken === null);
-
-  const token = useRef<TokenType>(locationProvidedToken);
+  const [loading, setLoading] = useState(token === "");
 
   const navigate = useNavigate();
 
@@ -90,7 +98,12 @@ export const Layout = () => {
 
   const { mutate: verifyStorageToken } = useVerifyTokenMutation({
     onSuccess: () => {
-      token.current = storageProvidedToken || "";
+      dispatchTokenData({
+        type: "SET_ACTION",
+        payload: {
+          token: storageProvidedToken || token,
+        },
+      });
       setTimeout(() => setLoading(false), delayedCall);
     },
     onError: () => {
@@ -108,7 +121,7 @@ export const Layout = () => {
   };
 
   useEffect(() => {
-    if (locationProvidedToken === null) {
+    if (token === "") {
       chechTokenFromStorage();
     }
   }, []);
@@ -118,11 +131,11 @@ export const Layout = () => {
   }
 
   return (
-    <TokenProvider currentToken={token.current}>
+    <AuthWrapper>
       <PlaylistComponentProvider>
         <PlaylistShower />
         <TrioLogicalDesign />
       </PlaylistComponentProvider>
-    </TokenProvider>
+    </AuthWrapper>
   );
 };

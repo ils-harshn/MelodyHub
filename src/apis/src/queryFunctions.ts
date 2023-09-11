@@ -1,4 +1,4 @@
-import { TokenType } from "../../contexts/Context.types";
+import { TokenType } from "../../hooks/TokenHooks";
 import api, { getAuthHeader } from "../api";
 import ENDPOINTS from "./apiEndPoints";
 import {

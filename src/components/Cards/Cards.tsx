@@ -9,7 +9,7 @@ import { PlayPauseButton } from "../Buttons/buttons";
 import ImageWithLoader from "../ImageWithLoader/ImageWithLoader";
 import { FullLoader } from "../Loaders/Loaders";
 import styles from "./Cards.module.css";
-import { useRef, useEffect, useState, useContext } from "react";
+import { useRef, useEffect, useState } from "react";
 import {
   ContentCardType,
   ImageCardType,
@@ -25,10 +25,10 @@ import {
   useDeletePlaylistMutation,
   useRemoveSongFromPlaylistMutation,
 } from "../../apis/src/queryHooks";
-import { TokenContext } from "../../contexts/TokenContext";
 import { usePlaylistComponentDispatch } from "../../hooks/PlaylistComponentHooks";
 import { useNavigate } from "react-router-dom";
 import * as routes from "../../router/routes";
+import { useToken } from "../../hooks/TokenHooks";
 
 const OptionPopup: React.FC<OptionPopupType> = ({
   data,
@@ -224,7 +224,7 @@ const OptionPopupSongCardLandscape: React.FC<
   const optionsRef = useRef<HTMLDivElement>(null);
   const dispatchPlaylistData = usePlaylistComponentDispatch();
 
-  const token = useContext(TokenContext);
+  const { token } = useToken();
 
   const {
     mutate: removeSongFromPlaylistMutate,
@@ -378,7 +378,7 @@ export const PlaylistCard: React.FC<PlaylistCardType> = ({
 }) => {
   const [deleted, setDeleted] = useState(false);
   const [addedSong, setAddedSong] = useState(false);
-  const token = useContext(TokenContext);
+  const { token } = useToken();
   const { mutate, isLoading } = useDeletePlaylistMutation(token, {
     onSuccess: () => {
       if (onDeleteSuccess) onDeleteSuccess();

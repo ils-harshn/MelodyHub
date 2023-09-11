@@ -21,6 +21,7 @@ import { ReactComponent as Playlist } from "./icons/Playlist.svg";
 import { ReactComponent as Genre } from "./icons/Genre.svg";
 import { ReactComponent as Queue } from "./icons/Queue.svg";
 import { ReactComponent as Trash } from "./icons/Trash.svg";
+import { ReactComponent as Logout } from "./icons/Logout.svg";
 
 export default Logo;
 export {
@@ -46,4 +47,5 @@ export {
   Genre,
   Queue,
   Trash,
+  Logout,
 };

@@ -4,19 +4,19 @@ import { ArtistType } from "../../apis/src/response.types";
 import { ImageCard, LoadMoreCard } from "../../components/Cards/Cards";
 import { ImageCardContainer } from "../../components/Containers/Containers";
 import { InputWithIcon } from "../../components/Inputs/Inputs";
-import { TokenContext } from "../../contexts/TokenContext";
 import { getClassName } from "../../utils";
 import { generateURLFromID } from "../../utils/helpers/urls";
 import styles from "./Artist.module.css";
-import { useContext, Fragment, useState } from "react";
+import {  Fragment, useState } from "react";
 import { ArtistsPayloadType } from "../../apis/src/payload.types";
 import { FullLoader } from "../../components/Loaders/Loaders";
 import { useNavigate } from "react-router-dom";
 import { ARTIST_SONGS } from "../../router/routes";
+import { useToken } from "../../hooks/TokenHooks";
 
 const Artist: React.FC = () => {
   const navigate = useNavigate();
-  const token = useContext(TokenContext);
+  const { token } = useToken();
   const [filterBoxData, setFilterBoxData] = useState<ArtistsPayloadType>({
     text: "",
     option: "name",

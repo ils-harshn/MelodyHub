@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AxiosConfig } from "./index.types";
-import { TokenType } from "../contexts/Context.types";
+import { TokenType } from "../hooks/TokenHooks";
 
 const BASE_URL = process.env.REACT_APP_BASEURL;
 

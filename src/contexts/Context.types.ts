@@ -11,10 +11,3 @@ export type ThemeContextValue = {
   theme: ThemeTypes;
   toggleTheme: (themeName: ThemeTypes) => void;
 };
-
-// Token Context Types
-export type TokenType = string;
-export type TokenProviderType = {
-  currentToken: TokenType;
-  children: React.ReactNode;
-};

@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { usePlaylistSongsInfiniteQuery } from "../../apis/src/queryHooks";
-import { useContext, Fragment } from "react";
-import { TokenContext } from "../../contexts/TokenContext";
+import { Fragment } from "react";
 import PlaylistSongsContainerType from "./PlaylistSongs.types";
 import { getClassName, isNumeric } from "../../utils";
 import NotFound from "../NotFound/NotFound";
@@ -11,9 +10,10 @@ import { PlaylistSongsLandscapeContainer } from "../../components/Containers/Con
 import styles from "./PlaylistSongs.module.css";
 import { getIndexForInfiniteQuery } from "../../apis/src/utils";
 import { FullLoader } from "../../components/Loaders/Loaders";
+import { useToken } from "../../hooks/TokenHooks";
 
 const SongsContainer: React.FC<PlaylistSongsContainerType> = ({ id, name }) => {
-  const token = useContext(TokenContext);
+  const { token } = useToken();
   const {
     data,
     isLoading,

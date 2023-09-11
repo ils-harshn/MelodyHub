@@ -1,11 +1,10 @@
-import { useContext, Fragment } from "react";
+import { Fragment } from "react";
 import { useRecentSongsInfiniteQuery } from "../../apis/src/queryHooks";
 import SongCardContainer, {
   ContentCardContainer,
 } from "../../components/Containers/Containers";
 import { getClassName } from "../../utils";
 import styles from "./Library.module.css";
-import { TokenContext } from "../../contexts/TokenContext";
 import { FullLoader } from "../../components/Loaders/Loaders";
 import { SongType } from "../../apis/src/response.types";
 import SongCard, { ContentCard } from "../../components/Cards/Cards";
@@ -13,9 +12,10 @@ import { Artist, Genre, Playlist, Queue } from "../../assests/icons";
 import { useNavigate } from "react-router-dom";
 import * as routes from "../../router/routes";
 import { usePlaylistComponentDispatch } from "../../hooks/PlaylistComponentHooks";
+import { useToken } from "../../hooks/TokenHooks";
 
 const Recent25Songs: React.FC = () => {
-  const token = useContext(TokenContext);
+  const { token } = useToken();
   const { data, isLoading } = useRecentSongsInfiniteQuery(token, {
     page: 1,
   });

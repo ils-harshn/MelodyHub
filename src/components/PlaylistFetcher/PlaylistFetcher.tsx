@@ -1,4 +1,4 @@
-import { useContext, Fragment, useState, useEffect, useRef } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import {
   useCreatePlaylistMutation,
   useFilterPlaylistsInfiniteQuery,
@@ -6,7 +6,6 @@ import {
 import { PlaylistCardContainer } from "../../components/Containers/Containers";
 import { getClassName } from "../../utils";
 import styles from "./PlaylistFetcher.module.css";
-import { TokenContext } from "../../contexts/TokenContext";
 import { FullLoader } from "../../components/Loaders/Loaders";
 import { PlaylistResponseType } from "../../apis/src/response.types";
 import { LoadMoreCard, PlaylistCard } from "../../components/Cards/Cards";
@@ -22,9 +21,10 @@ import {
   usePlaylistComponentData,
   usePlaylistComponentDispatch,
 } from "../../hooks/PlaylistComponentHooks";
+import { useToken } from "../../hooks/TokenHooks";
 
 const PlaylistCreator: React.FC<PlaylistCreatorType> = ({ onSuccessAdd }) => {
-  const token = useContext(TokenContext);
+  const { token } = useToken();
   const [text, setText] = useState("");
   const { mutate, isLoading, isError } = useCreatePlaylistMutation(token, {
     onSuccess: () => {
@@ -81,7 +81,7 @@ const PlaylistCreator: React.FC<PlaylistCreatorType> = ({ onSuccessAdd }) => {
 export const PlaylistFetcherComponent: React.FC<
   PlaylistFetcherComponentType
 > = ({ open, toggleOpen, addToSong }) => {
-  const token = useContext(TokenContext);
+  const { token } = useToken();
   const [text, setText] = useState("");
   const debouncedText = useDebounce(text, 500);
   const {

@@ -36,8 +36,8 @@ import {
   OnlyPagePayloadType,
   RemoveSongFromPlaylistPayload,
 } from "./payload.types";
-import { TokenType } from "../../contexts/Context.types";
 import { getPageNumberFromBEUrl } from "./utils";
+import { TokenType } from "../../hooks/TokenHooks";
 
 export const useLoginMutation = (config = {}) =>
   useMutation({

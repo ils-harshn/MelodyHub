@@ -14,16 +14,22 @@ import { useLoginMutation } from "../../../apis/src/queryHooks";
 import { LoginResponseType } from "../../../apis/src/response.types";
 import { setToken } from "../../../utils/helpers/tokenkeeper";
 import { useNavigate } from "react-router-dom";
+import { useTokenDispatch } from "../../../hooks/TokenHooks";
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
+  const dispatchTokenData = useTokenDispatch();
 
   const { mutate, isLoading, isError } = useLoginMutation({
     onSuccess: (data: LoginResponseType) => {
       setToken(data.token, formik.values.rememberMe);
-      navigate(HOME.endpoint, {
-        state: data.token,
+      dispatchTokenData({
+        type: "SET_ACTION",
+        payload: {
+          token: data.token,
+        },
       });
+      navigate(HOME.endpoint);
     },
   });
 

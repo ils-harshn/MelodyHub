@@ -54,18 +54,25 @@
   margin: 20px 0 20px 0;
 }
 
-.option-selector :global .collapse-box {
+.option-selector :global .collapse-box,
+.option-selector :global .logout-box {
   display: flex;
   align-items: center;
 }
 
-.option-selector :global .collapse-box-toggler {
+.option-selector :global .collapse-box-toggler,
+.option-selector :global .logout-button {
   display: flex;
   margin-left: 10px;
 }
 
-.option-selector :global .collapse-box-toggler svg {
+.option-selector :global .collapse-box-toggler svg,
+.option-selector :global .logout-button svg {
   fill: var(--icon-color);
   width: 14px;
   height: 14px;
+}
+
+.option-selector :global .logout-box {
+  cursor: pointer;
 }

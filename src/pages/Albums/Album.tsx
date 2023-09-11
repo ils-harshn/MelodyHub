@@ -4,20 +4,20 @@ import { AlbumType } from "../../apis/src/response.types";
 import { ImageCard, LoadMoreCard } from "../../components/Cards/Cards";
 import { ImageCardContainer } from "../../components/Containers/Containers";
 import { InputWithIcon, SelectInput } from "../../components/Inputs/Inputs";
-import { TokenContext } from "../../contexts/TokenContext";
 import { getClassName } from "../../utils";
 import { generateURLFromID } from "../../utils/helpers/urls";
 import styles from "./Album.module.css";
-import { useContext, Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 import { AlbumsPayloadType } from "../../apis/src/payload.types";
 import { AlbumsSelectorOptionType } from "./Album.type";
 import { FullLoader } from "../../components/Loaders/Loaders";
 import { useNavigate } from "react-router-dom";
 import { ALBUM_SONGS } from "../../router/routes";
+import { useToken } from "../../hooks/TokenHooks";
 
 const Album: React.FC = () => {
   const navigate = useNavigate();
-  const token = useContext(TokenContext);
+  const { token } = useToken();
   const [filterBoxData, setFilterBoxData] = useState<AlbumsPayloadType>({
     text: "",
     option: "title",

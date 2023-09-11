@@ -5,8 +5,7 @@ import {
   useAlbumDetail,
   useAlbumSongsInfiniteQuery,
 } from "../../apis/src/queryHooks";
-import { TokenContext } from "../../contexts/TokenContext";
-import { useContext, Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 import { AlbumDetailType } from "./Album.type";
 import styles from "./AlbumDetail.module.css";
 import { FullLoader, Skeleton } from "../../components/Loaders/Loaders";
@@ -20,9 +19,10 @@ import { SongType } from "../../apis/src/response.types";
 import { getIndexForInfiniteQuery } from "../../apis/src/utils";
 import { SongCardLandscapeContainer } from "../../components/Containers/Containers";
 import NotFound from "../NotFound/NotFound";
+import { useToken } from "../../hooks/TokenHooks";
 
 const AlbumSongs: React.FC<AlbumDetailType> = ({ id, isError }) => {
-  const token = useContext(TokenContext);
+  const { token } = useToken();
   const {
     data,
     isLoading,
@@ -81,7 +81,7 @@ const AlbumSongs: React.FC<AlbumDetailType> = ({ id, isError }) => {
 };
 
 const AlbumInfo: React.FC<AlbumDetailType> = ({ id, isError }) => {
-  const token = useContext(TokenContext);
+  const { token } = useToken();
   const { data, isLoading } = useAlbumDetail(
     token,
     {

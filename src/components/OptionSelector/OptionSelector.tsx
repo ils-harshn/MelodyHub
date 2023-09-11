@@ -3,12 +3,38 @@ import ThemeContext from "../../contexts/ThemeContext";
 import styles from "./OptionSelector.module.css";
 import { getClassName } from "../../utils";
 import { OPTION_SELECTOR_OPENER } from "../../consts/ids";
-import { Bolt, CollapseIn, CollapseOut } from "../../assests/icons";
+import { Bolt, CollapseIn, CollapseOut, Logout } from "../../assests/icons";
 import { themes } from "../../contexts/Context.types";
 import { SelectInput } from "../Inputs/Inputs";
 import Label from "../Label/Label";
 import { ThemeOptionType } from "./OptionSelector.types";
 import { useState } from "react";
+import { useToken, useTokenDispatch } from "../../hooks/TokenHooks";
+
+const LogoutOutOption: React.FC = () => {
+  const { token } = useToken();
+  const dispatch = useTokenDispatch();
+
+  if (token === "") return null;
+
+  return (
+    <>
+      <div
+        className="logout-box"
+        onClick={() =>
+          dispatch({
+            type: "REMOVE_TOKEN",
+          })
+        }
+      >
+        <Label varient="secondary">Logout</Label>
+        <div className="logout-button">
+          <Logout />
+        </div>
+      </div>
+    </>
+  );
+};
 
 const ThemeChanger: React.FC = () => {
   const themeContext = useContext(ThemeContext);
@@ -110,6 +136,9 @@ const OptionSelector: React.FC = () => {
         </div>
         <div className="option">
           <CollapseBox />
+        </div>
+        <div className="option">
+          <LogoutOutOption />
         </div>
       </div>
     </div>

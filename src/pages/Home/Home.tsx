@@ -1,15 +1,14 @@
-import { useContext } from "react";
 import { useMostPopularSongs } from "../../apis/src/queryHooks";
 import SongCard from "../../components/Cards/Cards";
 import SongCardContainer from "../../components/Containers/Containers";
 import { getClassName } from "../../utils";
 import styles from "./Home.module.css";
-import { TokenContext } from "../../contexts/TokenContext";
 import { FullLoader } from "../../components/Loaders/Loaders";
 import { SongType } from "../../apis/src/response.types";
+import { useToken } from "../../hooks/TokenHooks";
 
 const Home: React.FC = () => {
-  const token = useContext(TokenContext);
+  const { token } = useToken();
   const { data, isLoading } = useMostPopularSongs(token);
 
   if (isLoading === true) return <FullLoader />;

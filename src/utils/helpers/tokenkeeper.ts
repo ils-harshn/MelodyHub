@@ -1,6 +1,11 @@
-export const removeToken = () => {
+export const clearStorage = () => {
   localStorage.clear();
   sessionStorage.clear();
+};
+
+export const removeToken = () => {
+  localStorage.removeItem("token");
+  sessionStorage.removeItem("token");
 };
 
 export const setToken = (token: string, rememberMe = false) => {
