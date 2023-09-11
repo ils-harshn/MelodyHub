@@ -5,13 +5,28 @@ import { useEffect, useState } from "react";
 import { TRIOLOGY_ID } from "../../consts/ids";
 import { useMusicPlayerData } from "../../hooks/MusicPlayerHooks";
 
-const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {
-  const musicPlayerData = useMusicPlayerData();
+const TimerSlider: React.FC = () => {
   const [value, setValue] = useState(0);
 
   const getBackgroundSize = () => {
     return { backgroundSize: `${(value * 100) / 100}% 100%` };
   };
+
+  return (
+    <input
+      className="timer-range"
+      type="range"
+      min={0}
+      max={100}
+      onChange={(e) => setValue(parseInt(e.target.value) || 0)}
+      style={getBackgroundSize()}
+      value={value}
+    />
+  );
+};
+
+const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {
+  const musicPlayerData = useMusicPlayerData();
 
   useEffect(() => {
     const ele = document.getElementById(TRIOLOGY_ID);
@@ -29,15 +44,7 @@ const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {
         musicPlayerData.open === true ? "open" : ""
       )}
     >
-      <input
-        className="timer-range"
-        type="range"
-        min={0}
-        max={100}
-        onChange={(e) => setValue(parseInt(e.target.value) || 0)}
-        style={getBackgroundSize()}
-        value={value}
-      />
+      <TimerSlider />
     </div>
   );
 };
