@@ -4,6 +4,7 @@ import styles from "./MusicPlayer.module.css";
 import { useEffect, useState } from "react";
 import { TRIOLOGY_ID } from "../../consts/ids";
 import { useMusicPlayerData } from "../../hooks/MusicPlayerHooks";
+import { Heart, HollowHeart } from "../../assests/icons";
 
 const TimerSlider: React.FC = () => {
   const [value, setValue] = useState(0);
@@ -45,6 +46,17 @@ const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {
       )}
     >
       <TimerSlider />
+      <div className="block-1">
+        <div className="details">
+          <div className="title truncate">Tune Jo Na Kaha</div>
+          <div className="artists truncate">Pritam, Pritam, Pritam, Pritam, Pritam, Pritam, Pritam, Pritam, Pritam, Pritam, Pritam, Pritam</div>
+        </div>
+        <div className="like-button">
+          <HollowHeart />
+        </div>
+      </div>
+      <div className="buttons"></div>
+      <div className="options"></div>
     </div>
   );
 };

@@ -4,7 +4,7 @@
 
   background-color: var(--musicplayer-bg-color);
 
-  height: 90px;
+  height: 58px;
   width: 100vw;
   transform: translateY(90px);
   transition: transform 300ms;
@@ -70,4 +70,44 @@
   transition: box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     bottom 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+/* blocks sizing */
+.music-player {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+}
+
+.music-player :global .block-1 {
+  display: flex;
+  align-items: center;
+}
+
+.music-player :global .block-1 .details {
+  max-width: 240px;
+  width: 100%;
+  margin-right: 16px;
+}
+
+.music-player :global .block-1 .details .title {
+  color: #fff;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.music-player :global .block-1 .details .artists {
+  color: #b3b3b3;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.music-player :global .block-1 .like-button,
+.music-player :global .block-1 .like-button svg {
+  width: 16px;
+  height: 16px;
+  fill: white;
 }
