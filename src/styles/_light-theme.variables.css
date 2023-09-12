@@ -116,7 +116,13 @@ CFAT - Constants For All Themes
   /* music player */
   --musicplayer-bg-color: #c0c0c0;
 
-  /* timer range */
+  /* music player details */
+  --musicplayer-details-title-color: #000000;
+  --musicplayer-details-album-and-artists-color: #2f2f2f;
+  --musicplayer-icons-color: #3b3b3b;
+  --musicplayer-liked-song-icon-color: #ff0000;
+
+  /* music player */ /* timer range */
   --timer-range-bg: #f3f3f3;
   --timer-range-completed-upto-color: #00ff22;
   --timer-range-thumb-color: #00ff22;

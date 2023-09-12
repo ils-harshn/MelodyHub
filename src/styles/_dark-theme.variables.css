@@ -108,7 +108,13 @@
   /* music player */
   --musicplayer-bg-color: #181818;
 
-  /* timer range */
+  /* music player details */
+  --musicplayer-details-title-color: #ffffff;
+  --musicplayer-details-album-and-artists-color: #b3b3b3;
+  --musicplayer-icons-color: #ffffff;
+  --musicplayer-liked-song-icon-color: #ff0000;
+
+  /* music player */ /* timer range */
   --timer-range-bg: #9595958e;
   --timer-range-completed-upto-color: #ffffff;
   --timer-range-thumb-color: #ffffff;

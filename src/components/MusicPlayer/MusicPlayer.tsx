@@ -84,6 +84,27 @@ const TimerSlider: React.FC = () => {
   );
 };
 
+const MusicPlayerOptions: React.FC = () => {
+  return (
+    <div className="options">
+      <div className="option">
+        <Mic />
+      </div>
+      <div className="option">
+        <Playlist />
+      </div>
+      <div className="option">
+        <Bars />
+      </div>
+      <VolumeOption />
+    </div>
+  );
+};
+
+const MusicPlayerButtons: React.FC = () => {
+  return <div className="buttons"></div>;
+};
+
 const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {
   const musicPlayerData = useMusicPlayerData();
 
@@ -105,19 +126,8 @@ const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {
     >
       <TimerSlider />
       <SongDetails />
-      <div className="buttons"></div>
-      <div className="options">
-        <div className="option">
-          <Mic />
-        </div>
-        <div className="option">
-          <Playlist />
-        </div>
-        <div className="option">
-          <Bars />
-        </div>
-        <VolumeOption />
-      </div>
+      <MusicPlayerButtons />
+      <MusicPlayerOptions />
     </div>
   );
 };

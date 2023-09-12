@@ -95,7 +95,7 @@
 }
 
 .music-player :global .block-1 .details .title {
-  color: #fff;
+  color: var(--musicplayer-details-title-color);
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -104,7 +104,7 @@
 
 .music-player :global .block-1 .details .artists,
 .music-player :global .block-1 .details .album {
-  color: #b3b3b3;
+  color: var(--musicplayer-details-album-and-artists-color);
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
@@ -126,13 +126,11 @@
 .music-player :global .block-1 .like-button svg {
   width: 16px;
   height: 16px;
-  fill: white;
+  fill: var(--musicplayer-icons-color);
 }
 
 .music-player :global .block-1 .like-button.liked svg {
-  fill: red;
-  width: 18px;
-  height: 18px;
+  fill: var(--musicplayer-liked-song-icon-color);
 }
 
 /* buttons */
@@ -159,7 +157,7 @@
 }
 
 .music-player :global .options .option svg {
-  fill: white;
+  fill: var(--musicplayer-icons-color);
   width: 18px;
   height: 18px;
   pointer-events: none;
