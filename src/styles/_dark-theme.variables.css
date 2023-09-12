@@ -109,8 +109,8 @@
   --musicplayer-bg-color: #181818;
 
   /* timer range */
-  --timer-range-bg: #979797;
-  --timer-range-completed-upto-color: #82cfd0;
-  --timer-range-thumb-color: #82cfd0;
-  --timer-range-thumb-focused-box-shadow: #82cfd098 0px 0px 0px 8px;
+  --timer-range-bg: #9595958e;
+  --timer-range-completed-upto-color: #ffffff;
+  --timer-range-thumb-color: #ffffff;
+  --timer-range-thumb-focused-box-shadow: #ffffff71 0px 0px 0px 8px;
 }

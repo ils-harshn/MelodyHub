@@ -23,6 +23,11 @@ import { ReactComponent as Queue } from "./icons/Queue.svg";
 import { ReactComponent as Trash } from "./icons/Trash.svg";
 import { ReactComponent as Logout } from "./icons/Logout.svg";
 import { ReactComponent as HollowHeart } from "./icons/HollowHeart.svg";
+import { ReactComponent as Mic } from "./icons/Mic.svg";
+import { ReactComponent as VolumeFull } from "./icons/VolumeFull.svg";
+import { ReactComponent as VolumeLow } from "./icons/VolumeLow.svg";
+import { ReactComponent as Mute } from "./icons/Mute.svg";
+import { ReactComponent as Bars } from "./icons/Bars.svg";
 
 export default Logo;
 export {
@@ -50,4 +55,9 @@ export {
   Trash,
   Logout,
   HollowHeart,
+  Mic,
+  VolumeFull,
+  VolumeLow,
+  Mute,
+  Bars,
 };
