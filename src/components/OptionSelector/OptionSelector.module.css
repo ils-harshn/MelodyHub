@@ -114,3 +114,9 @@
 .option-selector :global .profile .profile-data .data-item > label:first-child {
   margin-right: 8px;
 }
+
+@media only screen and (max-width: 400px) {
+  .option-selector {
+    width: 200px;
+  }
+}
