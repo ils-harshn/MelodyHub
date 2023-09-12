@@ -135,10 +135,39 @@
 
 /* buttons */
 .music-player :global .buttons {
-  border: 1px solid red;
   height: 100%;
   flex-grow: 1;
   margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-player :global .buttons .music-button {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin: 0 16px 0 16px;
+}
+
+.music-player :global .buttons .music-button svg {
+  fill: var(--musicplayer-icons-color);
+  width: inherit;
+  height: inherit;
+}
+
+.music-player :global .buttons .music-player-play-pause-button {
+  margin: 0 8px 0 8px;
+}
+
+.music-player :global .buttons .music-button.repeat-state.active svg,
+.music-player :global .buttons .music-button.random-state.active svg {
+  fill: var(--music-button-active-color);
 }
 
 /* options */
@@ -147,7 +176,7 @@
   align-items: center;
   height: 100%;
   max-width: 240px;
-  width: 100%;
+  width: fit-content;
   margin-right: 34px;
 }
 
@@ -216,4 +245,52 @@
   transition: box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     bottom 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+/* media query for music player */
+@media only screen and (max-width: 820px) {
+  .music-player :global .block-1 {
+    width: 25%;
+  }
+
+  .music-player :global .block-1 .like-button {
+    display: none;
+  }
+
+  .music-player :global .options .option {
+    display: none;
+  }
+  .music-player :global .options .option:last-child {
+    display: flex;
+  }
+}
+
+@media only screen and (max-width: 596px) {
+  .music-player :global .block-1 {
+    min-width: 20px;
+    width: 40%;
+  }
+  .music-player :global .block-1 .like-button {
+    display: none;
+  }
+
+  .music-player :global .buttons {
+    justify-content: flex-end;
+  }
+
+  .music-player :global .options {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .music-player :global .block-1 {
+    min-width: 20px;
+    width: 100%;
+  }
+  .music-player :global .buttons .random-state,
+  .music-player :global .buttons .repeat-state,
+  .music-player :global .buttons .previous-button {
+    display: none;
+  }
 }

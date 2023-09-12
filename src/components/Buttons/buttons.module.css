@@ -59,7 +59,6 @@
 
 /* play pause button */
 .play-pause-button {
-  background-color: var(--primary-color);
   outline: none;
   border: none;
   border-radius: 50%;
@@ -69,8 +68,22 @@
   cursor: pointer;
 }
 
-.play-pause-button svg {
-  fill: var(--primary-text-color);
+/* primary */
+.play-pause-button:global.primary {
+  background-color: var(--play-pause-primary-button-bg-color);
+}
+
+.play-pause-button:global.primary svg {
+  fill: var(--play-pause-primary-button-svg-color);
+}
+
+/* secondary */
+.play-pause-button:global.secondary {
+  background-color: var(--play-pause-secondary-button-bg-color);
+}
+
+.play-pause-button:global.secondary svg {
+  fill: var(--play-pause-secondary-button-svg-color);
 }
 
 /* sizes */

@@ -41,6 +41,7 @@ const Button: React.FC<ButtonType> = ({
 
 const PlayPauseButton: React.FC<PlayPauseButtonType> = ({
   className = "",
+  varient = "primary",
   playing = false,
   size = "medium",
   ...props
@@ -51,6 +52,7 @@ const PlayPauseButton: React.FC<PlayPauseButtonType> = ({
         className,
         styles["play-pause-button"],
         size,
+        varient,
         playing ? "playing" : "pause"
       )}
       {...props}

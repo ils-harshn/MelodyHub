@@ -28,6 +28,11 @@ import { ReactComponent as VolumeFull } from "./icons/VolumeFull.svg";
 import { ReactComponent as VolumeLow } from "./icons/VolumeLow.svg";
 import { ReactComponent as Mute } from "./icons/Mute.svg";
 import { ReactComponent as Bars } from "./icons/Bars.svg";
+import { ReactComponent as Random } from "./icons/Random.svg";
+import { ReactComponent as Next } from "./icons/Next.svg";
+import { ReactComponent as Previous } from "./icons/Previous.svg";
+import { ReactComponent as Repeat } from "./icons/Repeat.svg";
+import { ReactComponent as RepeatSingle } from "./icons/RepeatSingle.svg";
 
 export default Logo;
 export {
@@ -60,4 +65,9 @@ export {
   VolumeLow,
   Mute,
   Bars,
+  Random,
+  Next,
+  Previous,
+  Repeat,
+  RepeatSingle,
 };

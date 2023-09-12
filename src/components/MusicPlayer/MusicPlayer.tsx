@@ -10,10 +10,16 @@ import {
   HollowHeart,
   Mic,
   Mute,
+  Next,
   Playlist,
+  Previous,
+  Random,
+  Repeat,
+  RepeatSingle,
   VolumeFull,
   VolumeLow,
 } from "../../assests/icons";
+import { PlayPauseButton } from "../Buttons/buttons";
 
 const VolumeOption: React.FC = () => {
   const [value, setValue] = useState(65);
@@ -102,7 +108,57 @@ const MusicPlayerOptions: React.FC = () => {
 };
 
 const MusicPlayerButtons: React.FC = () => {
-  return <div className="buttons"></div>;
+  const [playing, setPlaying] = useState(false);
+  const [repeatState, setRepeatState] = useState(0);
+  const [randomActive, setRandomActive] = useState(false);
+
+  return (
+    <div className="buttons">
+      <button
+        className={getClassName(
+          "music-button",
+          "random-state",
+          randomActive === false ? "" : "active"
+        )}
+        onClick={() =>
+          setRandomActive((prev) => {
+            setRepeatState(0);
+            return !prev;
+          })
+        }
+      >
+        <Random />
+      </button>
+      <button className="music-button previous-button">
+        <Previous />
+      </button>
+      <PlayPauseButton
+        size="medium"
+        playing={playing}
+        varient="secondary"
+        className="music-player-play-pause-button"
+        onClick={() => setPlaying(!playing)}
+      />
+      <button className="music-button next-button">
+        <Next />
+      </button>
+      <button
+        className={getClassName(
+          "music-button",
+          "repeat-state",
+          repeatState === 0 ? "" : "active"
+        )}
+        onClick={() =>
+          setRepeatState((prev) => {
+            setRandomActive(false);
+            return (prev + 1) % 3;
+          })
+        }
+      >
+        {repeatState === 2 ? <RepeatSingle /> : <Repeat />}
+      </button>
+    </div>
+  );
 };
 
 const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {

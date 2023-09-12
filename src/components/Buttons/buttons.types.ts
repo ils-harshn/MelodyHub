@@ -12,6 +12,7 @@ export type ButtonType = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export type PlayPauseButtonType =
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    varient?: "primary" | "secondary";
     size?: "medium" | "large";
     playing: boolean;
   };

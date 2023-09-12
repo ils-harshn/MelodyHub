@@ -16,6 +16,14 @@
   --inputs-text-color: #ffffff;
   --inputs-placeholder-color: #979797;
 
+  /* play pause button primary */
+  --play-pause-primary-button-bg-color: #1ed760;
+  --play-pause-primary-button-svg-color: #ffffff;
+
+  /* play pause button secondary */
+  --play-pause-secondary-button-bg-color: #ffffff;
+  --play-pause-secondary-button-svg-color: #000000;
+
   /* labels */
   --label-text-color: #ffffff;
 
@@ -119,4 +127,7 @@
   --timer-range-completed-upto-color: #ffffff;
   --timer-range-thumb-color: #ffffff;
   --timer-range-thumb-focused-box-shadow: #ffffff71 0px 0px 0px 8px;
+
+  /* music player buttons */
+  --music-button-active-color: #1DB954;
 }

@@ -11,7 +11,7 @@ CFAT - Constants For All Themes
   --bg-color: #e9e9e9;
 
   --primary-color: #1ed760;
-  --primary-text-color: #000;
+  --primary-text-color: #000000;
   --primary-font-style: Inter;
 
   --secondary-color: #ffffff;
@@ -23,6 +23,14 @@ CFAT - Constants For All Themes
   --inputs-bg-color: #fff;
   --inputs-text-color: black;
   --inputs-placeholder-color: #6a6a6a;
+
+  /* play pause button primary */
+  --play-pause-primary-button-bg-color: #1ed760;
+  --play-pause-primary-button-svg-color: #000000;
+
+  /* play pause button secondary */
+  --play-pause-secondary-button-bg-color: #252525;
+  --play-pause-secondary-button-svg-color: #ffffff;
 
   /* labels */
   --label-text-color: #000;
@@ -127,6 +135,9 @@ CFAT - Constants For All Themes
   --timer-range-completed-upto-color: #00ff22;
   --timer-range-thumb-color: #00ff22;
   --timer-range-thumb-focused-box-shadow: #00ff2298 0px 0px 0px 8px;
+
+  /* music player buttons */
+  --music-button-active-color: #0091ff;
 
   /* CFAT */
   --blue-color: #1877f2;
