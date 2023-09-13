@@ -3,11 +3,13 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: calc(100% - 90px);
+  width: calc(100% - 48px);
+  height: calc(100% - 138px);
+  padding: 24px;
   z-index: 1;
   transition: transform 300ms ease-in;
   transform: scale(0);
+  overflow-y: auto;
 }
 
 .music-player-playlist:global.active {

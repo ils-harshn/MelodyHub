@@ -71,18 +71,12 @@ const SongCard: React.FC<SongCardType> = ({
   onClick,
   ...props
 }) => {
-  const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
   const playlistData = useMusicPlayerPlaylistData();
 
   const { playing } = useMusicPlayerData();
   const dispatchPlayer = useMusicPlayerDispatch();
 
   const handleThumbnailClick = () => {
-    if (playlistData.currentSong?.id !== data.id)
-      dispatchMusicPlayerPlaylistData({
-        type: "SET_CURRENT_SONG",
-        payload: { currentSong: data },
-      });
     dispatchPlayer({
       type: "TOGGLE_PLAYING",
       payload: {
@@ -102,9 +96,9 @@ const SongCard: React.FC<SongCardType> = ({
     >
       <div
         className="thumbnail"
-        onClick={(e) => {
+        onClick={() => {
           handleThumbnailClick();
-          if (onClick) onClick(e);
+          if (onClick) onClick();
         }}
       >
         <ImageWithLoader
