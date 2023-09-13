@@ -1,13 +1,8 @@
-import { DATA_SHARING_FOR_PLAYLIST_TYPE } from "../../apis/src/queryKeys";
 import { PlaylistResponseType, SongType } from "../../apis/src/response.types";
 import { IconType } from "../../assests/icons.types";
 
 export type SongCardType = React.HTMLAttributes<HTMLDivElement> & {
   data: SongType;
-  type?: DATA_SHARING_FOR_PLAYLIST_TYPE;
-  index?: number;
-  pageNumber?: number;
-  payload?: {};
 };
 
 export type ContentCardType = React.HTMLAttributes<HTMLDivElement> & {

@@ -14,10 +14,6 @@ const Search: React.FC = () => {
   const searchBoxData = useSearchBoxData();
   const debouncedSearchBoxData = useDebounce(searchBoxData, 500);
   const { token } = useToken();
-  const payload = {
-    text: debouncedSearchBoxData.text,
-    option: debouncedSearchBoxData.option,
-  };
   const {
     data,
     isLoading,
@@ -25,7 +21,10 @@ const Search: React.FC = () => {
     hasNextPage,
     isFetching,
     fetchNextPage,
-  } = useFilterSongsInfiniteQuery(token, payload);
+  } = useFilterSongsInfiniteQuery(token, {
+    text: debouncedSearchBoxData.text,
+    option: debouncedSearchBoxData.option,
+  });
 
   if (isLoading) return <FullLoader />;
   return (
@@ -34,17 +33,10 @@ const Search: React.FC = () => {
         <h2>Found Nothing</h2>
       ) : (
         <SongCardContainer title="What you wanna listen?">
-          {data.pages.map((group, pageNumber) => (
-            <Fragment key={pageNumber}>
-              {group.results.map((item: SongType, index: number) => (
-                <SongCard
-                  data={item}
-                  key={item.id}
-                  index={index}
-                  pageNumber={pageNumber}
-                  payload={payload}
-                  type="FILTERED_SONGS_INFINITE_QUERY"
-                />
+          {data.pages.map((group, index) => (
+            <Fragment key={index}>
+              {group.results.map((item: SongType) => (
+                <SongCard data={item} key={item.id} />
               ))}
             </Fragment>
           ))}

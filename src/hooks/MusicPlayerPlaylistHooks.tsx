@@ -1,14 +1,9 @@
 import { createContext, useContext, useReducer } from "react";
 import { SongType } from "../apis/src/response.types";
-import { DATA_SHARING_FOR_PLAYLIST_TYPE } from "../apis/src/queryKeys";
 
 type InitialStateType = {
   open?: boolean;
   currentSong?: SongType;
-  pageNumber?: number;
-  index?: number;
-  type?: DATA_SHARING_FOR_PLAYLIST_TYPE;
-  payload?: {};
 };
 
 type ToggleOpenAction = {
@@ -25,20 +20,7 @@ type SetCurrentSongAction = {
   };
 };
 
-type SetCurrentSongWithPaginationAction = {
-  type: "SET_CURRENT_SONG_WITH_PAGINATION";
-  payload: {
-    type: DATA_SHARING_FOR_PLAYLIST_TYPE;
-    index: number;
-    pageNumber: number;
-    payload: {};
-  };
-};
-
-type actionType =
-  | ToggleOpenAction
-  | SetCurrentSongAction
-  | SetCurrentSongWithPaginationAction;
+type actionType = ToggleOpenAction | SetCurrentSongAction;
 
 type MusicPlayerPlaylistProviderType = {
   children: React.ReactNode;
@@ -46,10 +28,6 @@ type MusicPlayerPlaylistProviderType = {
 
 const initialState: InitialStateType = {
   open: false,
-  currentSong: undefined,
-  pageNumber: undefined,
-  index: undefined,
-  type: undefined,
 };
 
 const MusicPlayerPlaylistContext = createContext(initialState);
@@ -65,18 +43,7 @@ function musicPlayerPlaylistReducer(state = initialState, action: actionType) {
     case "SET_CURRENT_SONG":
       return {
         ...state,
-        pageNumber: undefined,
-        index: undefined,
-        type: undefined,
-        payload: undefined,
         currentSong: action.payload.currentSong,
-      };
-    case "SET_CURRENT_SONG_WITH_PAGINATION":
-      return {
-        ...state,
-        type: action.payload.type,
-        index: action.payload.index,
-        pageNumber: action.payload.pageNumber,
       };
     default:
       return state;
