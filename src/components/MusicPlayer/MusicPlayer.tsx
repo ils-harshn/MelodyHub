@@ -221,10 +221,14 @@ const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {
         musicPlayerData.open === true ? "open" : ""
       )}
     >
-      <TimerSlider />
-      <SongDetails />
-      <MusicPlayerButtons />
-      <MusicPlayerOptions />
+      {musicPlayerData.open ? (
+        <>
+          <TimerSlider />
+          <SongDetails />
+          <MusicPlayerButtons />
+          <MusicPlayerOptions />
+        </>
+      ) : null}
     </div>
   );
 };
