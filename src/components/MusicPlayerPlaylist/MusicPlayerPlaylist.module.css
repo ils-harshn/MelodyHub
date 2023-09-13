@@ -1,0 +1,15 @@
+.music-player-playlist {
+  background-color: #000000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 90px);
+  z-index: 1;
+  transition: transform 300ms ease-in;
+  transform: scale(0);
+}
+
+.music-player-playlist:global.active {
+  transform: scale(1);
+}

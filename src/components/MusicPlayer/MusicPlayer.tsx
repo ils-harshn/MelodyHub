@@ -1,5 +1,5 @@
 import { getClassName } from "../../utils";
-import MusicPlayerType from "./MusicPlayer.types";
+import MusicPlayerType, { MusicOptionType } from "./MusicPlayer.types";
 import styles from "./MusicPlayer.module.css";
 import { useEffect, useState } from "react";
 import { TRIOLOGY_ID } from "../../consts/ids";
@@ -20,6 +20,7 @@ import {
   VolumeLow,
 } from "../../assests/icons";
 import { PlayPauseButton } from "../Buttons/buttons";
+import { useMusicPlayerPlaylistDispatch } from "../../hooks/MusicPlayerPlaylistHooks";
 
 const VolumeOption: React.FC = () => {
   const [value, setValue] = useState(65);
@@ -90,18 +91,58 @@ const TimerSlider: React.FC = () => {
   );
 };
 
+const MusicOption: React.FC<MusicOptionType> = ({
+  active,
+  children,
+  onClick,
+}) => {
+  return (
+    <div
+      className={getClassName("option", active ? "active" : "deactive")}
+      onClick={onClick}
+    >
+      {children}
+    </div>
+  );
+};
+
 const MusicPlayerOptions: React.FC = () => {
+  const [activeOptionIndex, setActiveOpenIndex] = useState(0);
+  const dispatchMusicPlayerPlaylist = useMusicPlayerPlaylistDispatch();
+
+  const handleOptionClick = (index: number) => {
+    const activeIndex = activeOptionIndex === index ? 0 : index;
+    setActiveOpenIndex(activeIndex);
+
+    // Handle Player Playlist
+    dispatchMusicPlayerPlaylist({
+      type: "TOGGLE_OPEN",
+      payload: { open: activeIndex === 2 },
+    });
+  };
+
   return (
     <div className="options">
-      <div className="option">
+      <MusicOption
+        active={activeOptionIndex === 1}
+        onClick={() => handleOptionClick(1)}
+      >
         <Mic />
-      </div>
-      <div className="option">
+      </MusicOption>
+
+      <MusicOption
+        active={activeOptionIndex === 2}
+        onClick={() => handleOptionClick(2)}
+      >
         <Playlist />
-      </div>
-      <div className="option">
+      </MusicOption>
+
+      <MusicOption
+        active={activeOptionIndex === 3}
+        onClick={() => handleOptionClick(3)}
+      >
         <Bars />
-      </div>
+      </MusicOption>
       <VolumeOption />
     </div>
   );

@@ -185,6 +185,18 @@
   margin-right: 16px;
 }
 
+.music-player :global .options .option.deactive {
+  opacity: 0.5;
+}
+
+.music-player :global .options .option.deactive:hover {
+  opacity: 0.75;
+}
+
+.music-player :global .options .option.active {
+  opacity: 1;
+}
+
 .music-player :global .options .option svg {
   fill: var(--musicplayer-icons-color);
   width: 18px;
