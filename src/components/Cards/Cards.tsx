@@ -68,6 +68,7 @@ const OptionPopup: React.FC<OptionPopupType> = ({
 const SongCard: React.FC<SongCardType> = ({
   data,
   className = "",
+  onClick,
   ...props
 }) => {
   const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
@@ -99,7 +100,13 @@ const SongCard: React.FC<SongCardType> = ({
       )}
       {...props}
     >
-      <div className="thumbnail" onClick={handleThumbnailClick}>
+      <div
+        className="thumbnail"
+        onClick={(e) => {
+          handleThumbnailClick();
+          if (onClick) onClick(e);
+        }}
+      >
         <ImageWithLoader
           src={generateURLFromID(data.album.thumbnail300x300)}
           alt="Loading"
