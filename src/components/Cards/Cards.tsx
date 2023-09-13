@@ -29,6 +29,10 @@ import { usePlaylistComponentDispatch } from "../../hooks/PlaylistComponentHooks
 import { useNavigate } from "react-router-dom";
 import * as routes from "../../router/routes";
 import { useToken } from "../../hooks/TokenHooks";
+import {
+  useMusicPlayerPlaylistData,
+  useMusicPlayerPlaylistDispatch,
+} from "../../hooks/MusicPlayerPlaylistHooks";
 
 const OptionPopup: React.FC<OptionPopupType> = ({
   data,
@@ -36,6 +40,7 @@ const OptionPopup: React.FC<OptionPopupType> = ({
   isPlaying,
 }) => {
   const dispatchPlaylistData = usePlaylistComponentDispatch();
+
   return (
     <div className="option-button">
       <Options />
@@ -65,22 +70,22 @@ const SongCard: React.FC<SongCardType> = ({
   className = "",
   ...props
 }) => {
-  const dispatch = useMusicPlayerDispatch();
-  const musicPlayerData = useMusicPlayerData();
+  const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
+  const playlistData = useMusicPlayerPlaylistData();
+
+  const { playing } = useMusicPlayerData();
+  const dispatchPlayer = useMusicPlayerDispatch();
 
   const handleThumbnailClick = () => {
-    dispatch({
-      type: "TOGGLE",
+    if (playlistData.currentSong?.id !== data.id)
+      dispatchMusicPlayerPlaylistData({
+        type: "SET_CURRENT_SONG",
+        payload: { currentSong: data },
+      });
+    dispatchPlayer({
+      type: "TOGGLE_PLAYING",
       payload: {
-        open: true,
-        playing:
-          musicPlayerData.data?.id === data.id
-            ? !musicPlayerData.playing
-            : true,
-        data: {
-          id: data.id,
-          album_image_id: data.album.thumbnail,
-        },
+        playing: playlistData.currentSong?.id === data.id ? !playing : true,
       },
     });
   };
@@ -89,7 +94,7 @@ const SongCard: React.FC<SongCardType> = ({
     <div
       className={getClassName(
         styles["song-card"],
-        musicPlayerData.data?.id === data.id ? "selected" : "",
+        playlistData.currentSong?.id === data.id ? "selected" : "",
         className
       )}
       {...props}
@@ -105,7 +110,7 @@ const SongCard: React.FC<SongCardType> = ({
         <div className={"thumbnail-button"}>
           <PlayPauseButton
             playing={
-              musicPlayerData.data?.id === data.id && musicPlayerData.playing
+              playlistData.currentSong?.id === data.id && (playing || false)
             }
             size="medium"
           />
@@ -128,7 +133,7 @@ const SongCard: React.FC<SongCardType> = ({
             data={data}
             handlePlay={handleThumbnailClick}
             isPlaying={
-              musicPlayerData.data?.id === data.id && musicPlayerData.playing
+              playlistData.currentSong?.id === data.id && (playing || false)
             }
           />
           <div>{data.views} Listened</div>
@@ -321,30 +326,31 @@ export const SongCardLandscape: React.FC<SongCardLandscapeType> = ({
   onRemoveFromPlaylistSuccess,
   ...props
 }) => {
-  const dispatch = useMusicPlayerDispatch();
-  const musicPlayerData = useMusicPlayerData();
+  const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
+  const playlistData = useMusicPlayerPlaylistData();
+
+  const { playing } = useMusicPlayerData();
+  const dispatchPlayer = useMusicPlayerDispatch();
 
   const handleThumbnailClick = () => {
-    dispatch({
-      type: "TOGGLE",
+    if (playlistData.currentSong?.id !== data.id)
+      dispatchMusicPlayerPlaylistData({
+        type: "SET_CURRENT_SONG",
+        payload: { currentSong: data },
+      });
+    dispatchPlayer({
+      type: "TOGGLE_PLAYING",
       payload: {
-        open: true,
-        playing:
-          musicPlayerData.data?.id === data.id
-            ? !musicPlayerData.playing
-            : true,
-        data: {
-          id: data.id,
-          album_image_id: data.album.thumbnail,
-        },
+        playing: playlistData.currentSong?.id === data.id ? !playing : true,
       },
     });
   };
+
   return (
     <div
       className={getClassName(
         styles["song-card-landscape"],
-        musicPlayerData.data?.id === data.id ? "selected" : "",
+        playlistData.currentSong?.id === data.id ? "selected" : "",
         className
       )}
       {...props}
@@ -366,7 +372,7 @@ export const SongCardLandscape: React.FC<SongCardLandscapeType> = ({
         data={data}
         handlePlay={handleThumbnailClick}
         isPlaying={
-          musicPlayerData.data?.id === data.id && musicPlayerData.playing
+          playlistData.currentSong?.id === data.id && (playing || false)
         }
       />
     </div>

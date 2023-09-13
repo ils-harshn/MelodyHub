@@ -3,7 +3,10 @@ import MusicPlayerType, { MusicOptionType } from "./MusicPlayer.types";
 import styles from "./MusicPlayer.module.css";
 import { useEffect, useState } from "react";
 import { TRIOLOGY_ID } from "../../consts/ids";
-import { useMusicPlayerData } from "../../hooks/MusicPlayerHooks";
+import {
+  useMusicPlayerData,
+  useMusicPlayerDispatch,
+} from "../../hooks/MusicPlayerHooks";
 import {
   Bars,
   Heart,
@@ -20,7 +23,10 @@ import {
   VolumeLow,
 } from "../../assests/icons";
 import { PlayPauseButton } from "../Buttons/buttons";
-import { useMusicPlayerPlaylistDispatch } from "../../hooks/MusicPlayerPlaylistHooks";
+import {
+  useMusicPlayerPlaylistData,
+  useMusicPlayerPlaylistDispatch,
+} from "../../hooks/MusicPlayerPlaylistHooks";
 
 const VolumeOption: React.FC = () => {
   const [value, setValue] = useState(65);
@@ -149,7 +155,8 @@ const MusicPlayerOptions: React.FC = () => {
 };
 
 const MusicPlayerButtons: React.FC = () => {
-  const [playing, setPlaying] = useState(false);
+  const { playing } = useMusicPlayerData();
+  const dispatchMusicPlayerOption = useMusicPlayerDispatch();
   const [repeatState, setRepeatState] = useState(0);
   const [randomActive, setRandomActive] = useState(false);
 
@@ -175,10 +182,15 @@ const MusicPlayerButtons: React.FC = () => {
       </button>
       <PlayPauseButton
         size="medium"
-        playing={playing}
+        playing={playing || false}
         varient="secondary"
         className="music-player-play-pause-button"
-        onClick={() => setPlaying(!playing)}
+        onClick={() =>
+          dispatchMusicPlayerOption({
+            type: "TOGGLE_PLAYING",
+            payload: { playing: !playing },
+          })
+        }
       />
       <button className="music-button next-button">
         <Next />
@@ -203,25 +215,24 @@ const MusicPlayerButtons: React.FC = () => {
 };
 
 const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {
-  const musicPlayerData = useMusicPlayerData();
+  const { currentSong } = useMusicPlayerPlaylistData();
 
   useEffect(() => {
     const ele = document.getElementById(TRIOLOGY_ID);
     if (ele) {
-      ele.style.height =
-        musicPlayerData.open === true ? "calc(100vh - 90px)" : "100vh";
+      ele.style.height = currentSong ? "calc(100vh - 90px)" : "100vh";
     }
-  }, [musicPlayerData.open]);
+  }, [currentSong]);
 
   return (
     <div
       className={getClassName(
         className,
         styles["music-player"],
-        musicPlayerData.open === true ? "open" : ""
+        currentSong ? "open" : ""
       )}
     >
-      {musicPlayerData.open ? (
+      {currentSong ? (
         <>
           <TimerSlider />
           <SongDetails />

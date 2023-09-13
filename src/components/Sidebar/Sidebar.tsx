@@ -6,26 +6,26 @@ import styles from "./Sidebar.module.css";
 import * as routes from "../../router/routes";
 import { SidebarSongImageType } from "./Sidebar.type";
 import ImageWithLoader from "../ImageWithLoader/ImageWithLoader";
-import { useMusicPlayerData } from "../../hooks/MusicPlayerHooks";
 import { useEffect } from "react";
 import { SIDEBAR_CONTAINER_ID, SIDEBAR_OPENER_ID } from "../../consts/ids";
 import { generateURLFromID } from "../../utils/helpers/urls";
 import { usePlaylistComponentDispatch } from "../../hooks/PlaylistComponentHooks";
+import { useMusicPlayerPlaylistData } from "../../hooks/MusicPlayerPlaylistHooks";
 
 const SidebarSongImage: React.FC<SidebarSongImageType> = ({
   className = "",
   ...props
 }) => {
-  const musicData = useMusicPlayerData();
-  if (musicData.data?.album_image_id === undefined) return null;
+  const { currentSong } = useMusicPlayerPlaylistData();
+  if (currentSong === undefined) return null;
   else
     return (
       <div
         {...props}
-        className={getClassName(className, musicData.open ? "show" : "hide")}
+        className={getClassName(className, currentSong ? "show" : "hide")}
       >
         <ImageWithLoader
-          src={generateURLFromID(musicData.data.album_image_id)}
+          src={generateURLFromID(currentSong.album.thumbnail300x300)}
           alt="Loading"
         />
       </div>

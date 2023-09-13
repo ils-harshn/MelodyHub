@@ -1,7 +1,9 @@
 import { createContext, useContext, useReducer } from "react";
+import { SongType } from "../apis/src/response.types";
 
 type InitialStateType = {
   open?: boolean;
+  currentSong?: SongType;
 };
 
 type ToggleOpenAction = {
@@ -11,7 +13,14 @@ type ToggleOpenAction = {
   };
 };
 
-type actionType = ToggleOpenAction;
+type SetCurrentSongAction = {
+  type: "SET_CURRENT_SONG";
+  payload: {
+    currentSong: SongType;
+  };
+};
+
+type actionType = ToggleOpenAction | SetCurrentSongAction;
 
 type MusicPlayerPlaylistProviderType = {
   children: React.ReactNode;
@@ -31,14 +40,19 @@ function musicPlayerPlaylistReducer(state = initialState, action: actionType) {
         ...state,
         open: action.payload.open,
       };
+    case "SET_CURRENT_SONG":
+      return {
+        ...state,
+        currentSong: action.payload.currentSong,
+      };
     default:
       return state;
   }
 }
 
-export const MusicPlayerPlaylistProvider: React.FC<MusicPlayerPlaylistProviderType> = ({
-  children,
-}) => {
+export const MusicPlayerPlaylistProvider: React.FC<
+  MusicPlayerPlaylistProviderType
+> = ({ children }) => {
   const [state, dispatch] = useReducer(
     musicPlayerPlaylistReducer,
     initialState
