@@ -297,10 +297,15 @@ const OptionPopupSongCardLandscape: React.FC<
                 });
             }}
           >
-            Remove
+            {removing ? "Removing" : "Remove"}
           </div>
         ) : null}
-        <div className="option" onClick={handlePlay}>
+        <div
+          className="option"
+          onClick={() => {
+            if (!removing) handlePlay();
+          }}
+        >
           {isPlaying ? "Pause" : "Play"}
         </div>
       </div>
