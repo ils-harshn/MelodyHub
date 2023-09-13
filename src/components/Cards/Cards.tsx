@@ -68,6 +68,10 @@ const OptionPopup: React.FC<OptionPopupType> = ({
 const SongCard: React.FC<SongCardType> = ({
   data,
   className = "",
+  type,
+  payload,
+  index,
+  pageNumber,
   ...props
 }) => {
   const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
@@ -77,11 +81,29 @@ const SongCard: React.FC<SongCardType> = ({
   const dispatchPlayer = useMusicPlayerDispatch();
 
   const handleThumbnailClick = () => {
-    if (playlistData.currentSong?.id !== data.id)
-      dispatchMusicPlayerPlaylistData({
-        type: "SET_CURRENT_SONG",
-        payload: { currentSong: data },
-      });
+    if (playlistData.currentSong?.id !== data.id) {
+      if (
+        type === undefined ||
+        index === undefined ||
+        pageNumber === undefined ||
+        payload === undefined
+      ) {
+        dispatchMusicPlayerPlaylistData({
+          type: "SET_CURRENT_SONG",
+          payload: { currentSong: data },
+        });
+      } else {
+        dispatchMusicPlayerPlaylistData({
+          type: "SET_CURRENT_SONG_WITH_PAGINATION",
+          payload: {
+            type: type,
+            index: index,
+            pageNumber: pageNumber,
+            payload: payload,
+          },
+        });
+      }
+    }
     dispatchPlayer({
       type: "TOGGLE_PLAYING",
       payload: {
