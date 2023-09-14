@@ -42,6 +42,13 @@ const VolumeOption: React.FC = () => {
     return { backgroundSize: `${value}% 100%` };
   };
 
+  useEffect(() => {
+    const audioElement = document.getElementById(
+      MUSIC_PLAYER_ID
+    ) as HTMLAudioElement;
+    audioElement.volume = value / 100;
+  }, [value]);
+
   return (
     <div className="option volume-option">
       {value >= 70 ? <VolumeFull /> : value === 0 ? <Mute /> : <VolumeLow />}
@@ -220,7 +227,7 @@ const MusicPlayerButtons: React.FC = () => {
         audioElement.removeEventListener("canplay", handleCanPlay);
       };
     }
-  }, []);
+  }, [playing]);
 
   useEffect(() => {
     const audioElement = document.getElementById(
