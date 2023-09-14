@@ -26,7 +26,6 @@ export const FilteredSongsList: React.FC<FilteredSongsListType> = ({
   pageNumber,
   payload,
 }) => {
-  console.log("Rencdered");
   const { token } = useToken();
   const {
     data,

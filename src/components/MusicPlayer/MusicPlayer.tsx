@@ -127,9 +127,37 @@ const SongDetails: React.FC = () => {
 
 const TimerSlider: React.FC = () => {
   const [value, setValue] = useState(0);
+  // const [canPlay, setCanPlay] = useState(0);
 
   const getBackgroundSize = () => {
     return { backgroundSize: `${value}% 100%` };
+  };
+
+  useEffect(() => {
+    const audioElement = document.getElementById(
+      MUSIC_PLAYER_ID
+    ) as HTMLAudioElement;
+
+    const handleTimeUpdatePlay = () => {
+      let value = (audioElement.currentTime * 100) / audioElement.duration;
+      setValue(value || 0);
+    };
+
+    if (audioElement) {
+      audioElement.addEventListener("timeupdate", handleTimeUpdatePlay);
+      return () => {
+        audioElement.removeEventListener("timeupdate", handleTimeUpdatePlay);
+      };
+    }
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const audioElement = document.getElementById(
+      MUSIC_PLAYER_ID
+    ) as HTMLAudioElement;
+    const newValue = parseFloat(e.target.value);
+    let value = (newValue * audioElement.duration) / 100;
+    audioElement.currentTime = value;
   };
 
   return (
@@ -139,7 +167,7 @@ const TimerSlider: React.FC = () => {
       min={0}
       max={100}
       step={0.02}
-      onChange={(e) => setValue(parseInt(e.target.value) || 0)}
+      onChange={handleChange}
       style={getBackgroundSize()}
       value={value}
     />
