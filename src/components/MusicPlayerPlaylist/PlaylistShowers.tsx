@@ -313,6 +313,173 @@ export const PlaylistSongsList: React.FC<PlaylistSongsListType> = ({
     });
   };
 
+  const randomAndRepeatState = useMusicPlayerRandomAndRepeatData();
+  const musicPlayDispatch = useMusicPlayerDispatch();
+
+  const handleNext = () => {
+    if (data) {
+      const totalFetchedYet = data.pages.reduce(
+        (total, data) => data.results.length + total,
+        0
+      );
+
+      const currentIndex = getIndexForInfiniteQuery(
+        pageNumber,
+        index,
+        data.pages[0].results.length,
+        0
+      );
+      const { pageNumber: newPageNumber, index: newIndex } =
+        getPagenumberAndIndexForInfiniteQuery(
+          currentIndex + 1,
+          data.pages[0].results.length
+        );
+
+      if (randomAndRepeatState.index === 0) {
+        if (
+          getIndexForInfiniteQuery(newPageNumber, newIndex) > totalFetchedYet
+        ) {
+          musicPlayDispatch({
+            type: "TOGGLE_PLAYING",
+            payload: { playing: false },
+          });
+        } else {
+          dispatchMusicPlayerPlaylistData({
+            type: "GET_PLAYLIST_SONGS_INFINITE_QUERY",
+            payload: {
+              pageNumber: newPageNumber,
+              index: newIndex,
+              queryPayload: payload,
+              currentSong: data.pages[newPageNumber].results[newIndex],
+            },
+          });
+        }
+      } else if (randomAndRepeatState.index === 1) {
+        if (
+          getIndexForInfiniteQuery(newPageNumber, newIndex) > totalFetchedYet
+        ) {
+          dispatchMusicPlayerPlaylistData({
+            type: "GET_PLAYLIST_SONGS_INFINITE_QUERY",
+            payload: {
+              pageNumber: 0,
+              index: 0,
+              queryPayload: payload,
+              currentSong: data.pages[0].results[0],
+            },
+          });
+        } else {
+          dispatchMusicPlayerPlaylistData({
+            type: "GET_PLAYLIST_SONGS_INFINITE_QUERY",
+            payload: {
+              pageNumber: newPageNumber,
+              index: newIndex,
+              queryPayload: payload,
+              currentSong: data.pages[newPageNumber].results[newIndex],
+            },
+          });
+        }
+      } else if (randomAndRepeatState.index === 2) {
+        dispatchMusicPlayerPlaylistData({
+          type: "GET_PLAYLIST_SONGS_INFINITE_QUERY",
+          payload: {
+            pageNumber: pageNumber,
+            index: index,
+            queryPayload: payload,
+            currentSong: data.pages[pageNumber].results[index],
+          },
+        });
+        const audioElement = document.getElementById(
+          MUSIC_PLAYER_ID
+        ) as HTMLAudioElement;
+        audioElement.currentTime = 0;
+      } else {
+        const { pageNumber: randomPageNumber, index: randomIndex } =
+          getPagenumberAndIndexForInfiniteQuery(
+            Math.floor(Math.random() * totalFetchedYet),
+            data.pages[0].results.length
+          );
+        dispatchMusicPlayerPlaylistData({
+          type: "GET_PLAYLIST_SONGS_INFINITE_QUERY",
+          payload: {
+            pageNumber: randomPageNumber,
+            index: randomIndex,
+            queryPayload: payload,
+            currentSong: data.pages[randomPageNumber].results[randomIndex],
+          },
+        });
+      }
+    }
+  };
+
+  const handlePrev = () => {
+    if (data) {
+      const currentIndex = getIndexForInfiniteQuery(
+        pageNumber,
+        index,
+        data.pages[0].results.length,
+        0
+      );
+      const { pageNumber: newPageNumber, index: newIndex } =
+        getPagenumberAndIndexForInfiniteQuery(
+          currentIndex - 1,
+          data.pages[0].results.length
+        );
+      if (newPageNumber >= 0 && newIndex >= 0) {
+        dispatchMusicPlayerPlaylistData({
+          type: "GET_PLAYLIST_SONGS_INFINITE_QUERY",
+          payload: {
+            pageNumber: newPageNumber,
+            index: newIndex,
+            queryPayload: payload,
+            currentSong: data.pages[newPageNumber].results[newIndex],
+          },
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    const nextButtonElement = document.getElementById(
+      MUSIC_PLAYER_NEXT_BUTTON_ID
+    ) as HTMLDivElement;
+    if (nextButtonElement) {
+      nextButtonElement.addEventListener("click", handleNext);
+      return () => {
+        nextButtonElement.removeEventListener("click", handleNext);
+      };
+    }
+  }, [index, pageNumber, randomAndRepeatState]);
+
+  // handle audio end event
+  useEffect(() => {
+    const audioElement = document.getElementById(
+      MUSIC_PLAYER_ID
+    ) as HTMLAudioElement;
+
+    const handleAudioEnd = () => {
+      handleNext();
+    };
+
+    if (audioElement) {
+      audioElement.addEventListener("ended", handleAudioEnd);
+      return () => {
+        audioElement.removeEventListener("ended", handleAudioEnd);
+      };
+    }
+  }, [index, pageNumber, randomAndRepeatState]);
+
+  useEffect(() => {
+    const prevButtonElement = document.getElementById(
+      MUSIC_PLAYER_PREV_BUTTON_ID
+    ) as HTMLDivElement;
+    if (prevButtonElement) {
+      prevButtonElement.addEventListener("click", handlePrev);
+      return () => {
+        prevButtonElement.removeEventListener("click", handlePrev);
+      };
+    }
+  }, [index, pageNumber]);
+
   if (isLoading) return <FullLoader />;
   return (
     <div className={getClassName(styles["search"])}>
@@ -384,6 +551,173 @@ export const AlbumSongsList: React.FC<AlbumSongsListType> = ({
     });
   };
 
+  const randomAndRepeatState = useMusicPlayerRandomAndRepeatData();
+  const musicPlayDispatch = useMusicPlayerDispatch();
+
+  const handleNext = () => {
+    if (data) {
+      const totalFetchedYet = data.pages.reduce(
+        (total, data) => data.results.length + total,
+        0
+      );
+
+      const currentIndex = getIndexForInfiniteQuery(
+        pageNumber,
+        index,
+        data.pages[0].results.length,
+        0
+      );
+      const { pageNumber: newPageNumber, index: newIndex } =
+        getPagenumberAndIndexForInfiniteQuery(
+          currentIndex + 1,
+          data.pages[0].results.length
+        );
+
+      if (randomAndRepeatState.index === 0) {
+        if (
+          getIndexForInfiniteQuery(newPageNumber, newIndex) > totalFetchedYet
+        ) {
+          musicPlayDispatch({
+            type: "TOGGLE_PLAYING",
+            payload: { playing: false },
+          });
+        } else {
+          dispatchMusicPlayerPlaylistData({
+            type: "GET_ALBUM_SONGS_INFINITE_QUERY",
+            payload: {
+              pageNumber: newPageNumber,
+              index: newIndex,
+              queryPayload: payload,
+              currentSong: data.pages[newPageNumber].results[newIndex],
+            },
+          });
+        }
+      } else if (randomAndRepeatState.index === 1) {
+        if (
+          getIndexForInfiniteQuery(newPageNumber, newIndex) > totalFetchedYet
+        ) {
+          dispatchMusicPlayerPlaylistData({
+            type: "GET_ALBUM_SONGS_INFINITE_QUERY",
+            payload: {
+              pageNumber: 0,
+              index: 0,
+              queryPayload: payload,
+              currentSong: data.pages[0].results[0],
+            },
+          });
+        } else {
+          dispatchMusicPlayerPlaylistData({
+            type: "GET_ALBUM_SONGS_INFINITE_QUERY",
+            payload: {
+              pageNumber: newPageNumber,
+              index: newIndex,
+              queryPayload: payload,
+              currentSong: data.pages[newPageNumber].results[newIndex],
+            },
+          });
+        }
+      } else if (randomAndRepeatState.index === 2) {
+        dispatchMusicPlayerPlaylistData({
+          type: "GET_ALBUM_SONGS_INFINITE_QUERY",
+          payload: {
+            pageNumber: pageNumber,
+            index: index,
+            queryPayload: payload,
+            currentSong: data.pages[pageNumber].results[index],
+          },
+        });
+        const audioElement = document.getElementById(
+          MUSIC_PLAYER_ID
+        ) as HTMLAudioElement;
+        audioElement.currentTime = 0;
+      } else {
+        const { pageNumber: randomPageNumber, index: randomIndex } =
+          getPagenumberAndIndexForInfiniteQuery(
+            Math.floor(Math.random() * totalFetchedYet),
+            data.pages[0].results.length
+          );
+        dispatchMusicPlayerPlaylistData({
+          type: "GET_ALBUM_SONGS_INFINITE_QUERY",
+          payload: {
+            pageNumber: randomPageNumber,
+            index: randomIndex,
+            queryPayload: payload,
+            currentSong: data.pages[randomPageNumber].results[randomIndex],
+          },
+        });
+      }
+    }
+  };
+
+  const handlePrev = () => {
+    if (data) {
+      const currentIndex = getIndexForInfiniteQuery(
+        pageNumber,
+        index,
+        data.pages[0].results.length,
+        0
+      );
+      const { pageNumber: newPageNumber, index: newIndex } =
+        getPagenumberAndIndexForInfiniteQuery(
+          currentIndex - 1,
+          data.pages[0].results.length
+        );
+      if (newPageNumber >= 0 && newIndex >= 0) {
+        dispatchMusicPlayerPlaylistData({
+          type: "GET_ALBUM_SONGS_INFINITE_QUERY",
+          payload: {
+            pageNumber: newPageNumber,
+            index: newIndex,
+            queryPayload: payload,
+            currentSong: data.pages[newPageNumber].results[newIndex],
+          },
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    const nextButtonElement = document.getElementById(
+      MUSIC_PLAYER_NEXT_BUTTON_ID
+    ) as HTMLDivElement;
+    if (nextButtonElement) {
+      nextButtonElement.addEventListener("click", handleNext);
+      return () => {
+        nextButtonElement.removeEventListener("click", handleNext);
+      };
+    }
+  }, [index, pageNumber, randomAndRepeatState]);
+
+  // handle audio end event
+  useEffect(() => {
+    const audioElement = document.getElementById(
+      MUSIC_PLAYER_ID
+    ) as HTMLAudioElement;
+
+    const handleAudioEnd = () => {
+      handleNext();
+    };
+
+    if (audioElement) {
+      audioElement.addEventListener("ended", handleAudioEnd);
+      return () => {
+        audioElement.removeEventListener("ended", handleAudioEnd);
+      };
+    }
+  }, [index, pageNumber, randomAndRepeatState]);
+
+  useEffect(() => {
+    const prevButtonElement = document.getElementById(
+      MUSIC_PLAYER_PREV_BUTTON_ID
+    ) as HTMLDivElement;
+    if (prevButtonElement) {
+      prevButtonElement.addEventListener("click", handlePrev);
+      return () => {
+        prevButtonElement.removeEventListener("click", handlePrev);
+      };
+    }
+  }, [index, pageNumber]);
+
   if (isLoading) return <FullLoader />;
   return (
     <div className={getClassName(styles["search"])}>
@@ -454,6 +788,173 @@ export const ArtistSongsList: React.FC<ArtistSongsListType> = ({
       },
     });
   };
+
+  const randomAndRepeatState = useMusicPlayerRandomAndRepeatData();
+  const musicPlayDispatch = useMusicPlayerDispatch();
+
+  const handleNext = () => {
+    if (data) {
+      const totalFetchedYet = data.pages.reduce(
+        (total, data) => data.results.length + total,
+        0
+      );
+
+      const currentIndex = getIndexForInfiniteQuery(
+        pageNumber,
+        index,
+        data.pages[0].results.length,
+        0
+      );
+      const { pageNumber: newPageNumber, index: newIndex } =
+        getPagenumberAndIndexForInfiniteQuery(
+          currentIndex + 1,
+          data.pages[0].results.length
+        );
+
+      if (randomAndRepeatState.index === 0) {
+        if (
+          getIndexForInfiniteQuery(newPageNumber, newIndex) > totalFetchedYet
+        ) {
+          musicPlayDispatch({
+            type: "TOGGLE_PLAYING",
+            payload: { playing: false },
+          });
+        } else {
+          dispatchMusicPlayerPlaylistData({
+            type: "GET_ARTIST_SONGS_INFINITE_QUERY",
+            payload: {
+              pageNumber: newPageNumber,
+              index: newIndex,
+              queryPayload: payload,
+              currentSong: data.pages[newPageNumber].results[newIndex],
+            },
+          });
+        }
+      } else if (randomAndRepeatState.index === 1) {
+        if (
+          getIndexForInfiniteQuery(newPageNumber, newIndex) > totalFetchedYet
+        ) {
+          dispatchMusicPlayerPlaylistData({
+            type: "GET_ARTIST_SONGS_INFINITE_QUERY",
+            payload: {
+              pageNumber: 0,
+              index: 0,
+              queryPayload: payload,
+              currentSong: data.pages[0].results[0],
+            },
+          });
+        } else {
+          dispatchMusicPlayerPlaylistData({
+            type: "GET_ARTIST_SONGS_INFINITE_QUERY",
+            payload: {
+              pageNumber: newPageNumber,
+              index: newIndex,
+              queryPayload: payload,
+              currentSong: data.pages[newPageNumber].results[newIndex],
+            },
+          });
+        }
+      } else if (randomAndRepeatState.index === 2) {
+        dispatchMusicPlayerPlaylistData({
+          type: "GET_ARTIST_SONGS_INFINITE_QUERY",
+          payload: {
+            pageNumber: pageNumber,
+            index: index,
+            queryPayload: payload,
+            currentSong: data.pages[pageNumber].results[index],
+          },
+        });
+        const audioElement = document.getElementById(
+          MUSIC_PLAYER_ID
+        ) as HTMLAudioElement;
+        audioElement.currentTime = 0;
+      } else {
+        const { pageNumber: randomPageNumber, index: randomIndex } =
+          getPagenumberAndIndexForInfiniteQuery(
+            Math.floor(Math.random() * totalFetchedYet),
+            data.pages[0].results.length
+          );
+        dispatchMusicPlayerPlaylistData({
+          type: "GET_ARTIST_SONGS_INFINITE_QUERY",
+          payload: {
+            pageNumber: randomPageNumber,
+            index: randomIndex,
+            queryPayload: payload,
+            currentSong: data.pages[randomPageNumber].results[randomIndex],
+          },
+        });
+      }
+    }
+  };
+
+  const handlePrev = () => {
+    if (data) {
+      const currentIndex = getIndexForInfiniteQuery(
+        pageNumber,
+        index,
+        data.pages[0].results.length,
+        0
+      );
+      const { pageNumber: newPageNumber, index: newIndex } =
+        getPagenumberAndIndexForInfiniteQuery(
+          currentIndex - 1,
+          data.pages[0].results.length
+        );
+      if (newPageNumber >= 0 && newIndex >= 0) {
+        dispatchMusicPlayerPlaylistData({
+          type: "GET_ARTIST_SONGS_INFINITE_QUERY",
+          payload: {
+            pageNumber: newPageNumber,
+            index: newIndex,
+            queryPayload: payload,
+            currentSong: data.pages[newPageNumber].results[newIndex],
+          },
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    const nextButtonElement = document.getElementById(
+      MUSIC_PLAYER_NEXT_BUTTON_ID
+    ) as HTMLDivElement;
+    if (nextButtonElement) {
+      nextButtonElement.addEventListener("click", handleNext);
+      return () => {
+        nextButtonElement.removeEventListener("click", handleNext);
+      };
+    }
+  }, [index, pageNumber, randomAndRepeatState]);
+
+  // handle audio end event
+  useEffect(() => {
+    const audioElement = document.getElementById(
+      MUSIC_PLAYER_ID
+    ) as HTMLAudioElement;
+
+    const handleAudioEnd = () => {
+      handleNext();
+    };
+
+    if (audioElement) {
+      audioElement.addEventListener("ended", handleAudioEnd);
+      return () => {
+        audioElement.removeEventListener("ended", handleAudioEnd);
+      };
+    }
+  }, [index, pageNumber, randomAndRepeatState]);
+
+  useEffect(() => {
+    const prevButtonElement = document.getElementById(
+      MUSIC_PLAYER_PREV_BUTTON_ID
+    ) as HTMLDivElement;
+    if (prevButtonElement) {
+      prevButtonElement.addEventListener("click", handlePrev);
+      return () => {
+        prevButtonElement.removeEventListener("click", handlePrev);
+      };
+    }
+  }, [index, pageNumber]);
 
   if (isLoading) return <FullLoader />;
   return (
