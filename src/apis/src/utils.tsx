@@ -53,6 +53,17 @@ export const getIndexForInfiniteQuery = (
   return songIndex + indexing + pagesIndex * limit;
 };
 
+export const getPagenumberAndIndexForInfiniteQuery = (
+  num: number,
+  limit: number = 24
+) => {
+  const returnVal = {
+    pageNumber: parseInt((num / limit).toString()),
+    index: num % limit,
+  };
+  return returnVal;
+};
+
 export const getArtistNameForGivenIdFromArtistSet = (
   artist_set: ArtistType[],
   id: number

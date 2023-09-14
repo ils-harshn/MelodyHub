@@ -86,10 +86,11 @@
   align-items: center;
   justify-content: space-between;
   margin-right: 16px;
+  width: 204px;
 }
 
 .music-player :global .block-1 .details {
-  max-width: 240px;
+  max-width: 204px;
   width: 100%;
   margin-right: 16px;
 }

@@ -2,7 +2,12 @@ import { getClassName } from "../../utils";
 import MusicPlayerType, { MusicOptionType } from "./MusicPlayer.types";
 import styles from "./MusicPlayer.module.css";
 import { useEffect, useState } from "react";
-import { MUSIC_PLAYER_ID, TRIOLOGY_ID } from "../../consts/ids";
+import {
+  MUSIC_PLAYER_ID,
+  MUSIC_PLAYER_NEXT_BUTTON_ID,
+  MUSIC_PLAYER_PREV_BUTTON_ID,
+  TRIOLOGY_ID,
+} from "../../consts/ids";
 import {
   useMusicPlayerData,
   useMusicPlayerDispatch,
@@ -36,7 +41,7 @@ import { Loader } from "../Loaders/Loaders";
 import { generateURLFromID } from "../../utils/helpers/urls";
 
 const VolumeOption: React.FC = () => {
-  const [value, setValue] = useState(65);
+  const [value, setValue] = useState(25);
 
   const getBackgroundSize = () => {
     return { backgroundSize: `${value}% 100%` };
@@ -127,7 +132,6 @@ const SongDetails: React.FC = () => {
 
 const TimerSlider: React.FC = () => {
   const [value, setValue] = useState(0);
-  // const [canPlay, setCanPlay] = useState(0);
 
   const getBackgroundSize = () => {
     return { backgroundSize: `${value}% 100%` };
@@ -285,7 +289,10 @@ const MusicPlayerButtons: React.FC = () => {
       >
         <Random />
       </button>
-      <button className="music-button previous-button">
+      <button
+        className="music-button previous-button"
+        id={MUSIC_PLAYER_PREV_BUTTON_ID}
+      >
         <Previous />
       </button>
       {loadingAudioContent ? (
@@ -304,7 +311,10 @@ const MusicPlayerButtons: React.FC = () => {
           }
         />
       )}
-      <button className="music-button next-button">
+      <button
+        className="music-button next-button"
+        id={MUSIC_PLAYER_NEXT_BUTTON_ID}
+      >
         <Next />
       </button>
       <button
@@ -349,13 +359,9 @@ const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {
           <audio
             id={MUSIC_PLAYER_ID}
             src={generateURLFromID(currentSong.url)}
-            // onTimeUpdate={() => {}}
-            // onCanPlay={() => {}}
             style={{
               display: "none",
             }}
-            // onEnded={() => {}}
-            controls
           />
           <TimerSlider />
           <SongDetails />

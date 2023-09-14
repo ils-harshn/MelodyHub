@@ -25,7 +25,11 @@ const MusicPlayerPlaylist: React.FC = () => {
   switch (queryKey) {
     case "SET_SINGLE_SONG_ACTION":
       componentToRender = (
-        <SongCardLandscape data={currentSong as SongType} index={1} />
+        <SongCardLandscape
+          data={currentSong as SongType}
+          index={1}
+          showOptions={false}
+        />
       );
       break;
     case "FILTERED_SONGS_INFINITE_QUERY":
