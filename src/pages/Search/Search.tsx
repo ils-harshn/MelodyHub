@@ -9,10 +9,7 @@ import SongCard, { LoadMoreCard } from "../../components/Cards/Cards";
 import { useSearchBoxData } from "../../hooks/SearchBoxHooks";
 import { useDebounce } from "@uidotdev/usehooks";
 import { useToken } from "../../hooks/TokenHooks";
-import {
-  useMusicPlayerPlaylistData,
-  useMusicPlayerPlaylistDispatch,
-} from "../../hooks/MusicPlayerPlaylistHooks";
+import { useMusicPlayerPlaylistDispatch } from "../../hooks/MusicPlayerPlaylistHooks";
 
 const Search: React.FC = () => {
   const searchBoxData = useSearchBoxData();
@@ -32,26 +29,21 @@ const Search: React.FC = () => {
   } = useFilterSongsInfiniteQuery(token, payload);
 
   const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
-  const { queryKey } = useMusicPlayerPlaylistData();
 
-  const handleClickOnSong = (pageNumber: number, index: number) => {
-    if (queryKey === undefined || queryKey !== "FILTERED_SONGS_INFINITE_QUERY")
-      dispatchMusicPlayerPlaylistData({
-        type: "FILTERED_SONGS_INFINITE_QUERY",
-        payload: {
-          index: index,
-          pageNumber: pageNumber,
-          queryPayload: payload,
-        },
-      });
-    else
-      dispatchMusicPlayerPlaylistData({
-        type: "CHANGE_SONG_INDEX_WITH_PAGENUMBER",
-        payload: {
-          index: index,
-          pageNumber: pageNumber,
-        },
-      });
+  const handleClickOnSong = (
+    song: SongType,
+    pageNumber: number,
+    index: number
+  ) => {
+    dispatchMusicPlayerPlaylistData({
+      type: "FILTERED_SONGS_INFINITE_QUERY",
+      payload: {
+        index: index,
+        pageNumber: pageNumber,
+        queryPayload: payload,
+        currentSong: song,
+      },
+    });
   };
 
   if (isLoading) return <FullLoader />;
@@ -67,7 +59,7 @@ const Search: React.FC = () => {
                 <SongCard
                   data={item}
                   key={item.id}
-                  onClick={() => handleClickOnSong(pageNumber, index)}
+                  onClick={() => handleClickOnSong(item, pageNumber, index)}
                 />
               ))}
             </Fragment>

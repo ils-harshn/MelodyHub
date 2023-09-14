@@ -31,7 +31,6 @@ import * as routes from "../../router/routes";
 import { useToken } from "../../hooks/TokenHooks";
 import {
   useMusicPlayerPlaylistData,
-  useMusicPlayerPlaylistDispatch,
 } from "../../hooks/MusicPlayerPlaylistHooks";
 
 const OptionPopup: React.FC<OptionPopupType> = ({
@@ -83,6 +82,7 @@ const SongCard: React.FC<SongCardType> = ({
         playing: playlistData.currentSong?.id === data.id ? !playing : true,
       },
     });
+    if (onClick) onClick();
   };
 
   return (
@@ -94,13 +94,7 @@ const SongCard: React.FC<SongCardType> = ({
       )}
       {...props}
     >
-      <div
-        className="thumbnail"
-        onClick={() => {
-          handleThumbnailClick();
-          if (onClick) onClick();
-        }}
-      >
+      <div className="thumbnail" onClick={() => handleThumbnailClick()}>
         <ImageWithLoader
           src={generateURLFromID(data.album.thumbnail300x300)}
           alt="Loading"
@@ -322,29 +316,26 @@ const OptionPopupSongCardLandscape: React.FC<
 export const SongCardLandscape: React.FC<SongCardLandscapeType> = ({
   data,
   index,
+  showOptions = true,
   className = "",
+  onClick,
   showingForPlaylistId,
   onRemoveFromPlaylistSuccess,
   ...props
 }) => {
-  const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
   const playlistData = useMusicPlayerPlaylistData();
 
   const { playing } = useMusicPlayerData();
   const dispatchPlayer = useMusicPlayerDispatch();
 
   const handleThumbnailClick = () => {
-    if (playlistData.currentSong?.id !== data.id)
-      dispatchMusicPlayerPlaylistData({
-        type: "SET_CURRENT_SONG",
-        payload: { currentSong: data },
-      });
     dispatchPlayer({
       type: "TOGGLE_PLAYING",
       payload: {
         playing: playlistData.currentSong?.id === data.id ? !playing : true,
       },
     });
+    if (onClick) onClick();
   };
 
   return (
@@ -367,15 +358,17 @@ export const SongCardLandscape: React.FC<SongCardLandscapeType> = ({
           </div>
         </div>
       </div>
-      <OptionPopupSongCardLandscape
-        showingForPlaylistId={showingForPlaylistId}
-        onRemoveFromPlaylistSuccess={onRemoveFromPlaylistSuccess}
-        data={data}
-        handlePlay={handleThumbnailClick}
-        isPlaying={
-          playlistData.currentSong?.id === data.id && (playing || false)
-        }
-      />
+      {showOptions ? (
+        <OptionPopupSongCardLandscape
+          showingForPlaylistId={showingForPlaylistId}
+          onRemoveFromPlaylistSuccess={onRemoveFromPlaylistSuccess}
+          data={data}
+          handlePlay={handleThumbnailClick}
+          isPlaying={
+            playlistData.currentSong?.id === data.id && (playing || false)
+          }
+        />
+      ) : null}
     </div>
   );
 };

@@ -27,6 +27,11 @@ import {
   useMusicPlayerPlaylistData,
   useMusicPlayerPlaylistDispatch,
 } from "../../hooks/MusicPlayerPlaylistHooks";
+import {
+  useNeutralizeReactionOnSongMutation,
+  useReactOnASongMutation,
+} from "../../apis/src/queryHooks";
+import { useToken } from "../../hooks/TokenHooks";
 
 const VolumeOption: React.FC = () => {
   const [value, setValue] = useState(65);
@@ -53,24 +58,59 @@ const VolumeOption: React.FC = () => {
 };
 
 const SongDetails: React.FC = () => {
-  const [clicked, setClicked] = useState(false);
+  const { currentSong } = useMusicPlayerPlaylistData();
+  const [liked, setLiked] = useState(
+    currentSong?.reaction === "like" ? true : false
+  );
+  const { token } = useToken();
+  const { mutate: likeSong, isLoading: liking } = useReactOnASongMutation(
+    token,
+    {
+      onSuccess: () => {
+        setLiked(true);
+      },
+    }
+  );
+
+  const { mutate: neutralizeReaction, isLoading: neutralizing } =
+    useNeutralizeReactionOnSongMutation(token, {
+      onSuccess: () => {
+        setLiked(false);
+      },
+    });
+
+  useEffect(() => {
+    setLiked(currentSong?.reaction === "like" ? true : false);
+  }, [currentSong]);
+
   return (
     <div className="block-1">
       <div className="details">
-        <div className="title truncate">Tune Jo Na Kaha</div>
+        <div className="title truncate">{currentSong?.original_name}</div>
         <div className="artists truncate">
-          Pritam, Pritam, Pritam, Pritam, Pritam, Pritam, Pritam, Pritam,
-          Pritam, Pritam, Pritam, Pritam
+          {currentSong?.artist_set.map((item) => item.name).join(", ")}
         </div>
-        <div className="album truncate">Ek Tha Tiger (2007)</div>
+        <div className="album truncate">
+          {currentSong?.album.title} ({currentSong?.album.year})
+        </div>
       </div>
       <div
-        className={getClassName("like-button", clicked ? "liked" : "")}
+        className={getClassName("like-button", liked ? "liked" : "")}
         onClick={() => {
-          setClicked(!clicked);
+          if (!liking && !neutralizing && currentSong) {
+            if (liked === false)
+              likeSong({
+                id: currentSong.id,
+                reaction: "like",
+              });
+            else
+              neutralizeReaction({
+                id: currentSong.id,
+              });
+          }
         }}
       >
-        {clicked ? <Heart /> : <HollowHeart />}
+        {liked ? <Heart /> : <HollowHeart />}
       </div>
     </div>
   );

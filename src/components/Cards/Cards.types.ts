@@ -39,8 +39,10 @@ export type LoadMoreCardType = React.HTMLAttributes<HTMLDivElement> & {
 
 export type SongCardLandscapeType = SongCardType & {
   index: number;
+  showOptions?: boolean;
   showingForPlaylistId?: number;
   onRemoveFromPlaylistSuccess?: () => void;
+  onClick?: () => void;
 };
 
 export type PlaylistCardType = React.HTMLAttributes<HTMLDivElement> & {

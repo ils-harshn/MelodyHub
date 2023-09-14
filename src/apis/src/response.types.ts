@@ -24,13 +24,14 @@ export type GenreType = {
   name: string;
 };
 
-export type ReactionType = "neutral" | "like" | "dislike";
+export type ReactionNeutralType = "neutral";
+export type ReactionType = "like" | "dislike";
 
 export type SongType = {
   id: number;
   album: AlbumType;
   artist_set: ArtistType[];
-  reaction: ReactionType;
+  reaction: ReactionType | ReactionNeutralType;
   genre: GenreType;
   title: string;
   url: string;

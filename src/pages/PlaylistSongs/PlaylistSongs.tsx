@@ -11,9 +11,14 @@ import styles from "./PlaylistSongs.module.css";
 import { getIndexForInfiniteQuery } from "../../apis/src/utils";
 import { FullLoader } from "../../components/Loaders/Loaders";
 import { useToken } from "../../hooks/TokenHooks";
+import { useMusicPlayerPlaylistDispatch } from "../../hooks/MusicPlayerPlaylistHooks";
 
 const SongsContainer: React.FC<PlaylistSongsContainerType> = ({ id, name }) => {
   const { token } = useToken();
+
+  const payload = {
+    id: id,
+  };
   const {
     data,
     isLoading,
@@ -23,15 +28,26 @@ const SongsContainer: React.FC<PlaylistSongsContainerType> = ({ id, name }) => {
     fetchNextPage,
     isError,
     refetch,
-  } = usePlaylistSongsInfiniteQuery(
-    token,
-    {
-      id: id,
-    },
-    {
-      retry: false,
-    }
-  );
+  } = usePlaylistSongsInfiniteQuery(token, payload, {
+    retry: false,
+  });
+
+  const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
+  const handleClickOnSong = (
+    song: SongType,
+    pageNumber: number,
+    index: number
+  ) => {
+    dispatchMusicPlayerPlaylistData({
+      type: "GET_PLAYLIST_SONGS_INFINITE_QUERY",
+      payload: {
+        index: index,
+        pageNumber: pageNumber,
+        queryPayload: payload,
+        currentSong: song,
+      },
+    });
+  };
 
   if (isError) return <NotFound />;
   if (isLoading) return <FullLoader />;
@@ -44,15 +60,16 @@ const SongsContainer: React.FC<PlaylistSongsContainerType> = ({ id, name }) => {
           title={`${name} [${data.pages[0].count}]`}
           optionTitle={isFetching ? "Please Wait" : "Play All"}
         >
-          {data.pages.map((group, index) => (
-            <Fragment key={index}>
-              {group.results.map((item: SongType, i: number) => (
+          {data.pages.map((group, pageNumber) => (
+            <Fragment key={pageNumber}>
+              {group.results.map((item: SongType, index: number) => (
                 <SongCardLandscape
+                  onClick={() => handleClickOnSong(item, pageNumber, index)}
                   showingForPlaylistId={id}
                   onRemoveFromPlaylistSuccess={() => refetch()}
                   data={item}
                   key={item.id}
-                  index={getIndexForInfiniteQuery(index, i)}
+                  index={getIndexForInfiniteQuery(pageNumber, index)}
                 />
               ))}
             </Fragment>

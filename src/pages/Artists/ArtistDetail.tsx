@@ -23,9 +23,13 @@ import {
 import { SongCardLandscapeContainer } from "../../components/Containers/Containers";
 import NotFound from "../NotFound/NotFound";
 import { useToken } from "../../hooks/TokenHooks";
+import { useMusicPlayerPlaylistDispatch } from "../../hooks/MusicPlayerPlaylistHooks";
 
 const ArtistSongs: React.FC<ArtistDetailType> = ({ id, isError }) => {
   const { token } = useToken();
+  const payload = {
+    id: id,
+  };
   const {
     data,
     isLoading,
@@ -33,18 +37,31 @@ const ArtistSongs: React.FC<ArtistDetailType> = ({ id, isError }) => {
     hasNextPage,
     isFetching,
     fetchNextPage,
-  } = useArtistSongsInfiniteQuery(
-    token,
-    {
-      id: id,
+  } = useArtistSongsInfiniteQuery(token, payload, {
+    retry: false,
+    onError: () => {
+      isError(true);
     },
-    {
-      retry: false,
-      onError: () => {
-        isError(true);
+  });
+
+  const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
+
+  const handleClickOnSong = (
+    song: SongType,
+    pageNumber: number,
+    index: number
+  ) => {
+    dispatchMusicPlayerPlaylistData({
+      type: "GET_ARTIST_SONGS_INFINITE_QUERY",
+      payload: {
+        index: index,
+        pageNumber: pageNumber,
+        queryPayload: payload,
+        currentSong: song,
       },
-    }
-  );
+    });
+  };
+
   return (
     <div className="songs primary-scroll-bar">
       {isLoading ? (
@@ -59,14 +76,15 @@ const ArtistSongs: React.FC<ArtistDetailType> = ({ id, isError }) => {
           )}`}
           optionTitle="Play All"
         >
-          {data.pages.map((group, index) => (
-            <Fragment key={index}>
-              {group.results.map((item: SongType, i: number) => (
+          {data.pages.map((group, pageNumber) => (
+            <Fragment key={pageNumber}>
+              {group.results.map((item: SongType, index: number) => (
                 <SongCardLandscape
                   className="song-item"
                   data={item}
                   key={item.id}
-                  index={getIndexForInfiniteQuery(index, i)}
+                  index={getIndexForInfiniteQuery(pageNumber, index)}
+                  onClick={() => handleClickOnSong(item, pageNumber, index)}
                 />
               ))}
             </Fragment>

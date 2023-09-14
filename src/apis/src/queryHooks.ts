@@ -16,6 +16,8 @@ import {
   getPlaylistsWithFilter,
   getRecentSongs,
   loginUser,
+  neutralizeReactionOnSong,
+  reactOnSong,
   removeSongFromPlaylist,
   verifyToken,
 } from "./queryFunctions";
@@ -33,23 +35,32 @@ import {
   GetPlaylistSongsPayloadType,
   GetPlaylistsWithFilterPayload,
   LoginPayloadType,
+  NeutralizeReactionOnSongType,
   OnlyPagePayloadType,
+  ReactOnSongPayloadType,
   RemoveSongFromPlaylistPayload,
 } from "./payload.types";
 import { getPageNumberFromBEUrl } from "./utils";
 import { TokenType } from "../../hooks/TokenHooks";
+
+const commonConfig = {
+  retry: false,
+  refetchOnWindowFocus: false,
+};
 
 export const useLoginMutation = (config = {}) =>
   useMutation({
     mutationFn: (payload: LoginPayloadType) =>
       loginUser(payload.email, payload.password),
     mutationKey: [QUERY_KEYS.LOGIN_USER],
+    ...commonConfig,
     ...config,
   });
 
 export const useVerifyTokenMutation = (config = {}) =>
   useMutation({
     mutationFn: (payload: TokenType) => verifyToken(payload),
+    ...commonConfig,
     ...config,
   });
 
@@ -57,6 +68,7 @@ export const useMostPopularSongs = (token: TokenType, config = {}) =>
   useQuery({
     queryKey: [QUERY_KEYS.MOST_POPULAR_SONGS],
     queryFn: () => getMostPopularSong(token),
+    ...commonConfig,
     ...config,
   });
 
@@ -68,6 +80,7 @@ export const useFilterSongs = (
   useQuery({
     queryKey: [QUERY_KEYS.FILTERED_SONGS, payload],
     queryFn: () => getFilterSongs(token, payload),
+    ...commonConfig,
     ...config,
   });
 
@@ -87,6 +100,7 @@ export const useFilterSongsInfiniteQuery = (
         ? getPageNumberFromBEUrl(lastpage.next)
         : undefined;
     },
+    ...commonConfig,
     ...config,
   });
 
@@ -106,6 +120,7 @@ export const useRecentSongsInfiniteQuery = (
         ? getPageNumberFromBEUrl(lastpage.next)
         : undefined;
     },
+    ...commonConfig,
     ...config,
   });
 
@@ -125,6 +140,7 @@ export const useAlbumsInfiniteQuery = (
         ? getPageNumberFromBEUrl(lastpage.next)
         : undefined;
     },
+    ...commonConfig,
     ...config,
   });
 
@@ -144,6 +160,7 @@ export const useArtistsInfiniteQuery = (
         ? getPageNumberFromBEUrl(lastpage.next)
         : undefined;
     },
+    ...commonConfig,
     ...config,
   });
 
@@ -155,6 +172,7 @@ export const useAlbumDetail = (
   useQuery({
     queryFn: () => getAlbumDetail(token, payload),
     queryKey: [QUERY_KEYS.GET_ALBUM_DETAIL, payload],
+    ...commonConfig,
     ...config,
   });
 
@@ -174,6 +192,7 @@ export const useAlbumSongsInfiniteQuery = (
         ? getPageNumberFromBEUrl(lastpage.next)
         : undefined;
     },
+    ...commonConfig,
     ...config,
   });
 
@@ -185,6 +204,7 @@ export const useArtistDetail = (
   useQuery({
     queryFn: () => getArtistDetail(token, payload),
     queryKey: [QUERY_KEYS.GET_ARTIST_DETAIL, payload],
+    ...commonConfig,
     ...config,
   });
 
@@ -204,6 +224,7 @@ export const useArtistSongsInfiniteQuery = (
         ? getPageNumberFromBEUrl(lastpage.next)
         : undefined;
     },
+    ...commonConfig,
     ...config,
   });
 
@@ -223,6 +244,7 @@ export const useFilterPlaylistsInfiniteQuery = (
         ? getPageNumberFromBEUrl(lastpage.next)
         : undefined;
     },
+    ...commonConfig,
     ...config,
   });
 
@@ -230,6 +252,7 @@ export const useDeletePlaylistMutation = (token: TokenType, config = {}) =>
   useMutation({
     mutationFn: (payload: DeletePlatlistPayload) =>
       deletePlaylist(token, payload),
+    ...commonConfig,
     ...config,
   });
 
@@ -237,6 +260,7 @@ export const useCreatePlaylistMutation = (token: TokenType, config = {}) =>
   useMutation({
     mutationFn: (payload: CreatePlaylistPayload) =>
       createPlaylist(token, payload),
+    ...commonConfig,
     ...config,
   });
 
@@ -244,6 +268,7 @@ export const useAddSongToPlaylistMutation = (token: TokenType, config = {}) =>
   useMutation({
     mutationFn: (payload: AddSongToPlaylistPayload) =>
       addSongToPlaylist(token, payload),
+    ...commonConfig,
     ...config,
   });
 
@@ -263,6 +288,7 @@ export const usePlaylistSongsInfiniteQuery = (
         ? getPageNumberFromBEUrl(lastpage.next)
         : undefined;
     },
+    ...commonConfig,
     ...config,
   });
 
@@ -273,5 +299,27 @@ export const useRemoveSongFromPlaylistMutation = (
   useMutation({
     mutationFn: (payload: RemoveSongFromPlaylistPayload) =>
       removeSongFromPlaylist(token, payload),
+    ...commonConfig,
+    ...config,
+  });
+
+export const useReactOnASongMutation = (token: TokenType, config = {}) =>
+  useMutation({
+    mutationFn: (payload: ReactOnSongPayloadType) =>
+      reactOnSong(token, payload),
+    mutationKey: [QUERY_KEYS.REACT_ON_A_SONG],
+    ...commonConfig,
+    ...config,
+  });
+
+export const useNeutralizeReactionOnSongMutation = (
+  token: TokenType,
+  config = {}
+) =>
+  useMutation({
+    mutationFn: (payload: NeutralizeReactionOnSongType) =>
+      neutralizeReactionOnSong(token, payload),
+    mutationKey: [QUERY_KEYS.NEUTRALIZE_REACTION_ON_A_SONG],
+    ...commonConfig,
     ...config,
   });

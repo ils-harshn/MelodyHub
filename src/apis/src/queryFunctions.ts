@@ -14,7 +14,9 @@ import {
   GetArtistSongsPayload,
   GetPlaylistSongsPayloadType,
   GetPlaylistsWithFilterPayload,
+  NeutralizeReactionOnSongType,
   OnlyPagePayloadType,
+  ReactOnSongPayloadType,
   RemoveSongFromPlaylistPayload,
 } from "./payload.types";
 import {
@@ -270,6 +272,40 @@ export const removeSongFromPlaylist = async (
     ),
     headers: {
       ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};
+
+export const reactOnSong = async (
+  token: TokenType,
+  payload: ReactOnSongPayloadType
+) => {
+  const response = await api({
+    method: "post",
+    url: ENDPOINTS.REACT_ON_A_SONG(payload.id),
+    headers: {
+      ...getAuthHeader(token),
+    },
+    data: {
+      reaction: payload.reaction,
+    },
+  });
+  return response.data;
+};
+
+export const neutralizeReactionOnSong = async (
+  token: TokenType,
+  payload: NeutralizeReactionOnSongType
+) => {
+  const response = await api({
+    method: "post",
+    url: ENDPOINTS.NETRALIZE_REACTION_ON_A_SONG,
+    headers: {
+      ...getAuthHeader(token),
+    },
+    data: {
+      id: payload.id,
     },
   });
   return response.data;

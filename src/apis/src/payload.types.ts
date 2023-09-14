@@ -1,3 +1,5 @@
+import { ReactionType } from "./response.types";
+
 export type LoginPayloadType = {
   email: string;
   password: string;
@@ -75,5 +77,14 @@ export type AddSongToPlaylistPayload = {
 export type RemoveSongFromPlaylistPayload = AddSongToPlaylistPayload;
 export type GetPlaylistSongsPayloadType = {
   page?: number;
+  id: number;
+};
+
+export type ReactOnSongPayloadType = {
+  id: number;
+  reaction: ReactionType;
+};
+
+export type NeutralizeReactionOnSongType = {
   id: number;
 };

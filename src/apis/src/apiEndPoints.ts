@@ -33,6 +33,8 @@ const ENDPOINTS = {
     `/api/songs/playlists/get/${id}/songs/?page=${page}`,
   REMOVE_SONG_FROM_PLAYLIST: (playlist_id: number, song_id: number) =>
     `/api/songs/playlists/get/${playlist_id}/song/delete/${song_id}/`,
+  REACT_ON_A_SONG: (song_id: number) => `/api/songs/reaction/${song_id}/`,
+  NETRALIZE_REACTION_ON_A_SONG: `/api/songs/neutral/`,
 };
 
 export default ENDPOINTS;

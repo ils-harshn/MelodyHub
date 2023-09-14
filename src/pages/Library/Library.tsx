@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import * as routes from "../../router/routes";
 import { usePlaylistComponentDispatch } from "../../hooks/PlaylistComponentHooks";
 import { useToken } from "../../hooks/TokenHooks";
+import { useMusicPlayerPlaylistDispatch } from "../../hooks/MusicPlayerPlaylistHooks";
 
 const Recent25Songs: React.FC = () => {
   const { token } = useToken();
@@ -20,6 +21,16 @@ const Recent25Songs: React.FC = () => {
     page: 1,
   });
 
+  const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
+
+  const handleClickOnSong = (data: SongType) => {
+    dispatchMusicPlayerPlaylistData({
+      type: "SET_SINGLE_SONG_ACTION",
+      payload: {
+        currentSong: data,
+      },
+    });
+  };
   if (isLoading === true) return <FullLoader />;
   return (
     <>
@@ -32,7 +43,11 @@ const Recent25Songs: React.FC = () => {
           {data.pages.map((group, index) => (
             <Fragment key={index}>
               {group.results.map((item: SongType) => (
-                <SongCard data={item} key={item.id} />
+                <SongCard
+                  data={item}
+                  key={item.id}
+                  onClick={() => handleClickOnSong(item)}
+                />
               ))}
             </Fragment>
           ))}

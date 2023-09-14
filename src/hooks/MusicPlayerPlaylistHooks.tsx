@@ -13,7 +13,6 @@ type InitialStateType = {
   currentSong?: SongType;
   queryKey?:
     | "FILTERED_SONGS_INFINITE_QUERY"
-    | "RECENT_SONGS_INFINITE_QUERY"
     | "GET_ALBUM_SONGS_INFINITE_QUERY"
     | "GET_ARTIST_SONGS_INFINITE_QUERY"
     | "GET_PLAYLIST_SONGS_INFINITE_QUERY"
@@ -41,15 +40,7 @@ type PlayFilteredSongsAction = {
     queryPayload: FilterSongsPayloadType;
     index: number;
     pageNumber: number;
-  };
-};
-
-type PlayRecentSongsAction = {
-  type: "RECENT_SONGS_INFINITE_QUERY";
-  payload: {
-    queryPayload: OnlyPagePayloadType;
-    index: number;
-    pageNumber: number;
+    currentSong: SongType;
   };
 };
 
@@ -59,6 +50,7 @@ type PlayAlbumSongsAction = {
     queryPayload: GetAlbumSongsPayload;
     index: number;
     pageNumber: number;
+    currentSong: SongType;
   };
 };
 
@@ -68,6 +60,7 @@ type PlayAritstSongsAction = {
     queryPayload: GetArtistSongsPayload;
     index: number;
     pageNumber: number;
+    currentSong: SongType;
   };
 };
 
@@ -77,6 +70,7 @@ type PlayPlaylistSongsAction = {
     queryPayload: GetPlaylistSongsPayloadType;
     index: number;
     pageNumber: number;
+    currentSong: SongType;
   };
 };
 
@@ -106,7 +100,6 @@ type actionType =
   | ToggleOpenAction
   | SetCurrentSongAction
   | PlayFilteredSongsAction
-  | PlayRecentSongsAction
   | PlayAlbumSongsAction
   | PlayAritstSongsAction
   | PlayPlaylistSongsAction
@@ -140,10 +133,9 @@ function musicPlayerPlaylistReducer(state = initialState, action: actionType) {
     case "GET_ALBUM_SONGS_INFINITE_QUERY":
     case "GET_ARTIST_SONGS_INFINITE_QUERY":
     case "GET_PLAYLIST_SONGS_INFINITE_QUERY":
-    case "RECENT_SONGS_INFINITE_QUERY":
       return {
         ...state,
-        currentSong: undefined,
+        currentSong: action.payload.currentSong,
         index: action.payload.index,
         pageNumber: action.payload.pageNumber,
         queryKey: action.type,
