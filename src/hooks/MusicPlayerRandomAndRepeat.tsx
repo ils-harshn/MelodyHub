@@ -41,10 +41,9 @@ function musicPlayerRandomAndRepeatReducer(
 export const MusicPlayerRandomAndRepeatProvider: React.FC<
   MusicPlayerRandomAndRepeatProviderType
 > = ({ children }) => {
-  const [state, dispatch] = useReducer(
-    musicPlayerRandomAndRepeatReducer,
-    initialState
-  );
+  const [state, dispatch] = useReducer(musicPlayerRandomAndRepeatReducer, {
+    index: 0,
+  });
 
   return (
     <DispatchContext.Provider value={dispatch}>
