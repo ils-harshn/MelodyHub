@@ -27,6 +27,7 @@ import {
   MUSIC_PLAYER_NEXT_BUTTON_ID,
   MUSIC_PLAYER_PREV_BUTTON_ID,
 } from "../../consts/ids";
+import { useMusicPlayerRandomAndRepeatData } from "../../hooks/MusicPlayerRandomAndRepeat";
 
 export const FilteredSongsList: React.FC<FilteredSongsListType> = ({
   index,
@@ -51,6 +52,8 @@ export const FilteredSongsList: React.FC<FilteredSongsListType> = ({
       enabled: false,
     }
   );
+
+  const randomAndRepeatState = useMusicPlayerRandomAndRepeatData();
 
   const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
 
@@ -150,7 +153,7 @@ export const FilteredSongsList: React.FC<FilteredSongsListType> = ({
         nextButtonElement.removeEventListener("click", handleNext);
       };
     }
-  }, [index, pageNumber]);
+  }, [index, pageNumber, randomAndRepeatState]);
 
   useEffect(() => {
     const prevButtonElement = document.getElementById(

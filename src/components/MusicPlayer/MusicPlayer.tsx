@@ -39,6 +39,7 @@ import {
 import { useToken } from "../../hooks/TokenHooks";
 import { Loader } from "../Loaders/Loaders";
 import { generateURLFromID } from "../../utils/helpers/urls";
+import { useMusicPlayerRandomAndRepeatDispatch } from "../../hooks/MusicPlayerRandomAndRepeat";
 
 const VolumeOption: React.FC = () => {
   const [value, setValue] = useState(25);
@@ -242,6 +243,29 @@ const MusicPlayerButtons: React.FC = () => {
   const [randomActive, setRandomActive] = useState(false);
   const { currentSong } = useMusicPlayerPlaylistData();
   const [loadingAudioContent, setLoadingAudioContent] = useState(true);
+
+  const dispatch = useMusicPlayerRandomAndRepeatDispatch();
+
+  useEffect(() => {
+    if (repeatState !== 0)
+      dispatch({
+        type: "TOGGLE",
+        // repeat state
+        payload: { index: repeatState },
+      });
+    else if (randomActive)
+      dispatch({
+        type: "TOGGLE",
+        // random state
+        payload: { index: 3 },
+      });
+    else
+      dispatch({
+        type: "TOGGLE",
+        // no state
+        payload: { index: 0 },
+      });
+  }, [repeatState, randomActive]);
 
   useEffect(() => {
     const audioElement = document.getElementById(
