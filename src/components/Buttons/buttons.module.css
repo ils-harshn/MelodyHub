@@ -68,6 +68,10 @@
   cursor: pointer;
 }
 
+.play-pause-button:disabled {
+  opacity: 0.25;
+}
+
 /* primary */
 .play-pause-button:global.primary {
   background-color: var(--play-pause-primary-button-bg-color);

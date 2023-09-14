@@ -2,7 +2,7 @@ import { getClassName } from "../../utils";
 import MusicPlayerType, { MusicOptionType } from "./MusicPlayer.types";
 import styles from "./MusicPlayer.module.css";
 import { useEffect, useState } from "react";
-import { TRIOLOGY_ID } from "../../consts/ids";
+import { MUSIC_PLAYER_ID, TRIOLOGY_ID } from "../../consts/ids";
 import {
   useMusicPlayerData,
   useMusicPlayerDispatch,
@@ -32,6 +32,8 @@ import {
   useReactOnASongMutation,
 } from "../../apis/src/queryHooks";
 import { useToken } from "../../hooks/TokenHooks";
+import { Loader } from "../Loaders/Loaders";
+import { generateURLFromID } from "../../utils/helpers/urls";
 
 const VolumeOption: React.FC = () => {
   const [value, setValue] = useState(65);
@@ -199,6 +201,37 @@ const MusicPlayerButtons: React.FC = () => {
   const dispatchMusicPlayerOption = useMusicPlayerDispatch();
   const [repeatState, setRepeatState] = useState(0);
   const [randomActive, setRandomActive] = useState(false);
+  const { currentSong } = useMusicPlayerPlaylistData();
+  const [loadingAudioContent, setLoadingAudioContent] = useState(true);
+
+  useEffect(() => {
+    const audioElement = document.getElementById(
+      MUSIC_PLAYER_ID
+    ) as HTMLAudioElement;
+
+    const handleCanPlay = () => {
+      if (playing) audioElement.play();
+      setLoadingAudioContent(false);
+    };
+
+    if (audioElement) {
+      audioElement.addEventListener("canplay", handleCanPlay);
+      return () => {
+        audioElement.removeEventListener("canplay", handleCanPlay);
+      };
+    }
+  }, []);
+
+  useEffect(() => {
+    const audioElement = document.getElementById(
+      MUSIC_PLAYER_ID
+    ) as HTMLAudioElement;
+    playing ? audioElement.play() : audioElement.pause();
+  }, [playing]);
+
+  useEffect(() => {
+    setLoadingAudioContent(true);
+  }, [currentSong]);
 
   return (
     <div className="buttons">
@@ -220,18 +253,22 @@ const MusicPlayerButtons: React.FC = () => {
       <button className="music-button previous-button">
         <Previous />
       </button>
-      <PlayPauseButton
-        size="medium"
-        playing={playing || false}
-        varient="secondary"
-        className="music-player-play-pause-button"
-        onClick={() =>
-          dispatchMusicPlayerOption({
-            type: "TOGGLE_PLAYING",
-            payload: { playing: !playing },
-          })
-        }
-      />
+      {loadingAudioContent ? (
+        <Loader size="small" className="music-player-play-pause-button" />
+      ) : (
+        <PlayPauseButton
+          size="medium"
+          playing={playing || false}
+          varient="secondary"
+          className="music-player-play-pause-button"
+          onClick={() =>
+            dispatchMusicPlayerOption({
+              type: "TOGGLE_PLAYING",
+              payload: { playing: !playing },
+            })
+          }
+        />
+      )}
       <button className="music-button next-button">
         <Next />
       </button>
@@ -274,6 +311,17 @@ const MusicPlayer: React.FC<MusicPlayerType> = ({ className = "" }) => {
     >
       {currentSong ? (
         <>
+          <audio
+            id={MUSIC_PLAYER_ID}
+            src={generateURLFromID(currentSong.url)}
+            // onTimeUpdate={() => {}}
+            // onCanPlay={() => {}}
+            style={{
+              display: "none",
+            }}
+            // onEnded={() => {}}
+            controls
+          />
           <TimerSlider />
           <SongDetails />
           <MusicPlayerButtons />

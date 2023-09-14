@@ -130,4 +130,7 @@
 
   /* music player buttons */
   --music-button-active-color: #1DB954;
+
+    /* music-player-playlist */
+    --music-player-playlist-bg-color: #000000;
 }

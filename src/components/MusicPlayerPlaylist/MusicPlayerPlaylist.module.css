@@ -1,5 +1,5 @@
 .music-player-playlist {
-  background-color: #000000;
+  background-color: var(--music-player-playlist-bg-color);
   position: absolute;
   top: 0;
   left: 0;

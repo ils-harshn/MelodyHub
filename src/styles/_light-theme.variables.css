@@ -139,6 +139,9 @@ CFAT - Constants For All Themes
   /* music player buttons */
   --music-button-active-color: #0091ff;
 
+  /* music-player-playlist */
+  --music-player-playlist-bg-color: #ffffff;
+
   /* CFAT */
   --blue-color: #1877f2;
 
