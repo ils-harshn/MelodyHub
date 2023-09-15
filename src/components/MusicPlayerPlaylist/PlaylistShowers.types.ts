@@ -4,6 +4,7 @@ import {
   GetArtistSongsPayload,
   GetPlaylistSongsPayloadType,
 } from "../../apis/src/payload.types";
+import { SongType } from "../../apis/src/response.types";
 
 export type FilteredSongsListType = {
   index: number;
@@ -27,4 +28,8 @@ export type ArtistSongsListType = {
   index: number;
   pageNumber: number;
   payload: GetArtistSongsPayload;
+};
+
+export type SingleSongSelectedType = {
+  song: SongType;
 };

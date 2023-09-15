@@ -24,6 +24,7 @@ import { LoginResponseType } from "../../apis/src/response.types";
 import MusicPlayerPlaylist from "../../components/MusicPlayerPlaylist/MusicPlayerPlaylist";
 import { MusicPlayerPlaylistProvider } from "../../hooks/MusicPlayerPlaylistHooks";
 import { MusicPlayerRandomAndRepeatProvider } from "../../hooks/MusicPlayerRandomAndRepeat";
+import { MusicPlayerLoadingProvider } from "../../hooks/MusicPlayerLoadingHook";
 
 export const AuthLayout: React.FC = () => {
   return (
@@ -137,15 +138,17 @@ export const Layout = () => {
 
   return (
     <AuthWrapper>
-      <PlaylistComponentProvider>
-        <MusicPlayerRandomAndRepeatProvider>
-          <MusicPlayerPlaylistProvider>
-            <PlaylistShower />
-            <MusicPlayerPlaylist />
-            <TrioLogicalDesign />
-          </MusicPlayerPlaylistProvider>
-        </MusicPlayerRandomAndRepeatProvider>
-      </PlaylistComponentProvider>
+      <MusicPlayerLoadingProvider>
+        <PlaylistComponentProvider>
+          <MusicPlayerRandomAndRepeatProvider>
+            <MusicPlayerPlaylistProvider>
+              <PlaylistShower />
+              <MusicPlayerPlaylist />
+              <TrioLogicalDesign />
+            </MusicPlayerPlaylistProvider>
+          </MusicPlayerRandomAndRepeatProvider>
+        </PlaylistComponentProvider>
+      </MusicPlayerLoadingProvider>
     </AuthWrapper>
   );
 };

@@ -3,6 +3,7 @@ import {
   useArtistSongsInfiniteQuery,
   useFilterSongsInfiniteQuery,
   usePlaylistSongsInfiniteQuery,
+  useRandomSong,
 } from "../../apis/src/queryHooks";
 import { useToken } from "../../hooks/TokenHooks";
 import { getClassName } from "../../utils";
@@ -12,6 +13,7 @@ import {
   ArtistSongsListType,
   FilteredSongsListType,
   PlaylistSongsListType,
+  SingleSongSelectedType,
 } from "./PlaylistShowers.types";
 import styles from "./MusicPlayerPlaylist.module.css";
 import { PlaylistSongsLandscapeContainer } from "../Containers/Containers";
@@ -30,6 +32,7 @@ import {
 } from "../../consts/ids";
 import { useMusicPlayerRandomAndRepeatData } from "../../hooks/MusicPlayerRandomAndRepeat";
 import { useMusicPlayerDispatch } from "../../hooks/MusicPlayerHooks";
+import { useMusicPlayerLoadingDispatch } from "../../hooks/MusicPlayerLoadingHook";
 
 export const FilteredSongsList: React.FC<FilteredSongsListType> = ({
   index,
@@ -990,4 +993,76 @@ export const ArtistSongsList: React.FC<ArtistSongsListType> = ({
       )}
     </div>
   );
+};
+
+export const SingleSongSelected: React.FC<SingleSongSelectedType> = ({
+  song,
+}) => {
+  const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
+
+  const randomAndRepeatState = useMusicPlayerRandomAndRepeatData();
+  const { token } = useToken();
+  const dispatchForLoading = useMusicPlayerLoadingDispatch();
+  const { refetch } = useRandomSong(token, {
+    onSuccess: (data: SongType) => {
+      dispatchMusicPlayerPlaylistData({
+        type: "SET_SINGLE_SONG_ACTION",
+        payload: {
+          currentSong: data,
+        },
+      });
+      dispatchForLoading({
+        type: "TOGGLE_LOADING",
+        payload: { loading: false },
+      });
+    },
+    enabled: false,
+  });
+
+  const handleNext = () => {
+    if (randomAndRepeatState.index === 3) {
+      refetch();
+      dispatchForLoading({
+        type: "TOGGLE_LOADING",
+        payload: { loading: true },
+      });
+    } else if (randomAndRepeatState.index !== 0) {
+      const audioElement = document.getElementById(
+        MUSIC_PLAYER_ID
+      ) as HTMLAudioElement;
+      audioElement.currentTime = 0;
+    }
+  };
+
+  useEffect(() => {
+    const nextButtonElement = document.getElementById(
+      MUSIC_PLAYER_NEXT_BUTTON_ID
+    ) as HTMLDivElement;
+    if (nextButtonElement) {
+      nextButtonElement.addEventListener("click", handleNext);
+      return () => {
+        nextButtonElement.removeEventListener("click", handleNext);
+      };
+    }
+  }, [song, randomAndRepeatState.index]);
+
+  // handle audio end event
+  useEffect(() => {
+    const audioElement = document.getElementById(
+      MUSIC_PLAYER_ID
+    ) as HTMLAudioElement;
+
+    const handleAudioEnd = () => {
+      handleNext();
+    };
+
+    if (audioElement) {
+      audioElement.addEventListener("ended", handleAudioEnd);
+      return () => {
+        audioElement.removeEventListener("ended", handleAudioEnd);
+      };
+    }
+  }, [randomAndRepeatState.index]);
+
+  return <SongCardLandscape data={song} index={1} showOptions={false} />;
 };

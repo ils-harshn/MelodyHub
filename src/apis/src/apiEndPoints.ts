@@ -35,6 +35,7 @@ const ENDPOINTS = {
     `/api/songs/playlists/get/${playlist_id}/song/delete/${song_id}/`,
   REACT_ON_A_SONG: (song_id: number) => `/api/songs/reaction/${song_id}/`,
   NETRALIZE_REACTION_ON_A_SONG: `/api/songs/neutral/`,
+  GET_RANDOM_SONG: `/api/random/song/`,
 };
 
 export default ENDPOINTS;

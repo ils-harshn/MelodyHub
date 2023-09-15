@@ -310,3 +310,14 @@ export const neutralizeReactionOnSong = async (
   });
   return response.data;
 };
+
+export const getRandomSong = async (token: TokenType) => {
+  const response = await api({
+    method: "get",
+    url: ENDPOINTS.GET_RANDOM_SONG,
+    headers: {
+      ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};

@@ -40,6 +40,7 @@ import { useToken } from "../../hooks/TokenHooks";
 import { Loader } from "../Loaders/Loaders";
 import { generateURLFromID } from "../../utils/helpers/urls";
 import { useMusicPlayerRandomAndRepeatDispatch } from "../../hooks/MusicPlayerRandomAndRepeat";
+import { useMusicPlayerLoadingData } from "../../hooks/MusicPlayerLoadingHook";
 
 const VolumeOption: React.FC = () => {
   const [value, setValue] = useState(25);
@@ -243,6 +244,7 @@ const MusicPlayerButtons: React.FC = () => {
   const [randomActive, setRandomActive] = useState(false);
   const { currentSong } = useMusicPlayerPlaylistData();
   const [loadingAudioContent, setLoadingAudioContent] = useState(true);
+  const { loading: isLoading } = useMusicPlayerLoadingData();
 
   const dispatch = useMusicPlayerRandomAndRepeatDispatch();
 
@@ -310,16 +312,18 @@ const MusicPlayerButtons: React.FC = () => {
             return !prev;
           })
         }
+        disabled={isLoading}
       >
         <Random />
       </button>
       <button
         className="music-button previous-button"
         id={MUSIC_PLAYER_PREV_BUTTON_ID}
+        disabled={isLoading}
       >
         <Previous />
       </button>
-      {loadingAudioContent ? (
+      {loadingAudioContent || isLoading ? (
         <Loader size="small" className="music-player-play-pause-button" />
       ) : (
         <PlayPauseButton
@@ -338,6 +342,7 @@ const MusicPlayerButtons: React.FC = () => {
       <button
         className="music-button next-button"
         id={MUSIC_PLAYER_NEXT_BUTTON_ID}
+        disabled={isLoading}
       >
         <Next />
       </button>
@@ -353,6 +358,7 @@ const MusicPlayerButtons: React.FC = () => {
             return (prev + 1) % 3;
           })
         }
+        disabled={isLoading}
       >
         {repeatState === 2 ? <RepeatSingle /> : <Repeat />}
       </button>

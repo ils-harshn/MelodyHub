@@ -14,6 +14,7 @@ import {
   getMostPopularSong,
   getPlaylistSongs,
   getPlaylistsWithFilter,
+  getRandomSong,
   getRecentSongs,
   loginUser,
   neutralizeReactionOnSong,
@@ -320,6 +321,14 @@ export const useNeutralizeReactionOnSongMutation = (
     mutationFn: (payload: NeutralizeReactionOnSongType) =>
       neutralizeReactionOnSong(token, payload),
     mutationKey: [QUERY_KEYS.NEUTRALIZE_REACTION_ON_A_SONG],
+    ...commonConfig,
+    ...config,
+  });
+
+export const useRandomSong = (token: TokenType, config = {}) =>
+  useQuery({
+    queryFn: () => getRandomSong(token),
+    queryKey: [QUERY_KEYS.GET_RANDOM_SONG],
     ...commonConfig,
     ...config,
   });

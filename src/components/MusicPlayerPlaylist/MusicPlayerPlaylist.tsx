@@ -7,13 +7,13 @@ import {
 import { SongType } from "../../apis/src/response.types";
 import { useMusicPlayerPlaylistData } from "../../hooks/MusicPlayerPlaylistHooks";
 import { getClassName } from "../../utils";
-import { SongCardLandscape } from "../Cards/Cards";
 import styles from "./MusicPlayerPlaylist.module.css";
 import {
   AlbumSongsList,
   ArtistSongsList,
   FilteredSongsList,
   PlaylistSongsList,
+  SingleSongSelected,
 } from "./PlaylistShowers";
 
 const MusicPlayerPlaylist: React.FC = () => {
@@ -24,13 +24,7 @@ const MusicPlayerPlaylist: React.FC = () => {
 
   switch (queryKey) {
     case "SET_SINGLE_SONG_ACTION":
-      componentToRender = (
-        <SongCardLandscape
-          data={currentSong as SongType}
-          index={1}
-          showOptions={false}
-        />
-      );
+      componentToRender = <SingleSongSelected song={currentSong as SongType} />;
       break;
     case "FILTERED_SONGS_INFINITE_QUERY":
       componentToRender = (
