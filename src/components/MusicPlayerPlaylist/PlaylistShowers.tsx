@@ -1013,7 +1013,7 @@ export const SingleSongSelected: React.FC<SingleSongSelectedType> = ({
       });
       dispatchForLoading({
         type: "TOGGLE_LOADING",
-        payload: { loading: false },
+        payload: { loading: true },
       });
     },
     enabled: false,

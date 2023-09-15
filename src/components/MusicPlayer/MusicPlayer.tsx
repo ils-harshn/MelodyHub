@@ -295,8 +295,8 @@ const MusicPlayerButtons: React.FC = () => {
   }, [playing]);
 
   useEffect(() => {
-    setLoadingAudioContent(true);
-  }, [currentSong]);
+    setLoadingAudioContent(isLoading || false);
+  }, [isLoading]);
 
   return (
     <div className="buttons">
@@ -323,7 +323,7 @@ const MusicPlayerButtons: React.FC = () => {
       >
         <Previous />
       </button>
-      {loadingAudioContent || isLoading ? (
+      {loadingAudioContent ? (
         <Loader size="small" className="music-player-play-pause-button" />
       ) : (
         <PlayPauseButton
