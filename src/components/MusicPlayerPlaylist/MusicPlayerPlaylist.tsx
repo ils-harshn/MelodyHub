@@ -3,6 +3,7 @@ import {
   GetAlbumSongsPayload,
   GetArtistSongsPayload,
   GetPlaylistSongsPayloadType,
+  OnlyPagePayloadType,
 } from "../../apis/src/payload.types";
 import { SongType } from "../../apis/src/response.types";
 import { useMusicPlayerPlaylistData } from "../../hooks/MusicPlayerPlaylistHooks";
@@ -12,6 +13,7 @@ import {
   AlbumSongsList,
   ArtistSongsList,
   FilteredSongsList,
+  LikedSongsList,
   PlaylistSongsList,
   SingleSongSelected,
 } from "./PlaylistShowers";
@@ -59,6 +61,15 @@ const MusicPlayerPlaylist: React.FC = () => {
           index={index as number}
           pageNumber={pageNumber as number}
           payload={queryPayload as GetArtistSongsPayload}
+        />
+      );
+      break;
+    case "GET_LIKED_SONGS":
+      componentToRender = (
+        <LikedSongsList
+          index={index as number}
+          pageNumber={pageNumber as number}
+          payload={queryPayload as OnlyPagePayloadType}
         />
       );
       break;

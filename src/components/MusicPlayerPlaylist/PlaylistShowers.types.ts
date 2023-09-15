@@ -3,6 +3,7 @@ import {
   GetAlbumSongsPayload,
   GetArtistSongsPayload,
   GetPlaylistSongsPayloadType,
+  OnlyPagePayloadType,
 } from "../../apis/src/payload.types";
 import { SongType } from "../../apis/src/response.types";
 
@@ -10,6 +11,12 @@ export type FilteredSongsListType = {
   index: number;
   pageNumber: number;
   payload: FilterSongsPayloadType;
+};
+
+export type LikedSongsListType = {
+  index: number;
+  pageNumber: number;
+  payload: OnlyPagePayloadType;
 };
 
 export type PlaylistSongsListType = {

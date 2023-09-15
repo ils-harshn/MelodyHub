@@ -11,6 +11,7 @@ import Artist from "../pages/Artists/Artist";
 import AlbumDetail from "../pages/Albums/AlbumDetail";
 import ArtistDetail from "../pages/Artists/ArtistDetail";
 import PlaylistSongs from "../pages/PlaylistSongs/PlaylistSongs";
+import LikedSongs from "../pages/LikedSongs/LikedSongs";
 
 const AppRouter: React.FC = () => {
   return (
@@ -27,10 +28,7 @@ const AppRouter: React.FC = () => {
             path={routes.PLAYLIST_SONGS.path}
             element={<PlaylistSongs />}
           />
-          <Route
-            path={routes.LIKED_SONGS.path}
-            element={<h2>LIKED_SONGS</h2>}
-          />
+          <Route path={routes.LIKED_SONGS.path} element={<LikedSongs />} />
           {/* INDEX - ALBUM_NESTED */}
           <Route path={routes.ALBUM_NESTED.path}>
             <Route index element={<Album />} />

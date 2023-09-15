@@ -12,6 +12,7 @@ import {
   getArtistSongs,
   getArtists,
   getFilterSongs,
+  getLikedSongs,
   getMostPopularSong,
   getPlaylistSongs,
   getPlaylistsWithFilter,
@@ -343,6 +344,26 @@ export const useAddToRecentSong = (
   useQuery({
     queryFn: () => addRecentSong(token, payload),
     queryKey: [QUERY_KEYS.ADD_TO_RECENT_SONG],
+    ...commonConfig,
+    ...config,
+  });
+
+export const useLikedSongsInfiniteQuery = (
+  token: TokenType,
+  payload: OnlyPagePayloadType,
+  config = {}
+) =>
+  useInfiniteQuery({
+    queryFn: ({ pageParam = 1 }) => {
+      payload.page = pageParam;
+      return getLikedSongs(token, payload);
+    },
+    queryKey: [QUERY_KEYS.GET_LIKED_SONGS, payload],
+    getNextPageParam: (lastpage: any) => {
+      return lastpage.next && lastpage.count
+        ? getPageNumberFromBEUrl(lastpage.next)
+        : undefined;
+    },
     ...commonConfig,
     ...config,
   });

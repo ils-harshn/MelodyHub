@@ -16,13 +16,15 @@ type InitialStateType = {
     | "GET_ALBUM_SONGS_INFINITE_QUERY"
     | "GET_ARTIST_SONGS_INFINITE_QUERY"
     | "GET_PLAYLIST_SONGS_INFINITE_QUERY"
-    | "SET_SINGLE_SONG_ACTION";
+    | "SET_SINGLE_SONG_ACTION"
+    | "GET_LIKED_SONGS";
   queryPayload?:
     | FilterSongsPayloadType
     | OnlyPagePayloadType
     | GetAlbumSongsPayload
     | GetArtistSongsPayload
-    | GetPlaylistSongsPayloadType;
+    | GetPlaylistSongsPayloadType
+    | {};
   index?: number;
   pageNumber?: number;
 };
@@ -31,6 +33,16 @@ type ToggleOpenAction = {
   type: "TOGGLE_OPEN";
   payload: {
     open: boolean;
+  };
+};
+
+type PlayLikedSongsAction = {
+  type: "GET_LIKED_SONGS";
+  payload: {
+    queryPayload: {};
+    index: number;
+    pageNumber: number;
+    currentSong: SongType;
   };
 };
 
@@ -104,7 +116,8 @@ type actionType =
   | PlayAritstSongsAction
   | PlayPlaylistSongsAction
   | SetIndexAndPageNumberAction
-  | SetSingleSongAction;
+  | SetSingleSongAction
+  | PlayLikedSongsAction;
 
 type MusicPlayerPlaylistProviderType = {
   children: React.ReactNode;
@@ -133,6 +146,7 @@ function musicPlayerPlaylistReducer(state = initialState, action: actionType) {
     case "GET_ALBUM_SONGS_INFINITE_QUERY":
     case "GET_ARTIST_SONGS_INFINITE_QUERY":
     case "GET_PLAYLIST_SONGS_INFINITE_QUERY":
+    case "GET_LIKED_SONGS":
       return {
         ...state,
         currentSong: action.payload.currentSong,

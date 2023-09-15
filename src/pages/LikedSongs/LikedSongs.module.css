@@ -1,0 +1,11 @@
+.liked-songs {
+  padding: 24px;
+  /* position: relative; */
+}
+
+.liked-songs :global .liked-songs-loader {
+  width: 35%;
+  min-width: 200px;
+  margin: auto;
+  margin-top: 24px;
+}

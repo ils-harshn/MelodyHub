@@ -336,3 +336,17 @@ export const addRecentSong = async (
   });
   return response.data;
 };
+
+export const getLikedSongs = async (
+  token: TokenType,
+  payload: OnlyPagePayloadType
+) => {
+  const response = await api({
+    method: "get",
+    url: ENDPOINTS.GET_LIKED_SONGS(payload.page),
+    headers: {
+      ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};
