@@ -36,6 +36,7 @@ const ENDPOINTS = {
   REACT_ON_A_SONG: (song_id: number) => `/api/songs/reaction/${song_id}/`,
   NETRALIZE_REACTION_ON_A_SONG: `/api/songs/neutral/`,
   GET_RANDOM_SONG: `/api/random/song/`,
+  SET_TO_RECENT_SONG: (song_id: number) => `/api/songs/get/${song_id}/`,
 };
 
 export default ENDPOINTS;

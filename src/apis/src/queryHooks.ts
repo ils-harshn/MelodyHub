@@ -1,6 +1,7 @@
 import { useInfiniteQuery, useMutation, useQuery } from "react-query";
 import QUERY_KEYS from "./queryKeys";
 import {
+  addRecentSong,
   addSongToPlaylist,
   createPlaylist,
   deletePlaylist,
@@ -37,6 +38,7 @@ import {
   GetPlaylistsWithFilterPayload,
   LoginPayloadType,
   NeutralizeReactionOnSongType,
+  OnlyIdPayloadType,
   OnlyPagePayloadType,
   ReactOnSongPayloadType,
   RemoveSongFromPlaylistPayload,
@@ -329,6 +331,18 @@ export const useRandomSong = (token: TokenType, config = {}) =>
   useQuery({
     queryFn: () => getRandomSong(token),
     queryKey: [QUERY_KEYS.GET_RANDOM_SONG],
+    ...commonConfig,
+    ...config,
+  });
+
+export const useAddToRecentSong = (
+  token: TokenType,
+  payload: OnlyIdPayloadType,
+  config = {}
+) =>
+  useQuery({
+    queryFn: () => addRecentSong(token, payload),
+    queryKey: [QUERY_KEYS.ADD_TO_RECENT_SONG],
     ...commonConfig,
     ...config,
   });

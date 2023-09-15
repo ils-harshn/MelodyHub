@@ -15,6 +15,7 @@ import {
   GetPlaylistSongsPayloadType,
   GetPlaylistsWithFilterPayload,
   NeutralizeReactionOnSongType,
+  OnlyIdPayloadType,
   OnlyPagePayloadType,
   ReactOnSongPayloadType,
   RemoveSongFromPlaylistPayload,
@@ -315,6 +316,20 @@ export const getRandomSong = async (token: TokenType) => {
   const response = await api({
     method: "get",
     url: ENDPOINTS.GET_RANDOM_SONG,
+    headers: {
+      ...getAuthHeader(token),
+    },
+  });
+  return response.data;
+};
+
+export const addRecentSong = async (
+  token: TokenType,
+  payload: OnlyIdPayloadType
+) => {
+  const response = await api({
+    method: "get",
+    url: ENDPOINTS.SET_TO_RECENT_SONG(payload.id),
     headers: {
       ...getAuthHeader(token),
     },
