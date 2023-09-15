@@ -30,11 +30,7 @@ const Search: React.FC = () => {
 
   const dispatchMusicPlayerPlaylistData = useMusicPlayerPlaylistDispatch();
 
-  const handleClickOnSong = (
-    song: SongType,
-    pageNumber: number,
-    index: number
-  ) => {
+  const handlePlayAll = (song: SongType, pageNumber: number, index: number) => {
     dispatchMusicPlayerPlaylistData({
       type: "FILTERED_SONGS_INFINITE_QUERY",
       payload: {
@@ -46,20 +42,33 @@ const Search: React.FC = () => {
     });
   };
 
+  const handleClickOnSong = (song: SongType) => {
+    dispatchMusicPlayerPlaylistData({
+      type: "SET_SINGLE_SONG_ACTION",
+      payload: {
+        currentSong: song,
+      },
+    });
+  };
+
   if (isLoading) return <FullLoader />;
   return (
     <div className={getClassName(styles["search"])}>
       {!data || !data.pages || data.pages[0].count === 0 ? (
         <h2>Found Nothing</h2>
       ) : (
-        <SongCardContainer title="What you wanna listen?">
+        <SongCardContainer
+          title="What you wanna listen?"
+          optionTitle="Play All"
+          onClick={() => handlePlayAll(data.pages[0].results[0], 0, 0)}
+        >
           {data.pages.map((group, pageNumber) => (
             <Fragment key={pageNumber}>
-              {group.results.map((item: SongType, index: number) => (
+              {group.results.map((item: SongType) => (
                 <SongCard
                   data={item}
                   key={item.id}
-                  onClick={() => handleClickOnSong(item, pageNumber, index)}
+                  onClick={() => handleClickOnSong(item)}
                 />
               ))}
             </Fragment>
