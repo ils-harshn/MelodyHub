@@ -21,7 +21,9 @@ import { PlaylistComponentProvider } from "../../hooks/PlaylistComponentHooks";
 import { PlaylistShower } from "../../components/PlaylistFetcher/PlaylistFetcher";
 import { useToken, useTokenDispatch } from "../../hooks/TokenHooks";
 import { LoginResponseType } from "../../apis/src/response.types";
-import MusicPlayerPlaylist from "../../components/MusicPlayerPlaylist/MusicPlayerPlaylist";
+import MusicPlayerPlaylist, {
+  MusicSpectro,
+} from "../../components/MusicPlayerPlaylist/MusicPlayerPlaylist";
 import { MusicPlayerPlaylistProvider } from "../../hooks/MusicPlayerPlaylistHooks";
 import { MusicPlayerRandomAndRepeatProvider } from "../../hooks/MusicPlayerRandomAndRepeat";
 import { MusicPlayerLoadingProvider } from "../../hooks/MusicPlayerLoadingHook";
@@ -144,6 +146,7 @@ export const Layout = () => {
             <MusicPlayerPlaylistProvider>
               <PlaylistShower />
               <MusicPlayerPlaylist />
+              <MusicSpectro />
               <TrioLogicalDesign />
             </MusicPlayerPlaylistProvider>
           </MusicPlayerRandomAndRepeatProvider>

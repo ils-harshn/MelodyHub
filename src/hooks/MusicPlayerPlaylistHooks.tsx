@@ -25,14 +25,30 @@ type InitialStateType = {
     | GetArtistSongsPayload
     | GetPlaylistSongsPayloadType
     | {};
+  openPreview?: boolean;
   index?: number;
   pageNumber?: number;
+  timeInStr?: string;
 };
 
 type ToggleOpenAction = {
   type: "TOGGLE_OPEN";
   payload: {
     open: boolean;
+  };
+};
+
+type ToggleOpenPreviewAction = {
+  type: "TOGGLE_OPEN_PREVIEW";
+  payload: {
+    openPreview: boolean;
+  };
+};
+
+type TimerUpdateAction = {
+  type: "HANDLE_TIMER_UPDATE";
+  payload: {
+    timeInStr: string;
   };
 };
 
@@ -117,7 +133,9 @@ type actionType =
   | PlayPlaylistSongsAction
   | SetIndexAndPageNumberAction
   | SetSingleSongAction
-  | PlayLikedSongsAction;
+  | PlayLikedSongsAction
+  | ToggleOpenPreviewAction
+  | TimerUpdateAction;
 
 type MusicPlayerPlaylistProviderType = {
   children: React.ReactNode;
@@ -125,6 +143,7 @@ type MusicPlayerPlaylistProviderType = {
 
 const initialState: InitialStateType = {
   open: false,
+  timeInStr: "00:00",
 };
 
 const MusicPlayerPlaylistContext = createContext(initialState);
@@ -169,6 +188,16 @@ function musicPlayerPlaylistReducer(state = initialState, action: actionType) {
         queryPayload: undefined,
         index: undefined,
         pageNumber: undefined,
+      };
+    case "TOGGLE_OPEN_PREVIEW":
+      return {
+        ...state,
+        openPreview: action.payload.openPreview,
+      };
+    case "HANDLE_TIMER_UPDATE":
+      return {
+        ...state,
+        timeInStr: action.payload.timeInStr,
       };
     default:
       return state;

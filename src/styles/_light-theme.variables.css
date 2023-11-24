@@ -165,4 +165,7 @@ CFAT - Constants For All Themes
   /* CFAT Inputs */
   --tertiary-input-bg-color: #ffffff;
   --tertiary-input-icon-color: #000000;
+
+  /* spectro gradient */
+  --spectro-gradient: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)
 }

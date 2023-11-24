@@ -43,7 +43,7 @@ import { useMusicPlayerRandomAndRepeatDispatch } from "../../hooks/MusicPlayerRa
 import { useMusicPlayerLoadingData } from "../../hooks/MusicPlayerLoadingHook";
 
 const VolumeOption: React.FC = () => {
-  const [value, setValue] = useState(25);
+  const [value, setValue] = useState(0);
 
   const getBackgroundSize = () => {
     return { backgroundSize: `${value}% 100%` };
@@ -134,6 +134,7 @@ const SongDetails: React.FC = () => {
 
 const TimerSlider: React.FC = () => {
   const [value, setValue] = useState(0);
+  const timerUpdater = useMusicPlayerPlaylistDispatch();
 
   const getBackgroundSize = () => {
     return { backgroundSize: `${value}% 100%` };
@@ -144,9 +145,28 @@ const TimerSlider: React.FC = () => {
       MUSIC_PLAYER_ID
     ) as HTMLAudioElement;
 
+    const updateCompletedTime = () => {
+      const currentTime = audioElement.currentTime;
+      const minutes = Math.floor(currentTime / 60);
+      const seconds = Math.floor(currentTime % 60);
+      const formattedTime =
+        (minutes < 10 ? "0" : "") +
+        minutes +
+        ":" +
+        (seconds < 10 ? "0" : "") +
+        seconds;
+      timerUpdater({
+        type: "HANDLE_TIMER_UPDATE",
+        payload: {
+          timeInStr: formattedTime,
+        },
+      });
+    };
+
     const handleTimeUpdatePlay = () => {
       let value = (audioElement.currentTime * 100) / audioElement.duration;
       setValue(value || 0);
+      updateCompletedTime();
     };
 
     if (audioElement) {
@@ -197,6 +217,7 @@ const MusicOption: React.FC<MusicOptionType> = ({
 
 const MusicPlayerOptions: React.FC = () => {
   const [activeOptionIndex, setActiveOpenIndex] = useState(0);
+  const { openPreview } = useMusicPlayerPlaylistData();
   const dispatchMusicPlayerPlaylist = useMusicPlayerPlaylistDispatch();
 
   const handleOptionClick = (index: number) => {
@@ -208,7 +229,18 @@ const MusicPlayerOptions: React.FC = () => {
       type: "TOGGLE_OPEN",
       payload: { open: activeIndex === 2 },
     });
+
+    dispatchMusicPlayerPlaylist({
+      type: "TOGGLE_OPEN_PREVIEW",
+      payload: {
+        openPreview: activeIndex === 3,
+      },
+    });
   };
+
+  useEffect(() => {
+    if (activeOptionIndex === 3 && openPreview === false) setActiveOpenIndex(0);
+  }, [openPreview]);
 
   return (
     <div className="options">
