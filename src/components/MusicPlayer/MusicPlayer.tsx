@@ -43,7 +43,7 @@ import { useMusicPlayerRandomAndRepeatDispatch } from "../../hooks/MusicPlayerRa
 import { useMusicPlayerLoadingData } from "../../hooks/MusicPlayerLoadingHook";
 
 const VolumeOption: React.FC = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(25);
 
   const getBackgroundSize = () => {
     return { backgroundSize: `${value}% 100%` };
