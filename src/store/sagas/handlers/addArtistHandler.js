@@ -1,7 +1,6 @@
 import { call, put } from "redux-saga/effects";
-import { addAlbumErrorAction, addAlbumSuccessAction } from "../../actions/addAlbumActions";
 import uploadAPIs from "../../../api/fileUploadAPIs";
-import { createAlbumAPI, createArtistAPI } from "../../../api/adminAPIs";
+import { createArtistAPI } from "../../../api/adminAPIs";
 import { createDownloadLink } from "../../../helpers";
 import { addArtistErrorAction, addArtistSuccessAction } from "../../actions/addArtistActions";
 
@@ -17,6 +16,8 @@ export function* addArtistHandler(action) {
             action.payload.name, 
             thumbnail300x300, 
             thumbnail1200x1200,
+            data1.data.github_download_url,
+            data2.data.github_download_url,
         )
         yield put(addArtistSuccessAction(data))
     } catch (err) {
