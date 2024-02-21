@@ -85,7 +85,8 @@ const AddSong = () => {
                             const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                             setProgress(progress)
                         })
-                        finaldata["url"] = `https://drive.google.com/uc?id=${filedata.data.file_id}&export=download`
+                        finaldata["prev1_url"] = `https://drive.google.com/uc?id=${filedata.data.file_id}&export=download`
+                        finaldata["url"] = filedata.data.github_download_url
                         let finalsong = await createSongAPI(token, finaldata)
                         navigate("/")
                     }
